@@ -5,7 +5,8 @@ module.exports = function () {
     restrict: 'EA',
     templateUrl: 'app/scripts/directives/dashboard-header/view.html',
     scope: {
-      title: '='
-    }
+      dashboardHeaderItems: '='
+    },
+    link: function (scope) {}
   }
 }

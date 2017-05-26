@@ -1,5 +1,13 @@
  <link rel="stylesheet" href="app/scripts/directives/dashboard-header/style.css">
 
-<div class="container" ng-cloak>
-  <h2 class="title" ng-cloak>{{ title }}</h2>
+<div class="container">
+  <div>
+    <h3 class="option">{{ dashboardHeaderItems.left }}</h3>
+  </div>
+  <div>
+    <h2 class="title">{{ dashboardHeaderItems.title }}</h2>
+  </div>
+  <div>
+    <h3 class="option">{{ dashboardHeaderItems.right }}</h3>
+  </div>
 </div>
