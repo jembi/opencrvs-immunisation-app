@@ -20,7 +20,8 @@
     "snazzy": "^7.0.0",
     "standard": "^10.0.2",
     "tap": "^10.3.2",
-    "uglify-js": "^3.0.11"
+    "uglify-js": "^3.0.11",
+    "sinon": "^2.3.2"
   },
   "dependencies": {
     "angular": "^1.6.4",
