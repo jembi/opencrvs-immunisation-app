@@ -1,7 +1,7 @@
 {
   "key": "search-by-id",
   "name": "Search By Id",
-  "displayName": "Enter TrackNetID of patient you are searching for",
+  "displayName": "Search patients by TracknetID:",
   "flex": "100",
   "rows": [{
     "name": "Row 1",

@@ -22,20 +22,20 @@ module.exports = function (Api, loadResource) {
         // var success = function (result) {
         //   return { isValid: true, msg: 'Success' }
         // }
-
+        //
         // var error = function (err) {
         //   return { isValid: false, msg: 'Error' }
         // }
 
         // return Api.Patient.get(patientId).$promise.then(success, error)
-        return { isValid: true, msg: 'Success' }
+        return new Promise(function (resolve, reject) { resolve({ isValid: true, msg: 'Success' }) })
       }
 
       scope.state = {}
       scope.state.FormBuilder = {
-        name: 'search-by-id',
+        name: 'searchById',
         displayType: null,
-        globals: { },
+        globals: {},
         sections: [],
         login: {},
         buttons: {
