@@ -50,6 +50,10 @@ amdefine@>=0.0.4:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/amdefine/-/amdefine-1.0.1.tgz#4a5282ac164729e93619bcfd3ad151f817ce91f5"
 
+angular-resource@^1.6.4:
+  version "1.6.4"
+  resolved "https://registry.yarnpkg.com/angular-resource/-/angular-resource-1.6.4.tgz#bcb83688b0a7d3402fde58dc7f4881383a6c0ebb"
+
 angular-route@^1.6.4:
   version "1.6.4"
   resolved "https://registry.yarnpkg.com/angular-route/-/angular-route-1.6.4.tgz#7bb216fcda746a1b8c452054b05900a7074ecc62"
@@ -701,6 +705,14 @@ crypto-browserify@^3.0.0:
     pbkdf2 "^3.0.3"
     public-encrypt "^4.0.0"
     randombytes "^2.0.0"
+
+crypto-js@^3.1.9-1:
+  version "3.1.9-1"
+  resolved "https://registry.yarnpkg.com/crypto-js/-/crypto-js-3.1.9-1.tgz#fda19e761fc077e01ffbfdc6e9fdfc59e8806cd8"
+
+crypto@^0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/crypto/-/crypto-0.0.3.tgz#470a81b86be4c5ee17acc8207a1f5315ae20dbb0"
 
 d@1:
   version "1.0.0"

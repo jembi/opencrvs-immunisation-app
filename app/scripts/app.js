@@ -2,12 +2,13 @@
 
 var angular = require('angular')
 var ngRoute = require('angular-route')
+var ngResource = require('angular-resource')
 
-var dependencies = [ ngRoute ]
+var dependencies = [ ngRoute, ngResource ]
 var app = angular.module('rcbsApp', dependencies)
 
-require('./controllers')
 require('./services')
+require('./controllers')
 
 app.config(function ($routeProvider) {
   $routeProvider
@@ -18,4 +19,8 @@ app.config(function ($routeProvider) {
   .otherwise({
     redirectTo: '/'
   })
+})
+
+app.config(function ($locationProvider) {
+  $locationProvider.hashPrefix('') // Remove ! from url
 })
