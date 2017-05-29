@@ -4,7 +4,11 @@
   "description": "Rwanda Case Based Surveillance",
   "scripts": {
     "build": "browserify --entry app/scripts/app.js | uglifyjs --output dist/bundle.js",
-    "start": "light-server -s . -p 7777 -w \". # npm run build # reload\""
+    "start": "light-server -s . -p 7777 -w \". # npm run build # reload\"",
+    "test": "npm run -s test:code && npm run -s test:style",
+    "test:code": "tap -R nyan --cov test/**/*.js",
+    "test:style": "standard --verbose | snazzy",
+    "cov": "npm run test:code -- --coverage-report=lcov"
   },
   "main": "app/scripts/app.js",
   "repository": "git@github.com:jembi/rcbs-frontend.git",
@@ -13,7 +17,9 @@
   "devDependencies": {
     "browserify": "^14.3.0",
     "light-server": "^2.0.2",
+    "snazzy": "^7.0.0",
     "standard": "^10.0.2",
+    "tap": "^10.3.2",
     "uglify-js": "^3.0.11"
   },
   "dependencies": {
