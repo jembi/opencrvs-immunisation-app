@@ -1,0 +1,20 @@
+{
+  "key": "search-by-id",
+  "name": "Search By Id",
+  "displayName": "Enter TrackNetID of patient you are searching for",
+  "flex": "100",
+  "rows": [{
+    "name": "Row 1",
+    "title": null,
+    "layout": "row",
+    "fields": [{
+      "type": "input",
+      "flex": "100",
+      "name": "tracknetid",
+      "title": "TrackNetID",
+      "settings": {
+        "required": true
+      }
+    }]
+  }]
+}
