@@ -4,7 +4,7 @@
   "description": "Rwanda Case Based Surveillance",
   "scripts": {
     "build": "browserify --entry app/scripts/app.js | uglifyjs --output dist/bundle.js",
-    "start": "light-server -s . -p 7777 -w \". # npm run build # reload\"",
+    "start": "light-server -s . -p 7777 -w \"app/**, index.html # npm run build # reload\"",
     "test": "npm run -s test:code && npm run -s test:style",
     "test:code": "tap -R nyan --cov test/**/*.js",
     "test:style": "standard --verbose | snazzy",
@@ -24,6 +24,14 @@
   },
   "dependencies": {
     "angular": "^1.6.4",
-    "angular-route": "^1.6.4"
+    "angular-animate": "^1.6.4",
+    "angular-aria": "^1.6.4",
+    "angular-cookies": "^1.6.4",
+    "angular-material": "^1.1.4",
+    "angular-material-data-table": "^0.10.9",
+    "angular-messages": "^1.6.4",
+    "angular-resource": "^1.6.4",
+    "angular-route": "^1.6.4",
+    "moment": "^2.18.1"
   }
 }
