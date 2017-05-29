@@ -4,7 +4,7 @@
   "description": "Rwanda Case Based Surveillance",
   "scripts": {
     "build": "browserify --entry app/scripts/app.js | uglifyjs --output dist/bundle.js",
-    "start": "light-server -s . -p 7777 -w \". # npm run build # reload\""
+    "start": "light-server -s . -p 7777 -w \"app/**, index.html # npm run build # reload\""
   },
   "main": "app/scripts/app.js",
   "repository": "git@github.com:jembi/rcbs-frontend.git",
