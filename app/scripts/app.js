@@ -12,6 +12,7 @@ var dependencies = [ ngRoute, formBuilder, ngMaterial, ngCookies, ngResource, ng
 var app = angular.module('rcbsApp', dependencies)
 
 require('./controllers')
+require('./directives')
 require('./services')
 
 app.config(function ($routeProvider) {
