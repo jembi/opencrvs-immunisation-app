@@ -2,8 +2,13 @@
 
 var angular = require('angular')
 var ngRoute = require('angular-route')
+var formBuilder = require('md-form-builder')
+var ngMaterial = require('angular-material')
+var ngCookies = require('angular-cookies')
+var ngResource = require('angular-resource')
+var ngMessages = require('angular-messages')
 
-var dependencies = [ ngRoute ]
+var dependencies = [ ngRoute, formBuilder, ngMaterial, ngCookies, ngResource, ngMessages ]
 var app = angular.module('rcbsApp', dependencies)
 
 require('./controllers')
