@@ -1,7 +1,7 @@
 {
    "key": "sec1",
    "name": "Section 1",
-   "displayName": "Search by Demographics",
+   "displayName": "2. Search by Demographics",
    "flex": "100",
    "rows": [
       {
@@ -10,7 +10,7 @@
          "fields": [
             {
                "type": "input",
-               "flex": "25",
+               "flex": "50",
                "name": "givenName",
                "title": "Given Name",
                "settings": {
@@ -26,7 +26,7 @@
             },
             {
                "type": "input",
-               "flex": "25",
+               "flex": "50",
                "name": "familyName",
                "title": "Family Name",
                "settings": {
@@ -48,7 +48,7 @@
          "fields": [
             {
                "type": "date",
-               "flex": "25",
+               "flex": "50",
                "name": "birthDate",
                "title": "Date of Birth",
                "settings": {
@@ -64,7 +64,7 @@
             },
             {
                "type": "select",
-               "flex": "25",
+               "flex": "50",
                "name": "gender",
                "title": "Gender",
                "settings": {

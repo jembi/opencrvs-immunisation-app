@@ -7,8 +7,6 @@ module.exports = function (Api, loadResource, $q) {
     scope: {},
     link: function (scope) {
       var submit = function (form) {
-        console.log(form)
-
         var defer = $q.defer()
 
         var formFieldsValues = {}

@@ -1,5 +1,10 @@
 <!doctype html>
-<div>
-  <span>Welcome to the RCBS Dashboard</span>
-  <search-by-demographics></search-by-demographics>
-</div>
+<dashboard-header dashboard-header-items="dashboardHeaderItems"></dashboard-header>
+
+<md-content>
+  <div layout="row" flex-offset="20" flex="60">
+    <div md-whiteframe="2" flex-offset="30" flex="70">
+      <search-by-demographics></search-by-demographics>
+    </div>
+  </div>
+</md-content>
