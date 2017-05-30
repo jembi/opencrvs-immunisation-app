@@ -20,7 +20,8 @@ module.exports = function (Api, loadResource, $q) {
         console.log(formFieldsValues)
 
         // Api.getPatient()
-        return defer.resolve({ isValid: true, msg: 'Success' })
+        defer.resolve({ isValid: true, msg: 'Success' })
+        return defer.promise
       }
 
       scope.state = {}
