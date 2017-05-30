@@ -4,7 +4,7 @@
   "description": "Rwanda Case Based Surveillance",
   "scripts": {
     "build": "browserify --entry app/scripts/app.js | uglifyjs --output dist/bundle.js",
-    "start": "light-server -s . -p 7777 -w \"app/**, index.html # npm run build # reload\"",
+    "start": "npm run build && light-server -s . -p 7777 -w \"app/**, index.html # npm run build # reload\"",
     "test": "npm run -s test:code && npm run -s test:style",
     "test:code": "tap -R nyan --cov test/**/*.js",
     "test:style": "standard --verbose | snazzy",
