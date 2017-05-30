@@ -3,10 +3,13 @@
 var moment = require('moment')
 var angular = require('angular')
 var ngRoute = require('angular-route')
+var ngCookies = require('angular-cookies')
 var ngResource = require('angular-resource')
+var ngMessages = require('angular-messages')
 var ngMaterial = require('angular-material')
+var formBuilder = require('md-form-builder')
 
-var dependencies = [ ngRoute, ngResource, ngMaterial ]
+var dependencies = [ ngRoute, formBuilder, ngMaterial, ngCookies, ngResource, ngMessages ]
 var app = angular.module('rcbsApp', dependencies)
 
 require('./directives')

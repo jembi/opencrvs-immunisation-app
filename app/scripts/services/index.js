@@ -8,3 +8,4 @@ app.config(function ($httpProvider) {
 })
 
 app.factory('Api', require('./rest'))
+app.factory('loadResource', require('./load-resource'))

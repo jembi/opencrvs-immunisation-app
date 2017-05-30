@@ -1,0 +1,102 @@
+{
+   "key": "sec1",
+   "name": "Section 1",
+   "displayName": "2. Search by Demographics",
+   "flex": "100",
+   "rows": [
+      {
+         "name": "Row 1",
+         "layout": "row",
+         "fields": [
+            {
+               "type": "input",
+               "flex": "50",
+               "name": "givenName",
+               "title": "Given Name",
+               "settings": {
+                  "valueType": "valueString",
+                  "disabled": false,
+                  "required": true
+               },
+               "skipLogic": {
+                  "func": {},
+                  "checks": []
+               },
+               "value": null
+            },
+            {
+               "type": "input",
+               "flex": "50",
+               "name": "familyName",
+               "title": "Family Name",
+               "settings": {
+                  "valueType": "valueString",
+                  "disabled": false,
+                  "required": true
+               },
+               "skipLogic": {
+                  "func": {},
+                  "checks": []
+               },
+               "value": null
+            }
+         ]
+      },
+      {
+         "name": "Row 2",
+         "layout": "row",
+         "fields": [
+            {
+               "type": "date",
+               "flex": "50",
+               "name": "birthDate",
+               "title": "Date of Birth",
+               "settings": {
+                  "valueType": "valueString",
+                  "disabled": false,
+                  "required": true
+               },
+               "skipLogic": {
+                  "func": {},
+                  "checks": []
+               },
+               "value": null
+            },
+            {
+               "type": "select",
+               "flex": "50",
+               "name": "gender",
+               "title": "Gender",
+               "settings": {
+                  "valueType": "valueString",
+                  "disabled": false,
+                  "required": true
+               },
+               "skipLogic": {
+                  "func": {},
+                  "checks": []
+               },
+               "options": [
+                  {
+                     "key": "male",
+                     "value": "Male"
+                  },
+                  {
+                     "key": "female",
+                     "value": "Female"
+                  },
+                  {
+                     "key": "other",
+                     "value": "Other"
+                  },
+                  {
+                     "key": "uknown",
+                     "value": "Unknown"
+                  }
+               ],
+               "value": null
+            }
+         ]
+      }
+   ]
+}
