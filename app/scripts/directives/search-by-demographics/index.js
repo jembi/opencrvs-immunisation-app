@@ -22,7 +22,7 @@ module.exports = function (Api, loadResource, $q) {
 
         // Api.fetchMatches()
 
-        defer.resolve({ isValid: true, msg: 'Found some potencial matches' })
+        defer.resolve({ isValid: true, msg: 'Found some potential matches' })
 
         return defer.promise
       }

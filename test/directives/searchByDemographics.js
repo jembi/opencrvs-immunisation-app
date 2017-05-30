@@ -34,7 +34,7 @@ tap.test('.link()', { autoend: true }, (t) => {
       return {
         resolve: (result) => {
           t.equals(result.isValid, true)
-          t.equals(result.msg, 'Found some potencial matches')
+          t.equals(result.msg, 'Found some potential matches')
           t.end()
         }
       }
