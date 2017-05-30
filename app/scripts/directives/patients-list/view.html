@@ -1,24 +1,26 @@
 <md-content>
-    
+  <link rel="stylesheet" href="app/scripts/directives/patients-list/style.css" />
+
   <md-table-container>
     <table md-table ng-model="selected" md-progress="promise">
       <thead ng-if="!options.decapitate" md-head md-order="query.order" md-on-reorder="logOrder">
         <tr md-row>
-          <th md-column md-order-by="name"><span>Name</span></th>
-          <th md-column md-order-by="surname"><span>Surname</span></th>
-          <th md-column md-order-by="gender"><span>Sex</span></th>
-          <th md-column md-order-by="tracknet"><span>TrackNet ID#</span></th>
-          <th md-column md-order-by="birthDate"><span>Date of Birth</span></th>
-          <th md-column><span>Action</span></th>
+          <th width="50"></th>
+          <th md-column><span>Name</span></th>
+          <th md-column><span>Surname</span></th>
+          <th md-column><span>Sex</span></th>
+          <th md-column><span>TrackNet ID#</span></th>
+          <th md-column><span>Date of Birth</span></th>
+          <th width="50"></th>
         </tr>
       </thead>
       <tbody md-body>
-        <tr md-row ng-repeat="patient in patients track by patient.id | filter: filter.search | orderBy: query.order | limitTo: query.limit : (query.page -1) * query.limit">
-          <td md-cell>
-            {{patient.name.given}}
-
-            <div>asdasdasd</div>
+        <tr ng-repeat-start="patient in patients track by patient.id | filter: filter.search | orderBy: query.order | limitTo: query.limit : (query.page -1) * query.limit">
+          <td md-cell ng-click="togglePatientDetails(patient)">
+            <i class="material-icons" ng-if="patient._control.showPatientDetails">expand_less</i>
+            <i class="material-icons" ng-if="!patient._control.showPatientDetails">expand_more</i>
           </td>
+          <td md-cell>{{patient.name.given}}</td>
           <td md-cell>{{patient.name.family}}</td>
           <td md-cell>{{patient.gender}}</td>
           <td md-cell>{{patient.tracnetID}}</td>
@@ -27,11 +29,30 @@
             <button class="md-button md-primary md-raised">View</button>
           </td>
         </tr>
+        <tr ng-if="patient._control.showPatientDetails" ng-repeat-end>
+          <td colspan="7" class="showPatientDetails">
+            <patients-list-row-details patient="patient"></patients-list-row-details>
+          </td>
+        </tr>
       </tbody>
     </table>
   </md-table-container>
 
   <md-table-pagination md-limit="query.limit" md-limit-options="limitOptions" md-page="query.page" md-total="{{desserts.count}}" md-page-select="options.pageSelect" md-boundary-links="options.boundaryLinks" md-on-paginate="logPagination"></md-table-pagination>
-  
-  <pre>{{patients | json}}</pre>
+
+
+
+  <div layout="row" layout-align="center center">
+    <div md-whiteframe="2" flex-sm="90" flex-gt-sm="70" flex-gt-md="50" layout="column" layout-align="center center" style="background: cornsilk; padding: 10px">
+      <div ng-if="patients.length > 0">Not finding the Patient you are looking for? </div>
+      <div ng-if="patients.length === 0">No results found matching your query.</div>
+
+      <div>
+        <button class="md-button md-primary md-raised">Search Again</button>
+        <span flex>OR</span>
+        <button class="md-button md-primary md-raised">Create patient</button>
+      </div>
+    </div>
+  </div>
+
 </md-content>

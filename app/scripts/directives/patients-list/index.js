@@ -11,16 +11,18 @@ module.exports = function () {
     },
     link: function (scope) {
 
+      scope.togglePatientDetails = function (patient) {
+        patient._control.showPatientDetails = !patient._control.showPatientDetails
+      }
+
       var getOfficialName = function (names) {
         var officialName = {
           given: null,
           family: null
         }
 
-        angular.forEach(names, function(nameInstance, key) {
+        angular.forEach(names, function(nameInstance) {
           if (nameInstance.use === 'official') {
-            console.log(nameInstance)
-
             officialName.prefix = nameInstance.prefix.join(' ')
             officialName.given = nameInstance.given.join(' ')
             officialName.family = nameInstance.family.join(' ')
@@ -33,10 +35,9 @@ module.exports = function () {
       var getTracnetID = function (identifiers) {
         var tracnetID = null
 
-        angular.forEach(identifiers, function(identifierInstance, key) {
+        angular.forEach(identifiers, function(identifierInstance) {
           if (identifierInstance.use === 'official') {
             if (identifierInstance.system === TRACNET_SYSTEM_IDENTIFIER) {
-              console.log(identifierInstance.value)
               tracnetID = identifierInstance.value
             }
           }
@@ -49,26 +50,60 @@ module.exports = function () {
         return gender.charAt(0).toUpperCase()
       }
 
+      var getContact = function (contact) {
+        var contactArray = []
+
+        angular.forEach(contact, function(contactInstance) {
+          var relationships = []
+          var fullnames = []
+
+          // get relationships
+          angular.forEach(contactInstance.relationship, function(relationshipInstance) {
+            angular.forEach(relationshipInstance.coding, function(relationship) {
+              relationships.push(relationship.code)
+            })
+          })
+
+          angular.forEach(contactInstance.name, function(nameInstance) {
+            var fullname = nameInstance.given.join(' ') + ' ' + nameInstance.family.join(' ')
+            fullnames.push(fullname)
+          })
+
+          var formattedContact = {
+            relationship: relationships.join(', '),
+            name: fullnames,
+            telecom: contactInstance.telecom
+          }
+
+          contactArray.push(formattedContact)
+        })
+
+        return contactArray
+      }
+
       scope.patients = []
-      angular.forEach(scope.results, function(patient, key) {
-        console.log(patient)
-
-
-        var officialName = getOfficialName(patient.name)
-
-
+      angular.forEach(scope.results, function(patient) {
         scope.patients.push({
           id: patient.id,
-          name: {
-            prefix: officialName.prefix,
-            given: officialName.given,
-            family: officialName.family
-          },
+          name: getOfficialName(patient.name),
           gender: getGender(patient.gender),
           tracnetID: getTracnetID(patient.identifier),
-          birthDate: patient.birthDate
+          birthDate: patient.birthDate,
+          telecom: patient.telecom,
+          address: patient.address,
+          communication: patient.communication,
+          contact: getContact(patient.contact),
+          extension: patient.extension,
+          _control: {
+            showPatientDetails: false
+          }
         })
       });
+
+
+
+
+
 
 
 
@@ -91,7 +126,6 @@ module.exports = function () {
         limit: 5,
         page: 1
       };
-      
       
 
 

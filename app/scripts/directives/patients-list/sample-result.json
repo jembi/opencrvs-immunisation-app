@@ -68,6 +68,17 @@
             "state": "Western Cape",
             "city": "Cape Town",
             "postalCode": "7570"
+         }, {
+            "use": "home",
+            "type": "both",
+            "line": [
+               "2760 TEST Street",
+               "Wallacedene",
+               "Kraaifontein"
+            ],
+            "state": "Western Cape",
+            "city": "Cape Town",
+            "postalCode": "7570"
          }
       ],
       "communication": [
