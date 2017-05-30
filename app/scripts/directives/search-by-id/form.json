@@ -1,7 +1,7 @@
 {
   "key": "search-by-id",
   "name": "Search By Id",
-  "displayName": "Search patients by TracknetID:",
+  "displayName": "1. Search by TracNet ID:",
   "flex": "100",
   "rows": [{
     "name": "Row 1",
@@ -10,8 +10,8 @@
     "fields": [{
       "type": "input",
       "flex": "100",
-      "name": "tracknetid",
-      "title": "TrackNetID",
+      "name": "tracNetID",
+      "title": "TracNet ID",
       "settings": {
         "required": true
       }
