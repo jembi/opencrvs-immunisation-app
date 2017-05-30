@@ -17,10 +17,18 @@ module.exports = function (Api, loadResource, $q) {
             }
           }
         }
-        console.log(formFieldsValues)
 
-        // Api.getPatient()
-        defer.resolve({ isValid: true, msg: 'Success' })
+        var success = function (result) {
+          console.log(result)
+          defer.resolve({ isValid: true, msg: 'Success' })
+        }
+
+        var error = function (err) {
+          defer.reject({ isValid: false, msg: err.statusText || 'Error' })
+        }
+
+        var patientId = formFieldsValues.tracNetID
+        Api.Patients.get({ id: patientId }).$promise.then(success, error)
         return defer.promise
       }
 
