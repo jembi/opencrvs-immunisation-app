@@ -4,8 +4,9 @@ var moment = require('moment')
 var angular = require('angular')
 var ngRoute = require('angular-route')
 var ngMaterial = require('angular-material')
+var mdDataTable = require('angular-material-data-table')
 
-var dependencies = [ ngRoute, ngMaterial ]
+var dependencies = [ ngRoute, ngMaterial, mdDataTable ]
 var app = angular.module('rcbsApp', dependencies)
 
 require('./controllers')
