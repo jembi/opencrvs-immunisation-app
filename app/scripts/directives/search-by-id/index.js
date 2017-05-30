@@ -1,12 +1,14 @@
 'use strict'
 
-module.exports = function (Api, loadResource) {
+module.exports = function (Api, loadResource, $q) {
   return {
     restrict: 'EA',
     templateUrl: 'app/scripts/directives/search-by-id/view.html',
     scope: {},
     link: function (scope) {
       var submit = function (form) {
+        var defer = $q.defer()
+
         var formFieldsValues = {}
         for (var k in form) {
           if (form.hasOwnProperty(k)) {
@@ -15,20 +17,10 @@ module.exports = function (Api, loadResource) {
             }
           }
         }
+        console.log(formFieldsValues)
 
-        // TODO
-        // var patientId = formFieldsValues.tracknetid
-
-        // var success = function (result) {
-        //   return { isValid: true, msg: 'Success' }
-        // }
-        //
-        // var error = function (err) {
-        //   return { isValid: false, msg: 'Error' }
-        // }
-
-        // return Api.Patient.get(patientId).$promise.then(success, error)
-        return new Promise(function (resolve, reject) { resolve({ isValid: true, msg: 'Success' }) })
+        // Api.getPatient()
+        return defer.resolve({ isValid: true, msg: 'Success' })
       }
 
       scope.state = {}
