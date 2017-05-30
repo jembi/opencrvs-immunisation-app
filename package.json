@@ -32,6 +32,7 @@
     "angular-messages": "^1.6.4",
     "angular-resource": "^1.6.4",
     "angular-route": "^1.6.4",
+    "md-form-builder": "^0.5.3",
     "moment": "^2.18.1"
   }
 }
