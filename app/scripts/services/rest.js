@@ -7,6 +7,8 @@ module.exports = function ($resource, config) {
   var server = protocol + '://' + host + ':' + port
 
   return {
-    Patients: $resource(server + '/fhir/Patient/:id', { id: '@id' })
+    Patients: $resource(server + '/fhir/Patient/:id', { id: '@id' }, {
+      match: { method: 'POST', url: server + '/fhir/Patient/$match' }
+    })
   }
 }
