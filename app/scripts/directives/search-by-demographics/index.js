@@ -36,9 +36,7 @@ module.exports = function (Api, loadResource, $q, state) {
   return {
     restrict: 'EA',
     templateUrl: 'app/scripts/directives/search-by-demographics/view.html',
-    scope: {
-      state: '='
-    },
+    scope: {},
     link: function (scope) {
       var submit = function (form) {
         var defer = $q.defer()
@@ -65,7 +63,8 @@ module.exports = function (Api, loadResource, $q, state) {
         return defer.promise
       }
 
-      scope.state.FormBuilderDemographics = {
+      scope.state = {}
+      scope.state.FormBuilder = {
         name: 'searchByDemographics',
         displayType: null,
         globals: {
@@ -74,7 +73,7 @@ module.exports = function (Api, loadResource, $q, state) {
           showReviewButton: false
         },
         sections: [],
-        searchByDemographics: {},
+        login: {},
         buttons: {
           submit: 'search'
         },
@@ -82,11 +81,12 @@ module.exports = function (Api, loadResource, $q, state) {
           execute: submit,
           params: []
         },
-        saveAsDraft: false
+        saveAsDraft: false,
+        searchByDemographics: {}
       }
 
       loadResource.fetch('app/scripts/directives/search-by-demographics/form.json').then(function (formSection) {
-        scope.state.FormBuilderDemographics.sections.push(formSection)
+        scope.state.FormBuilder.sections.push(formSection)
       })
     }
   }

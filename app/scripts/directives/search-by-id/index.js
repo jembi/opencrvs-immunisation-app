@@ -4,9 +4,7 @@ module.exports = function (Api, loadResource, $q) {
   return {
     restrict: 'EA',
     templateUrl: 'app/scripts/directives/search-by-id/view.html',
-    scope: {
-      state: '='
-    },
+    scope: {},
     link: function (scope) {
       var submit = function (form) {
         var defer = $q.defer()
@@ -19,15 +17,6 @@ module.exports = function (Api, loadResource, $q) {
             }
           }
         }
-<<<<<<< HEAD
-
-        // TODO: API call to fetch patients
-        // Mocked API call to fetch patients
-        loadResource.fetch('app/scripts/directives/patients-list/sample-result.json').then(function (results) {
-          scope.state.patients = results // array of entries
-        })
-=======
->>>>>>> 73dda9e91d1a057db076747608d7db7982ee2377
 
         var success = function (result) {
           console.log(result)
@@ -44,12 +33,13 @@ module.exports = function (Api, loadResource, $q) {
         return defer.promise
       }
 
-      scope.state.FormBuilderSearchById = {
+      scope.state = {}
+      scope.state.FormBuilder = {
         name: 'searchById',
         displayType: null,
         globals: {},
         sections: [],
-        searchById: {},
+        login: {},
         buttons: {
           submit: 'search'
         },
@@ -60,7 +50,7 @@ module.exports = function (Api, loadResource, $q) {
       }
 
       loadResource.fetch('app/scripts/directives/search-by-id/form.json').then(function (formSection) {
-        scope.state.FormBuilderSearchById.sections.push(formSection)
+        scope.state.FormBuilder.sections.push(formSection)
       })
     }
   }
