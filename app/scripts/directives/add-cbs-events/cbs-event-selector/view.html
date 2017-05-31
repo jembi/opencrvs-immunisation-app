@@ -1,0 +1,4 @@
+<md-toolbar layout="row" layout-align="center center">Select an event to add</md-toolbar>
+<md-content layout="column">
+  <md-button ng-repeat="title in eventTitles" ng-click="setSelectedEvent({ selectedEvent: title })" class="md-button md-accent md-raised" flex="100">{{ title }}</md-button>
+</md-content>

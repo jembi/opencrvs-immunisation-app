@@ -1,0 +1,10 @@
+<md-toolbar layout="row" flex="100" layout-align="space-between center">
+  <link rel="stylesheet" href="app/scripts/directives/add-cbs-events/patient-details-bar/style.css">
+  
+  <div class="padding-left"><h3>{{ patientDetails.givenName }} {{ patientDetails.familyName }}</h3></div>
+  <div flex layout="row" layout-align="space-around center">
+    <div>{{ patientDetails.gender }}</div>
+    <div>{{ patientDetails.birthDate }}</div>
+  </div>
+  <div><md-button class="md-button md-accent md-raised">Add event</md-button></div>
+</md-toolbar>
