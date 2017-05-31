@@ -12,10 +12,6 @@ var formBuilder = require('md-form-builder')
 var dependencies = [ ngRoute, formBuilder, ngMaterial, ngCookies, ngResource, ngMessages ]
 var app = angular.module('rcbsApp', dependencies)
 
-require('./directives')
-require('./services')
-require('./controllers')
-
 app.config(function ($routeProvider) {
   $routeProvider
   .when('/', {
@@ -82,10 +78,26 @@ app.config(function ($mdDateLocaleProvider) {
   }
 })
 
+function loadConfig () {
+  var initInjector = angular.injector(['ng'])
+  var $http = initInjector.get('$http')
+
+  return $http.get('app/config/default.json').then(function (response) {
+    app.constant('config', response.data)
+  }, function (err) {
+    app.constant('config', 'No Config Loaded')
+    console.error(err)
+  })
+}
+
 function bootstrapApplication () {
+  require('./directives')
+  require('./services')
+  require('./controllers')
+
   angular.element(document).ready(function () {
     angular.bootstrap(document, ['rcbsApp'])
   })
 }
 
-bootstrapApplication()
+loadConfig().then(bootstrapApplication)
