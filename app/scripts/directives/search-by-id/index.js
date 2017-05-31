@@ -19,7 +19,7 @@ module.exports = function (Api, loadResource, $q) {
         }
 
         var patientId = formFieldsValues.tracNetID
-        Api.Patients.get({ id: patientId }, function (bundle) {
+        Api.Patients.get({ id: patientId }, function (result) {
           state.setSearchResults(result)
           console.log(result)
           defer.resolve({ isValid: true, msg: 'Success' })
