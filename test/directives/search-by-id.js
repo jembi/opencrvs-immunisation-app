@@ -1,10 +1,22 @@
 'use strict'
 
 const tap = require('tap')
+const sinon = require('sinon')
 
 const searchById = require('../../app/scripts/directives/search-by-id')
 
 tap.test('.link()', { autoend: true }, (t) => {
+  const sandbox = sinon.sandbox.create()
+  tap.beforeEach((done) => {
+    sandbox.stub(console, 'error').callsFake((msg) => {})
+    done()
+  })
+
+  tap.afterEach((done) => {
+    sandbox.restore()
+    done()
+  })
+
   t.test('should set state.fromBuilder on scope and fetch correct form file', (t) => {
     // given
     const scope = {}
@@ -109,7 +121,7 @@ tap.test('.link()', { autoend: true }, (t) => {
       return {
         reject: (err) => {
           t.equals(err.isValid, false)
-          t.equals(err.msg, 'Error')
+          t.equals(err.msg, 'Failed to perform search')
           t.end()
         }
       }

@@ -24,7 +24,8 @@ module.exports = function (Api, loadResource, $q) {
         }
 
         var error = function (err) {
-          defer.reject({ isValid: false, msg: err.statusText || 'Error' })
+          console.error(err)
+          defer.reject({ isValid: false, msg: err.statusText || 'Failed to perform search' })
         }
 
         var patientId = formFieldsValues.tracNetID
