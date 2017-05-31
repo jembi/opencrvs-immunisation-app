@@ -29,7 +29,7 @@ module.exports = function (Api, loadResource, $q) {
         }
 
         var patientId = formFieldsValues.tracNetID
-        Api.Patients.get({ id: patientId }).$promise.then(success, error)
+        Api.Patients.get({ identifier: patientId }, success, error)
         return defer.promise
       }
 
