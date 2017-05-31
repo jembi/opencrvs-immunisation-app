@@ -1,10 +1,10 @@
 'use strict'
 
 module.exports = function () {
-  var searchResults = []
+  var searchResults = null
 
   return {
-    getSearchresults: function () {
+    getSearchResults: function () {
       return searchResults
     },
     setSearchResults: function (results) {

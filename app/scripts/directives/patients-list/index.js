@@ -1,22 +1,18 @@
 'use strict'
 /* global angular */
 
-module.exports = function () {
+module.exports = function (state) {
   var TRACNET_SYSTEM_IDENTIFIER = 'pshr:tracnetid'
   return {
     restrict: 'EA',
     replace: true,
     templateUrl: 'app/scripts/directives/patients-list/view.html',
     scope: {
-      state: '='
+      results: '='
     },
     link: function (scope) {
-      // Move this into service one implemeneted - Re-used in header directive
       scope.clearSearch = function () {
-        scope.state.patients = null
-        scope.state.header.title = 'Search Patient'
-        scope.state.header.left.clearSearchResults = false // hide the return to search button in top header
-        scope.state.header.right.createPatient = false // hide the create patient button in top header
+        state.setSearchResults(null)
       }
 
       scope.togglePatientDetails = function (patient) {
@@ -89,48 +85,51 @@ module.exports = function () {
         return contactArray
       }
 
-      scope.patients = []
-      angular.forEach(scope.state.patients, function (patient) {
-        scope.patients.push({
-          id: patient.id,
-          name: getOfficialName(patient.name),
-          gender: getGender(patient.gender),
-          tracnetID: getTracnetID(patient.identifier),
-          birthDate: patient.birthDate,
-          telecom: patient.telecom,
-          address: patient.address,
-          communication: patient.communication,
-          contact: getContact(patient.contact),
-          extension: patient.extension,
-          _control: {
-            showPatientDetails: false
+      scope.$watch('results', function(newResults, oldResults) {
+        if (newResults) {
+          scope.patients = []
+          angular.forEach(scope.results, function (resource) {
+            var patient = resource.resource
+            scope.patients.push({
+              id: patient.id,
+              name: getOfficialName(patient.name),
+              gender: getGender(patient.gender),
+              tracnetID: getTracnetID(patient.identifier),
+              birthDate: patient.birthDate,
+              telecom: patient.telecom,
+              address: patient.address,
+              communication: patient.communication,
+              contact: getContact(patient.contact),
+              extension: patient.extension,
+              _control: {
+                showPatientDetails: false
+              }
+            })
+          })
+
+          scope.selected = []
+          scope.limitOptions = [5, 10, 15]
+
+          scope.options = {
+            rowSelection: false,
+            multiSelect: false,
+            autoSelect: false,
+            decapitate: false,
+            largeEditDialog: false,
+            boundaryLinks: false,
+            limitSelect: false,
+            pageSelect: false
           }
-        })
-      })
 
-      scope.state.header.title = 'Search results (' + scope.patients.length + ')'
-      scope.state.header.left.clearSearchResults = true // Show the return to search button in top header
-      scope.state.header.right.createPatient = true // Show the create patient button in top header
+          scope.query = {
+            order: 'name',
+            limit: 5,
+            page: 1
+          }
+        }
+      }, true);
 
-      scope.selected = []
-      scope.limitOptions = [5, 10, 15]
-
-      scope.options = {
-        rowSelection: false,
-        multiSelect: false,
-        autoSelect: false,
-        decapitate: false,
-        largeEditDialog: false,
-        boundaryLinks: false,
-        limitSelect: false,
-        pageSelect: false
-      }
-
-      scope.query = {
-        order: 'name',
-        limit: 5,
-        page: 1
-      }
+      
     }
   }
 }

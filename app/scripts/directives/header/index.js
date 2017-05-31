@@ -1,6 +1,6 @@
 'use strict'
 
-module.exports = function () {
+module.exports = function (state) {
   return {
     restrict: 'EA',
     replace: true,
@@ -9,12 +9,8 @@ module.exports = function () {
       state: '='
     },
     link: function (scope) {
-      // Move this into service one implemeneted - Re-used in patient list directive
       scope.clearSearch = function () {
-        scope.state.patients = null
-        scope.state.header.title = 'Search Patient'
-        scope.state.header.left.clearSearchResults = false // hide the return to search button in top header
-        scope.state.header.right.createPatient = false // hide the create patient button in top header
+        state.setSearchResults(null)
       }
     }
   }
