@@ -1,8 +1,16 @@
 'use strict'
 
 const tap = require('tap')
+const sinon = require('sinon')
 
 const searchByDemographics = require('../../app/scripts/directives/search-by-demographics')
+
+const sandbox = sinon.sandbox.create()
+sandbox.stub(console, 'error').callsFake((msg) => {})
+sandbox.stub(console, 'log').callsFake((msg) => {})
+tap.tearDown(() => {
+  sandbox.restore()
+})
 
 tap.test('.link()', { autoend: true }, (t) => {
   t.test('should set state.fromBuilder on scope and fetch correct form file', (t) => {
