@@ -24,7 +24,6 @@ module.exports = function ($scope) {
   }
 
   $scope.setSelectedEvent = function (selectedEvent) {
-    console.log(selectedEvent)
     $scope.selectedEvent = selectedEvent
   }
 }
