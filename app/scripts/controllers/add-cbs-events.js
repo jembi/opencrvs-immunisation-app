@@ -18,7 +18,9 @@ module.exports = function ($scope) {
     givenName: 'DummyName',
     familyName: 'DummySurname',
     gender: 'male',
-    birthDate: '1990-03-05'
+    birthDate: '1990-03-05',
+    telecom: '0721111111',
+    tracNetId: '1234-123456'
   }
 
   $scope.setSelectedEvent = function (selectedEvent) {

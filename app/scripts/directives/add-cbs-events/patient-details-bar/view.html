@@ -1,10 +1,38 @@
-<md-toolbar layout="row" flex="100" layout-align="space-between center">
+<div>
   <link rel="stylesheet" href="app/scripts/directives/add-cbs-events/patient-details-bar/style.css">
-  
-  <div class="padding-left"><h3>{{ patientDetails.givenName }} {{ patientDetails.familyName }}</h3></div>
-  <div flex layout="row" layout-align="space-around center">
-    <div>{{ patientDetails.gender }}</div>
-    <div>{{ patientDetails.birthDate }}</div>
+
+  <div md-whiteframe="2" layout="row" flex="100" layout-align="space-around center">
+    
+    <div flex layout="column" layout-align="center center">
+      <div><u>Given Name</u></div>
+      <div>{{ patientDetails.givenName }}</div>
+    </div>
+    
+    <div flex layout="column" layout-align="center center">
+      <div><u>Family Name</u></div>
+      <div>{{ patientDetails.familyName }}</div>
+    </div>
+    
+    <div flex layout="column" layout-align="center center">
+      <div><u>BirthDate</u></div>
+      <div>{{ patientDetails.birthDate }}</div>
+    </div>
+    
+    <div flex layout="column" layout-align="center center">
+      <div><u>Gender</u></div>
+      <div>{{ patientDetails.gender }}</div>
+    </div>
+    
+    <div flex layout="column" layout-align="center center">
+      <div><u>Telecom</u></div>
+      <div>{{ patientDetails.telecom }}</div>
+    </div>
+    
+    <div flex layout="column" layout-align="center center">
+      <div><u>TracNet ID</u></div>
+      <div>{{ patientDetails.tracNetId }}</div>
+    </div>
+    
+    <div><md-button class="md-button md-accent md-raised">Add event</md-button></div>
   </div>
-  <div><md-button class="md-button md-accent md-raised">Add event</md-button></div>
-</md-toolbar>
+</div>

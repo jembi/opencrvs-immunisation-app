@@ -8,6 +8,11 @@ module.exports = function () {
       eventTitles: '=',
       setSelectedEvent: '&'
     },
-    link: function (scope) {}
+    link: function (scope) {
+      scope.selectEventClick = function (title) {
+        scope.selectedEvent = title
+        scope.setSelectedEvent({ selectedEvent: title })
+      }
+    }
   }
 }

@@ -1,4 +1,4 @@
-<md-toolbar layout="row" layout-align="center center">Select an event to add</md-toolbar>
-<md-content layout="column">
-  <md-button ng-repeat="title in eventTitles" ng-click="setSelectedEvent({ selectedEvent: title })" class="md-button md-accent md-raised" flex="100">{{ title }}</md-button>
-</md-content>
+<div layout="column">
+  <div layout="row" layout-align="center center"><h3>Select an event to add</h3></div>
+  <md-button ng-repeat="title in eventTitles" ng-click="selectEventClick(title)" ng-class="{'md-primary': title == selectedEvent}" class="md-button md-raised" flex="100">{{ title }}</md-button>
+</div>

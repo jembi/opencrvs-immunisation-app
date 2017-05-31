@@ -5,11 +5,10 @@
   <div layout="column">
     <patient-details-bar patient-details="patientDetails"></patient-details-bar>
     <div layout="row" flex="100">
-      <div md-whiteframe="2" flex="20">
+      <div flex="20">
         <cbs-event-selector event-titles="eventTitles" set-selected-event="setSelectedEvent(selectedEvent)"></cbs-event-selector>
       </div>
-      <div md-whiteframe="2" flex="80">
-        
+      <div flex="80">
         <div ng-if="selectedEvent==eventTitles[0]">{{eventTitles[0]}} event coming soon</div>
         <linkage-to-care ng-if="selectedEvent==eventTitles[1]"></linkage-to-care>
         <div ng-if="selectedEvent==eventTitles[2]">{{eventTitles[2]}} event coming soon</div>
