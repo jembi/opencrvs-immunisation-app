@@ -38,21 +38,19 @@
     </table>
   </md-table-container>
 
+  <!-- No pagination yet - Options set to false -->
   <md-table-pagination md-limit="query.limit" md-limit-options="limitOptions" md-page="query.page" md-total="{{desserts.count}}" md-page-select="options.pageSelect" md-boundary-links="options.boundaryLinks" md-on-paginate="logPagination"></md-table-pagination>
 
-
-
   <div layout="row" layout-align="center center">
-    <div md-whiteframe="2" flex-sm="90" flex-gt-sm="70" flex-gt-md="50" layout="column" layout-align="center center" style="background: cornsilk; padding: 10px">
+    <div md-whiteframe="2" flex-sm="90" flex-gt-sm="70" flex-gt-md="50" layout="column" layout-align="center center" style="background: cornsilk; padding: 10px; margin: 5px;">
       <div ng-if="patients.length > 0">Not finding the Patient you are looking for? </div>
       <div ng-if="patients.length === 0">No results found matching your query.</div>
 
       <div>
-        <button class="md-button md-primary md-raised">Search Again</button>
+        <button class="md-button md-primary md-raised" ng-click="clearSearch()">Clear Search</button>
         <span flex>OR</span>
         <button class="md-button md-primary md-raised">Create patient</button>
       </div>
     </div>
   </div>
-
 </md-content>

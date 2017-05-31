@@ -4,5 +4,10 @@
 
 body {
   margin: 0px;
-  background-color: #ccccde;
+  background: #ddd;
+}
+
+.dashboard-whiteframe {
+  margin: 5px;
+  background: rgb(250,250,250)
 }

@@ -1,0 +1,13 @@
+<md-content>
+  <link rel="stylesheet" href="app/scripts/directives/header/style.css">
+
+  <md-toolbar class="md-hue-2">
+    <div class="md-toolbar-tools">
+      <md-button ng-if="state.header.left.clearSearchResults" ng-click="clearSearch()" class="md-button md-accent md-raised" aria-label="Return to search">Clear Search</md-button>
+
+      <span flex layout="row" layout-align="center center" md-truncate class="md-display-1">{{ state.header.title }}</span>
+
+      <md-button ng-if="state.header.right.createPatient" class="md-button md-accent md-raised" aria-label="Create Patient">Create Patient</md-button>
+    </div>
+  </md-toolbar>
+</md-content>

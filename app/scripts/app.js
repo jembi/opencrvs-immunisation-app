@@ -3,15 +3,19 @@
 var moment = require('moment')
 var angular = require('angular')
 var ngRoute = require('angular-route')
+var ngCookies = require('angular-cookies')
+var ngResource = require('angular-resource')
+var ngMessages = require('angular-messages')
 var ngMaterial = require('angular-material')
 var mdDataTable = require('angular-material-data-table')
+var formBuilder = require('md-form-builder')
 
-var dependencies = [ ngRoute, ngMaterial, mdDataTable ]
+var dependencies = [ ngRoute, formBuilder, ngMaterial, ngCookies, ngResource, ngMessages, mdDataTable ]
 var app = angular.module('rcbsApp', dependencies)
 
-require('./controllers')
 require('./directives')
 require('./services')
+require('./controllers')
 
 app.config(function ($routeProvider) {
   $routeProvider
