@@ -15,7 +15,7 @@ module.exports = function ($scope, loadResource, state) {
   }
 
   // Watch for changes in the state service - patients
-  $scope.$watch(function() { return state.getSearchResults() }, function(newResults){
+  $scope.$watch(function () { return state.getSearchResults() }, function (newResults) {
     $scope.state.patients = newResults
 
     if (!newResults) {
@@ -27,6 +27,5 @@ module.exports = function ($scope, loadResource, state) {
       $scope.state.header.left.clearSearchResults = true // hide the return to search button in top header
       $scope.state.header.right.createPatient = true // hide the create patient button in top header
     }
-    
-  }, true);
+  }, true)
 }

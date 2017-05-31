@@ -1,6 +1,6 @@
 'use strict'
 
-module.exports = function (Api, loadResource, $q) {
+module.exports = function (Api, loadResource, $q, state) {
   return {
     restrict: 'EA',
     templateUrl: 'app/scripts/directives/search-by-id/view.html',
@@ -19,8 +19,8 @@ module.exports = function (Api, loadResource, $q) {
         }
 
         var patientId = formFieldsValues.tracNetID
-        Api.Patients.get({ id: patientId }, function (result) {
-          state.setSearchResults(result)
+        Api.Patients.get({ identifier: patientId }, function (result) {
+          state.setSearchResults(result.entry)
           console.log(result)
           defer.resolve({ isValid: true, msg: 'Success' })
         }, function (err) {

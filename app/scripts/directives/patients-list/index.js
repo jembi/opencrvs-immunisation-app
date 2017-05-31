@@ -85,10 +85,10 @@ module.exports = function (state) {
         return contactArray
       }
 
-      scope.$watch('results', function(newResults, oldResults) {
+      scope.$watch('results', function (newResults, oldResults) {
         if (newResults) {
           scope.patients = []
-          angular.forEach(scope.results, function (resource) {
+          angular.forEach(newResults, function (resource) {
             var patient = resource.resource
             scope.patients.push({
               id: patient.id,
@@ -127,9 +127,7 @@ module.exports = function (state) {
             page: 1
           }
         }
-      }, true);
-
-      
+      }, true)
     }
   }
 }
