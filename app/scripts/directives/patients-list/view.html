@@ -9,7 +9,7 @@
             <th width="50"></th>
             <th md-column><span>Name</span></th>
             <th md-column><span>Surname</span></th>
-            <th md-column><span>Sex</span></th>
+            <th md-column><span>Gender</span></th>
             <th md-column><span>TrackNet ID#</span></th>
             <th md-column><span>Date of Birth</span></th>
             <th md-column>Match</th>
@@ -17,8 +17,10 @@
           </tr>
         </thead>
         <tbody md-body>
-          <tr ng-repeat-start="patient in patients track by patient.id | filter: filter.search | orderBy: query.order | limitTo: query.limit : (query.page -1) * query.limit">
-            <td md-cell ng-click="togglePatientDetails(patient)">
+          <tr ng-repeat-start="patient in patients track by patient.id | filter: filter.search | orderBy: query.order | limitTo: query.limit : (query.page -1) * query.limit"
+            class="patientsListRow"
+            ng-click="togglePatientDetails(patient)">
+            <td md-cell>
               <i class="material-icons" ng-if="patient._control.showPatientDetails">expand_less</i>
               <i class="material-icons" ng-if="!patient._control.showPatientDetails">expand_more</i>
             </td>
@@ -29,7 +31,7 @@
             <td md-cell>{{patient.birthDate}}</td>
             <td md-cell>
               <span class="matchlabel" ng-class="{'certain': patient.search.extension.valueCode == 'certain' , 'possible': patient.search.extension.valueCode == 'possible', 'probable': patient.search.extension.valueCode == 'probable' } ">
-                {{patient.search.extension.valueCode}} ({{patient.search.score * 100}}%)
+                {{patient.search.extension.valueCode}} ({{patient.search.score * 100 | number : 2}}%)
               </span>
             </td>
             <td md-cell>
@@ -37,7 +39,7 @@
             </td>
           </tr>
           <tr ng-if="patient._control.showPatientDetails" ng-repeat-end>
-            <td colspan="7" class="showPatientDetails">
+            <td colspan="8" class="showPatientDetails">
               <patients-list-row-details patient="patient"></patients-list-row-details>
             </td>
           </tr>
@@ -49,8 +51,8 @@
     <md-table-pagination md-limit="query.limit" md-limit-options="limitOptions" md-page="query.page" md-total="{{desserts.count}}" md-page-select="options.pageSelect" md-boundary-links="options.boundaryLinks" md-on-paginate="logPagination"></md-table-pagination>
   </div>
 
-  <div layout="row" layout-align="center center" ng-if="patients">
-    <div md-whiteframe="2" flex-sm="90" flex-gt-sm="70" flex-gt-md="50" layout="column" layout-align="center center" style="background: cornsilk; padding: 10px; margin: 5px;">
+  <div layout="row" layout-align="center center" ng-if="patients" style="padding: 10px;">
+    <div flex-sm="90" flex-gt-sm="70" flex-gt-md="50" layout="column" layout-align="center center">
       <div ng-if="patients.length > 0">Not finding the Patient you are looking for? </div>
       <div ng-if="patients.length === 0">No results found matching your query.</div>
 

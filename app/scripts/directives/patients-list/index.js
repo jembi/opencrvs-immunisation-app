@@ -1,5 +1,4 @@
 'use strict'
-/* global angular */
 
 module.exports = function (state) {
   var TRACNET_SYSTEM_IDENTIFIER = 'pshr:tracnetid'
@@ -25,13 +24,14 @@ module.exports = function (state) {
           family: null
         }
 
-        angular.forEach(names, function (nameInstance) {
+        for (var i = 0; i < names.length; i++) {
+          var nameInstance = names[i]
           if (nameInstance.use === 'official') {
             officialName.prefix = nameInstance.prefix.join(' ')
             officialName.given = nameInstance.given.join(' ')
             officialName.family = nameInstance.family.join(' ')
           }
-        })
+        }
 
         return officialName
       }
@@ -39,57 +39,67 @@ module.exports = function (state) {
       var getTracnetID = function (identifiers) {
         var tracnetID = null
 
-        angular.forEach(identifiers, function (identifierInstance) {
+        for (var i = 0; i < identifiers.length; i++) {
+          var identifierInstance = identifiers[i]
           if (identifierInstance.use === 'official') {
             if (identifierInstance.system === TRACNET_SYSTEM_IDENTIFIER) {
               tracnetID = identifierInstance.value
             }
           }
-        })
+        }
 
         return tracnetID
       }
 
       var getGender = function (gender) {
-        return gender.charAt(0).toUpperCase()
+        if (gender) {
+          return gender.charAt(0).toUpperCase()
+        }
       }
 
       var getContact = function (contact) {
         var contactArray = []
 
-        angular.forEach(contact, function (contactInstance) {
-          var relationships = []
-          var fullnames = []
+        if (contact) {
+          for (var c = 0; c < contact.length; c++) {
+            var contactInstance = contact[c]
+            var relationships = []
+            var fullnames = []
 
-          // get relationships
-          angular.forEach(contactInstance.relationship, function (relationshipInstance) {
-            angular.forEach(relationshipInstance.coding, function (relationship) {
-              relationships.push(relationship.code)
-            })
-          })
+            // get relationships
+            for (var r = 0; r < contactInstance.relationship.length; r++) {
+              var relationshipInstance = contactInstance.relationship[r]
+              for (var i = 0; i < relationshipInstance.coding.length; i++) {
+                var relationship = relationshipInstance.coding[i]
+                relationships.push(relationship.code)
+              }
+            }
 
-          angular.forEach(contactInstance.name, function (nameInstance) {
-            var fullname = nameInstance.given.join(' ') + ' ' + nameInstance.family.join(' ')
-            fullnames.push(fullname)
-          })
+            for (var n = 0; n < contactInstance.name.length; n++) {
+              var nameInstance = contactInstance.name[n]
+              var fullname = nameInstance.given.join(' ') + ' ' + nameInstance.family.join(' ')
+              fullnames.push(fullname)
+            }
 
-          var formattedContact = {
-            relationship: relationships.join(', '),
-            name: fullnames,
-            telecom: contactInstance.telecom
+            var formattedContact = {
+              relationship: relationships.join(', '),
+              name: fullnames,
+              telecom: contactInstance.telecom
+            }
+
+            contactArray.push(formattedContact)
           }
-
-          contactArray.push(formattedContact)
-        })
+        }
 
         return contactArray
       }
 
-      scope.$watch('results', function (newResults, oldResults) {
-        if (newResults) {
-          scope.patients = []
-          angular.forEach(newResults, function (resource) {
-            var patient = resource.resource
+      scope.createPatientsList = function (results) {
+        scope.patients = []
+
+        if (results) {
+          for (var i = 0; i < results.length; i++) {
+            var patient = results[i].resource
             scope.patients.push({
               id: patient.id,
               name: getOfficialName(patient.name),
@@ -101,32 +111,38 @@ module.exports = function (state) {
               communication: patient.communication,
               contact: getContact(patient.contact),
               extension: patient.extension,
-              search: resource.search,
+              search: results[i].search,
               _control: {
                 showPatientDetails: false
               }
             })
-          })
-
-          scope.selected = []
-          scope.limitOptions = [5, 10, 15]
-
-          scope.options = {
-            rowSelection: false,
-            multiSelect: false,
-            autoSelect: false,
-            decapitate: false,
-            largeEditDialog: false,
-            boundaryLinks: false,
-            limitSelect: false,
-            pageSelect: false
           }
+        }
 
-          scope.query = {
-            order: 'name',
-            limit: 5,
-            page: 1
-          }
+        scope.selected = []
+        scope.limitOptions = [5, 10, 15]
+
+        scope.options = {
+          rowSelection: false,
+          multiSelect: false,
+          autoSelect: false,
+          decapitate: false,
+          largeEditDialog: false,
+          boundaryLinks: false,
+          limitSelect: false,
+          pageSelect: false
+        }
+
+        scope.query = {
+          order: 'name',
+          limit: 5,
+          page: 1
+        }
+      }
+
+      scope.$watch('results', function (newResults, oldResults) {
+        if (newResults) {
+          scope.createPatientsList(newResults)
         }
       }, true)
     }

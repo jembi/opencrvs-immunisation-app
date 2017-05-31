@@ -19,3 +19,12 @@
 .matchlabel.probable {
   background: #FE5621;
 }
+
+.patientsListRow:hover {
+  cursor: pointer;
+  background: #eee;
+}
+
+.patientsListRow:focus {
+  outline: none;
+}
