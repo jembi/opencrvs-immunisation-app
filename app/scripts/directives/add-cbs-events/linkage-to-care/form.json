@@ -1,0 +1,84 @@
+{
+  "key": "sec1",
+  "name": "Section 1",
+  "displayName": "Linkage to care",
+  "flex": "100",
+  "rows": [{
+      "name": "Row 1",
+      "layout": "row",
+      "fields": [{
+        "type": "date",
+        "flex": "100",
+        "name": "encounterDate",
+        "title": "Encounter Date",
+        "settings": {
+          "valueType": "valueString",
+          "disabled": false,
+          "required": true
+        },
+        "skipLogic": {
+          "func": {},
+          "checks": []
+        },
+        "value": null
+      }]
+    },
+    {
+      "name": "Row 2",
+      "layout": "row",
+      "fields": [{
+        "type": "date",
+        "flex": "100",
+        "name": "encounterLocation",
+        "title": "Location",
+        "settings": {
+          "valueType": "valueString",
+          "disabled": false,
+          "required": true
+        },
+        "skipLogic": {
+          "func": {},
+          "checks": []
+        },
+        "value": null
+      }]
+    },
+    {
+      "name": "Row 3",
+      "layout": "row",
+      "fields": [{
+        "type": "select",
+        "flex": "100",
+        "name": "encounterType",
+        "title": "Encounter Type",
+        "settings": {
+          "valueType": "valueString",
+          "disabled": false,
+          "required": true
+        },
+        "skipLogic": {
+          "func": {},
+          "checks": []
+        },
+        "options": [{
+            "key": "hiv-visit",
+            "value": "HIV visit"
+          },
+          {
+            "key": "anc-visit",
+            "value": "ANC visit"
+          },
+          {
+            "key": "pmtct-visit",
+            "value": "PMTCT visit"
+          },
+          {
+            "key": "other",
+            "value": "Other"
+          }
+        ],
+        "value": null
+      }]
+    }
+  ]
+}
