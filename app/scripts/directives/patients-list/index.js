@@ -101,6 +101,7 @@ module.exports = function (state) {
               communication: patient.communication,
               contact: getContact(patient.contact),
               extension: patient.extension,
+              search: resource.search,
               _control: {
                 showPatientDetails: false
               }

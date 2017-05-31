@@ -12,6 +12,7 @@
             <th md-column><span>Sex</span></th>
             <th md-column><span>TrackNet ID#</span></th>
             <th md-column><span>Date of Birth</span></th>
+            <th md-column>Match</th>
             <th width="50"></th>
           </tr>
         </thead>
@@ -26,6 +27,11 @@
             <td md-cell>{{patient.gender}}</td>
             <td md-cell>{{patient.tracnetID}}</td>
             <td md-cell>{{patient.birthDate}}</td>
+            <td md-cell>
+              <span class="matchlabel" ng-class="{'certain': patient.search.extension.valueCode == 'certain' , 'possible': patient.search.extension.valueCode == 'possible', 'probable': patient.search.extension.valueCode == 'probable' } ">
+                {{patient.search.extension.valueCode}} ({{patient.search.score * 100}}%)
+              </span>
+            </td>
             <td md-cell>
               <button class="md-button md-primary md-raised">View</button>
             </td>
