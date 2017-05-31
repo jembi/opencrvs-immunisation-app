@@ -19,15 +19,28 @@ module.exports = function (Api, loadResource, $q) {
             }
           }
         }
+<<<<<<< HEAD
 
         // TODO: API call to fetch patients
         // Mocked API call to fetch patients
         loadResource.fetch('app/scripts/directives/patients-list/sample-result.json').then(function (results) {
           scope.state.patients = results // array of entries
         })
+=======
+>>>>>>> 73dda9e91d1a057db076747608d7db7982ee2377
 
-        // Api.getPatient()
-        defer.resolve({ isValid: true, msg: 'Success' })
+        var success = function (result) {
+          console.log(result)
+          defer.resolve({ isValid: true, msg: 'Success' })
+        }
+
+        var error = function (err) {
+          console.error(err)
+          defer.reject({ isValid: false, msg: err.statusText || 'Failed to perform search' })
+        }
+
+        var patientId = formFieldsValues.tracNetID
+        Api.Patients.get({ id: patientId }).$promise.then(success, error)
         return defer.promise
       }
 

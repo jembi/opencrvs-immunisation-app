@@ -1,6 +1,38 @@
 'use strict'
 
-module.exports = function (Api, loadResource, $q) {
+module.exports = function (Api, loadResource, $q, state) {
+  var createParametersResource = function (formFields) {
+    var resource = {
+      resourceType: 'Patient',
+      name: [
+        {
+          given: [ formFields.givenName ],
+          family: [ formFields.familyName ]
+        }
+      ],
+      gender: formFields.gender,
+      birthDate: formFields.birthDate
+    }
+
+    return {
+      resourceType: 'Parameters',
+      parameter: [
+        {
+          name: 'resource',
+          resource: resource
+        },
+        {
+          name: 'count',
+          valueInteger: 100
+        },
+        {
+          name: 'onlyCertainMatches',
+          valueBoolean: false
+        }
+      ]
+    }
+  }
+
   return {
     restrict: 'EA',
     templateUrl: 'app/scripts/directives/search-by-demographics/view.html',
@@ -20,14 +52,16 @@ module.exports = function (Api, loadResource, $q) {
           }
         }
 
-        // TODO: API call to fetch patients
-        // Mocked API call to fetch patients
-        loadResource.fetch('app/scripts/directives/patients-list/sample-result.json').then(function (results) {
-          scope.state.patients = results // array of entries
+        var body = createParametersResource(formFieldsValues)
+
+        Api.Patients.match(body, function (bundle) {
+          state.setSearchResults(bundle.entry)
+          defer.resolve({ isValid: true, msg: 'Found some potential matches' })
+        }, function (err) {
+          console.error(err)
+          defer.reject(err)
         })
 
-        // Api.fetchMatches()
-        defer.resolve({ isValid: true, msg: 'Found some potential matches' })
         return defer.promise
       }
 
