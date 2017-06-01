@@ -1,6 +1,38 @@
 'use strict'
 
-module.exports = function (Api, loadResource, $q) {
+module.exports = function (Api, loadResource, $q, state) {
+  var createParametersResource = function (formFields) {
+    var resource = {
+      resourceType: 'Patient',
+      name: [
+        {
+          given: [ formFields.givenName ],
+          family: [ formFields.familyName ]
+        }
+      ],
+      gender: formFields.gender,
+      birthDate: formFields.birthDate
+    }
+
+    return {
+      resourceType: 'Parameters',
+      parameter: [
+        {
+          name: 'resource',
+          resource: resource
+        },
+        {
+          name: 'count',
+          valueInteger: 100
+        },
+        {
+          name: 'onlyCertainMatches',
+          valueBoolean: false
+        }
+      ]
+    }
+  }
+
   return {
     restrict: 'EA',
     templateUrl: 'app/scripts/directives/search-by-demographics/view.html',
@@ -18,17 +50,21 @@ module.exports = function (Api, loadResource, $q) {
           }
         }
 
-        console.log(formFieldsValues)
+        var body = createParametersResource(formFieldsValues)
 
-        // Api.fetchMatches()
-
-        defer.resolve({ isValid: true, msg: 'Found some potential matches' })
+        Api.Patients.match(body, function (bundle) {
+          state.setSearchResults(bundle.entry)
+          defer.resolve({ isValid: true, msg: 'Found some potential matches' })
+        }, function (err) {
+          console.error(err)
+          defer.reject(err)
+        })
 
         return defer.promise
       }
 
       scope.state = {}
-      scope.state.FormBuilder = {
+      scope.state.FormBuilderDemographics = {
         name: 'searchByDemographics',
         displayType: null,
         globals: {
@@ -37,7 +73,6 @@ module.exports = function (Api, loadResource, $q) {
           showReviewButton: false
         },
         sections: [],
-        login: {},
         buttons: {
           submit: 'search'
         },
@@ -50,7 +85,7 @@ module.exports = function (Api, loadResource, $q) {
       }
 
       loadResource.fetch('app/scripts/directives/search-by-demographics/form.json').then(function (formSection) {
-        scope.state.FormBuilder.sections.push(formSection)
+        scope.state.FormBuilderDemographics.sections.push(formSection)
       })
     }
   }

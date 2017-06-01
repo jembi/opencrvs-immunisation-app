@@ -1,13 +1,17 @@
 <!doctype html>
-<dashboard-header dashboard-header-items="dashboardHeaderItems"></dashboard-header>
+<header state="state"></header>
 
-<md-content>
-  <div layout="row" flex-offset="10" flex="80">
-    <div md-whiteframe="2" flex="30">
-      <search-by-id></search-by-id>
+<div>
+  <div layout="row">
+    <div md-whiteframe="2" flex="30" class="dashboard-whiteframe">
+      <search-by-id state="state"></search-by-id>
     </div>
-    <div md-whiteframe="2" flex-offset="10" flex="70">
-      <search-by-demographics></search-by-demographics>
+    <div md-whiteframe="2" flex="70" class="dashboard-whiteframe">
+      <search-by-demographics state="state"></search-by-demographics>
     </div>
   </div>
-<md-content>
+
+  <div md-whiteframe="2" flex="100" class="dashboard-whiteframe" ng-if="state.patients">
+    <patients-list results="state.patients"></patients-list>
+  </div>
+</div>
