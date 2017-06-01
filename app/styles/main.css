@@ -1,0 +1,13 @@
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
+
+body {
+  margin: 0px;
+  background: #ddd;
+}
+
+.dashboard-whiteframe {
+  margin: 5px;
+  background: rgb(250,250,250)
+}
