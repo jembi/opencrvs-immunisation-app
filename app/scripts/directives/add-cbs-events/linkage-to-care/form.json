@@ -1,14 +1,14 @@
 {
   "key": "sec1",
   "name": "Section 1",
-  "displayName": "Linkage to care",
+  "displayName": "Linkage to Care",
   "flex": "100",
   "rows": [{
       "name": "Row 1",
       "layout": "row",
       "fields": [{
         "type": "date",
-        "flex": "100",
+        "flex": "33",
         "name": "encounterDate",
         "title": "Encounter Date",
         "settings": {
@@ -21,34 +21,47 @@
           "checks": []
         },
         "value": null
-      }]
-    },
-    {
-      "name": "Row 2",
-      "layout": "row",
-      "fields": [{
-        "type": "date",
-        "flex": "100",
+      },
+      {
+        "type": "select",
+        "flex": "33",
         "name": "encounterLocation",
         "title": "Location",
         "settings": {
           "valueType": "valueString",
           "disabled": false,
-          "required": true
+          "required": true,
+          "searchOptions": true
         },
         "skipLogic": {
           "func": {},
           "checks": []
         },
+        "options": [
+          {"key": "Chuk", "value": "Chuk"}, 
+          {"key": "Kacyiru Police Hospital", "value": "Kacyiru Police Hospital"}, 
+          {"key": "Muhima Hospital", "value": "Muhima Hospital"}, 
+          {"key": "Kibagabaga Hospital", "value": "Kibagabaga Hospital"}, 
+          {"key": "Kanombe Military Hospital", "value": "Kanombe Military Hospital"}, 
+          {"key": "King Faisal Hospital", "value": "King Faisal Hospital"}, 
+          {"key": "Ndera Hospital", "value": "Ndera Hospital"}, 
+          {"key": "Masaka Hospital", "value": "Masaka Hospital"}, 
+          {"key": "Rwinkwavu Hospital", "value": "Rwinkwavu Hospital"}, 
+          {"key": "Kirehe Hospital", "value": "Kirehe Hospital"}, 
+          {"key": "Kibungo Hospital", "value": "Kibungo Hospital"}, 
+          {"key": "Nyagatare Hospital", "value": "Nyagatare Hospital"}, 
+          {"key": "Gahini Hospital", "value": "Gahini Hospital"}, 
+          {"key": "Nyamata Hospital", "value": "Nyamata Hospital"}, 
+          {"key": "Ngarama Hospital", "value": "Ngarama Hospital"}, 
+          {"key": "Kiziguro Hospital", "value": "Kiziguro Hospital"}, 
+          {"key": "Rwamagana Hospital", "value": "Rwamagana Hospital"}, 
+          {"key": "Other", "value": "Other"}
+        ],
         "value": null
-      }]
-    },
-    {
-      "name": "Row 3",
-      "layout": "row",
-      "fields": [{
+      }, 
+      {
         "type": "select",
-        "flex": "100",
+        "flex": "33",
         "name": "encounterType",
         "title": "Encounter Type",
         "settings": {
