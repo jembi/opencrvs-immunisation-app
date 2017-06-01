@@ -8,7 +8,14 @@ const dashboardController = require('../../app/scripts/controllers/dashboard')
 tap.test('.someFunction()', { autoend: true }, (t) => {
   t.test('should check something and pass', (t) => {
     // given
-    const scope = { some: 'scope' }
+    const scope = {
+      some: 'scope',
+      $watch: () => {
+        return new Promise((resolve, reject) => {
+          resolve()
+        })
+      }
+    }
     const patientsResults = {
       'resourceType': 'Bundle',
       'id': 'c3a312d0-4456-11e7-9cc5-dd24d9f4c890',

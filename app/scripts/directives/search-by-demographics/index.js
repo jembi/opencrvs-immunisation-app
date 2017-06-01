@@ -64,7 +64,7 @@ module.exports = function (Api, loadResource, $q, state) {
       }
 
       scope.state = {}
-      scope.state.FormBuilder = {
+      scope.state.FormBuilderDemographics = {
         name: 'searchByDemographics',
         displayType: null,
         globals: {
@@ -73,7 +73,6 @@ module.exports = function (Api, loadResource, $q, state) {
           showReviewButton: false
         },
         sections: [],
-        login: {},
         buttons: {
           submit: 'search'
         },
@@ -86,7 +85,7 @@ module.exports = function (Api, loadResource, $q, state) {
       }
 
       loadResource.fetch('app/scripts/directives/search-by-demographics/form.json').then(function (formSection) {
-        scope.state.FormBuilder.sections.push(formSection)
+        scope.state.FormBuilderDemographics.sections.push(formSection)
       })
     }
   }

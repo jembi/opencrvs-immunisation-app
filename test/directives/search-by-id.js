@@ -13,7 +13,7 @@ tap.tearDown(() => {
 })
 
 tap.test('.link()', { autoend: true }, (t) => {
-  t.test('should set state.fromBuilder on scope and fetch correct form file', (t) => {
+  t.test('should set state.FormBuilderSearchById on scope and fetch correct form file', (t) => {
     // given
     const scope = {}
     const fetchMock = (file) => {
@@ -26,7 +26,7 @@ tap.test('.link()', { autoend: true }, (t) => {
     // when
     directive.link(scope)
     // then
-    t.ok(scope.state.FormBuilder)
+    t.ok(scope.state.FormBuilderSearchById)
     t.end()
   })
 
@@ -36,7 +36,7 @@ tap.test('.link()', { autoend: true }, (t) => {
       const scope = {}
       const apiMock = {
         get: (params, success) => {
-          success()
+          success({ entry: [] })
         }
       }
       const fetchMock = (file) => {
@@ -53,10 +53,11 @@ tap.test('.link()', { autoend: true }, (t) => {
           }
         }
       }
-      const directive = searchById({ Patients: apiMock }, { fetch: fetchMock }, { defer: deferMock })
+      const mock = () => {}
+      const directive = searchById({ Patients: apiMock }, { fetch: fetchMock }, { defer: deferMock }, { setSearchResults: mock })
       directive.link(scope)
       // when
-      scope.state.FormBuilder.submit.execute()
+      scope.state.FormBuilderSearchById.submit.execute()
     })
 
     t.test('should reject with an error message', (t) => {
@@ -83,10 +84,11 @@ tap.test('.link()', { autoend: true }, (t) => {
           }
         }
       }
+
       const directive = searchById({ Patients: apiMock }, { fetch: fetchMock }, { defer: deferMock })
       directive.link(scope)
       // when
-      scope.state.FormBuilder.submit.execute()
+      scope.state.FormBuilderSearchById.submit.execute()
     })
 
     t.test('should reject with a default error message when no statusText on error object', (t) => {
@@ -114,7 +116,7 @@ tap.test('.link()', { autoend: true }, (t) => {
       const directive = searchById({ Patients: apiMock }, { fetch: fetchMock }, { defer: deferMock })
       directive.link(scope)
       // when
-      scope.state.FormBuilder.submit.execute()
+      scope.state.FormBuilderSearchById.submit.execute()
     })
 
     t.test('should call the API with correct parameter', (t) => {
@@ -124,9 +126,10 @@ tap.test('.link()', { autoend: true }, (t) => {
         get: (params, success, error) => {
           // then
           t.equals(params.identifier, '1234')
-          success()
+          success({ entry: [] })
         }
       }
+
       const fetchMock = (file) => {
         return new Promise((resolve, reject) => {
           resolve()
@@ -139,10 +142,11 @@ tap.test('.link()', { autoend: true }, (t) => {
           }
         }
       }
-      const directive = searchById({ Patients: apiMock }, { fetch: fetchMock }, { defer: deferMock })
+      const mock = () => {}
+      const directive = searchById({ Patients: apiMock }, { fetch: fetchMock }, { defer: deferMock }, { setSearchResults: mock })
       directive.link(scope)
       // when
-      scope.state.FormBuilder.submit.execute({ tracNetID: { $dirty: true, $modelValue: '1234' } })
+      scope.state.FormBuilderSearchById.submit.execute({ tracNetID: { $dirty: true, $modelValue: '1234' } })
     })
   })
 })

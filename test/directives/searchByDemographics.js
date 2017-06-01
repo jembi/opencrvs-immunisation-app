@@ -13,7 +13,7 @@ tap.tearDown(() => {
 })
 
 tap.test('.link()', { autoend: true }, (t) => {
-  t.test('should set state.fromBuilder on scope and fetch correct form file', (t) => {
+  t.test('should set state.FormBuilderDemographics on scope and fetch correct form file', (t) => {
     // given
     const scope = {}
     const fetchMock = (file) => {
@@ -26,7 +26,7 @@ tap.test('.link()', { autoend: true }, (t) => {
     // when
     directive.link(scope)
     // then
-    t.ok(scope.state.FormBuilder)
+    t.ok(scope.state.FormBuilderDemographics)
     t.end()
   })
 
@@ -56,7 +56,7 @@ tap.test('.link()', { autoend: true }, (t) => {
       const directive = searchByDemographics({ Patients: { match: matchMock } }, { fetch: fetchMock }, { defer: deferMock }, { setSearchResults: mock })
       directive.link(scope)
       // when
-      scope.state.FormBuilder.submit.execute()
+      scope.state.FormBuilderDemographics.submit.execute()
     })
 
     t.test('should call Api.match with a FHIR parameter object', (t) => {
@@ -109,7 +109,7 @@ tap.test('.link()', { autoend: true }, (t) => {
       const directive = searchByDemographics({ Patients: { match: matchMock } }, { fetch: fetchMock }, { defer: deferMock }, { setSearchResults: mock })
       directive.link(scope)
       // when
-      scope.state.FormBuilder.submit.execute({
+      scope.state.FormBuilderDemographics.submit.execute({
         givenName: { $dirty: true, $modelValue: 'Jane' },
         familyName: { $dirty: true, $modelValue: 'Smith' },
         gender: { $dirty: true, $modelValue: 'female' },
@@ -141,7 +141,7 @@ tap.test('.link()', { autoend: true }, (t) => {
       const directive = searchByDemographics({ Patients: { match: matchMock } }, { fetch: fetchMock }, { defer: deferMock }, { setSearchResults: setSateMock })
       directive.link(scope)
       // when
-      scope.state.FormBuilder.submit.execute()
+      scope.state.FormBuilderDemographics.submit.execute()
     })
 
     t.test('should reject submit promise if an error occurs', (t) => {
@@ -166,7 +166,7 @@ tap.test('.link()', { autoend: true }, (t) => {
       const directive = searchByDemographics({ Patients: { match: matchMock } }, { fetch: fetchMock }, { defer: deferMock })
       directive.link(scope)
       // when
-      scope.state.FormBuilder.submit.execute()
+      scope.state.FormBuilderDemographics.submit.execute()
     })
   })
 })
