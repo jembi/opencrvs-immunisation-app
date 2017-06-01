@@ -1,0 +1,81 @@
+<md-content layout="row" style="background: transparent;">
+  <link rel="stylesheet" href="app/scripts/directives/patients-list-row-details/style.css" />
+
+  <div class="patientDetailsWhiteframe" md-whiteframe="2" flex-sm="45" flex-gt-sm="35" flex-gt-md="25" layout="column" layout-align="start center">
+    <div class="title">Telecom</div>
+    <div class="details" flex>
+      <div class="detailsRow" ng-repeat="telecom in patient.telecom track by $index" layout="row">
+        <div class="system" flex>{{telecom.system}}</div>
+        <div class="value" flex>{{telecom.value}}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="patientDetailsWhiteframe" md-whiteframe="2" flex-sm="45" flex-gt-sm="35" flex-gt-md="25" layout="column" layout-align="start center">
+    <div class="title">Address</div>
+    <div class="details" flex>
+      <div ng-repeat="address in patient.address track by $index" layout="column">
+        <div class="detailsRow" layout="row">
+          <div class="system" flex>Use:</div>
+          <div class="value" flex>{{address.use}}</div>
+        </div>
+        <div class="detailsRow" layout="row">
+          <div class="system" flex>Line:</div>
+          <div class="value" flex>
+            <div ng-repeat="line in address.line track by $index">
+              {{line}}
+            </div>
+          </div>
+        </div>
+        <div class="detailsRow" layout="row">
+          <div class="system" flex>City:</div>
+          <div class="value" flex>{{address.city}}</div>
+        </div>
+        <div class="detailsRow" layout="row">
+          <div class="system" flex>State:</div>
+          <div class="value" flex>{{address.state}}</div>
+        </div>
+        <div class="detailsRow" layout="row">
+          <div class="system" flex>Postal Code:</div>
+          <div class="value" flex>{{address.postalCode}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="patientDetailsWhiteframe" md-whiteframe="2" flex-sm="45" flex-gt-sm="35" flex-gt-md="25" layout="column" layout-align="start center">
+    <div class="title">Contact</div>
+    <div class="details" flex>
+      <div ng-repeat="contact in patient.contact track by $index" layout="column">
+        <div class="detailsRow" layout="row">
+          <div class="system" flex>Relationship:</div>
+          <div class="value" flex>{{contact.relationship}}</div>
+        </div>
+        <div class="detailsRow" layout="row">
+          <div class="system" flex>Name:</div>
+          <div class="value" flex>
+            <div ng-repeat="nameInstance in contact.name track by $index">
+              <span ng-repeat="name in nameInstance track by $index">{{name}}</span>
+            </div>
+          </div>
+        </div>
+        <div class="detailsRow" ng-repeat="telecom in contact.telecom track by $index" layout="row">
+          <div class="system" flex>{{telecom.system}}</div>
+          <div class="value" flex>{{telecom.value}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="patientDetailsWhiteframe" md-whiteframe="2" flex-sm="45" flex-gt-sm="35" flex-gt-md="25" layout="column" layout-align="start center">
+    <div class="title">Extensions</div>
+    <div class="details" flex>
+      <div class="detailsRow" ng-repeat="extension in patient.extension track by $index" layout="row">
+        <div flex ng-repeat="(key, value) in extension">
+          {{value}}
+        </div>
+      </div>
+    </div>
+  </div>
+
+</md-content>

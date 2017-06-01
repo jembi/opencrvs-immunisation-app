@@ -1,3 +1,17 @@
+<!doctype html>
+<header state="state"></header>
+
 <div>
-  <span>Welcome to the RCBS Dashboard</span>
+  <div layout="row">
+    <div md-whiteframe="2" flex="30" class="dashboard-whiteframe">
+      <search-by-id state="state"></search-by-id>
+    </div>
+    <div md-whiteframe="2" flex="70" class="dashboard-whiteframe">
+      <search-by-demographics state="state"></search-by-demographics>
+    </div>
+  </div>
+
+  <div md-whiteframe="2" flex="100" class="dashboard-whiteframe" ng-if="state.patients">
+    <patients-list results="state.patients"></patients-list>
+  </div>
 </div>
