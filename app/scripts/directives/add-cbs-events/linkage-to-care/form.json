@@ -16,6 +16,17 @@
           "disabled": false,
           "required": true
         },
+        "FHIRMappings": [{
+          "path": "period.start",
+          "params": null,
+          "valueType": "formValue",
+          "value": "encounterDate"
+        }, {
+          "path": "period.end",
+          "params": null,
+          "valueType": "formValue",
+          "value": "encounterDate"
+        }],
         "skipLogic": {
           "func": {},
           "checks": []
@@ -33,6 +44,12 @@
           "required": true,
           "searchOptions": true
         },
+        "FHIRMappings": [{
+          "path": "location[0].location.display",
+          "params": null,
+          "valueType": "formValue",
+          "value": "encounterLocation"
+        }],
         "skipLogic": {
           "func": {},
           "checks": []

@@ -10,3 +10,4 @@ app.config(function ($httpProvider) {
 app.factory('Api', require('./rest'))
 app.factory('loadResource', require('./load-resource'))
 app.factory('state', require('./state'))
+app.factory('FHIR', require('./FHIR/FHIR'))
