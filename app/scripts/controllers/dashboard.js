@@ -1,6 +1,6 @@
 'use strict'
 
-module.exports = function ($scope, loadResource, state) {
+module.exports = function ($scope, state, $location) {
   $scope.state = {
     patients: null,
     header: {
@@ -20,7 +20,7 @@ module.exports = function ($scope, loadResource, state) {
     } else {
       $scope.state.header.title = 'Search Results (' + newResults.length + ')'
       $scope.state.header.left = [{ text: 'clear search', onClick: function () { state.setSearchResults(null) } }] // show the return to search button in top header
-      $scope.state.header.right = [{ text: 'create patient' }] // show the create patient button in top header
+      $scope.state.header.right = [{ text: 'add patient', onClick: function () { $location.path('/add-patient') } }] // show the create patient button in top header
     }
   }, true)
 }
