@@ -49,10 +49,10 @@ tap.test('.link()', { autoend: true }, (t) => {
     // then
     t.ok(scope.results)
     t.ok(scope.patients) // results array was empty
-    t.equal(scope.patients.length, 2, 'should have two patients in the array')
-    t.equal(scope.patients[0].name.given, 'Nelle', 'should patient 1 with given name of "Nelle"')
-    t.equal(scope.patients[0].name.family, 'Burton', 'should patient 1 with family name of "Burton"')
-    t.equal(scope.patients[1].name.given, 'Bertie', 'should patient 2 with given name of "Bertie"')
+    t.equal(scope.patients.count, 2, 'should have two patients in the array')
+    t.equal(scope.patients.data[0].name.given, 'Nelle', 'should patient 1 with given name of "Nelle"')
+    t.equal(scope.patients.data[0].name.family, 'Burton', 'should patient 1 with family name of "Burton"')
+    t.equal(scope.patients.data[1].name.given, 'Bertie', 'should patient 2 with given name of "Bertie"')
     t.end()
   })
 })
