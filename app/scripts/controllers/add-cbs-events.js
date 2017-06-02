@@ -1,11 +1,30 @@
 'use strict'
 
-module.exports = function ($scope) {
-  $scope.dashboardHeaderItems = {
-    title: 'Add CBS events',
-    left: 'Cancel',
-    right: ''
+module.exports = function (Api, $scope, $routeParams) {
+  $scope.state = {
+    patients: null,
+    singlePatient: true,
+    header: {
+      title: 'Add CBS Events',
+      left: [
+        {
+          text: 'cancel',
+          onClick: function () { console.log('TODO: Navigate back to view patient page') }
+        }
+      ],
+      right: []
+    }
   }
+
+  var success = function (results) {
+    $scope.state.patients = [{ resource: results }]
+  }
+
+  var error = function (err) {
+    console.error(err)
+  }
+
+  Api.Patients.get({ id: $routeParams.patientId }, success, error)
 
   $scope.eventTitles = [
     'HIV confirmation',
@@ -13,15 +32,6 @@ module.exports = function ($scope) {
     'First CD4 count',
     'First viral load'
   ]
-
-  $scope.patientDetails = {
-    givenName: 'DummyName',
-    familyName: 'DummySurname',
-    gender: 'male',
-    birthDate: '1990-03-05',
-    telecom: '0721111111',
-    tracNetId: '1234-123456'
-  }
 
   $scope.setSelectedEvent = function (selectedEvent) {
     $scope.selectedEvent = selectedEvent

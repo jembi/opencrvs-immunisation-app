@@ -19,7 +19,11 @@ app.config(function ($routeProvider) {
     templateUrl: 'app/views/dashboard.html',
     controller: 'DashboardControl'
   })
-  .when('/add-cbs-events', {
+  .when('/patients', {
+    templateUrl: 'app/views/dashboard.html',
+    controller: 'DashboardControl'
+  })
+  .when('/patients/:patientId/add-event', {
     templateUrl: 'app/views/add-cbs-events.html',
     controller: 'AddCbsEventsControl'
   })

@@ -1,14 +1,17 @@
 <!doctype html>
-<dashboard-header dashboard-header-items="dashboardHeaderItems"></dashboard-header>
+<header state="state"></header>
 
-<md-content>
+<div>
   <div layout="column">
-    <patient-details-bar patient-details="patientDetails"></patient-details-bar>
+    <div md-whiteframe="2" class="dashboard-whiteframe">
+      <patients-list ng-if="state.patients" results="state.patients" single-patient="state.singlePatient"></patients-list>
+    </div>
+    
     <div layout="row" flex="100">
-      <div flex="20">
+      <div flex="20" md-whiteframe="2" class="dashboard-whiteframe">
         <cbs-event-selector event-titles="eventTitles" set-selected-event="setSelectedEvent(selectedEvent)"></cbs-event-selector>
       </div>
-      <div flex="80">
+      <div flex="80" md-whiteframe="2" class="dashboard-whiteframe">
         <div ng-if="selectedEvent==eventTitles[0]">{{eventTitles[0]}} event coming soon</div>
         <linkage-to-care ng-if="selectedEvent==eventTitles[1]"></linkage-to-care>
         <div ng-if="selectedEvent==eventTitles[2]">{{eventTitles[2]}} event coming soon</div>
@@ -16,5 +19,5 @@
       </div>
     </div>
   </div>
-<md-content>
+</div>
   

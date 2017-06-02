@@ -21,7 +21,6 @@ module.exports = function (Api, loadResource, $q, state) {
         var patientId = formFieldsValues.tracNetID
         Api.Patients.get({ identifier: patientId }, function (result) {
           state.setSearchResults(result.entry)
-          console.log(result)
           defer.resolve({ isValid: true, msg: 'Success' })
         }, function (err) {
           console.error(err)
