@@ -1,0 +1,30 @@
+.showPatientDetails {
+  padding: 10px;
+  background: #F7F1F6;
+  border-top: 1px solid #ddd;
+}
+
+.matchlabel {
+  border-radius: 5px;
+  padding: 5px;
+  text-transform: capitalize;
+  color: #fff;
+}
+.matchlabel.certain {
+  background: #4BAE4F;
+}
+.matchlabel.possible {
+  background: #02A8F3;
+}
+.matchlabel.probable {
+  background: #FE5621;
+}
+
+.patientsListRow:hover {
+  cursor: pointer;
+  background: #eee;
+}
+
+.patientsListRow:focus {
+  outline: none;
+}
