@@ -86,6 +86,12 @@
           "disabled": false,
           "required": true
         },
+        "FHIRMappings": [{
+          "path": "type.coding[0].display",
+          "params": null,
+          "valueType": "formValue",
+          "value": "encounterType"
+        }],
         "skipLogic": {
           "func": {},
           "checks": []

@@ -10,7 +10,6 @@ module.exports = function (state) {
       results: '='
     },
     link: function (scope) {
-
       scope.clearSearch = function () {
         state.setSearchResults(null)
       }
@@ -121,8 +120,8 @@ module.exports = function (state) {
         }
 
         scope.patients = {
-          "count": patientsArr.length,
-          "data": patientsArr
+          count: patientsArr.length,
+          data: patientsArr
         }
 
         scope.selected = []

@@ -42,7 +42,7 @@
     "role": {
       "coding": [
         {
-          "system": "ansa:practitioner:role",
+          "system": "pshr:practitioner:role",
           "code": ""
         }
       ]

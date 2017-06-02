@@ -1,7 +1,6 @@
 'use strict'
 
 module.exports = function (Api, loadResource, $q, state, FHIR) {
-
   return {
     restrict: 'EA',
     templateUrl: 'app/scripts/directives/add-cbs-events/linkage-to-care/view.html',
@@ -19,8 +18,9 @@ module.exports = function (Api, loadResource, $q, state, FHIR) {
           }
         }
 
-        loadResource.fetch('app/scripts/directives/add-cbs-events/linkage-to-care/FHIR-Encounter.json').then(function (fhirDoc) {
-          var fhirObject = FHIR.mapFHIRObject(fhirDoc, scope.state.FormBuilderAddCbsEventLinkageToCare, formFieldsValues);
+        loadResource.fetch('app/scripts/services/FHIR/resources/Encounter.json').then(function (fhirDoc) {
+          var fhirObject = FHIR.mapFHIRObject(fhirDoc, scope.state.FormBuilderAddCbsEventLinkageToCare, formFieldsValues)
+          console.log(fhirObject)
           defer.resolve({ isValid: true, msg: 'Event mapped to FHIR document!' })
 
           // TODO: API call to submit document
