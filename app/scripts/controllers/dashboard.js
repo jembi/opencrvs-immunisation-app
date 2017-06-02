@@ -1,6 +1,6 @@
 'use strict'
 
-module.exports = function ($scope, loadResource, state, $q, FHIR) {
+module.exports = function ($scope, state, $q, FHIR) {
   $scope.state = {
     patients: null,
     header: {

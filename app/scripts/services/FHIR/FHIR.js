@@ -3,8 +3,7 @@
 module.exports = function () {
   var setField = function (resource, key, value, params) {
     if (!resource) {
-      console.log(key)
-      console.log(value)
+      console.error('Trying to add a value to a resource that does not exist: ' + key + ' - ' + value)
       return
     }
 

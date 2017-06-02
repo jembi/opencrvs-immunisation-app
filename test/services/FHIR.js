@@ -7,7 +7,7 @@ const FHIR = require('../../app/scripts/services/FHIR/FHIR.js')()
 
 const sandbox = sinon.sandbox.create()
 sandbox.stub(console, 'error').callsFake((msg) => {})
-// sandbox.stub(console, 'log').callsFake((msg) => {})
+sandbox.stub(console, 'log').callsFake((msg) => {})
 tap.tearDown(() => {
   sandbox.restore()
 })
