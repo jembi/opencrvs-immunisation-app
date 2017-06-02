@@ -20,7 +20,10 @@ module.exports = function (Api, loadResource, $q, state, FHIR) {
 
         loadResource.fetch('app/scripts/services/FHIR/resources/Encounter.json').then(function (fhirDoc) {
           var fhirObject = FHIR.mapFHIRObject(fhirDoc, scope.state.FormBuilderAddCbsEventLinkageToCare, formFieldsValues)
-          console.log(fhirObject)
+
+          // add the Subject Refernce - Patient/Reference
+          fhirObject.subject.reference = 'patient/link'
+
           defer.resolve({ isValid: true, msg: 'Event mapped to FHIR document!' })
 
           // TODO: API call to submit document
