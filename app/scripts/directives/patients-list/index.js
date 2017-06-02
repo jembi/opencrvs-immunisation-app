@@ -146,10 +146,6 @@ module.exports = function (state, $location) {
           scope.createPatientsList(newResults)
         }
       }, true)
-
-      scope.viewPatient = function (id) {
-        $location.path('/patients/' + id + '/add-event')
-      }
     }
   }
 }

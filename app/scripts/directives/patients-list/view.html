@@ -36,7 +36,7 @@
               </span>
             </td>
             <td md-cell ng-if="!singlePatient">
-              <button ng-click="viewPatient(patient.id)" class="md-button md-primary md-raised">View</button>
+              <a href="#/patients/{{patient.id}}/add-event" class="md-button md-primary md-raised">View</a>
             </td>
           </tr>
           <tr ng-if="patient._control.showPatientDetails" ng-repeat-end>
