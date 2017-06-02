@@ -1,0 +1,36 @@
+{
+  "resourceType": "QuestionnaireResponse",
+  "status": "completed",
+  "questionnaire": {
+    "reference": "Questionnaire/1"
+  },
+  "subject": {
+    "reference": "Patient/1"
+  },
+  "source": {
+    "reference": "Patient/1"
+  },
+  "encounter": {
+    "reference": "Encounter/1"
+  },
+  "group": {
+    "title": "Postoperative Questionnaire",
+    "question": [
+      {
+        "formKey": "",
+        "text": "a question",
+        "answer": [
+          {
+            "valueString": "an answer"
+          }
+        ]
+      }
+    ]
+  },
+  "extension": [
+    {
+      "url": "pshr:workflow:reviewed",
+      "extension": []
+    }
+  ]
+}

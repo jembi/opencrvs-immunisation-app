@@ -96,12 +96,12 @@ module.exports = function (state, $location) {
       }
 
       scope.createPatientsList = function (results) {
-        scope.patients = []
+        var patientsArr = []
 
         if (results) {
           for (var i = 0; i < results.length; i++) {
             var patient = results[i].resource
-            scope.patients.push({
+            patientsArr.push({
               id: patient.id,
               name: getOfficialName(patient.name),
               gender: getGender(patient.gender),
@@ -120,8 +120,13 @@ module.exports = function (state, $location) {
           }
         }
 
+        scope.patients = {
+          count: patientsArr.length,
+          data: patientsArr
+        }
+
         scope.selected = []
-        scope.limitOptions = [5, 10, 15]
+        scope.limitOptions = [10, 20, 50, 100]
 
         scope.options = {
           rowSelection: false,
@@ -136,7 +141,7 @@ module.exports = function (state, $location) {
 
         scope.query = {
           order: 'name',
-          limit: 5,
+          limit: 10,
           page: 1
         }
       }

@@ -1,6 +1,6 @@
 'use strict'
 
-module.exports = function (Api, loadResource, $q) {
+module.exports = function (Api, loadResource, $q, state, FHIR) {
   return {
     restrict: 'EA',
     templateUrl: 'app/scripts/directives/add-cbs-events/linkage-to-care/view.html',
@@ -17,31 +17,45 @@ module.exports = function (Api, loadResource, $q) {
             }
           }
         }
-        console.log(formFieldsValues)
 
-        // Api.saveCbsEvent()
-        defer.resolve({ isValid: true, msg: 'Success' })
+        loadResource.fetch('app/scripts/services/FHIR/resources/Encounter.json').then(function (fhirDoc) {
+          var fhirObject = FHIR.mapFHIRObject(fhirDoc, scope.state.FormBuilderAddCbsEventLinkageToCare, formFieldsValues)
+
+          // add the Subject Refernce - Patient/Reference
+          fhirObject.subject.reference = 'patient/link'
+
+          defer.resolve({ isValid: true, msg: 'Event mapped to FHIR document!' })
+
+          // TODO: API call to submit document
+          // OR - Save to holding object to be sent in bundle
+        })
+
         return defer.promise
       }
 
       scope.state = {}
-      scope.state.LinkageToCareForm = {
-        name: 'linkageToCareForm',
+      scope.state.FormBuilderAddCbsEventLinkageToCare = {
+        name: 'AddCbsEventLinkageToCare',
         displayType: null,
-        globals: {},
+        globals: {
+          viewModeOnly: false,
+          showDraftSubmitButton: false,
+          showReviewButton: false
+        },
         sections: [],
-        linkageToCareForm: {},
         buttons: {
-          submit: 'add event'
+          submit: 'search'
         },
         submit: {
           execute: submit,
           params: []
-        }
+        },
+        saveAsDraft: false,
+        AddCbsEventLinkageToCare: {}
       }
 
       loadResource.fetch('app/scripts/directives/add-cbs-events/linkage-to-care/form.json').then(function (formSection) {
-        scope.state.LinkageToCareForm.sections.push(formSection)
+        scope.state.FormBuilderAddCbsEventLinkageToCare.sections.push(formSection)
       })
     }
   }

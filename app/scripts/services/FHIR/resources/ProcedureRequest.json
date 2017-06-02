@@ -1,0 +1,13 @@
+{
+  "resourceType": "ProcedureRequest",
+  "subject": {
+    "reference": ""
+  },
+  "encounter": {
+    "reference": ""
+  },
+  "scheduledDateTime": "",
+  "code": {
+    "coding": []
+  }
+}

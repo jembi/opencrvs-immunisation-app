@@ -1,0 +1,23 @@
+{
+  "resourceType": "Procedure",
+  "status": "in-progress",
+  "subject": {
+    "reference": "Patient/1"
+  },
+  "encounter": {
+    "reference": "Encounter/1"
+  },
+  "request": {
+    "reference": "ProcedureRequest/1"
+  },
+  "performedDateTime": "",
+  "code": {
+    "coding": [
+      {
+        "system": "pshr:valueset:procedure-codes",
+        "code": "1102",
+        "display": "Laser tonsillectomy"
+      }
+    ]
+  }
+}

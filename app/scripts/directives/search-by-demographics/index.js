@@ -1,5 +1,7 @@
 'use strict'
 
+var moment = require('moment')
+
 module.exports = function (Api, loadResource, $q, state) {
   var createParametersResource = function (formFields) {
     var resource = {
@@ -11,7 +13,7 @@ module.exports = function (Api, loadResource, $q, state) {
         }
       ],
       gender: formFields.gender,
-      birthDate: formFields.birthDate
+      birthDate: moment(formFields.birthDate).format('YYYY-MM-DD')
     }
 
     return {
