@@ -30,7 +30,7 @@ module.exports = function (Api, loadResource, $q) {
         displayType: null,
         globals: {},
         sections: [],
-        login: {},
+        linkageToCareForm: {},
         buttons: {
           submit: 'add event'
         },
