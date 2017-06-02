@@ -2,7 +2,9 @@
 <header state="state"></header>
 
 <div>
-  <div layout="column">
+  <div ng-if="getPatientError">{{ getPatientError }}</div>
+  
+  <div ng-if="!getPatientError" layout="column">
     <div md-whiteframe="2">
       <patients-list ng-if="state.patients" results="state.patients" single-patient="state.singlePatient"></patients-list>
     </div>
