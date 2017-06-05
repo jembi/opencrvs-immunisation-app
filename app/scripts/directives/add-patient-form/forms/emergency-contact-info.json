@@ -1,0 +1,68 @@
+{
+  "key": "emergencyContactInfo",
+  "name": "Emergency Contact",
+  "displayName": "Emergency Contact Information",
+  "flex": "100",
+  "rows": [{
+    "name": "Row 1",
+    "title": "Please supply your emergency contact information below.",
+    "layout": "row",
+    "fields": [{ 
+      "type": "input",
+      "flex": "50",
+      "name": "emergencyContactPersonName",
+      "title": "Emergency Contact person Name",
+      "settings": {
+        "required": true
+      },
+      "FHIRMappings": [{
+        "path": "patient.contact.name.given[0]",
+        "params": null,
+        "valueType": "formValue",
+        "value": "emergencyContactPersonName"
+      }]
+    }, { 
+      "type": "input",
+      "flex": "50",
+      "name": "emergencyContactRelationship",
+      "title": "Emergency Contact Relationship",
+      "settings": {
+        "required": true
+      },
+      "FHIRMappings": [{
+        "path": "patient.contact.relationship.text",
+        "params": null,
+        "valueType": "formValue",
+        "value": "emergencyContactRelationship"
+      }]
+    }, { 
+      "type": "input",
+      "flex": "50",
+      "name": "emergencyContactMobile",
+      "title": "Emergency Contact Mobile",
+      "settings": {
+        "required": true
+      },
+      "FHIRMappings": [{
+        "path": "patient.contact.telecom.value",
+        "params": "contact.telecom.system=phone",
+        "valueType": "formValue",
+        "value": "emergencyContactMobile"
+      }]
+    }, { 
+      "type": "input",
+      "flex": "50",
+      "name": "emergencyContactEmail",
+      "title": "Emergency Contact email",
+      "settings": {
+        "required": true
+      },
+      "FHIRMappings": [{
+        "path": "patient.contact.telecom.value",
+        "params": "contact.telecom.system=email",
+        "valueType": "formValue",
+        "value": "emergencyContactEmail"
+      }]
+    }]
+  }]
+}

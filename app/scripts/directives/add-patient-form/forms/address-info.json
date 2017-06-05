@@ -1,0 +1,191 @@
+{
+  "key": "addressInfo",
+  "name": "Address Info",
+  "displayName": "Address Information",
+  "flex": "100",
+  "rows": [{
+    "name": "Row 1",
+    "title": "Please supply your physical address information below.",
+    "layout": "row",
+    "fields": [{ 
+      "type": "input",
+      "flex": "25",
+      "name": "physicalAddressNoStreet",
+      "title": "Physical Address No and Street",
+      "settings": {
+        "required": true
+      },
+      "FHIRMappings": [{
+        "path": "patient.address[0].line[0]",
+        "params": null,
+        "valueType": "formValue",
+        "value": "physicalAddressNoStreet"
+      }]
+    }, { 
+      "type": "input",
+      "flex": "25",
+      "name": "physicalAddressSuburb",
+      "title": "Physical Address Suburb",
+      "settings": {
+        "required": true
+      },
+      "FHIRMappings": [{
+        "path": "patient.address[0].city",
+        "params": null,
+        "valueType": "formValue",
+        "value": "physicalAddressSuburb"
+      }]
+    }, { 
+      "type": "input",
+      "flex": "25",
+      "name": "physicalAddressProvince",
+      "title": "Physical Address Province",
+      "settings": {
+        "required": true
+      },
+      "FHIRMappings": [{
+        "path": "patient.address[0].state",
+        "params": null,
+        "valueType": "formValue",
+        "value": "physicalAddressProvince"
+      }]
+    }, { 
+      "type": "input",
+      "flex": "25",
+      "name": "physicalAddressPostalCode",
+      "title": "Physical Address Postal Code",
+      "settings": {
+        "required": true
+      },
+      "FHIRMappings": [{
+        "path": "patient.address[0].postalCode",
+        "params": null,
+        "valueType": "formValue",
+        "value": "physicalAddressPostalCode"
+      }]
+    }]
+  }, {
+    "name": "Row 1",
+    "title": "Please supply your postal address information below.",
+    "layout": "row",
+    "fields": [{ 
+      "type": "checkboxes",
+      "flex": "100",
+      "name": "sameAsYourPhysicalAddress",
+      "title": "Same as your physical address?",
+      "settings": {
+        "required": false
+      },
+      "FHIRMappings": [{
+        "path": "patient.extension.valueBoolean",
+        "params": "extension.url=pshr:addressInfo:postalSameAsPhysical",
+        "valueType": "formValue",
+        "value": "sameAsYourPhysicalAddress"
+      }]
+    }, { 
+      "type": "input",
+      "flex": "25",
+      "name": "postalAddressNoStreet",
+      "title": "Postal Address No and Street",
+      "settings": {
+        "required": true
+      },
+      "FHIRMappings": [{
+        "path": "patient.address[1].line[0]",
+        "params": null,
+        "valueType": "formValue",
+        "value": "postalAddressNoStreet"
+      }],
+      "skipLogic": {
+        "func": {
+          "execute": "duplicateFieldValue",
+          "params": ["sameAsYourPhysicalAddress", "physicalAddressNoStreet", "postalAddressNoStreet"],
+          "watchingVars": ["sameAsYourPhysicalAddress", "physicalAddressNoStreet"]
+        },
+        "checks": [{
+          "variable": "form.sameAsYourPhysicalAddress.$modelValue",
+          "operand": "!=",
+          "value": true
+        }]
+      }
+    }, { 
+      "type": "input",
+      "flex": "25",
+      "name": "postalAddressSuburb",
+      "title": "Postal Address Suburb",
+      "settings": {
+        "required": true
+      },
+      "FHIRMappings": [{
+        "path": "patient.address[1].city",
+        "params": null,
+        "valueType": "formValue",
+        "value": "postalAddressSuburb"
+      }],
+      "skipLogic": {
+        "func": {
+          "execute": "duplicateFieldValue",
+          "params": ["sameAsYourPhysicalAddress", "physicalAddressSuburb", "postalAddressSuburb"],
+          "watchingVars": ["sameAsYourPhysicalAddress", "physicalAddressSuburb"]
+        },
+        "checks": [{
+          "variable": "form.sameAsYourPhysicalAddress.$modelValue",
+          "operand": "!=",
+          "value": true
+        }]
+      }
+    }, { 
+      "type": "input",
+      "flex": "25",
+      "name": "postalAddressProvince",
+      "title": "Postal Address Province",
+      "settings": {
+        "required": true
+      },
+      "FHIRMappings": [{
+        "path": "patient.address[1].state",
+        "params": null,
+        "valueType": "formValue",
+        "value": "postalAddressProvince"
+      }],
+      "skipLogic": {
+        "func": {
+          "execute": "duplicateFieldValue",
+          "params": ["sameAsYourPhysicalAddress", "physicalAddressProvince", "postalAddressProvince"],
+          "watchingVars": ["sameAsYourPhysicalAddress", "physicalAddressProvince"]
+        },
+        "checks": [{
+          "variable": "form.sameAsYourPhysicalAddress.$modelValue",
+          "operand": "!=",
+          "value": true
+        }]
+      }
+    }, { 
+      "type": "input",
+      "flex": "25",
+      "name": "postalAddressPostalCode",
+      "title": "Postal Address Postal Code",
+      "settings": {
+        "required": true
+      },
+      "FHIRMappings": [{
+        "path": "patient.address[1].postalCode",
+        "params": null,
+        "valueType": "formValue",
+        "value": "postalAddressPostalCode"
+      }],
+      "skipLogic": {
+        "func": {
+          "execute": "duplicateFieldValue",
+          "params": ["sameAsYourPhysicalAddress", "physicalAddressPostalCode", "postalAddressPostalCode"],
+          "watchingVars": ["sameAsYourPhysicalAddress", "physicalAddressPostalCode"]
+        },
+        "checks": [{
+          "variable": "form.sameAsYourPhysicalAddress.$modelValue",
+          "operand": "!=",
+          "value": true
+        }]
+      }
+    }]
+  }]
+}
