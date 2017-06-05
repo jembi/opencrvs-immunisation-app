@@ -1,0 +1,25 @@
+<!doctype html>
+<header state="state"></header>
+
+<div>
+  <div ng-if="getPatientError">{{ getPatientError }}</div>
+  
+  <div ng-if="!getPatientError" layout="column">
+    <div md-whiteframe="2">
+      <patients-list ng-if="state.patients" results="state.patients" single-patient="state.singlePatient"></patients-list>
+    </div>
+    
+    <div layout="row" flex="100">
+      <div flex="20" md-whiteframe="2" class="dashboard-whiteframe">
+        <cbs-event-selector event-titles="eventTitles" set-selected-event="setSelectedEvent(selectedEvent)"></cbs-event-selector>
+      </div>
+      <div flex="80" md-whiteframe="2" class="dashboard-whiteframe">
+        <div ng-if="selectedEvent==eventTitles[0]">{{eventTitles[0]}} event coming soon</div>
+        <add-events-linkage-to-care ng-if="selectedEvent==eventTitles[1]"></add-events-linkage-to-care>
+        <div ng-if="selectedEvent==eventTitles[2]">{{eventTitles[2]}} event coming soon</div>
+        <div ng-if="selectedEvent==eventTitles[3]">{{eventTitles[3]}} event coming soon</div>
+      </div>
+    </div>
+  </div>
+</div>
+  

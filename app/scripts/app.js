@@ -15,12 +15,16 @@ var app = angular.module('rcbsApp', dependencies)
 
 app.config(function ($routeProvider) {
   $routeProvider
-  .when('/', {
+  .when('/patients', {
     templateUrl: 'app/views/dashboard.html',
     controller: 'DashboardControl'
   })
+  .when('/patients/:patientId/add-event', {
+    templateUrl: 'app/views/add-cbs-events.html',
+    controller: 'AddCbsEventsControl'
+  })
   .otherwise({
-    redirectTo: '/'
+    redirectTo: '/patients'
   })
 })
 

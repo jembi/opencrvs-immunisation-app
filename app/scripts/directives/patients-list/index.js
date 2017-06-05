@@ -1,13 +1,14 @@
 'use strict'
 
-module.exports = function (state) {
+module.exports = function (state, $location) {
   var TRACNET_SYSTEM_IDENTIFIER = 'pshr:tracnetid'
   return {
     restrict: 'EA',
     replace: true,
     templateUrl: 'app/scripts/directives/patients-list/view.html',
     scope: {
-      results: '='
+      results: '=',
+      singlePatient: '='
     },
     link: function (scope) {
       scope.clearSearch = function () {
