@@ -4,6 +4,7 @@ const tap = require('tap')
 const sinon = require('sinon')
 
 const FHIR = require('../../app/scripts/services/FHIR/FHIR.js')()
+const FormBuilderService = require('../../app/scripts/services/FormBuilder.js')()
 const stateService = require('../../app/scripts/services/state.js')()
 const linkageToCare = require('../../app/scripts/directives/add-cbs-events/linkage-to-care')
 const FormBuilderLinkageToCare = require('../../app/scripts/directives/add-cbs-events/linkage-to-care/form.json')
@@ -37,7 +38,12 @@ tap.test('.link()', { autoend: true }, (t) => {
 tap.test('.submit()', { autoend: true }, (t) => {
   t.test('should resolve with a success message', (t) => {
     // given
-    const scope = {}
+    const scope = {
+      patient: {
+        resourceType: 'Patient',
+        id: 'AAAAA-BBBB-CCCC-DDDDD-EEEEEE'
+      }
+    }
     const mockFormData = {
       $setPristine: function () {},
       $setUntouched: function () {},
@@ -77,7 +83,7 @@ tap.test('.submit()', { autoend: true }, (t) => {
       }
     }
 
-    const directive = linkageToCare({ fetch: fetchMock }, { defer: deferMock }, stateService, FHIR)
+    const directive = linkageToCare({ fetch: fetchMock }, { defer: deferMock }, stateService, FHIR, FormBuilderService)
     directive.link(scope)
     // when
     scope.state.FormBuilderAddCbsEventLinkageToCare.sections = [FormBuilderLinkageToCare]

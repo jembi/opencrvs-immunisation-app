@@ -1,0 +1,69 @@
+{
+  "key": "sec1",
+  "name": "Section 1",
+  "displayName": "Linkage to Care",
+  "flex": "100",
+  "rows": [{
+      "name": "Row 1",
+      "layout": "row",
+      "fields": [{
+        "type": "date",
+        "flex": "33",
+        "name": "date",
+        "title": "Date",
+        "settings": {
+          "valueType": "valueString",
+          "disabled": false,
+          "required": true
+        },
+        "skipLogic": {
+          "func": {},
+          "checks": []
+        },
+        "value": "2017-06-01"
+      },
+      {
+        "type": "input",
+        "flex": "33",
+        "name": "basicInput",
+        "title": "Basic Input",
+        "settings": {
+          "valueType": "valueString",
+          "disabled": false,
+          "required": true,
+          "searchOptions": true
+        },
+        "skipLogic": {
+          "func": {},
+          "checks": []
+        },
+        "value": "Just a test string"
+      }, 
+      {
+        "type": "select",
+        "flex": "33",
+        "name": "encounterType",
+        "title": "Encounter Type",
+        "settings": {
+          "valueType": "valueString",
+          "disabled": false,
+          "required": true
+        },
+        "skipLogic": {
+          "func": {},
+          "checks": []
+        },
+        "options": [{
+            "key": "option-1",
+            "value": "Option 1"
+          },
+          {
+            "key": "option-2",
+            "value": "Option 2"
+          }
+        ],
+        "value": "option-2"
+      }]
+    }
+  ]
+}
