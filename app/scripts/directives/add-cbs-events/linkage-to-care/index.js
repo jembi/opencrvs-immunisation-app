@@ -1,6 +1,6 @@
 'use strict'
 
-module.exports = function (Api, loadResource, $q, state, FHIR) {
+module.exports = function (loadResource, $q, state, FHIR) {
   return {
     restrict: 'EA',
     templateUrl: 'app/scripts/directives/add-cbs-events/linkage-to-care/view.html',
@@ -27,7 +27,7 @@ module.exports = function (Api, loadResource, $q, state, FHIR) {
           fhirObject.subject.reference = scope.subjectReference
 
           // TODO: Add document to state bundle for submission
-          state.addEventToBundle(fhirObject)
+          state.pushToEventsArray(fhirObject)
           
           scope.resetForm(scope.state.FormBuilderAddCbsEventLinkageToCare, form)
 

@@ -1,6 +1,23 @@
-<div layout="column">
-  <md-toolbar layout="row" layout-align="center center">
-    <span>Select an event to add</span>
-  </md-toolbar>
-  <md-button ng-repeat="title in eventTitles" ng-click="selectEventClick(title)" ng-class="{'md-primary': title == selectedEvent}" class="md-button md-raised" flex="100">{{ title }}</md-button>
-</div>
+<md-content>
+  <link rel="stylesheet" href="app/scripts/directives/add-cbs-events/cbs-event-selector/style.css">
+
+  <div layout="column">
+    <md-toolbar layout="row" layout-align="center center">
+      <span>Select an event to add</span>
+    </md-toolbar>
+    <md-button ng-repeat="title in eventTitles" ng-click="selectEventClick(title)" ng-class="{'md-primary': title == selectedEvent}" class="md-button md-raised" flex="100">{{ title }}</md-button>
+
+    <div class="eventsSubmitControl" layout="column" ng-if="submitControl">
+      <div layout="row" layout-align="center center" class="eventsSubmitControlMsg" ng-class="{'error': submitControl.status == 'error' , 'success': submitControl.status == 'success' , 'processing': submitControl.status == 'processing' , 'info': submitControl.status == 'info'}">
+        {{ submitControl.displayText }}
+      </div>
+
+      <div flex layout="row" ng-if="submitControl.status !== 'success'">
+        <md-button class="md-accent md-button md-raised" style="margin-left: 0px;" ng-click="clearEventsBundle()">Clear</md-button>
+        <span flex></span>
+        <md-button class="md-primary md-button md-raised" style="margin-right: 0px;" ng-click="submitEventsBundle()">Submit</md-button>  
+      </div>
+      
+    </div>
+  </div>
+</md-content>
