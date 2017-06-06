@@ -68,7 +68,7 @@ module.exports = function (loadResource, $q, state, FHIR) {
         },
         sections: [],
         buttons: {
-          submit: 'search'
+          submit: 'Add'
         },
         submit: {
           execute: submit,

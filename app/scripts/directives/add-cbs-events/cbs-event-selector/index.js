@@ -14,6 +14,8 @@ module.exports = function (Api, loadResource, state) {
         scope.setSelectedEvent({ selectedEvent: title })
       }
 
+      scope.submitControl = null
+
       // add watcher to check when events are added to state service
       scope.$watch(function () { return state.getEventsArray() }, function (events) {
         if (events.length > 0) {
@@ -22,12 +24,11 @@ module.exports = function (Api, loadResource, state) {
             status: 'info',
             displayText: 'You have ' + events.length + ' ' + eventsString + ' ready to be submitted'
           }
-        } else {
-          scope.submitControl = null
         }
       }, true)
 
       scope.clearEventsBundle = function () {
+        scope.submitControl = null
         state.setEventsArray([])
       }
 
@@ -38,14 +39,16 @@ module.exports = function (Api, loadResource, state) {
         // TODO: replace with bundle object received from state service
         // load sample document for now
         loadResource.fetch('app/scripts/directives/add-cbs-events/cbs-event-selector/FHIR-Document.json').then(function (fhirBundle) {
-          console.log(fhirBundle)
-
           Api.FhirRoot.save(fhirBundle, function (result) {
+            state.setEventsArray([])
+
             scope.submitControl.status = 'success'
-            scope.submitControl.displayText = 'Successfully added events!'
+            scope.submitControl.displayText = 'Events submitted successfully!'
+
+            
           }, function (err) {
             scope.submitControl.status = 'error'
-            scope.submitControl.displayText = err
+            scope.submitControl.displayText = err.statusText || 'Internal Server Error: Please contact your administrator to resolve the issue'
             console.error(err)
           })
         })
