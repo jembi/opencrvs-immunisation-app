@@ -19,7 +19,7 @@
         "path": "patient.identifier.system",
         "params": null,
         "valueType": "staticValue",
-        "value": "pshr:tracnet:id"
+        "value": "rcbs:tracnet:id"
       }, {
         "path": "patient.identifier.assigner.display",
         "params": null,
