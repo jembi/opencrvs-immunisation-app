@@ -8,7 +8,7 @@ const addPatient = require('../../app/scripts/directives/add-patient-form')
 
 const sandbox = sinon.sandbox.create()
 sandbox.stub(console, 'error').callsFake((msg) => {})
-// sandbox.stub(console, 'log').callsFake((msg) => {})
+sandbox.stub(console, 'log').callsFake((msg) => {})
 tap.tearDown(() => {
   sandbox.restore()
 })
@@ -79,8 +79,6 @@ tap.test('.submit()', { autoend: true }, (t) => {
     const deferMock = () => {
       return {
         resolve: (result) => {
-          // then
-          // TODO: Used in API call
           t.equals(result.isValid, true)
           t.equals(result.msg, 'Patient has been created successfully')
           t.end()
