@@ -1,0 +1,125 @@
+{
+  "resourceType": "Patient",
+  "active": true,
+  "identifier": [
+    {
+      "use": "official",
+      "system": "",
+      "value": "",
+      "assigner": {
+        "display": ""
+      }
+    }
+  ],
+  "name": [
+    {
+      "use": "official",
+      "prefix": [],
+      "family": [],
+      "given": []
+    }
+  ],
+  "gender": "",
+  "birthDate": "",
+  "telecom": [
+    {
+      "system": "email",
+      "value": ""
+    },
+    {
+      "system": "phone",
+      "value": "",
+      "use": ""
+    }
+  ],
+  "photo": [{
+    "data": null
+  }],
+  "address": [
+    {
+      "use": "",
+      "type": "",
+      "line": [
+        ""
+      ],
+      "state": "",
+      "city": "",
+      "postalCode": ""
+    }
+  ],
+  "communication": [
+    {
+      "language": {
+        "coding": [
+          {
+            "system": "urn:ietf:bcp:47",
+            "code": ""
+          }
+        ],
+        "text": ""
+      },
+      "preferred": true
+    }
+  ],
+  "contact": [
+    {
+      "relationship": [
+        {
+          "coding": [
+            {
+              "system": "http://hl7.org/fhir/patient-contact-relationship",
+              "code": "emergency"
+            }
+          ]
+        },
+        {
+          "coding": [
+            {
+              "system": "http://hl7.org/fhir/patient-contact-relationship",
+              "code": ""
+            }
+          ]
+        }
+      ],
+      "name": [
+        {
+          "use": "official",
+          "family": [
+            ""
+          ],
+          "given": [
+            ""
+          ]
+        }
+      ],
+      "telecom": [
+        {
+          "system": "phone",
+          "value": "",
+          "use": ""
+        }, {
+          "system": "email",
+          "value": ""
+        }
+      ]
+    }
+  ],
+  "extension": [
+    {
+      "url": "pshr:medicalaid:name",
+      "valueString": ""
+    }, {
+      "url": "pshr:medicalaid:option",
+      "valueString": ""
+    }, {
+      "url": "pshr:medicalaid:number",
+      "valueString": ""
+    }, {
+      "url": "pshr:gapcover",
+      "valueBoolean": false
+    }, {
+      "url": "pshr:medicalaid:privateFunder",
+      "valueString": ""
+    }
+  ]
+}

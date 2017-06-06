@@ -90,7 +90,7 @@ tap.test('.link()', { autoend: true }, (t) => {
                   }
                 ],
                 gender: 'female',
-                birthDate: '1986-05-31T08:13:15.421Z'
+                birthDate: '1986-05-31'
               }
             },
             {

@@ -8,10 +8,6 @@ module.exports = function (state) {
     scope: {
       state: '='
     },
-    link: function (scope) {
-      scope.clearSearch = function () {
-        state.setSearchResults(null)
-      }
-    }
+    link: function (scope) {}
   }
 }
