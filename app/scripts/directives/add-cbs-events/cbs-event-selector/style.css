@@ -1,0 +1,25 @@
+.eventsSubmitControl {
+  padding: 10px;
+}
+
+.eventsSubmitControlMsg {
+  padding: 20px;
+  border-radius: 3px;
+  color: #fff;
+}
+
+.eventsSubmitControlMsg.error {
+  background: red;
+}
+
+.eventsSubmitControlMsg.success {
+  background: green;
+}
+
+.eventsSubmitControlMsg.processing {
+  background: lightblue;
+}
+
+.eventsSubmitControlMsg.info {
+  background: peru;
+}

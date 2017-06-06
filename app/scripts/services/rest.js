@@ -9,6 +9,10 @@ module.exports = function ($resource, config) {
   return {
     Patients: $resource(server + '/fhir/Patient/:id', { id: '@id' }, {
       match: { method: 'POST', url: server + '/fhir/Patient/$match' }
+    }),
+
+    FhirRoot: $resource(server + '/fhir', {
+      save: { method: 'POST' }
     })
   }
 }
