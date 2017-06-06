@@ -8,7 +8,6 @@ module.exports = function (loadResource, $q, state, FHIR) {
       subjectReference: '@'
     },
     link: function (scope) {
-      console.log(state)
       var submit = function (form) {
         var defer = $q.defer()
 
