@@ -1,5 +1,7 @@
 'use strict'
 
+var mhdBuilder = require('../../../modules/mhd-doc-builder')
+
 module.exports = function (Api, loadResource, state) {
   return {
     restrict: 'EA',
@@ -36,19 +38,16 @@ module.exports = function (Api, loadResource, state) {
         scope.submitControl.status = 'processing'
         scope.submitControl.displayText = 'Busy processing submitted events'
 
-        // TODO: replace with bundle object received from state service
-        // load sample document for now
-        loadResource.fetch('app/scripts/directives/add-cbs-events/cbs-event-selector/FHIR-Document.json').then(function (fhirBundle) {
-          Api.FhirRoot.save(fhirBundle, function (result) {
-            state.setEventsArray([])
+        var mhdTransaction = mhdBuilder.buildMHDTransaction('Patient/test', state.getEventsArray())
+        Api.FhirRoot.save(mhdTransaction, function (result) {
+          state.setEventsArray([])
 
-            scope.submitControl.status = 'success'
-            scope.submitControl.displayText = 'Events submitted successfully!'
-          }, function (err) {
-            scope.submitControl.status = 'error'
-            scope.submitControl.displayText = err.statusText || 'Internal Server Error: Please contact your administrator to resolve the issue'
-            console.error(err)
-          })
+          scope.submitControl.status = 'success'
+          scope.submitControl.displayText = 'Events submitted successfully!'
+        }, function (err) {
+          scope.submitControl.status = 'error'
+          scope.submitControl.displayText = err.statusText || 'Internal Server Error: Please contact your administrator to resolve the issue'
+          console.error(err)
         })
       }
     }
