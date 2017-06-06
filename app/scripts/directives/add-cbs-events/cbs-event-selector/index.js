@@ -44,8 +44,6 @@ module.exports = function (Api, loadResource, state) {
 
             scope.submitControl.status = 'success'
             scope.submitControl.displayText = 'Events submitted successfully!'
-
-            
           }, function (err) {
             scope.submitControl.status = 'error'
             scope.submitControl.displayText = err.statusText || 'Internal Server Error: Please contact your administrator to resolve the issue'
