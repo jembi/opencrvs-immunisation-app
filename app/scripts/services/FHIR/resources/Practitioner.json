@@ -1,0 +1,52 @@
+{
+"resourceType": "Practitioner",
+"active": true,
+"identifier": [
+  {
+    "use": "official",
+    "system": "",
+    "value": "",
+    "assigner": {
+      "display": ""
+    }
+  }
+],
+"name": {
+  "use": "official",
+  "prefix": [
+    ""
+  ],
+  "family": [
+    ""
+  ],
+  "given": [
+    ""
+  ]
+},
+"telecom": [
+  {
+    "system": "email",
+    "value": ""
+  },
+  {
+    "system": "phone",
+    "value": "",
+    "use": ""
+  }
+],
+"practitionerRole": [
+  {
+    "managingOrganization": {
+      "reference": ""
+    },
+    "role": {
+      "coding": [
+        {
+          "system": "pshr:practitioner:role",
+          "code": ""
+        }
+      ]
+    }
+  }
+]
+}

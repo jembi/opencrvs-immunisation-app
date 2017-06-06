@@ -1,0 +1,6 @@
+<div layout="column">
+  <md-toolbar layout="row" layout-align="center center">
+    <span>Select an event to add</span>
+  </md-toolbar>
+  <md-button ng-repeat="title in eventTitles" ng-click="selectEventClick(title)" ng-class="{'md-primary': title == selectedEvent}" class="md-button md-raised" flex="100">{{ title }}</md-button>
+</div>
