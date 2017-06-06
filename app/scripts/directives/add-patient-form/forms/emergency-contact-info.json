@@ -16,7 +16,7 @@
         "required": true
       },
       "FHIRMappings": [{
-        "path": "patient.contact.name.given[0]",
+        "path": "contact.name.given[0]",
         "params": null,
         "valueType": "formValue",
         "value": "emergencyContactPersonName"
@@ -30,7 +30,7 @@
         "required": true
       },
       "FHIRMappings": [{
-        "path": "patient.contact.relationship.text",
+        "path": "contact.relationship.text",
         "params": null,
         "valueType": "formValue",
         "value": "emergencyContactRelationship"
@@ -44,7 +44,7 @@
         "required": true
       },
       "FHIRMappings": [{
-        "path": "patient.contact.telecom.value",
+        "path": "contact.telecom.value",
         "params": "contact.telecom.system=phone",
         "valueType": "formValue",
         "value": "emergencyContactMobile"
@@ -58,7 +58,7 @@
         "required": true
       },
       "FHIRMappings": [{
-        "path": "patient.contact.telecom.value",
+        "path": "contact.telecom.value",
         "params": "contact.telecom.system=email",
         "valueType": "formValue",
         "value": "emergencyContactEmail"

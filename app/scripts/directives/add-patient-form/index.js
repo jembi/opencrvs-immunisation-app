@@ -20,11 +20,13 @@ module.exports = function (Api, loadResource, $q, state, FHIR) {
 
         loadResource.fetch('app/scripts/services/FHIR/resources/Patient.json').then(function (fhirDoc) {
           var fhirObject = FHIR.mapFHIRObject(fhirDoc, scope.state.FormBuilderAddPatient, formFieldsValues)
-          console.log(fhirObject)
 
-          defer.resolve({ isValid: true, msg: 'Patient mapped to FHIR document!' })
-
-          // TODO: API call to submit patient
+          Api.Patients.save(fhirObject, function (bundle) {
+            defer.resolve({ isValid: true, msg: 'Patient has been created successfully' })
+          }, function (err) {
+            console.error(err)
+            defer.reject(err)
+          })
         })
 
         return defer.promise
