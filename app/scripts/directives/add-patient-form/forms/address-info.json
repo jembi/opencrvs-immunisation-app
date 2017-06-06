@@ -5,41 +5,13 @@
   "flex": "100",
   "rows": [{
     "name": "Row 1",
-    "title": "Please supply your physical address information below.",
+    "title": "Please supply your address information below.",
     "layout": "row",
-    "fields": [{ 
+    "fields": [{
       "type": "input",
-      "flex": "25",
-      "name": "physicalAddressNoStreet",
-      "title": "Physical Address No and Street",
-      "settings": {
-        "required": true
-      },
-      "FHIRMappings": [{
-        "path": "patient.address[0].line[0]",
-        "params": null,
-        "valueType": "formValue",
-        "value": "physicalAddressNoStreet"
-      }]
-    }, { 
-      "type": "input",
-      "flex": "25",
-      "name": "physicalAddressSuburb",
-      "title": "Physical Address Suburb",
-      "settings": {
-        "required": true
-      },
-      "FHIRMappings": [{
-        "path": "patient.address[0].city",
-        "params": null,
-        "valueType": "formValue",
-        "value": "physicalAddressSuburb"
-      }]
-    }, { 
-      "type": "input",
-      "flex": "25",
-      "name": "physicalAddressProvince",
-      "title": "Physical Address Province",
+      "flex": "20",
+      "name": "province",
+      "title": "Province",
       "settings": {
         "required": true
       },
@@ -47,145 +19,64 @@
         "path": "patient.address[0].state",
         "params": null,
         "valueType": "formValue",
-        "value": "physicalAddressProvince"
+        "value": "province"
       }]
-    }, { 
+    }, {
       "type": "input",
-      "flex": "25",
-      "name": "physicalAddressPostalCode",
-      "title": "Physical Address Postal Code",
+      "flex": "20",
+      "name": "district",
+      "title": "District",
       "settings": {
         "required": true
       },
       "FHIRMappings": [{
-        "path": "patient.address[0].postalCode",
+        "path": "patient.address[0].district",
         "params": null,
         "valueType": "formValue",
-        "value": "physicalAddressPostalCode"
+        "value": "district"
       }]
-    }]
-  }, {
-    "name": "Row 1",
-    "title": "Please supply your postal address information below.",
-    "layout": "row",
-    "fields": [{ 
-      "type": "checkboxes",
-      "flex": "100",
-      "name": "sameAsYourPhysicalAddress",
-      "title": "Same as your physical address?",
+    }, {
+      "type": "input",
+      "flex": "20",
+      "name": "sector",
+      "title": "Sector",
       "settings": {
-        "required": false
+        "required": true
       },
       "FHIRMappings": [{
-        "path": "patient.extension.valueBoolean",
-        "params": "extension.url=pshr:addressInfo:postalSameAsPhysical",
+        "path": "patient.address[0].line[0]",
+        "params": null,
         "valueType": "formValue",
-        "value": "sameAsYourPhysicalAddress"
+        "value": "sector"
       }]
-    }, { 
+    }, {
       "type": "input",
-      "flex": "25",
-      "name": "postalAddressNoStreet",
-      "title": "Postal Address No and Street",
+      "flex": "20",
+      "name": "cell",
+      "title": "Cell",
       "settings": {
         "required": true
       },
       "FHIRMappings": [{
-        "path": "patient.address[1].line[0]",
+        "path": "patient.address[0].line[1]",
         "params": null,
         "valueType": "formValue",
-        "value": "postalAddressNoStreet"
-      }],
-      "skipLogic": {
-        "func": {
-          "execute": "duplicateFieldValue",
-          "params": ["sameAsYourPhysicalAddress", "physicalAddressNoStreet", "postalAddressNoStreet"],
-          "watchingVars": ["sameAsYourPhysicalAddress", "physicalAddressNoStreet"]
-        },
-        "checks": [{
-          "variable": "form.sameAsYourPhysicalAddress.$modelValue",
-          "operand": "!=",
-          "value": true
-        }]
-      }
-    }, { 
+        "value": "cell"
+      }]
+    }, {
       "type": "input",
-      "flex": "25",
-      "name": "postalAddressSuburb",
-      "title": "Postal Address Suburb",
+      "flex": "20",
+      "name": "umudugudu",
+      "title": "Umudugudu",
       "settings": {
         "required": true
       },
       "FHIRMappings": [{
-        "path": "patient.address[1].city",
+        "path": "patient.address[0].line[2]",
         "params": null,
         "valueType": "formValue",
-        "value": "postalAddressSuburb"
-      }],
-      "skipLogic": {
-        "func": {
-          "execute": "duplicateFieldValue",
-          "params": ["sameAsYourPhysicalAddress", "physicalAddressSuburb", "postalAddressSuburb"],
-          "watchingVars": ["sameAsYourPhysicalAddress", "physicalAddressSuburb"]
-        },
-        "checks": [{
-          "variable": "form.sameAsYourPhysicalAddress.$modelValue",
-          "operand": "!=",
-          "value": true
-        }]
-      }
-    }, { 
-      "type": "input",
-      "flex": "25",
-      "name": "postalAddressProvince",
-      "title": "Postal Address Province",
-      "settings": {
-        "required": true
-      },
-      "FHIRMappings": [{
-        "path": "patient.address[1].state",
-        "params": null,
-        "valueType": "formValue",
-        "value": "postalAddressProvince"
-      }],
-      "skipLogic": {
-        "func": {
-          "execute": "duplicateFieldValue",
-          "params": ["sameAsYourPhysicalAddress", "physicalAddressProvince", "postalAddressProvince"],
-          "watchingVars": ["sameAsYourPhysicalAddress", "physicalAddressProvince"]
-        },
-        "checks": [{
-          "variable": "form.sameAsYourPhysicalAddress.$modelValue",
-          "operand": "!=",
-          "value": true
-        }]
-      }
-    }, { 
-      "type": "input",
-      "flex": "25",
-      "name": "postalAddressPostalCode",
-      "title": "Postal Address Postal Code",
-      "settings": {
-        "required": true
-      },
-      "FHIRMappings": [{
-        "path": "patient.address[1].postalCode",
-        "params": null,
-        "valueType": "formValue",
-        "value": "postalAddressPostalCode"
-      }],
-      "skipLogic": {
-        "func": {
-          "execute": "duplicateFieldValue",
-          "params": ["sameAsYourPhysicalAddress", "physicalAddressPostalCode", "postalAddressPostalCode"],
-          "watchingVars": ["sameAsYourPhysicalAddress", "physicalAddressPostalCode"]
-        },
-        "checks": [{
-          "variable": "form.sameAsYourPhysicalAddress.$modelValue",
-          "operand": "!=",
-          "value": true
-        }]
-      }
+        "value": "umudugudu"
+      }]
     }]
   }]
 }
