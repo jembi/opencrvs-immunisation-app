@@ -1,10 +1,10 @@
 'use strict'
 
-var uuid = require('uuid')
-var Base64 = require('js-base64').Base64
+const uuid = require('uuid')
+const Base64 = require('js-base64').Base64
 
-exports.returnResourceAsEntry = function (resource, isTransaction) {
-  var entry = {
+exports.returnResourceAsEntry = (resource, isTransaction) => {
+  const entry = {
     fullUrl: 'urn:uuid:' + uuid.v4(),
     resource: resource
   }
@@ -19,8 +19,8 @@ exports.returnResourceAsEntry = function (resource, isTransaction) {
   return entry
 }
 
-exports.createDocumentBundle = function (patientRef, eventResources, currentTime) {
-  var doc = {
+exports.createDocumentBundle = (patientRef, eventResources, currentTime) => {
+  const doc = {
     resourceType: 'Bundle',
     type: 'document',
     meta: {
@@ -29,7 +29,7 @@ exports.createDocumentBundle = function (patientRef, eventResources, currentTime
     entry: []
   }
 
-  var composition = {
+  const composition = {
     resource: {
       identifier: {
         system: 'urn:ietf:rfc:3986',
@@ -62,9 +62,9 @@ exports.createDocumentBundle = function (patientRef, eventResources, currentTime
     }
   }
 
-  var eventResourceEntries = []
+  const eventResourceEntries = []
   eventResources.forEach((event) => {
-    var eventEntry = exports.returnResourceAsEntry(event)
+    const eventEntry = exports.returnResourceAsEntry(event)
     composition.resource.section.entry.push({
       title: 'CBS Event',
       text: 'CBS Event',
@@ -81,7 +81,7 @@ exports.createDocumentBundle = function (patientRef, eventResources, currentTime
   return doc
 }
 
-exports.createBinaryResource = function (docBundle) {
+exports.createBinaryResource = (docBundle) => {
   return {
     resourceType: 'Binary',
     contentType: 'application/fhir+json',
@@ -89,7 +89,7 @@ exports.createBinaryResource = function (docBundle) {
   }
 }
 
-exports.createDocumentReference = function (patientRef, binaryResourceEntry, currentTime) {
+exports.createDocumentReference = (patientRef, binaryResourceEntry, currentTime) => {
   return {
     resourceType: 'DocumentReference',
     masterIdentifier: {
@@ -128,7 +128,7 @@ exports.createDocumentReference = function (patientRef, binaryResourceEntry, cur
   }
 }
 
-exports.createDocumentManifest = function (patientRef, docRefEntry, currentTime) {
+exports.createDocumentManifest = (patientRef, docRefEntry, currentTime) => {
   return {
     resourceType: 'DocumentManifest',
     masterIdentifier: {
@@ -158,19 +158,19 @@ exports.createDocumentManifest = function (patientRef, docRefEntry, currentTime)
   }
 }
 
-exports.buildMHDTransaction = function (patientRef, events) {
-  var currentTime = new Date()
+exports.buildMHDTransaction = (patientRef, events) => {
+  const currentTime = new Date()
 
-  var docBundle = exports.createDocumentBundle(patientRef, events, currentTime)
+  const docBundle = exports.createDocumentBundle(patientRef, events, currentTime)
 
-  var binaryResource = exports.createBinaryResource(docBundle)
-  var binaryResourceEntry = exports.returnResourceAsEntry(binaryResource, true)
+  const binaryResource = exports.createBinaryResource(docBundle)
+  const binaryResourceEntry = exports.returnResourceAsEntry(binaryResource, true)
 
-  var docRef = exports.createDocumentReference(patientRef, binaryResourceEntry, currentTime)
-  var docRefEntry = exports.returnResourceAsEntry(docRef, true)
+  const docRef = exports.createDocumentReference(patientRef, binaryResourceEntry, currentTime)
+  const docRefEntry = exports.returnResourceAsEntry(docRef, true)
 
-  var docManifest = exports.createDocumentManifest(patientRef, docRefEntry, currentTime)
-  var docManifestEntry = exports.returnResourceAsEntry(docManifest, true)
+  const docManifest = exports.createDocumentManifest(patientRef, docRefEntry, currentTime)
+  const docManifestEntry = exports.returnResourceAsEntry(docManifest, true)
 
   return {
     resourceType: 'Bundle',
