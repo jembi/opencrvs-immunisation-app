@@ -8,6 +8,7 @@ module.exports = function (loadResource, $q, state, FHIR) {
       subjectReference: '@'
     },
     link: function (scope) {
+      console.log(state)
       var submit = function (form) {
         var defer = $q.defer()
 
@@ -28,16 +29,16 @@ module.exports = function (loadResource, $q, state, FHIR) {
 
           // TODO: Add document to state bundle for submission
           state.pushToEventsArray(fhirObject)
-          
+
           scope.resetForm(scope.state.FormBuilderAddCbsEventLinkageToCare, form)
 
-          defer.resolve({ isValid: true, msg: 'Event mapped to FHIR document!' })
+          defer.resolve({ isValid: true, msg: 'Event has been successfully added for submission' })
         })
 
         return defer.promise
       }
 
-      scope.resetForm = function(formSchema, form) {
+      scope.resetForm = function (formSchema, form) {
         for (var fbs = 0; fbs < formSchema.sections.length; fbs++) {
           var section = formSchema.sections[fbs]
 
@@ -52,9 +53,9 @@ module.exports = function (loadResource, $q, state, FHIR) {
         }
 
         // remove validation errors
-        form.$setPristine();
-        form.$setUntouched();
-      };
+        form.$setPristine()
+        form.$setUntouched()
+      }
 
       scope.state = {}
       scope.state.FormBuilderAddCbsEventLinkageToCare = {

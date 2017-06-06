@@ -14,7 +14,6 @@ module.exports = function (Api, loadResource, state) {
         scope.setSelectedEvent({ selectedEvent: title })
       }
 
-
       // add watcher to check when events are added to state service
       scope.$watch(function () { return state.getEventsArray() }, function (events) {
         if (events.length > 0) {
@@ -50,7 +49,6 @@ module.exports = function (Api, loadResource, state) {
             console.error(err)
           })
         })
-
       }
     }
   }
