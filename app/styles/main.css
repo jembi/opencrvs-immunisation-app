@@ -27,5 +27,13 @@ body {
   height: 28px;
   padding-top: 15px !important;
   font-size: 18px;
+
+  z-index: 99;
+}
+
+#FormBuilder .angular-notifications-icon {
+  right: 0px !important;
+  position: absolute;
+  top: 14px !important;
 }
 /* FormBuilder DatePicker style override */

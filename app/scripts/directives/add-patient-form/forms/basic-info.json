@@ -99,7 +99,7 @@
       "options": [{"key": "Mobile",  "value": "Mobile"}, {"key": "Home",  "value": "Home"}, {"key": "Other",  "value": "Other"}],
       "FHIRMappings": [{
         "path": "telecom.use",
-        "params": null,
+        "params": "telecom.system=phone",
         "valueType": "formValue",
         "value": "contactNumberType"
       }]
@@ -175,11 +175,6 @@
       	"required": true
       },
       "FHIRMappings": [{
-        "path": "user.email",
-        "params": null,
-        "valueType": "formValue",
-        "value": "emailAddress"
-      }, {
         "path": "telecom.value",
         "params": "telecom.system=email",
         "valueType": "formValue",

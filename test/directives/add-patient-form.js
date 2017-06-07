@@ -72,21 +72,25 @@ tap.test('.link()', { autoend: true }, (t) => {
         return {
           resolve: (result) => {
             // then
-            // TODO: Used in API call
             t.equals(result.isValid, true)
-            t.equals(result.msg, 'Patient mapped to FHIR document!')
+            t.equals(result.msg, 'Patient has been created successfully')
             t.end()
           }
         }
       }
+      const patientApiMock = {
+        save: (body, success) => {
+          return success()
+        }
+      }
 
-      const directive = addPatient({ Patient: { save: function () {} } }, { fetch: fetchMock }, { all: allMock, defer: deferMock }, {}, FHIR)
+      const directive = addPatient({ Patients: patientApiMock }, { fetch: fetchMock }, { all: allMock, defer: deferMock }, {}, FHIR)
       directive.link(scope)
       // when
       setTimeout(() => {
         t.equals(scope.state.FormBuilderAddPatient.sections.length, 4)
         scope.state.FormBuilderAddPatient.submit.execute(mockFormData)
-      }, 100)
+      }, 200)
     })
 
     t.test('should send the correct fhir patient to the Api', (t) => {
@@ -204,7 +208,7 @@ tap.test('.link()', { autoend: true }, (t) => {
         t.end()
       }
 
-      const directive = addPatient({ Patient: { save: savePatientMock } }, { fetch: fetchMock }, { all: allMock, defer: deferMock }, {}, FHIR)
+      const directive = addPatient({ Patients: { save: savePatientMock } }, { fetch: fetchMock }, { all: allMock, defer: deferMock }, {}, FHIR)
       directive.link(scope)
       // when
       setTimeout(() => {
@@ -259,7 +263,7 @@ tap.test('.link()', { autoend: true }, (t) => {
         t.end()
       }
 
-      const directive = addPatient({ Patient: { save: savePatientMock } }, { fetch: fetchMock }, { all: allMock, defer: deferMock }, {}, FHIR)
+      const directive = addPatient({ Patients: { save: savePatientMock } }, { fetch: fetchMock }, { all: allMock, defer: deferMock }, {}, FHIR)
       directive.link(scope)
       // when
       setTimeout(() => {

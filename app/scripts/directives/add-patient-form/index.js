@@ -25,10 +25,12 @@ module.exports = function (Api, loadResource, $q, state, FHIR) {
           formFieldsValues.firstPostitiveHivTestDate = moment(formFieldsValues.firstPostitiveHivTestDate).format('YYYY-MM-DD')
           var fhirObject = FHIR.mapFHIRObject(fhirDoc, scope.state.FormBuilderAddPatient, formFieldsValues)
 
-          defer.resolve({ isValid: true, msg: 'Patient mapped to FHIR document!' })
-
-          // TODO: API call to submit patient
-          Api.Patient.save(fhirObject)
+          Api.Patients.save(fhirObject, function (bundle) {
+            defer.resolve({ isValid: true, msg: 'Patient has been created successfully' })
+          }, function (err) {
+            console.error(err)
+            defer.reject(err)
+          })
         })
 
         return defer.promise
