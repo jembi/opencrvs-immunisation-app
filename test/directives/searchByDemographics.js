@@ -52,8 +52,11 @@ tap.test('.link()', { autoend: true }, (t) => {
       const matchMock = (body, success) => {
         success({ entry: [] })
       }
-      const mock = () => {}
-      const directive = searchByDemographics({ Patients: { match: matchMock } }, { fetch: fetchMock }, { defer: deferMock }, { setSearchResults: mock })
+      const stateMock = {
+        setSearchResults: () => {},
+        setPartialPatientDemographics: () => {}
+      }
+      const directive = searchByDemographics({ Patients: { match: matchMock } }, { fetch: fetchMock }, { defer: deferMock }, stateMock)
       directive.link(scope)
       // when
       scope.state.FormBuilderDemographics.submit.execute()
@@ -105,8 +108,11 @@ tap.test('.link()', { autoend: true }, (t) => {
         })
         success({ entry: [] })
       }
-      const mock = () => {}
-      const directive = searchByDemographics({ Patients: { match: matchMock } }, { fetch: fetchMock }, { defer: deferMock }, { setSearchResults: mock })
+      const stateMock = {
+        setSearchResults: () => {},
+        setPartialPatientDemographics: () => {}
+      }
+      const directive = searchByDemographics({ Patients: { match: matchMock } }, { fetch: fetchMock }, { defer: deferMock }, stateMock)
       directive.link(scope)
       // when
       scope.state.FormBuilderDemographics.submit.execute({
@@ -135,10 +141,13 @@ tap.test('.link()', { autoend: true }, (t) => {
       const matchMock = (body, success) => {
         success({ entry: [ 'one', 'two' ] })
       }
-      const setSateMock = (results) => {
-        t.deepEquals(results, [ 'one', 'two' ])
+      const stateMock = {
+        setSearchResults: (results) => {
+          t.deepEquals(results, [ 'one', 'two' ])
+        },
+        setPartialPatientDemographics: () => {}
       }
-      const directive = searchByDemographics({ Patients: { match: matchMock } }, { fetch: fetchMock }, { defer: deferMock }, { setSearchResults: setSateMock })
+      const directive = searchByDemographics({ Patients: { match: matchMock } }, { fetch: fetchMock }, { defer: deferMock }, stateMock)
       directive.link(scope)
       // when
       scope.state.FormBuilderDemographics.submit.execute()
@@ -163,7 +172,7 @@ tap.test('.link()', { autoend: true }, (t) => {
       const matchMock = (body, success, error) => {
         error(new Error('I failed :('))
       }
-      const directive = searchByDemographics({ Patients: { match: matchMock } }, { fetch: fetchMock }, { defer: deferMock })
+      const directive = searchByDemographics({ Patients: { match: matchMock } }, { fetch: fetchMock }, { defer: deferMock }, { setPartialPatientDemographics: () => {} })
       directive.link(scope)
       // when
       scope.state.FormBuilderDemographics.submit.execute()

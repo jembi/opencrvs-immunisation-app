@@ -52,6 +52,9 @@ module.exports = function (Api, loadResource, $q, state) {
           }
         }
 
+        // save partial patient demographics so they can be used for creating a patientRef
+        state.setPartialPatientDemographics(formFieldsValues)
+
         var body = createParametersResource(formFieldsValues)
 
         Api.Patients.match(body, function (bundle) {

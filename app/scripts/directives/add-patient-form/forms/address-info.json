@@ -1,0 +1,82 @@
+{
+  "key": "addressInfo",
+  "name": "Address Info",
+  "displayName": "Address Information",
+  "flex": "100",
+  "rows": [{
+    "name": "Row 1",
+    "title": "Please supply your address information below.",
+    "layout": "row",
+    "fields": [{
+      "type": "input",
+      "flex": "20",
+      "name": "province",
+      "title": "Province",
+      "settings": {
+        "required": true
+      },
+      "FHIRMappings": [{
+        "path": "address[0].state",
+        "params": null,
+        "valueType": "formValue",
+        "value": "province"
+      }]
+    }, {
+      "type": "input",
+      "flex": "20",
+      "name": "district",
+      "title": "District",
+      "settings": {
+        "required": true
+      },
+      "FHIRMappings": [{
+        "path": "address[0].district",
+        "params": null,
+        "valueType": "formValue",
+        "value": "district"
+      }]
+    }, {
+      "type": "input",
+      "flex": "20",
+      "name": "sector",
+      "title": "Sector",
+      "settings": {
+        "required": true
+      },
+      "FHIRMappings": [{
+        "path": "address[0].line[0]",
+        "params": null,
+        "valueType": "formValue",
+        "value": "sector"
+      }]
+    }, {
+      "type": "input",
+      "flex": "20",
+      "name": "cell",
+      "title": "Cell",
+      "settings": {
+        "required": true
+      },
+      "FHIRMappings": [{
+        "path": "address[0].line[1]",
+        "params": null,
+        "valueType": "formValue",
+        "value": "cell"
+      }]
+    }, {
+      "type": "input",
+      "flex": "20",
+      "name": "umudugudu",
+      "title": "Umudugudu",
+      "settings": {
+        "required": true
+      },
+      "FHIRMappings": [{
+        "path": "address[0].line[2]",
+        "params": null,
+        "valueType": "formValue",
+        "value": "umudugudu"
+      }]
+    }]
+  }]
+}

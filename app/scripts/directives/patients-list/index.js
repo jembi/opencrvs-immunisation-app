@@ -1,7 +1,7 @@
 'use strict'
 
 module.exports = function (state, $location) {
-  var TRACNET_SYSTEM_IDENTIFIER = 'pshr:tracnetid'
+  const TRACNET_SYSTEM_IDENTIFIER = 'rcbs:tracnet:id'
   return {
     restrict: 'EA',
     replace: true,
@@ -13,6 +13,11 @@ module.exports = function (state, $location) {
     link: function (scope) {
       scope.clearSearch = function () {
         state.setSearchResults(null)
+        state.setPartialPatientDemographics(null)
+      }
+
+      scope.createPatient = function () {
+        $location.path('/add-patient')
       }
 
       scope.togglePatientDetails = function (patient) {
@@ -151,6 +156,10 @@ module.exports = function (state, $location) {
           scope.createPatientsList(newResults)
         }
       }, true)
+
+      scope.$watch(function () { return state.getPartialPatientDemographics() }, function () {
+        scope.partialPatientDemographics = state.getPartialPatientDemographics()
+      })
     }
   }
 }

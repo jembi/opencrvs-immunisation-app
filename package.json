@@ -8,6 +8,7 @@
     "test": "npm run -s test:code && npm run -s test:style",
     "test:code": "tap -R nyan --cov test/**/*.js",
     "test:style": "standard --verbose | snazzy",
+    "test:debug": "tap --debug -t 0 test/**/*.js",
     "cov": "npm run test:code -- --coverage-report=lcov"
   },
   "main": "app/scripts/app.js",

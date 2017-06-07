@@ -1,16 +1,17 @@
+<!doctype html>
 <md-content>
   <link rel="stylesheet" href="app/scripts/directives/header/style.css">
 
   <md-toolbar class="md-hue-2">
     <div class="md-toolbar-tools" flex="100" layout="row" layout-align="space-between center">
-      <div flex="30" layout="row" layout-align="start center">        
+      <div flex="30" layout="row" layout-align="start center">
         <md-button ng-repeat="item in state.header.left" ng-if="item.text" ng-click="item.onClick()" class="md-button md-accent md-raised" aria-label="{{ item.text }}">{{ item.text }}</md-button>
       </div>
 
       <div flex="40" layout="row" layout-align="center center">
         <span flex layout="row" layout-align="center center" md-truncate class="md-display-1">{{ state.header.title }}</span>
       </div>
-      
+
       <div flex="30" layout="row" layout-align="end center">
         <md-button ng-repeat="item in state.header.right" ng-if="item.text" ng-click="item.onClick()" class="md-button md-accent md-raised" aria-label="{{ item.text }}">{{ item.text }}</md-button>
       </div>
