@@ -1,11 +1,15 @@
 'use strict'
 
-module.exports = function (Api, loadResource, $q, state, FHIR) {
+module.exports = function (Api, loadResource, $q, state, FHIR, $location) {
   return {
     restrict: 'EA',
     templateUrl: 'app/scripts/directives/add-patient-form/view.html',
     scope: {},
     link: function (scope) {
+      if (!state.getPartialPatientDemographics()) {
+        return $location.path('/')
+      }
+
       var submit = function (form) {
         var defer = $q.defer()
 
@@ -62,6 +66,15 @@ module.exports = function (Api, loadResource, $q, state, FHIR) {
             sections.push(emergencyContactInfo)
 
             scope.state.FormBuilderAddPatient.sections = sections
+
+            // set partial patient demographics in the form
+            var partialDemographics = state.getPartialPatientDemographics()
+            state.setPartialPatientDemographics(null)
+
+            basicInfo.rows[0].fields[2].value = partialDemographics.givenName
+            basicInfo.rows[0].fields[4].value = partialDemographics.familyName
+            basicInfo.rows[0].fields[7].value = partialDemographics.gender
+            basicInfo.rows[0].fields[8].value = partialDemographics.birthDate
           })
         })
       })
