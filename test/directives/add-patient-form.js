@@ -20,13 +20,35 @@ tap.test('.link()', { autoend: true }, (t) => {
     const scope = {}
     const fetchMock = (file) => {
       return new Promise((resolve, reject) => {
-        resolve()
+        switch (file) {
+          case 'app/scripts/directives/add-patient-form/forms/basic-info.json':
+            resolve(require('../../app/scripts/directives/add-patient-form/forms/basic-info.json'))
+            break
+          case 'app/scripts/directives/add-patient-form/forms/address-info.json':
+            resolve(require('../../app/scripts/directives/add-patient-form/forms/address-info.json'))
+            break
+          case 'app/scripts/directives/add-patient-form/forms/emergency-contact-info.json':
+            resolve(require('../../app/scripts/directives/add-patient-form/forms/emergency-contact-info.json'))
+            break
+          case 'app/scripts/directives/add-patient-form/forms/hiv-info.json':
+            resolve(require('../../app/scripts/directives/add-patient-form/forms/hiv-info.json'))
+            break
+          case 'app/scripts/services/FHIR/resources/Patient.json':
+            resolve(require('../../app/scripts/services/FHIR/resources/Patient.json'))
+            break
+          default:
+            t.fail(`Unknown file: ${file}`)
+        }
       })
     }
     const allMock = (promises) => {
       return Promise.all(promises)
     }
-    const directive = addPatient({}, { fetch: fetchMock }, { all: allMock })
+    const stateMock = {
+      getPartialPatientDemographics: () => { return {} },
+      setPartialPatientDemographics: () => {}
+    }
+    const directive = addPatient({}, { fetch: fetchMock }, { all: allMock }, stateMock)
     // when
     directive.link(scope)
     // then
@@ -34,7 +56,83 @@ tap.test('.link()', { autoend: true }, (t) => {
     setTimeout(() => {
       t.equals(scope.state.FormBuilderAddPatient.sections.length, 4)
       t.end()
+    }, 500)
+  })
+
+  t.test('should set partial patient details on the form', (t) => {
+    // given
+    const scope = {}
+    const fetchMock = (file) => {
+      return new Promise((resolve, reject) => {
+        switch (file) {
+          case 'app/scripts/directives/add-patient-form/forms/basic-info.json':
+            resolve(require('../../app/scripts/directives/add-patient-form/forms/basic-info.json'))
+            break
+          case 'app/scripts/directives/add-patient-form/forms/address-info.json':
+            resolve(require('../../app/scripts/directives/add-patient-form/forms/address-info.json'))
+            break
+          case 'app/scripts/directives/add-patient-form/forms/emergency-contact-info.json':
+            resolve(require('../../app/scripts/directives/add-patient-form/forms/emergency-contact-info.json'))
+            break
+          case 'app/scripts/directives/add-patient-form/forms/hiv-info.json':
+            resolve(require('../../app/scripts/directives/add-patient-form/forms/hiv-info.json'))
+            break
+          case 'app/scripts/services/FHIR/resources/Patient.json':
+            resolve(require('../../app/scripts/services/FHIR/resources/Patient.json'))
+            break
+        }
+      })
+    }
+
+    const allMock = (promises) => {
+      return Promise.all(promises)
+    }
+
+    const stateMock = {
+      getPartialPatientDemographics: () => {
+        return {
+          givenName: 'given',
+          familyName: 'family',
+          gender: 'female',
+          birthDate: '1980-06-05'
+        }
+      },
+      setPartialPatientDemographics: () => {}
+    }
+    const directive = addPatient({}, { fetch: fetchMock }, { all: allMock }, stateMock, FHIR)
+    directive.link(scope)
+
+    // wait 50ms to ensure sections have been added to FormBuilder
+    setTimeout(function () {
+      // then
+      const givenNameActual = scope.state.FormBuilderAddPatient.sections[0].rows[0].fields[2].value
+      t.equals(givenNameActual, 'given')
+      const familyNameActual = scope.state.FormBuilderAddPatient.sections[0].rows[0].fields[4].value
+      t.equals(familyNameActual, 'family')
+      const genderNameActual = scope.state.FormBuilderAddPatient.sections[0].rows[0].fields[7].value
+      t.equals(genderNameActual, 'female')
+      const birthDateNameActual = scope.state.FormBuilderAddPatient.sections[0].rows[0].fields[8].value
+      t.equals(birthDateNameActual, '1980-06-05')
+      t.end()
     }, 100)
+  })
+
+  t.test('should redirect when partial patient demographics aren\'t set', (t) => {
+    // given
+    const scope = {}
+    const stateMock = {
+      getPartialPatientDemographics: () => { return null }
+    }
+    const locationMock = {
+      path: (path) => {
+        // then
+        t.equals(path, '/patients') // redirect to /patients i.e. search page
+        t.end()
+      }
+    }
+    const directive = addPatient({}, {}, {}, stateMock, {}, locationMock)
+    // when
+    directive.link(scope)
   })
 
   t.test('.submit()', { autoend: true }, (t) => {
@@ -83,8 +181,12 @@ tap.test('.link()', { autoend: true }, (t) => {
           return success()
         }
       }
+      const stateMock = {
+        getPartialPatientDemographics: () => { return {} },
+        setPartialPatientDemographics: () => {}
+      }
 
-      const directive = addPatient({ Patients: patientApiMock }, { fetch: fetchMock }, { all: allMock, defer: deferMock }, {}, FHIR)
+      const directive = addPatient({ Patients: patientApiMock }, { fetch: fetchMock }, { all: allMock, defer: deferMock }, stateMock, FHIR)
       directive.link(scope)
       // when
       setTimeout(() => {
@@ -206,7 +308,12 @@ tap.test('.link()', { autoend: true }, (t) => {
         t.end()
       }
 
-      const directive = addPatient({ Patients: { save: savePatientMock } }, { fetch: fetchMock }, { all: allMock, defer: deferMock }, {}, FHIR)
+      const stateMock = {
+        getPartialPatientDemographics: () => { return {} },
+        setPartialPatientDemographics: () => {}
+      }
+
+      const directive = addPatient({ Patients: { save: savePatientMock } }, { fetch: fetchMock }, { all: allMock, defer: deferMock }, stateMock, FHIR)
       directive.link(scope)
       // when
       setTimeout(() => {
@@ -261,7 +368,12 @@ tap.test('.link()', { autoend: true }, (t) => {
         t.end()
       }
 
-      const directive = addPatient({ Patients: { save: savePatientMock } }, { fetch: fetchMock }, { all: allMock, defer: deferMock }, {}, FHIR)
+      const stateMock = {
+        getPartialPatientDemographics: () => { return {} },
+        setPartialPatientDemographics: () => {}
+      }
+
+      const directive = addPatient({ Patients: { save: savePatientMock } }, { fetch: fetchMock }, { all: allMock, defer: deferMock }, stateMock, FHIR)
       directive.link(scope)
       // when
       setTimeout(() => {

@@ -2,19 +2,23 @@
 
 var moment = require('moment')
 
-module.exports = function (Api, loadResource, $q, state, FHIR) {
+module.exports = function (Api, loadResource, $q, state, FHIR, $location) {
   return {
     restrict: 'EA',
     templateUrl: 'app/scripts/directives/add-patient-form/view.html',
     scope: {},
     link: function (scope) {
+      if (!state.getPartialPatientDemographics()) {
+        return $location.path('/patients')
+      }
+
       var submit = function (form) {
         var defer = $q.defer()
 
         var formFieldsValues = {}
         for (var k in form) {
           if (form.hasOwnProperty(k)) {
-            if (typeof form[k] === 'object' && form[k].hasOwnProperty('$modelValue') && form[k].$dirty) {
+            if (typeof form[k] === 'object' && form[k].hasOwnProperty('$modelValue')) {
               formFieldsValues[k] = form[k].$modelValue
             }
           }
@@ -64,6 +68,15 @@ module.exports = function (Api, loadResource, $q, state, FHIR) {
       promises.push(loadResource.fetch('app/scripts/directives/add-patient-form/forms/hiv-info.json'))
 
       $q.all(promises).then(function (results) {
+        // set partial patient demographics in the form
+        var partialDemographics = state.getPartialPatientDemographics()
+        state.setPartialPatientDemographics(null)
+
+        results[0].rows[0].fields[2].value = partialDemographics.givenName
+        results[0].rows[0].fields[4].value = partialDemographics.familyName
+        results[0].rows[0].fields[7].value = partialDemographics.gender
+        results[0].rows[0].fields[8].value = partialDemographics.birthDate
+
         scope.state.FormBuilderAddPatient.sections = results
       })
     }

@@ -2,6 +2,7 @@
 
 module.exports = function () {
   var searchResults = null
+  var partialPatientDemographics = null
 
   return {
     getSearchResults: function () {
@@ -9,6 +10,12 @@ module.exports = function () {
     },
     setSearchResults: function (results) {
       searchResults = results
+    },
+    setPartialPatientDemographics: function (partialPatient) {
+      partialPatientDemographics = partialPatient
+    },
+    getPartialPatientDemographics: function () {
+      return partialPatientDemographics
     }
   }
 }
