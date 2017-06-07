@@ -4,6 +4,8 @@ const tap = require('tap')
 const sinon = require('sinon')
 
 const FHIR = require('../../app/scripts/services/FHIR/FHIR.js')()
+const FormBuilderService = require('../../app/scripts/services/FormBuilder.js')()
+const stateService = require('../../app/scripts/services/state.js')()
 const linkageToCare = require('../../app/scripts/directives/add-cbs-events/linkage-to-care')
 const FormBuilderLinkageToCare = require('../../app/scripts/directives/add-cbs-events/linkage-to-care/form.json')
 
@@ -24,7 +26,7 @@ tap.test('.link()', { autoend: true }, (t) => {
         resolve()
       })
     }
-    const directive = linkageToCare({ Patients: { match: () => {} } }, { fetch: fetchMock })
+    const directive = linkageToCare({ fetch: fetchMock })
     // when
     directive.link(scope)
     // then
@@ -36,8 +38,15 @@ tap.test('.link()', { autoend: true }, (t) => {
 tap.test('.submit()', { autoend: true }, (t) => {
   t.test('should resolve with a success message', (t) => {
     // given
-    const scope = {}
+    const scope = {
+      patient: {
+        resourceType: 'Patient',
+        id: 'AAAAA-BBBB-CCCC-DDDDD-EEEEEE'
+      }
+    }
     const mockFormData = {
+      $setPristine: function () {},
+      $setUntouched: function () {},
       encounterDate: {
         $modelValue: '2017-02-23',
         $dirty: true
@@ -68,13 +77,13 @@ tap.test('.submit()', { autoend: true }, (t) => {
           // then
           // TODO: Used in API call
           t.equals(result.isValid, true)
-          t.equals(result.msg, 'Event mapped to FHIR document!')
+          t.equals(result.msg, 'Event has been successfully added for submission')
           t.end()
         }
       }
     }
 
-    const directive = linkageToCare({}, { fetch: fetchMock }, { defer: deferMock }, {}, FHIR)
+    const directive = linkageToCare({ fetch: fetchMock }, { defer: deferMock }, stateService, FHIR, FormBuilderService)
     directive.link(scope)
     // when
     scope.state.FormBuilderAddCbsEventLinkageToCare.sections = [FormBuilderLinkageToCare]
