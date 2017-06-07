@@ -1,10 +1,12 @@
 'use strict'
 
-module.exports = function (Api, loadResource, $q, state, FHIR) {
+module.exports = function (loadResource, $q, state, FHIR, FormBuilderService) {
   return {
     restrict: 'EA',
     templateUrl: 'app/scripts/directives/add-cbs-events/linkage-to-care/view.html',
-    scope: {},
+    scope: {
+      patient: '='
+    },
     link: function (scope) {
       var submit = function (form) {
         var defer = $q.defer()
@@ -22,15 +24,21 @@ module.exports = function (Api, loadResource, $q, state, FHIR) {
           var fhirObject = FHIR.mapFHIRObject(fhirDoc, scope.state.FormBuilderAddCbsEventLinkageToCare, formFieldsValues)
 
           // add the Subject Refernce - Patient/Reference
-          fhirObject.subject.reference = 'patient/link'
+          fhirObject.subject.reference = scope.patient.resourceType + '/' + scope.patient.id
 
-          defer.resolve({ isValid: true, msg: 'Event mapped to FHIR document!' })
+          // TODO: Add document to state bundle for submission
+          state.pushToEventsArray(fhirObject)
 
-          // TODO: API call to submit document
-          // OR - Save to holding object to be sent in bundle
+          scope.resetForm(scope.state.FormBuilderAddCbsEventLinkageToCare, form)
+
+          defer.resolve({ isValid: true, msg: 'Event has been successfully added for submission' })
         })
 
         return defer.promise
+      }
+
+      scope.resetForm = function (formSchema, form) {
+        FormBuilderService.resetForm(formSchema, form)
       }
 
       scope.state = {}
@@ -44,7 +52,7 @@ module.exports = function (Api, loadResource, $q, state, FHIR) {
         },
         sections: [],
         buttons: {
-          submit: 'search'
+          submit: 'Add'
         },
         submit: {
           execute: submit,
