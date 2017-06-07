@@ -1,6 +1,6 @@
 'use strict'
 
-var mhdBuilder = require('../../../modules/mhd-doc-builder')
+const mhdBuilder = require('../../../modules/mhd-doc-builder')
 
 module.exports = function (Api, loadResource, state) {
   return {
@@ -21,7 +21,7 @@ module.exports = function (Api, loadResource, state) {
       // add watcher to check when events are added to state service
       scope.$watch(function () { return state.getEventsArray() }, function (events) {
         if (events.length > 0) {
-          var eventsString = (events.length > 1) ? 'events' : 'event'
+          const eventsString = (events.length > 1) ? 'events' : 'event'
           scope.submitControl = {
             status: 'info',
             displayText: 'You have ' + events.length + ' ' + eventsString + ' ready to be submitted'
@@ -38,7 +38,7 @@ module.exports = function (Api, loadResource, state) {
         scope.submitControl.status = 'processing'
         scope.submitControl.displayText = 'Busy processing submitted events'
 
-        var mhdTransaction = mhdBuilder.buildMHDTransaction('Patient/test', state.getEventsArray())
+        const mhdTransaction = mhdBuilder.buildMHDTransaction(scope.patient.resourceType + '/' + scope.patient.id, state.getEventsArray())
         Api.FhirRoot.save(mhdTransaction, function (result) {
           state.setEventsArray([])
 
