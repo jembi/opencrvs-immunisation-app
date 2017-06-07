@@ -39,10 +39,9 @@
     {
       "use": "",
       "type": "",
-      "line": [
-        ""
-      ],
+      "line": [],
       "state": "",
+      "district": "",
       "city": "",
       "postalCode": ""
     }
@@ -70,7 +69,8 @@
               "system": "http://hl7.org/fhir/patient-contact-relationship",
               "code": "emergency"
             }
-          ]
+          ],
+          "text": ""
         },
         {
           "coding": [
@@ -78,18 +78,15 @@
               "system": "http://hl7.org/fhir/patient-contact-relationship",
               "code": ""
             }
-          ]
+          ],
+          "text": ""
         }
       ],
       "name": [
         {
           "use": "official",
-          "family": [
-            ""
-          ],
-          "given": [
-            ""
-          ]
+          "family": [],
+          "given": []
         }
       ],
       "telecom": [

@@ -115,7 +115,9 @@ module.exports = function () {
                     break
                 }
 
-                setDataInResource(newVal, fhirObject, FHIRMappingInstance.path, FHIRMappingInstance.params)
+                if (newVal) {
+                  setDataInResource(newVal, fhirObject, FHIRMappingInstance.path, FHIRMappingInstance.params)
+                }
               }
             }
           }

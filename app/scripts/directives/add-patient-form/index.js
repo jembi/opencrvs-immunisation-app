@@ -20,11 +20,13 @@ module.exports = function (Api, loadResource, $q, state, FHIR) {
 
         loadResource.fetch('app/scripts/services/FHIR/resources/Patient.json').then(function (fhirDoc) {
           var fhirObject = FHIR.mapFHIRObject(fhirDoc, scope.state.FormBuilderAddPatient, formFieldsValues)
-          console.log(fhirObject)
 
-          defer.resolve({ isValid: true, msg: 'Patient mapped to FHIR document!' })
-
-          // TODO: API call to submit patient
+          Api.Patients.save(fhirObject, function (bundle) {
+            defer.resolve({ isValid: true, msg: 'Patient has been created successfully' })
+          }, function (err) {
+            console.error(err)
+            defer.reject(err)
+          })
         })
 
         return defer.promise
@@ -33,7 +35,7 @@ module.exports = function (Api, loadResource, $q, state, FHIR) {
       scope.state = {}
       scope.state.FormBuilderAddPatient = {
         name: 'AddPatient',
-        displayType: null,
+        displayType: 'tabs',
         globals: {
           viewModeOnly: false,
           showDraftSubmitButton: false,
@@ -51,8 +53,17 @@ module.exports = function (Api, loadResource, $q, state, FHIR) {
         AddPatient: {}
       }
 
-      loadResource.fetch('app/scripts/directives/add-patient-form/form.json').then(function (formSection) {
-        scope.state.FormBuilderAddPatient.sections.push(formSection)
+      var sections = []
+      loadResource.fetch('app/scripts/directives/add-patient-form/forms/basic-info.json').then(function (basicInfo) {
+        loadResource.fetch('app/scripts/directives/add-patient-form/forms/address-info.json').then(function (addressInfo) {
+          loadResource.fetch('app/scripts/directives/add-patient-form/forms/emergency-contact-info.json').then(function (emergencyContactInfo) {
+            sections.push(basicInfo)
+            sections.push(addressInfo)
+            sections.push(emergencyContactInfo)
+
+            scope.state.FormBuilderAddPatient.sections = sections
+          })
+        })
       })
     }
   }
