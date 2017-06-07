@@ -1,5 +1,7 @@
 'use strict'
 
+var moment = require('moment')
+
 module.exports = function (Api, loadResource, $q, state, FHIR) {
   return {
     restrict: 'EA',
@@ -19,6 +21,8 @@ module.exports = function (Api, loadResource, $q, state, FHIR) {
         }
 
         loadResource.fetch('app/scripts/services/FHIR/resources/Patient.json').then(function (fhirDoc) {
+          formFieldsValues.dob = moment(formFieldsValues.dob).format('YYYY-MM-DD')
+          formFieldsValues.firstPostitiveHivTestDate = moment(formFieldsValues.firstPostitiveHivTestDate).format('YYYY-MM-DD')
           var fhirObject = FHIR.mapFHIRObject(fhirDoc, scope.state.FormBuilderAddPatient, formFieldsValues)
 
           Api.Patients.save(fhirObject, function (bundle) {
@@ -53,17 +57,14 @@ module.exports = function (Api, loadResource, $q, state, FHIR) {
         AddPatient: {}
       }
 
-      var sections = []
-      loadResource.fetch('app/scripts/directives/add-patient-form/forms/basic-info.json').then(function (basicInfo) {
-        loadResource.fetch('app/scripts/directives/add-patient-form/forms/address-info.json').then(function (addressInfo) {
-          loadResource.fetch('app/scripts/directives/add-patient-form/forms/emergency-contact-info.json').then(function (emergencyContactInfo) {
-            sections.push(basicInfo)
-            sections.push(addressInfo)
-            sections.push(emergencyContactInfo)
+      var promises = []
+      promises.push(loadResource.fetch('app/scripts/directives/add-patient-form/forms/basic-info.json'))
+      promises.push(loadResource.fetch('app/scripts/directives/add-patient-form/forms/address-info.json'))
+      promises.push(loadResource.fetch('app/scripts/directives/add-patient-form/forms/emergency-contact-info.json'))
+      promises.push(loadResource.fetch('app/scripts/directives/add-patient-form/forms/hiv-info.json'))
 
-            scope.state.FormBuilderAddPatient.sections = sections
-          })
-        })
+      $q.all(promises).then(function (results) {
+        scope.state.FormBuilderAddPatient.sections = results
       })
     }
   }
