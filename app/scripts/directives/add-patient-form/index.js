@@ -18,7 +18,7 @@ module.exports = function (Api, loadResource, $q, state, FHIR, $location) {
         var formFieldsValues = {}
         for (var k in form) {
           if (form.hasOwnProperty(k)) {
-            if (typeof form[k] === 'object' && form[k].hasOwnProperty('$modelValue') && form[k].$dirty) {
+            if (typeof form[k] === 'object' && form[k].hasOwnProperty('$modelValue')) {
               formFieldsValues[k] = form[k].$modelValue
             }
           }
