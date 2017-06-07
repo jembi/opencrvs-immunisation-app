@@ -32,16 +32,11 @@
       "use": ""
     }
   ],
-  "photo": [{
-    "data": null
-  }],
   "address": [
     {
       "use": "",
       "type": "",
-      "line": [
-        ""
-      ],
+      "line": [],
       "state": "",
       "district": "",
       "city": "",
@@ -68,7 +63,7 @@
         {
           "coding": [
             {
-              "system": "http://hl7.org/fhir/patient-contact-relationship",
+              "system": "http://hl7.org/fhir/vs/patient-contact-relationship",
               "code": "emergency"
             }
           ]
@@ -76,7 +71,7 @@
         {
           "coding": [
             {
-              "system": "http://hl7.org/fhir/patient-contact-relationship",
+              "system": "http://hl7.org/fhir/vs/patient-contact-relationship",
               "code": ""
             }
           ]
@@ -85,12 +80,8 @@
       "name": [
         {
           "use": "official",
-          "family": [
-            ""
-          ],
-          "given": [
-            ""
-          ]
+          "family": [],
+          "given": []
         }
       ],
       "telecom": [
@@ -107,19 +98,19 @@
   ],
   "extension": [
     {
-      "url": "pshr:medicalaid:name",
+      "url": "rcbs:profession",
       "valueString": ""
     }, {
-      "url": "pshr:medicalaid:option",
+      "url": "rcbs:firstposivehivtest:date",
+      "valueDate": ""
+    }, {
+      "url": "rcbs:firstposivehivtest:location",
       "valueString": ""
     }, {
-      "url": "pshr:medicalaid:number",
+      "url": "rcbs:partnerhiv:status",
       "valueString": ""
     }, {
-      "url": "pshr:gapcover",
-      "valueBoolean": false
-    }, {
-      "url": "pshr:medicalaid:privateFunder",
+      "url": "rcbs:hiv:status",
       "valueString": ""
     }
   ]

@@ -16,7 +16,7 @@
         "required": true
       },
       "FHIRMappings": [{
-        "path": "patient.address[0].state",
+        "path": "address[0].state",
         "params": null,
         "valueType": "formValue",
         "value": "province"
@@ -30,7 +30,7 @@
         "required": true
       },
       "FHIRMappings": [{
-        "path": "patient.address[0].district",
+        "path": "address[0].district",
         "params": null,
         "valueType": "formValue",
         "value": "district"
@@ -44,7 +44,7 @@
         "required": true
       },
       "FHIRMappings": [{
-        "path": "patient.address[0].line[0]",
+        "path": "address[0].line[0]",
         "params": null,
         "valueType": "formValue",
         "value": "sector"
@@ -58,7 +58,7 @@
         "required": true
       },
       "FHIRMappings": [{
-        "path": "patient.address[0].line[1]",
+        "path": "address[0].line[1]",
         "params": null,
         "valueType": "formValue",
         "value": "cell"
@@ -72,7 +72,7 @@
         "required": true
       },
       "FHIRMappings": [{
-        "path": "patient.address[0].line[2]",
+        "path": "address[0].line[2]",
         "params": null,
         "valueType": "formValue",
         "value": "umudugudu"

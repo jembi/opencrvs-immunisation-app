@@ -1,0 +1,132 @@
+{
+  "key": "hivInfo",
+  "name": "HIV Info",
+  "displayName": "HIV Information",
+  "flex": "100",
+  "rows": [{
+    "name": "Row 1",
+    "title": "Please supply additional information below",
+    "layout": "row",
+    "fields": [{
+      "type": "select",
+      "flex": "33",
+      "name": "hivStatus",
+      "title": "HIV Status",
+      "settings": {
+        "valueType": "valueString",
+        "disabled": false,
+        "required": true,
+        "searchOptions": true
+      },
+      "FHIRMappings": [{
+        "path": "extension.valueString",
+        "params": "extension.url=rcbs:hiv:status",
+        "valueType": "formValue",
+        "value": "hivStatus"
+      }],
+      "options": [
+        {"key": "Negative", "value": "Negative"},
+        {"key": "Positive", "value": "Positive"}
+      ],
+      "value": null
+    }, {
+      "type": "date",
+      "flex": "33",
+      "name": "firstPostitiveHivTestDate",
+      "title": "First HIV Postive Test Date",
+      "settings": {
+        "valueType": "valueString",
+        "disabled": false,
+        "required": true
+      },
+      "skipLogic": {
+      	"func": null,
+      	"checks": [{
+      		"variable": "form.hivStatus.$modelValue",
+      		"operand": "=",
+      		"value": "Positive"
+      	}]
+      },
+      "FHIRMappings": [{
+        "path": "extension.valueDate",
+        "params": "extension.url=rcbs:firstposivehivtest:date",
+        "valueType": "formValue",
+        "value": "firstPostitiveHivTestDate"
+      }],
+      "value": null
+    }, {
+      "type": "select",
+      "flex": "33",
+      "name": "firstPostitiveHivTestLocation",
+      "title": "First Postive HIV Test Location",
+      "settings": {
+        "valueType": "valueString",
+        "disabled": false,
+        "required": true,
+        "searchOptions": true
+      },
+      "FHIRMappings": [{
+        "path": "extension.valueString",
+        "params": "extension.url=rcbs:firstposivehivtest:location",
+        "valueType": "formValue",
+        "value": "firstPostitiveHivTestLocation"
+      }],
+      "skipLogic": {
+      	"func": null,
+      	"checks": [{
+      		"variable": "form.hivStatus.$modelValue",
+      		"operand": "=",
+      		"value": "Positive"
+      	}]
+      },
+      "options": [
+        {"key": "Chuk", "value": "Chuk"}, 
+        {"key": "Kacyiru Police Hospital", "value": "Kacyiru Police Hospital"}, 
+        {"key": "Muhima Hospital", "value": "Muhima Hospital"}, 
+        {"key": "Kibagabaga Hospital", "value": "Kibagabaga Hospital"}, 
+        {"key": "Kanombe Military Hospital", "value": "Kanombe Military Hospital"}, 
+        {"key": "King Faisal Hospital", "value": "King Faisal Hospital"}, 
+        {"key": "Ndera Hospital", "value": "Ndera Hospital"}, 
+        {"key": "Masaka Hospital", "value": "Masaka Hospital"}, 
+        {"key": "Rwinkwavu Hospital", "value": "Rwinkwavu Hospital"}, 
+        {"key": "Kirehe Hospital", "value": "Kirehe Hospital"}, 
+        {"key": "Kibungo Hospital", "value": "Kibungo Hospital"}, 
+        {"key": "Nyagatare Hospital", "value": "Nyagatare Hospital"}, 
+        {"key": "Gahini Hospital", "value": "Gahini Hospital"}, 
+        {"key": "Nyamata Hospital", "value": "Nyamata Hospital"}, 
+        {"key": "Ngarama Hospital", "value": "Ngarama Hospital"}, 
+        {"key": "Kiziguro Hospital", "value": "Kiziguro Hospital"}, 
+        {"key": "Rwamagana Hospital", "value": "Rwamagana Hospital"}, 
+        {"key": "Other", "value": "Other"}
+      ],
+      "value": null
+    }]
+  }, {
+    "name": "Row 2",
+    "title": null,
+    "layout": "row",
+    "fields": [{
+      "type": "select",
+      "flex": "33",
+      "name": "partnerHivStatus",
+      "title": "Partner HIV Status",
+      "settings": {
+        "valueType": "valueString",
+        "disabled": false,
+        "required": true,
+        "searchOptions": true
+      },
+      "FHIRMappings": [{
+        "path": "extension.valueString",
+        "params": "extension.url=rcbs:partnerhiv:status",
+        "valueType": "formValue",
+        "value": "partnerHivStatus"
+      }],
+      "options": [
+        {"key": "Negative", "value": "Negative"},
+        {"key": "Positive", "value": "Positive"}
+      ],
+      "value": null
+    }]
+  }]
+}

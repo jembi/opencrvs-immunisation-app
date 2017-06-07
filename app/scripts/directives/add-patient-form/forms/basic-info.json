@@ -16,17 +16,17 @@
       	"required": true
       },
       "FHIRMappings": [{
-        "path": "patient.identifier.system",
+        "path": "identifier[0].system",
         "params": null,
         "valueType": "staticValue",
         "value": "rcbs:tracnet:id"
       }, {
-        "path": "patient.identifier.assigner.display",
+        "path": "identifier[0].assigner.display",
         "params": null,
         "valueType": "staticValue",
         "value": "TracNet ID"
       }, {
-      	"path": "patient.identifier.value",
+      	"path": "identifier[0].value",
         "params": null,
       	"valueType": "formValue",
       	"value": "TracNetID"
@@ -41,7 +41,7 @@
       },
       "options": [{"key": "Mr",  "value": "Mr"}, {"key": "Mrs",  "value": "Mrs"}, {"key": "Ms",  "value": "Ms"}, {"key": "Dr",  "value": "Dr"}],
       "FHIRMappings": [{
-        "path": "patient.name.prefix[0]",
+        "path": "name[0].prefix[0]",
         "params": null,
         "valueType": "formValue",
         "value": "title"
@@ -55,7 +55,7 @@
       	"required": true
       },
       "FHIRMappings": [{
-        "path": "patient.name.given[0]",
+        "path": "name[0].given[0]",
         "params": null,
         "valueType": "formValue",
         "value": "firstname"
@@ -69,7 +69,7 @@
       	"required": false
       },
       "FHIRMappings": [{
-        "path": "patient.name.given[1]",
+        "path": "name[0].given[1]",
         "params": null,
         "valueType": "formValue",
         "value": "middleNames"
@@ -83,7 +83,7 @@
       	"required": true
       },
       "FHIRMappings": [{
-        "path": "patient.name.family[0]",
+        "path": "name[0].family[0]",
         "params": "",
         "valueType": "formValue",
         "value": "lastName"
@@ -98,13 +98,13 @@
       },
       "options": [{"key": "Mobile",  "value": "Mobile"}, {"key": "Home",  "value": "Home"}, {"key": "Other",  "value": "Other"}],
       "FHIRMappings": [{
-        "path": "patient.telecom.system",
-        "params": "telecom.system=Mobile|:|Home|:|Other",
+        "path": "telecom.use",
+        "params": null,
         "valueType": "formValue",
         "value": "contactNumberType"
       }]
     }, { 
-      "type": "inputNumber",
+      "type": "input",
   		"flex": "30",
   		"name": "contactNumber",
       "title": "Contact Number",
@@ -112,22 +112,39 @@
       	"required": true
       },
       "FHIRMappings": [{
-        "path": "patient.telecom.value",
+        "path": "telecom.value",
         "params": "telecom.system=phone",
         "valueType": "formValue",
         "value": "contactNumber"
       }]
     }, { 
-      "type": "radio",
+      "type": "select",
   		"flex": "20",
   		"name": "gender",
       "title": "Gender",
       "settings": {
       	"required": true
       },
-      "options": [{"key": "male",  "value": "Male"}, {"key": "female",  "value": "Female"}],
+			"options": [
+				 {
+						"key": "male",
+						"value": "Male"
+				 },
+				 {
+						"key": "female",
+						"value": "Female"
+				 },
+				 {
+						"key": "other",
+						"value": "Other"
+				 },
+				 {
+						"key": "uknown",
+						"value": "Unknown"
+				 }
+			],
       "FHIRMappings": [{
-        "path": "patient.gender",
+        "path": "gender",
         "params": null,
       	"valueType": "formValue",
       	"value": "gender"
@@ -143,7 +160,7 @@
       	"required": true
       },
       "FHIRMappings": [{
-        "path": "patient.birthDate",
+        "path": "birthDate",
         "params": null,
       	"valueType": "formValue",
       	"value": "dob"
@@ -163,12 +180,12 @@
         "valueType": "formValue",
         "value": "emailAddress"
       }, {
-        "path": "patient.telecom.value",
+        "path": "telecom.value",
         "params": "telecom.system=email",
         "valueType": "formValue",
         "value": "emailAddress"
       }]
-    }, { 
+    }, {
       "type": "email",
   		"flex": "50",
   		"name": "emaildAddressConfirm",
@@ -176,6 +193,20 @@
       "settings": {
       	"required": true
       }
+    }, {
+      "type": "input",
+      "flex": "30",
+      "name": "profession",
+      "title": "Profession",
+      "settings": {
+        "required": true
+      },
+      "FHIRMappings": [{
+        "path": "extension.valueString",
+        "params": "extension.url=rcbs:profession",
+        "valueType": "formValue",
+        "value": "profession"
+      }]
     }, { 
       "type": "select",
   		"flex": "20",
@@ -186,14 +217,14 @@
       },
       "options": [{"key": "English",  "value": "English"}, {"key": "Afrikaans",  "value": "Afrikaans"}, {"key": "Zulu",  "value": "Zulu"}, {"key": "Xhosa",  "value": "Xhosa"}, {"key": "Other",  "value": "Other"}],
       "FHIRMappings": [{
-        "path": "patient.communication.language.text",
+        "path": "communication[0].language.text",
         "params": null,
         "valueType": "formValue",
         "value": "preferredLanguage"
       }]
     }, { 
       "type": "input",
-  		"flex": "30",
+  		"flex": "20",
   		"name": "preferredLanguageOther",
       "title": "Preferred Language (other)",
       "settings": {
@@ -208,7 +239,7 @@
       	}]
       },
       "FHIRMappings": [{
-        "path": "patient.",
+        "path": "communication[0].language.text",
         "params": null,
         "valueType": "formValue",
         "value": "preferredLanguageOther"
