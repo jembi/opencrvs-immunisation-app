@@ -9,7 +9,7 @@ const FHIR = require('../../app/scripts/services/FHIR/FHIR.js')()
 
 const sandbox = sinon.sandbox.create()
 sandbox.stub(console, 'error').callsFake((msg) => {})
-// sandbox.stub(console, 'log').callsFake((msg) => {})
+sandbox.stub(console, 'log').callsFake((msg) => {})
 tap.tearDown(() => {
   sandbox.restore()
 })
@@ -126,7 +126,7 @@ tap.test('.link()', { autoend: true }, (t) => {
     const locationMock = {
       path: (path) => {
         // then
-        t.equals(path, '/') // redirect to root i.e. search page
+        t.equals(path, '/patients') // redirect to /patients i.e. search page
         t.end()
       }
     }

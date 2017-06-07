@@ -9,7 +9,7 @@ module.exports = function (Api, loadResource, $q, state, FHIR, $location) {
     scope: {},
     link: function (scope) {
       if (!state.getPartialPatientDemographics()) {
-        return $location.path('/')
+        return $location.path('/patients')
       }
 
       var submit = function (form) {
@@ -68,7 +68,6 @@ module.exports = function (Api, loadResource, $q, state, FHIR, $location) {
       promises.push(loadResource.fetch('app/scripts/directives/add-patient-form/forms/hiv-info.json'))
 
       $q.all(promises).then(function (results) {
-        console.log(results[0])
         // set partial patient demographics in the form
         var partialDemographics = state.getPartialPatientDemographics()
         state.setPartialPatientDemographics(null)
