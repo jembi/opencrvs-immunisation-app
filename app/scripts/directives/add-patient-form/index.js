@@ -1,5 +1,7 @@
 'use strict'
 
+var moment = require('moment')
+
 module.exports = function (Api, loadResource, $q, state, FHIR, $location) {
   return {
     restrict: 'EA',
@@ -23,6 +25,8 @@ module.exports = function (Api, loadResource, $q, state, FHIR, $location) {
         }
 
         loadResource.fetch('app/scripts/services/FHIR/resources/Patient.json').then(function (fhirDoc) {
+          formFieldsValues.dob = moment(formFieldsValues.dob).format('YYYY-MM-DD')
+          formFieldsValues.firstPostitiveHivTestDate = moment(formFieldsValues.firstPostitiveHivTestDate).format('YYYY-MM-DD')
           var fhirObject = FHIR.mapFHIRObject(fhirDoc, scope.state.FormBuilderAddPatient, formFieldsValues)
 
           Api.Patients.save(fhirObject, function (bundle) {
@@ -57,26 +61,24 @@ module.exports = function (Api, loadResource, $q, state, FHIR, $location) {
         AddPatient: {}
       }
 
-      var sections = []
-      loadResource.fetch('app/scripts/directives/add-patient-form/forms/basic-info.json').then(function (basicInfo) {
-        loadResource.fetch('app/scripts/directives/add-patient-form/forms/address-info.json').then(function (addressInfo) {
-          loadResource.fetch('app/scripts/directives/add-patient-form/forms/emergency-contact-info.json').then(function (emergencyContactInfo) {
-            sections.push(basicInfo)
-            sections.push(addressInfo)
-            sections.push(emergencyContactInfo)
+      var promises = []
+      promises.push(loadResource.fetch('app/scripts/directives/add-patient-form/forms/basic-info.json'))
+      promises.push(loadResource.fetch('app/scripts/directives/add-patient-form/forms/address-info.json'))
+      promises.push(loadResource.fetch('app/scripts/directives/add-patient-form/forms/emergency-contact-info.json'))
+      promises.push(loadResource.fetch('app/scripts/directives/add-patient-form/forms/hiv-info.json'))
 
-            scope.state.FormBuilderAddPatient.sections = sections
+      $q.all(promises).then(function (results) {
+        console.log(results[0])
+        // set partial patient demographics in the form
+        var partialDemographics = state.getPartialPatientDemographics()
+        state.setPartialPatientDemographics(null)
 
-            // set partial patient demographics in the form
-            var partialDemographics = state.getPartialPatientDemographics()
-            state.setPartialPatientDemographics(null)
+        results[0].rows[0].fields[2].value = partialDemographics.givenName
+        results[0].rows[0].fields[4].value = partialDemographics.familyName
+        results[0].rows[0].fields[7].value = partialDemographics.gender
+        results[0].rows[0].fields[8].value = partialDemographics.birthDate
 
-            basicInfo.rows[0].fields[2].value = partialDemographics.givenName
-            basicInfo.rows[0].fields[4].value = partialDemographics.familyName
-            basicInfo.rows[0].fields[7].value = partialDemographics.gender
-            basicInfo.rows[0].fields[8].value = partialDemographics.birthDate
-          })
-        })
+        scope.state.FormBuilderAddPatient.sections = results
       })
     }
   }

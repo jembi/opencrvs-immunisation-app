@@ -16,17 +16,17 @@
       	"required": true
       },
       "FHIRMappings": [{
-        "path": "identifier.system",
+        "path": "identifier[0].system",
         "params": null,
         "valueType": "staticValue",
-        "value": "pshr:tracnet:id"
+        "value": "rcbs:tracnet:id"
       }, {
-        "path": "identifier.assigner.display",
+        "path": "identifier[0].assigner.display",
         "params": null,
         "valueType": "staticValue",
         "value": "TracNet ID"
       }, {
-      	"path": "identifier.value",
+      	"path": "identifier[0].value",
         "params": null,
       	"valueType": "formValue",
       	"value": "TracNetID"
@@ -41,7 +41,7 @@
       },
       "options": [{"key": "Mr",  "value": "Mr"}, {"key": "Mrs",  "value": "Mrs"}, {"key": "Ms",  "value": "Ms"}, {"key": "Dr",  "value": "Dr"}],
       "FHIRMappings": [{
-        "path": "name.prefix[0]",
+        "path": "name[0].prefix[0]",
         "params": null,
         "valueType": "formValue",
         "value": "title"
@@ -55,7 +55,7 @@
       	"required": true
       },
       "FHIRMappings": [{
-        "path": "name.given[0]",
+        "path": "name[0].given[0]",
         "params": null,
         "valueType": "formValue",
         "value": "firstname"
@@ -69,7 +69,7 @@
       	"required": false
       },
       "FHIRMappings": [{
-        "path": "name.given[1]",
+        "path": "name[0].given[1]",
         "params": null,
         "valueType": "formValue",
         "value": "middleNames"
@@ -83,7 +83,7 @@
       	"required": true
       },
       "FHIRMappings": [{
-        "path": "name.family[0]",
+        "path": "name[0].family[0]",
         "params": "",
         "valueType": "formValue",
         "value": "lastName"
@@ -98,13 +98,13 @@
       },
       "options": [{"key": "Mobile",  "value": "Mobile"}, {"key": "Home",  "value": "Home"}, {"key": "Other",  "value": "Other"}],
       "FHIRMappings": [{
-        "path": "telecom.system",
-        "params": "telecom.system=Mobile|:|Home|:|Other",
+        "path": "telecom.use",
+        "params": "telecom.system=phone",
         "valueType": "formValue",
         "value": "contactNumberType"
       }]
     }, { 
-      "type": "inputNumber",
+      "type": "input",
   		"flex": "30",
   		"name": "contactNumber",
       "title": "Contact Number",
@@ -118,14 +118,31 @@
         "value": "contactNumber"
       }]
     }, { 
-      "type": "radio",
+      "type": "select",
   		"flex": "20",
   		"name": "gender",
       "title": "Gender",
       "settings": {
       	"required": true
       },
-      "options": [{"key": "male",  "value": "Male"}, {"key": "female",  "value": "Female"}],
+			"options": [
+				 {
+						"key": "male",
+						"value": "Male"
+				 },
+				 {
+						"key": "female",
+						"value": "Female"
+				 },
+				 {
+						"key": "other",
+						"value": "Other"
+				 },
+				 {
+						"key": "unknown",
+						"value": "Unknown"
+				 }
+			],
       "FHIRMappings": [{
         "path": "gender",
         "params": null,
@@ -163,7 +180,7 @@
         "valueType": "formValue",
         "value": "emailAddress"
       }]
-    }, { 
+    }, {
       "type": "email",
   		"flex": "50",
   		"name": "emaildAddressConfirm",
@@ -171,6 +188,20 @@
       "settings": {
       	"required": true
       }
+    }, {
+      "type": "input",
+      "flex": "30",
+      "name": "profession",
+      "title": "Profession",
+      "settings": {
+        "required": true
+      },
+      "FHIRMappings": [{
+        "path": "extension.valueString",
+        "params": "extension.url=rcbs:profession",
+        "valueType": "formValue",
+        "value": "profession"
+      }]
     }, { 
       "type": "select",
   		"flex": "20",
@@ -188,7 +219,7 @@
       }]
     }, { 
       "type": "input",
-  		"flex": "30",
+  		"flex": "20",
   		"name": "preferredLanguageOther",
       "title": "Preferred Language (other)",
       "settings": {
@@ -203,7 +234,7 @@
       	}]
       },
       "FHIRMappings": [{
-        "path": "",
+        "path": "communication[0].language.text",
         "params": null,
         "valueType": "formValue",
         "value": "preferredLanguageOther"
