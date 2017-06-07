@@ -9,7 +9,7 @@ const FHIR = require('../../app/scripts/services/FHIR/FHIR.js')()
 
 const sandbox = sinon.sandbox.create()
 sandbox.stub(console, 'error').callsFake((msg) => {})
-// sandbox.stub(console, 'log').callsFake((msg) => {})
+sandbox.stub(console, 'log').callsFake((msg) => {})
 tap.tearDown(() => {
   sandbox.restore()
 })
@@ -112,8 +112,7 @@ tap.test('.link()', { autoend: true }, (t) => {
         emailAddress: { $modelValue: 'email@exchange.com', $dirty: true },
         emaildAddressConfirm: { $modelValue: 'email@exchange.com', $dirty: true },
         profession: { $modelValue: 'Dentist', $dirty: true },
-        preferredLanguage: { $modelValue: 'Other', $dirty: true },
-        preferredLanguageOther: { $modelValue: 'xhosa', $dirty: true },
+        preferredLanguage: { $modelValue: 'xhosa', $dirty: true },
 
         // Address Info
         province: { $modelValue: 'Provey', $dirty: true },
@@ -163,7 +162,6 @@ tap.test('.link()', { autoend: true }, (t) => {
         return {
           resolve: (result) => {
             // then
-            // TODO: Used in API call
             t.equals(result.isValid, true)
             t.equals(result.msg, 'Patient mapped to FHIR document!')
           }
@@ -221,7 +219,8 @@ tap.test('.link()', { autoend: true }, (t) => {
       // given
       const scope = {}
       const mockFormData = {
-        preferredLanguage: { $modelValue: 'zulu', $dirty: true }
+        preferredLanguage: { $modelValue: 'Other', $dirty: true },
+        preferredLanguageOther: { $modelValue: 'French', $dirty: true }
       }
       const fetchMock = (file) => {
         return new Promise((resolve, reject) => {
@@ -251,7 +250,6 @@ tap.test('.link()', { autoend: true }, (t) => {
         return {
           resolve: (result) => {
             // then
-            // TODO: Used in API call
             t.equals(result.isValid, true)
             t.equals(result.msg, 'Patient mapped to FHIR document!')
           }
@@ -259,7 +257,7 @@ tap.test('.link()', { autoend: true }, (t) => {
       }
 
       const savePatientMock = (patient) => {
-        t.equals(patient.communication[0].language.text, 'zulu')
+        t.equals(patient.communication[0].language.text, 'French')
         t.end()
       }
 
