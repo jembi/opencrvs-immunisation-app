@@ -8,7 +8,8 @@ module.exports = function (Api, loadResource, state) {
     templateUrl: 'app/scripts/directives/add-cbs-events/cbs-event-selector/view.html',
     scope: {
       eventTitles: '=',
-      setSelectedEvent: '&'
+      setSelectedEvent: '&',
+      patient: '='
     },
     link: function (scope) {
       scope.selectEventClick = function (title) {
