@@ -1,17 +1,23 @@
 'use strict'
 
-module.exports = function (state) {
-  var TRACNET_SYSTEM_IDENTIFIER = 'pshr:tracnetid'
+module.exports = function (state, $location) {
+  const TRACNET_SYSTEM_IDENTIFIER = 'rcbs:tracnet:id'
   return {
     restrict: 'EA',
     replace: true,
     templateUrl: 'app/scripts/directives/patients-list/view.html',
     scope: {
-      results: '='
+      results: '=',
+      singlePatient: '='
     },
     link: function (scope) {
       scope.clearSearch = function () {
         state.setSearchResults(null)
+        state.setPartialPatientDemographics(null)
+      }
+
+      scope.createPatient = function () {
+        $location.path('/add-patient')
       }
 
       scope.togglePatientDetails = function (patient) {
@@ -95,12 +101,12 @@ module.exports = function (state) {
       }
 
       scope.createPatientsList = function (results) {
-        scope.patients = []
+        var patientsArr = []
 
         if (results) {
           for (var i = 0; i < results.length; i++) {
             var patient = results[i].resource
-            scope.patients.push({
+            patientsArr.push({
               id: patient.id,
               name: getOfficialName(patient.name),
               gender: getGender(patient.gender),
@@ -119,8 +125,13 @@ module.exports = function (state) {
           }
         }
 
+        scope.patients = {
+          count: patientsArr.length,
+          data: patientsArr
+        }
+
         scope.selected = []
-        scope.limitOptions = [5, 10, 15]
+        scope.limitOptions = [10, 20, 50, 100]
 
         scope.options = {
           rowSelection: false,
@@ -135,7 +146,7 @@ module.exports = function (state) {
 
         scope.query = {
           order: 'name',
-          limit: 5,
+          limit: 10,
           page: 1
         }
       }
@@ -145,6 +156,10 @@ module.exports = function (state) {
           scope.createPatientsList(newResults)
         }
       }, true)
+
+      scope.$watch(function () { return state.getPartialPatientDemographics() }, function () {
+        scope.partialPatientDemographics = state.getPartialPatientDemographics()
+      })
     }
   }
 }

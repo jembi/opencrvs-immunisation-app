@@ -1,0 +1,119 @@
+{
+  "resourceType": "Patient",
+  "active": true,
+  "identifier": [
+    {
+      "use": "official",
+      "system": "",
+      "value": "",
+      "assigner": {
+        "display": ""
+      }
+    }
+  ],
+  "name": [
+    {
+      "use": "official",
+      "prefix": [],
+      "family": [],
+      "given": []
+    }
+  ],
+  "gender": "",
+  "birthDate": "",
+  "telecom": [
+    {
+      "system": "email",
+      "value": ""
+    },
+    {
+      "system": "phone",
+      "value": "",
+      "use": ""
+    }
+  ],
+  "address": [
+    {
+      "use": "",
+      "type": "",
+      "line": [],
+      "state": "",
+      "district": "",
+      "city": "",
+      "postalCode": ""
+    }
+  ],
+  "communication": [
+    {
+      "language": {
+        "coding": [
+          {
+            "system": "urn:ietf:bcp:47",
+            "code": ""
+          }
+        ],
+        "text": ""
+      },
+      "preferred": true
+    }
+  ],
+  "contact": [
+    {
+      "relationship": [
+        {
+          "coding": [
+            {
+              "system": "http://hl7.org/fhir/vs/patient-contact-relationship",
+              "code": "emergency"
+            }
+          ],
+          "text": ""
+        },
+        {
+          "coding": [
+            {
+              "system": "http://hl7.org/fhir/vs/patient-contact-relationship",
+              "code": ""
+            }
+          ],
+          "text": ""
+        }
+      ],
+      "name": [
+        {
+          "use": "official",
+          "family": [],
+          "given": []
+        }
+      ],
+      "telecom": [
+        {
+          "system": "phone",
+          "value": "",
+          "use": ""
+        }, {
+          "system": "email",
+          "value": ""
+        }
+      ]
+    }
+  ],
+  "extension": [
+    {
+      "url": "rcbs:profession",
+      "valueString": ""
+    }, {
+      "url": "rcbs:firstposivehivtest:date",
+      "valueDate": ""
+    }, {
+      "url": "rcbs:firstposivehivtest:location",
+      "valueString": ""
+    }, {
+      "url": "rcbs:partnerhiv:status",
+      "valueString": ""
+    }, {
+      "url": "rcbs:hiv:status",
+      "valueString": ""
+    }
+  ]
+}

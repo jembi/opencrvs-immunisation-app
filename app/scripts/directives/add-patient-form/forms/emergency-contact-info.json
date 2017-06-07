@@ -1,0 +1,115 @@
+{
+  "key": "emergencyContactInfo",
+  "name": "Emergency Contact",
+  "displayName": "Emergency Contact Information",
+  "flex": "100",
+  "rows": [{
+    "name": "Row 1",
+    "title": "Please supply your emergency contact information below.",
+    "layout": "row",
+    "fields": [{ 
+      "type": "input",
+      "flex": "20",
+      "name": "emergencyContactFirstName",
+      "title": "First Name",
+      "settings": {
+        "required": true
+      },
+      "FHIRMappings": [{
+        "path": "contact[0].name[0].given[0]",
+        "params": null,
+        "valueType": "formValue",
+        "value": "emergencyContactFirstName"
+      }]
+    }, { 
+      "type": "input",
+      "flex": "20",
+      "name": "emergencyContactLastName",
+      "title": "Last Name",
+      "settings": {
+        "required": true
+      },
+      "FHIRMappings": [{
+        "path": "contact[0].name[0].family[0]",
+        "params": null,
+        "valueType": "formValue",
+        "value": "emergencyContactLastName"
+      }]
+    }, { 
+      "type": "select",
+      "flex": "20",
+      "name": "emergencyContactRelationship",
+      "title": "Relationship",
+      "settings": {
+        "required": true
+      },
+      "options": [{
+						"key": "family",
+						"value": "Family"
+				 },{
+						"key": "guardian",
+						"value": "Guardian"
+				 },{
+						"key": "friend",
+						"value": "Friend"
+				 },{
+						"key": "partner",
+						"value": "Partner"
+				 },{
+						"key": "work",
+						"value": "Work"
+				 },{
+						"key": "caregiver",
+						"value": "Caregiver"
+				 },{
+						"key": "agent",
+						"value": "Agent"
+				 },{
+						"key": "guarantor",
+						"value": "Guarantor"
+				 },{
+						"key": "parent",
+						"value": "Parent"
+				 }],
+      "FHIRMappings": [{
+        "path": "contact[0].relationship[1].coding[0].code",
+        "params": null,
+        "valueType": "formValue",
+        "value": "emergencyContactRelationship"
+      }]
+    }, { 
+      "type": "input",
+      "flex": "20",
+      "name": "emergencyContactMobile",
+      "title": "Mobile Number",
+      "settings": {
+        "required": true
+      },
+      "FHIRMappings": [{
+        "path": "contact.telecom.value",
+        "params": "contact.telecom.system=phone",
+        "valueType": "formValue",
+        "value": "emergencyContactMobile"
+      }, {
+        "path": "contact.telecom.use",
+        "params": "contact.telecom.system=phone",
+        "valueType": "staticValue",
+        "value": "Mobile"
+      }]
+    }, { 
+      "type": "email",
+      "flex": "20",
+      "name": "emergencyContactEmail",
+      "title": "Email",
+      "settings": {
+        "required": true
+      },
+      "FHIRMappings": [{
+        "path": "contact.telecom.value",
+        "params": "contact.telecom.system=email",
+        "valueType": "formValue",
+        "value": "emergencyContactEmail"
+      }]
+    }]
+  }]
+}

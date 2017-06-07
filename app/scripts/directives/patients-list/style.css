@@ -28,3 +28,11 @@
 .patientsListRow:focus {
   outline: none;
 }
+
+.squash-thead {
+  height: 30px !important;
+}
+
+.stretch-tr {
+  height: 30px !important;
+}
