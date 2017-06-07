@@ -15,8 +15,7 @@
       "settings": {
         "valueType": "valueString",
         "disabled": false,
-        "required": true,
-        "searchOptions": true
+        "required": true
       },
       "FHIRMappings": [{
         "path": "extension.valueString",
@@ -113,8 +112,7 @@
       "settings": {
         "valueType": "valueString",
         "disabled": false,
-        "required": true,
-        "searchOptions": true
+        "required": true
       },
       "FHIRMappings": [{
         "path": "extension.valueString",
