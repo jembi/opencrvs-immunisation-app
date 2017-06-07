@@ -6,7 +6,7 @@ const mhdBuilder = require('../../app/scripts/modules/mhd-doc-builder')
 
 tap.test('MHD document builder', { autoend: true }, (t) => {
   t.test('.returnResourceAsEntry', { autoend: true }, (t) => {
-    t.test('should encapsulated resource with fullUrl property', (t) => {
+    t.test('should encapsulate resource as an entry with fullUrl property', (t) => {
       var result = mhdBuilder.returnResourceAsEntry({ resourceType: 'Test' })
       t.same(result.resource, { resourceType: 'Test' })
       t.ok(result.fullUrl)
