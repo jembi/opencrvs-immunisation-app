@@ -1,7 +1,7 @@
 'use strict'
 
 module.exports = function (state, $location) {
-  var TRACNET_SYSTEM_IDENTIFIER = 'pshr:tracnetid'
+  const TRACNET_SYSTEM_IDENTIFIER = 'rcbs:tracnet:id'
   return {
     restrict: 'EA',
     replace: true,
