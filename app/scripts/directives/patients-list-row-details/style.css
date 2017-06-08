@@ -21,4 +21,12 @@
 
 .patientDetailsWhiteframe .details .detailsRow .system {
   text-transform: capitalize;
+  word-break: break-word;
+  max-width: 50%;
+  margin-right: 10px;
+}
+
+.patientDetailsWhiteframe .details .detailsRow .value {
+  max-width: 50%;
+  font-weight: bold;
 }
