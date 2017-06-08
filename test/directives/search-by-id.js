@@ -54,7 +54,7 @@ tap.test('.link()', { autoend: true }, (t) => {
         }
       }
       const mock = () => {}
-      const directive = searchById({ Patients: apiMock }, { fetch: fetchMock }, { defer: deferMock }, { setSearchResults: mock })
+      const directive = searchById({ Patients: apiMock }, { fetch: fetchMock }, { defer: deferMock }, { setSearchResults: mock, setSearchType: mock })
       directive.link(scope)
       // when
       scope.state.FormBuilderSearchById.submit.execute()
@@ -143,7 +143,7 @@ tap.test('.link()', { autoend: true }, (t) => {
         }
       }
       const mock = () => {}
-      const directive = searchById({ Patients: apiMock }, { fetch: fetchMock }, { defer: deferMock }, { setSearchResults: mock })
+      const directive = searchById({ Patients: apiMock }, { fetch: fetchMock }, { defer: deferMock }, { setSearchResults: mock, setSearchType: mock })
       directive.link(scope)
       // when
       scope.state.FormBuilderSearchById.submit.execute({ tracNetID: { $dirty: true, $modelValue: '1234' } })

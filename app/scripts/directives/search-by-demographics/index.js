@@ -59,6 +59,7 @@ module.exports = function (Api, loadResource, $q, state) {
 
         Api.Patients.match(body, function (bundle) {
           state.setSearchResults(bundle.entry)
+          state.setSearchType('demographics')
           defer.resolve({ isValid: true, msg: 'Found some potential matches' })
         }, function (err) {
           console.error(err)

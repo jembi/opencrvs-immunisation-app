@@ -54,7 +54,8 @@ tap.test('.link()', { autoend: true }, (t) => {
       }
       const stateMock = {
         setSearchResults: () => {},
-        setPartialPatientDemographics: () => {}
+        setPartialPatientDemographics: () => {},
+        setSearchType: () => {}
       }
       const directive = searchByDemographics({ Patients: { match: matchMock } }, { fetch: fetchMock }, { defer: deferMock }, stateMock)
       directive.link(scope)
@@ -110,7 +111,8 @@ tap.test('.link()', { autoend: true }, (t) => {
       }
       const stateMock = {
         setSearchResults: () => {},
-        setPartialPatientDemographics: () => {}
+        setPartialPatientDemographics: () => {},
+        setSearchType: () => {}
       }
       const directive = searchByDemographics({ Patients: { match: matchMock } }, { fetch: fetchMock }, { defer: deferMock }, stateMock)
       directive.link(scope)
@@ -145,7 +147,8 @@ tap.test('.link()', { autoend: true }, (t) => {
         setSearchResults: (results) => {
           t.deepEquals(results, [ 'one', 'two' ])
         },
-        setPartialPatientDemographics: () => {}
+        setPartialPatientDemographics: () => {},
+        setSearchType: () => {}
       }
       const directive = searchByDemographics({ Patients: { match: matchMock } }, { fetch: fetchMock }, { defer: deferMock }, stateMock)
       directive.link(scope)
