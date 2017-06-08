@@ -30,9 +30,6 @@ tap.test('.link()', { autoend: true }, (t) => {
           case 'app/scripts/directives/add-patient-form/forms/emergency-contact-info.json':
             resolve(require('../../app/scripts/directives/add-patient-form/forms/emergency-contact-info.json'))
             break
-          case 'app/scripts/directives/add-patient-form/forms/hiv-info.json':
-            resolve(require('../../app/scripts/directives/add-patient-form/forms/hiv-info.json'))
-            break
           case 'app/scripts/services/FHIR/resources/Patient.json':
             resolve(require('../../app/scripts/services/FHIR/resources/Patient.json'))
             break
@@ -54,7 +51,7 @@ tap.test('.link()', { autoend: true }, (t) => {
     // then
     t.ok(scope.state.FormBuilderAddPatient)
     setTimeout(() => {
-      t.equals(scope.state.FormBuilderAddPatient.sections.length, 4)
+      t.equals(scope.state.FormBuilderAddPatient.sections.length, 3)
       t.end()
     }, 500)
   })
@@ -73,9 +70,6 @@ tap.test('.link()', { autoend: true }, (t) => {
             break
           case 'app/scripts/directives/add-patient-form/forms/emergency-contact-info.json':
             resolve(require('../../app/scripts/directives/add-patient-form/forms/emergency-contact-info.json'))
-            break
-          case 'app/scripts/directives/add-patient-form/forms/hiv-info.json':
-            resolve(require('../../app/scripts/directives/add-patient-form/forms/hiv-info.json'))
             break
           case 'app/scripts/services/FHIR/resources/Patient.json':
             resolve(require('../../app/scripts/services/FHIR/resources/Patient.json'))
@@ -154,9 +148,6 @@ tap.test('.link()', { autoend: true }, (t) => {
             case 'app/scripts/directives/add-patient-form/forms/emergency-contact-info.json':
               resolve(require('../../app/scripts/directives/add-patient-form/forms/emergency-contact-info.json'))
               break
-            case 'app/scripts/directives/add-patient-form/forms/hiv-info.json':
-              resolve(require('../../app/scripts/directives/add-patient-form/forms/hiv-info.json'))
-              break
             case 'app/scripts/services/FHIR/resources/Patient.json':
               resolve(require('../../app/scripts/services/FHIR/resources/Patient.json'))
               break
@@ -190,7 +181,7 @@ tap.test('.link()', { autoend: true }, (t) => {
       directive.link(scope)
       // when
       setTimeout(() => {
-        t.equals(scope.state.FormBuilderAddPatient.sections.length, 4)
+        t.equals(scope.state.FormBuilderAddPatient.sections.length, 3)
         scope.state.FormBuilderAddPatient.submit.execute(mockFormData)
       }, 200)
     })
@@ -228,13 +219,7 @@ tap.test('.link()', { autoend: true }, (t) => {
         emergencyContactLastName: { $modelValue: 'Emerly', $dirty: true },
         emergencyContactRelationship: { $modelValue: 'Family', $dirty: true },
         emergencyContactMobile: { $modelValue: '+27721112222', $dirty: true },
-        emergencyContactEmail: { $modelValue: 'email@exchange.org', $dirty: true },
-
-        // HIV Info
-        hivStatus: { $modelValue: 'Positive', $dirty: true },
-        firstPostitiveHivTestDate: { $modelValue: date, $dirty: true },
-        firstPostitiveHivTestLocation: { $modelValue: 'Chuk', $dirty: true },
-        partnerHivStatus: { $modelValue: 'Negative', $dirty: true }
+        emergencyContactEmail: { $modelValue: 'email@exchange.org', $dirty: true }
       }
       const fetchMock = (file) => {
         return new Promise((resolve, reject) => {
@@ -247,9 +232,6 @@ tap.test('.link()', { autoend: true }, (t) => {
               break
             case 'app/scripts/directives/add-patient-form/forms/emergency-contact-info.json':
               resolve(require('../../app/scripts/directives/add-patient-form/forms/emergency-contact-info.json'))
-              break
-            case 'app/scripts/directives/add-patient-form/forms/hiv-info.json':
-              resolve(require('../../app/scripts/directives/add-patient-form/forms/hiv-info.json'))
               break
             case 'app/scripts/services/FHIR/resources/Patient.json':
               resolve(require('../../app/scripts/services/FHIR/resources/Patient.json'))
@@ -299,12 +281,6 @@ tap.test('.link()', { autoend: true }, (t) => {
         t.equals(patient.contact[0].telecom[0].value, '+27721112222')
         t.equals(patient.contact[0].telecom[0].use, 'Mobile')
         t.equals(patient.contact[0].telecom[1].value, 'email@exchange.org')
-
-        // HIV Info
-        t.equals(patient.extension[4].valueString, 'Positive')
-        t.equals(patient.extension[1].valueDate, formattedDate)
-        t.equals(patient.extension[2].valueString, 'Chuk')
-        t.equals(patient.extension[3].valueString, 'Negative')
         t.end()
       }
 
@@ -317,7 +293,7 @@ tap.test('.link()', { autoend: true }, (t) => {
       directive.link(scope)
       // when
       setTimeout(() => {
-        t.equals(scope.state.FormBuilderAddPatient.sections.length, 4)
+        t.equals(scope.state.FormBuilderAddPatient.sections.length, 3)
         scope.state.FormBuilderAddPatient.submit.execute(mockFormData)
       }, 100)
     })
@@ -340,9 +316,6 @@ tap.test('.link()', { autoend: true }, (t) => {
               break
             case 'app/scripts/directives/add-patient-form/forms/emergency-contact-info.json':
               resolve(require('../../app/scripts/directives/add-patient-form/forms/emergency-contact-info.json'))
-              break
-            case 'app/scripts/directives/add-patient-form/forms/hiv-info.json':
-              resolve(require('../../app/scripts/directives/add-patient-form/forms/hiv-info.json'))
               break
             case 'app/scripts/services/FHIR/resources/Patient.json':
               resolve(require('../../app/scripts/services/FHIR/resources/Patient.json'))
@@ -377,7 +350,7 @@ tap.test('.link()', { autoend: true }, (t) => {
       directive.link(scope)
       // when
       setTimeout(() => {
-        t.equals(scope.state.FormBuilderAddPatient.sections.length, 4)
+        t.equals(scope.state.FormBuilderAddPatient.sections.length, 3)
         scope.state.FormBuilderAddPatient.submit.execute(mockFormData)
       }, 100)
     })
