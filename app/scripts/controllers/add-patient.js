@@ -1,7 +1,7 @@
 
 'use strict'
 
-module.exports = function ($scope, $location, state) {
+module.exports = function ($scope, $location) {
   $scope.state = {
     patients: null,
     header: {
@@ -9,10 +9,7 @@ module.exports = function ($scope, $location, state) {
       left: [
         {
           text: 'back',
-          onClick: function () {
-            $location.path('/patients')
-            state.setSearchResults(null)
-          }
+          onClick: function () { $location.path('/patients') }
         }
       ],
       right: []
