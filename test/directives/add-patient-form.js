@@ -240,7 +240,7 @@ tap.test('.link()', { autoend: true }, (t) => {
       directive.link(scope)
       // when
       setTimeout(() => {
-        t.equals(scope.state.FormBuilderAddPatient.sections.length, 4)
+        t.equals(scope.state.FormBuilderAddPatient.sections.length, 3)
         scope.state.FormBuilderAddPatient.submit.execute(mockFormData)
       }, 200)
     })
