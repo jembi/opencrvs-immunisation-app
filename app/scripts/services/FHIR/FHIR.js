@@ -96,7 +96,7 @@ module.exports = function () {
 
     options.some(function (option) {
       if (option.key === keyToMatch) {
-        return optionVal = option.value
+        optionVal = option.value
       }
     })
 
