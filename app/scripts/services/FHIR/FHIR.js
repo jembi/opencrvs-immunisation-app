@@ -91,6 +91,18 @@ module.exports = function () {
     }
   }
 
+  var getOptionDisplayValue = function (options, keyToMatch) {
+    var optionVal = null
+
+    options.some(function (option) {
+      if (option.key === keyToMatch) {
+        return optionVal = option.value
+      }
+    })
+
+    return optionVal
+  }
+
   return {
     mapFHIRObject: function (fhirObject, FormBuilder, formData) {
       for (var fbs = 0; fbs < FormBuilder.sections.length; fbs++) {
@@ -109,6 +121,10 @@ module.exports = function () {
                 switch (FHIRMappingInstance.valueType) {
                   case 'formValue':
                     newVal = formData[ FHIRMappingInstance.value ]
+                    break
+                  case 'optionValue':
+                    var keyVal = formData[ FHIRMappingInstance.value ]
+                    newVal = getOptionDisplayValue(field.options, keyVal)
                     break
                   case 'staticValue':
                     newVal = FHIRMappingInstance.value
