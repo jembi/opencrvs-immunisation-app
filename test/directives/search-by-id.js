@@ -48,7 +48,7 @@ tap.test('.link()', { autoend: true }, (t) => {
         return {
           resolve: (result) => {
             t.equals(result.isValid, true)
-            t.equals(result.msg, 'Success')
+            t.equals(result.msg, 'Search Successful')
             t.end()
           }
         }
