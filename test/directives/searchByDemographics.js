@@ -191,7 +191,7 @@ tap.test('.link()', { autoend: true }, (t) => {
         return {
           reject: (err) => {
             t.equals(err.isValid, false)
-            t.equals(err.msg, 'Failed to perform search')
+            t.equals(err.msg, 'Could not connect to server')
             t.end()
           }
         }

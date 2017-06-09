@@ -33,7 +33,7 @@ module.exports = function (Api, loadResource, $q, state, FHIR, $location) {
             defer.resolve({ isValid: true, msg: 'Patient created successfully' })
           }, function (err) {
             console.error(err)
-            defer.reject({ isValid: false, msg: err.statusText || 'Failed to create patient' })
+            defer.reject({ isValid: false, msg: err.statusText || 'Could not connect to server' })
           })
         })
 

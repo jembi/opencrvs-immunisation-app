@@ -24,7 +24,7 @@ module.exports = function (Api, loadResource, $q, state) {
           defer.resolve({ isValid: true, msg: 'Search Successful' })
         }, function (err) {
           console.error(err)
-          defer.reject({ isValid: false, msg: err.statusText || 'Failed to perform search' })
+          defer.reject({ isValid: false, msg: err.statusText || 'Could not connect to server' })
         })
 
         return defer.promise
