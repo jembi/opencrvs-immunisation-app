@@ -162,7 +162,7 @@ tap.test('.link()', { autoend: true }, (t) => {
           resolve: (result) => {
             // then
             t.equals(result.isValid, true)
-            t.equals(result.msg, 'Patient has been created successfully')
+            t.equals(result.msg, 'Patient created successfully')
             t.end()
           }
         }
@@ -170,6 +170,65 @@ tap.test('.link()', { autoend: true }, (t) => {
       const patientApiMock = {
         save: (body, success) => {
           return success()
+        }
+      }
+      const stateMock = {
+        getPartialPatientDemographics: () => { return {} },
+        setPartialPatientDemographics: () => {}
+      }
+
+      const directive = addPatient({ Patients: patientApiMock }, { fetch: fetchMock }, { all: allMock, defer: deferMock }, stateMock, FHIR)
+      directive.link(scope)
+      // when
+      setTimeout(() => {
+        t.equals(scope.state.FormBuilderAddPatient.sections.length, 3)
+        scope.state.FormBuilderAddPatient.submit.execute(mockFormData)
+      }, 200)
+    })
+
+    t.test('should resolve with the correct error message', (t) => {
+      // given
+      const scope = {}
+      const mockFormData = {
+        gender: { $modelValue: 'male', $dirty: true }
+      }
+      const fetchMock = (file) => {
+        return new Promise((resolve, reject) => {
+          switch (file) {
+            case 'app/scripts/directives/add-patient-form/forms/basic-info.json':
+              resolve(require('../../app/scripts/directives/add-patient-form/forms/basic-info.json'))
+              break
+            case 'app/scripts/directives/add-patient-form/forms/address-info.json':
+              resolve(require('../../app/scripts/directives/add-patient-form/forms/address-info.json'))
+              break
+            case 'app/scripts/directives/add-patient-form/forms/emergency-contact-info.json':
+              resolve(require('../../app/scripts/directives/add-patient-form/forms/emergency-contact-info.json'))
+              break
+            case 'app/scripts/directives/add-patient-form/forms/hiv-info.json':
+              resolve(require('../../app/scripts/directives/add-patient-form/forms/hiv-info.json'))
+              break
+            case 'app/scripts/services/FHIR/resources/Patient.json':
+              resolve(require('../../app/scripts/services/FHIR/resources/Patient.json'))
+              break
+          }
+        })
+      }
+      const allMock = (promises) => {
+        return Promise.all(promises)
+      }
+      const deferMock = () => {
+        return {
+          reject: (result) => {
+            // then
+            t.equals(result.isValid, false)
+            t.equals(result.msg, 'Internal Server Error')
+            t.end()
+          }
+        }
+      }
+      const patientApiMock = {
+        save: (body, success, error) => {
+          return error({ statusText: 'Internal Server Error' })
         }
       }
       const stateMock = {
