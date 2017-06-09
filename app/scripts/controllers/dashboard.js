@@ -36,4 +36,8 @@ module.exports = function ($scope, state, $location, $q, FHIR) {
       })
     }
   }, true)
+
+  $scope.$on('$destroy', function () {
+    state.setSearchResults(null)
+  })
 }

@@ -59,10 +59,11 @@ module.exports = function (Api, loadResource, $q, state) {
 
         Api.Patients.match(body, function (bundle) {
           state.setSearchResults(bundle.entry)
-          defer.resolve({ isValid: true, msg: 'Found some potential matches' })
+          state.setSearchType('demographics')
+          defer.resolve({ isValid: true, msg: 'Search Successful' })
         }, function (err) {
           console.error(err)
-          defer.reject(err)
+          defer.reject({ isValid: false, msg: err.statusText || 'Could not connect to server' })
         })
 
         return defer.promise
