@@ -30,10 +30,10 @@ module.exports = function (Api, loadResource, $q, state, FHIR, $location) {
           var fhirObject = FHIR.mapFHIRObject(fhirDoc, scope.state.FormBuilderAddPatient, formFieldsValues)
 
           Api.Patients.save(fhirObject, function (bundle) {
-            defer.resolve({ isValid: true, msg: 'Patient has been created successfully' })
+            defer.resolve({ isValid: true, msg: 'Patient created successfully' })
           }, function (err) {
             console.error(err)
-            defer.reject(err)
+            defer.reject({ isValid: false, msg: err.statusText || 'Failed to create patient' })
           })
         })
 
