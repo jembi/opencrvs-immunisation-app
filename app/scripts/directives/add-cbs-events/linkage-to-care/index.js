@@ -48,7 +48,8 @@ module.exports = function (loadResource, $q, state, FHIR, FormBuilderService) {
         globals: {
           viewModeOnly: false,
           showDraftSubmitButton: false,
-          showReviewButton: false
+          showReviewButton: false,
+          messageTimeout: 5000
         },
         sections: [],
         buttons: {

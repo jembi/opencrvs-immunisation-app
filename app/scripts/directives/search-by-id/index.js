@@ -34,7 +34,9 @@ module.exports = function (Api, loadResource, $q, state) {
       scope.state.FormBuilderSearchById = {
         name: 'searchById',
         displayType: null,
-        globals: {},
+        globals: {
+          messageTimeout: 5000
+        },
         sections: [],
         searchById: {},
         buttons: {

@@ -75,7 +75,8 @@ module.exports = function (Api, loadResource, $q, state) {
         globals: {
           viewModeOnly: false,
           showDraftSubmitButton: false,
-          showReviewButton: false
+          showReviewButton: false,
+          messageTimeout: 5000
         },
         sections: [],
         buttons: {
