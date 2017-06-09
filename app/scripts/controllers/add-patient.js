@@ -8,7 +8,7 @@ module.exports = function ($scope, $location, state) {
       title: 'Add Patient',
       left: [
         {
-          text: 'cancel',
+          text: 'back',
           onClick: function () {
             $location.path('/patients')
             state.setSearchResults(null)
