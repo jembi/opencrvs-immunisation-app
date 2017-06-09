@@ -65,7 +65,6 @@ module.exports = function (Api, loadResource, $q, state, FHIR, $location) {
       promises.push(loadResource.fetch('app/scripts/directives/add-patient-form/forms/basic-info.json'))
       promises.push(loadResource.fetch('app/scripts/directives/add-patient-form/forms/address-info.json'))
       promises.push(loadResource.fetch('app/scripts/directives/add-patient-form/forms/emergency-contact-info.json'))
-      promises.push(loadResource.fetch('app/scripts/directives/add-patient-form/forms/hiv-info.json'))
 
       $q.all(promises).then(function (results) {
         // set partial patient demographics in the form

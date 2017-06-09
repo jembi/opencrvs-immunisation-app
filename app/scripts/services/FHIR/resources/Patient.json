@@ -102,18 +102,6 @@
     {
       "url": "rcbs:profession",
       "valueString": ""
-    }, {
-      "url": "rcbs:firstposivehivtest:date",
-      "valueDate": ""
-    }, {
-      "url": "rcbs:firstposivehivtest:location",
-      "valueString": ""
-    }, {
-      "url": "rcbs:partnerhiv:status",
-      "valueString": ""
-    }, {
-      "url": "rcbs:hiv:status",
-      "valueString": ""
     }
   ]
 }
