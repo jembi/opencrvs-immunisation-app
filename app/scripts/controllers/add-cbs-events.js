@@ -10,7 +10,7 @@ module.exports = function (Api, $scope, $routeParams, $location) {
       title: 'Add CBS Events',
       left: [
         {
-          text: 'cancel',
+          text: 'back',
           onClick: function () {
             $location.path('/events/' + $routeParams.patientId)
           }

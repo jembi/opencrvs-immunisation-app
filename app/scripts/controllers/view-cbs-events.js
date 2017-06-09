@@ -11,7 +11,9 @@ module.exports = function ($scope, $routeParams, events, $location) {
       left: [
         {
           text: 'back',
-          onClick: function () {}
+          onClick: function () {
+            $location.path('/patients')
+          }
         }
       ],
       right: [
