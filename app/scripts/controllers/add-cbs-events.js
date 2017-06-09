@@ -1,6 +1,6 @@
 'use strict'
 
-module.exports = function (Api, $scope, $routeParams) {
+module.exports = function (Api, $scope, $routeParams, $location) {
   var GET_PATIENT_ERROR = 'Error: Failed to find patient with id:' + $routeParams.patientId
 
   $scope.state = {
@@ -11,7 +11,9 @@ module.exports = function (Api, $scope, $routeParams) {
       left: [
         {
           text: 'cancel',
-          onClick: function () { console.log('TODO: Navigate back to view patient page') }
+          onClick: function () {
+            $location.path('/events/' + $routeParams.patientId)
+          }
         }
       ],
       right: []

@@ -1,6 +1,6 @@
 'use strict'
 
-module.exports = function ($scope, $routeParams, events) {
+module.exports = function ($scope, $routeParams, events, $location) {
   console.log('View CBS event controller loaded')
 
   events.test()
@@ -14,7 +14,14 @@ module.exports = function ($scope, $routeParams, events) {
           onClick: function () {}
         }
       ],
-      right: []
+      right: [
+        {
+          text: 'Add Event',
+          onClick: function () {
+            $location.path('/patients/' + $routeParams.patientId + '/add-events')
+          }
+        }
+      ]
     }
   }
 }
