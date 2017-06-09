@@ -153,6 +153,7 @@ module.exports = function (state, $location) {
 
       scope.$watch('results', function (newResults, oldResults) {
         if (newResults) {
+          scope.searchType = state.getSearchType()
           scope.createPatientsList(newResults)
         }
       }, true)
