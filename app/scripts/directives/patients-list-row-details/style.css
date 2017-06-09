@@ -27,6 +27,7 @@
 }
 
 .patientDetailsWhiteframe .details .detailsRow .value {
+  word-break: break-word;
   max-width: 50%;
   font-weight: bold;
 }

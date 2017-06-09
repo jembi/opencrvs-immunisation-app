@@ -5,7 +5,7 @@
     <div class="title">Telecom</div>
     <div class="details" flex>
       <div class="detailsRow" ng-repeat="telecom in patient.telecom track by $index" layout="row">
-        <div class="system">{{telecom.system}}</div>
+        <div class="system">{{telecom.system}}:</div>
         <div class="value">{{telecom.value}}</div>
       </div>
     </div>
@@ -68,7 +68,7 @@
     <div class="details" flex>
       <div class="detailsRow" ng-repeat="extension in patient.extension track by $index" layout="row">
         <div flex ng-repeat="(key, value) in extension" ng-class="{'system': $first , 'value': $last } ">
-          {{value}}
+          {{value}}<span ng-if="$first">:</span>
         </div>
       </div>
     </div>
