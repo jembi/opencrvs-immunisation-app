@@ -210,7 +210,13 @@
       "settings": {
       	"required": true
       },
-      "options": [{"key": "English",  "value": "English"}, {"key": "Afrikaans",  "value": "Afrikaans"}, {"key": "Zulu",  "value": "Zulu"}, {"key": "Xhosa",  "value": "Xhosa"}, {"key": "Other",  "value": "Other"}],
+      "options": [
+				{"key": "Kinyarwanda",  "value": "Kinyarwanda"},
+				{"key": "English",  "value": "English"},
+				{"key": "French",  "value": "French"},
+				{"key": "Swahili",  "value": "Swahili"},
+				{"key": "Other",  "value": "Other"}
+			],
       "FHIRMappings": [{
         "path": "communication[0].language.text",
         "params": null,
