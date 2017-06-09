@@ -12,7 +12,7 @@ module.exports = function (Api, $scope, $routeParams, $location) {
         {
           text: 'back',
           onClick: function () {
-            $location.path('/patients/' + $routeParams.patientId)
+            $location.path('/events/' + $routeParams.patientId)
           }
         }
       ],
