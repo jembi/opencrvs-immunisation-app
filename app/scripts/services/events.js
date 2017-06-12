@@ -11,6 +11,7 @@ module.exports = function () {
     constructSimpleHIVConfirmationObject: (encounter, observation) => {
       return {
         eventType: HIV_CONFIRMATION,
+        eventDate: encounter.period.start,
         data: {
           partnerStatus: observation.extension[0].valueString,
           firstPositiveHivTestLocation: encounter.location[0].location.display,
