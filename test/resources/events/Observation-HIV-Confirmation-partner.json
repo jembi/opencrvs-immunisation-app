@@ -20,10 +20,10 @@
   },
   "code": {
     "coding": {
-      "system": "http://loinc.org",
-      "code": "33660-2"
+      "system": "http://hearth.org/cbs",
+      "code": "partner-hiv-status"
     },
-    "text": "HIV 1 p24 Ag [Presence] in Serum by Neutralization test"
+    "text": "Partners HIV status"
   },
   "effectiveDateTime": "2010-06-30",
   "issued": "2010-07-25",

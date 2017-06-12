@@ -17,9 +17,11 @@ tap.test('.constructSimpleHIVConfirmationObject()', { autoend: true }, (t) => {
     // given
     const Encounter = require('../resources/events/Encounter-HIV-Confirmation.json')
     const Observation = require('../resources/events/Observation-HIV-Confirmation.json')
+    const ObservationPartner = require('../resources/events/Observation-HIV-Confirmation-partner.json')
+    const Observations = [Observation, ObservationPartner]
 
     // when
-    const hivConfimObj = EventsService.constructSimpleHIVConfirmationObject(Encounter, Observation)
+    const hivConfimObj = EventsService.constructSimpleHIVConfirmationObject(Encounter, Observations)
 
     t.ok(hivConfimObj)
 
