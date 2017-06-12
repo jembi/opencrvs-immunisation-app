@@ -1,0 +1,13 @@
+{
+  "resourceType": "Observation",
+  "encounter": {
+    "reference": ""
+  },
+  "valueCodeableConcept": {
+    "coding": {
+      "system": "",
+      "code": ""
+    },
+    "text": ""
+  }
+}
