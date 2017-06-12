@@ -1,0 +1,35 @@
+{
+  "id": "encounter-identifier-hiv-confirmation",
+  "resourceType": "Encounter",
+  "status": "finished",
+  "type": [
+    {
+      "coding": [
+        {
+          "system": "http://hearth.org/event-types",
+          "code": "hiv-confirmation",
+          "display": "HIV Confirmation"
+        }, 
+        {
+          "system": "http://hearth.org/encounter-types",
+          "code": "hiv-visits",
+          "display": "HIV Visit"
+        }
+      ]
+    }
+  ],
+  "period": {
+    "start": "2017-06-01",
+    "end": "2017-06-01"
+  },
+  "location": [
+    {
+      "location": {
+        "display": "Chuk"
+      }
+    }
+  ],
+  "subject": {
+    "reference": "Patient/a7df57e0-4774-11e7-8aa3-6b109d652cc5"
+  }
+}
