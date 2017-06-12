@@ -1,38 +1,34 @@
 {
-  "resourceType": "Observation",
-  "identifier": [
+  "resourceType": "Encounter",
+  "status": "finished",
+  "class": {
+    "system": "http://hl7.org/fhir/v3/ActCode",
+    "code": "HIVAIDS",
+    "display": "HIV-AIDS program"
+  },
+  "type": [
     {
-      "system": "urn:ietf:rfc:3986",
-      "value": "{{urn_uuid}}"
+      "coding": [
+        {
+          "system": "http://hearth.org/cbs/event-types",
+          "code": "cd4-count",
+          "display": "CD4 count CBS event"
+        }
+      ]
     }
   ],
-  "status": "final",
-  "category": {
-    "coding": {
-      "system": "http://hl7.org/fhir/ValueSet/observation-category",
-      "code": "laboratory"
-    },
-    "text": "laboratory"
+  "period": {
+    "start": "",
+    "end": ""
   },
-  "code": {
-    "coding": {
-      "system": "http://loinc.org",
-      "code": "24467-3"
-    },
-    "text": "CD3+​CD4+​ (T4 helper) cells [#/​volume] in Blood"
-  },
+  "location": [
+    {
+      "location": {
+        "display": ""
+      }
+    }
+  ],
   "subject": {
-    "reference": "Patient/xyz"
-  },
-  "effectiveDateTime": "{{testDate}}",
-  "issued": "{{currrentDateTime}}",
-  "performer": [
-    {
-      "reference": "Practitioner/xyz"
-    }
-  ],
-  "valueQuantity": {
-    "value": 500,
-    "unit": "mm3"
+    "reference": ""
   }
 }

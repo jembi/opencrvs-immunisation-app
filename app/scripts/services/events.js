@@ -1,21 +1,9 @@
 'use strict'
 
 module.exports = function () {
-  const isHIVConfirmation = (event) => {
-    return event.resourceType &&
-      event.resourceType === 'Observation' &&
-      event.code &&
-      event.code.coding &&
-      event.code.coding.system &&
-      event.code.coding.system === 'http://loinc.org' &&
-      event.code.coding.code &&
-      event.code.coding.code === '33660-2'
-  }
-
-  const isLinkageToCare = (event) => {
+  const isHIVEncounter = (event) => {
     return event.resourceType &&
       event.resourceType === 'Encounter' &&
-      event.class &&
       event.class &&
       event.class.system &&
       event.class.system === 'http://hl7.org/fhir/v3/ActCode' &&
@@ -23,26 +11,20 @@ module.exports = function () {
       event.class.code === 'HIVAIDS'
   }
 
-  const isCD4Count = (event) => {
-    return event.resourceType &&
-      event.resourceType === 'Observation' &&
-      event.code &&
-      event.code.coding &&
-      event.code.coding.system &&
-      event.code.coding.system === 'http://loinc.org' &&
-      event.code.coding.code &&
-      event.code.coding.code === '24467-3'
-  }
-
-  const isViralLoad = (event) => {
-    return event.resourceType &&
-      event.resourceType === 'Observation' &&
-      event.code &&
-      event.code.coding &&
-      event.code.coding.system &&
-      event.code.coding.system === 'http://loinc.org' &&
-      event.code.coding.code &&
-      event.code.coding.code === '23876-6'
+  const isEventOfType = (eventTypeCode, event) => {
+    return isHIVEncounter(event) &&
+      event.type &&
+      Array.isArray(event.type) &&
+      event.type.some((typeElem) => {
+        return typeElem.coding &&
+          Array.isArray(typeElem.coding) &&
+          typeElem.coding.some((codingElem) => {
+            return codingElem.system &&
+              codingElem.system === 'http://hearth.org/cbs/event-types' &&
+              codingElem.code &&
+              codingElem.code === eventTypeCode
+          })
+      })
   }
 
   return {
@@ -50,20 +32,17 @@ module.exports = function () {
       console.log('Event service test')
     },
 
-    isHIVConfirmation: isHIVConfirmation,
-    isLinkageToCare: isLinkageToCare,
-    isCD4Count: isCD4Count,
-    isViralLoad: isViralLoad,
+    isEventOfType: isEventOfType,
 
     formatEvents: (events) => {
       events.forEach((event) => {
-        if (isHIVConfirmation(event)) {
+        if (isEventOfType('linkage-to-care', event)) {
           // call format function
-        } else if (isLinkageToCare(event)) {
+        } else if (isEventOfType('hiv-confirmation', event)) {
           // call format function
-        } else if (isCD4Count(event)) {
+        } else if (isEventOfType('cd4-count', event)) {
           // call format function
-        } else if (isViralLoad(event)) {
+        } else if (isEventOfType('viral-load', event)) {
           // call format function
         } else {
           console.error('Unknown event type found', event)
