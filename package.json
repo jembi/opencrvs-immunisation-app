@@ -9,6 +9,7 @@
     "test:code": "tap -R nyan --cov test/**/*.js",
     "test:style": "standard --verbose | snazzy",
     "test:debug": "tap --debug -t 0 test/**/*.js",
+    "test:these": "tap -R nyan",
     "cov": "npm run test:code -- --coverage-report=lcov"
   },
   "main": "app/scripts/app.js",

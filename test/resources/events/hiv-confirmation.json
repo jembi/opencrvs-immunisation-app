@@ -1,0 +1,41 @@
+{
+  "resourceType": "Observation",
+  "identifier": [
+    {
+      "system": "urn:ietf:rfc:3986",
+      "value": "{{urn_uuid}}"
+    }
+  ],
+  "status": "final",
+  "category": {
+    "coding": {
+      "system": "http://hl7.org/fhir/ValueSet/observation-category",
+      "code": "laboratory"
+    },
+    "text": "laboratory"
+  },
+  "code": {
+    "coding": {
+      "system": "http://loinc.org",
+      "code": "33660-2"
+    },
+    "text": "HIV 1 p24 Ag [Presence] in Serum by Neutralization test"
+  },
+  "subject": {
+    "reference": "Patient/xyz"
+  },
+  "effectiveDateTime": "{{testDate}}",
+  "issued": "{{currrentDateTime}}",
+  "performer": [
+    {
+      "reference": "Practitioner/xyz"
+    }
+  ],
+  "valueCodeableConcept": {
+    "coding": {
+      "system": "http://loinc.org",
+      "code": "LA6576-8"
+    },
+    "text": "Positive"
+  }
+}

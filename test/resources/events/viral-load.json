@@ -1,0 +1,38 @@
+{
+  "resourceType": "Observation",
+  "identifier": [
+    {
+      "system": "urn:ietf:rfc:3986",
+      "value": "{{urn_uuid}}"
+    }
+  ],
+  "status": "final",
+  "category": {
+    "coding": {
+      "system": "http://hl7.org/fhir/ValueSet/observation-category",
+      "code": "laboratory"
+    },
+    "text": "laboratory"
+  },
+  "code": {
+    "coding": {
+      "system": "http://loinc.org",
+      "code": "23876-6"
+    },
+    "text": "HIV 1 RNA [Units/​volume] (viral load) in Plasma by Probe and signal amplification method"
+  },
+  "subject": {
+    "reference": "Patient/xyz"
+  },
+  "effectiveDateTime": "{{testDate}}",
+  "issued": "{{currrentDateTime}}",
+  "performer": [
+    {
+      "reference": "Practitioner/xyz"
+    }
+  ],
+  "valueQuantity": {
+    "value": 500,
+    "unit": "IU/mL"
+  }
+}

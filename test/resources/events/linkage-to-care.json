@@ -1,0 +1,34 @@
+{
+  "resourceType": "Encounter",
+  "status": "finished",
+  "class": {
+    "system": "http://hl7.org/fhir/v3/ActCode",
+    "code": "HIVAIDS",
+    "display": "HIV-AIDS program"
+  },
+  "type": [
+    {
+      "coding": [
+        {
+          "system": "http://hearth.org/cbs/event-types",
+          "code": "linkage-to-care",
+          "display": "Linkage to Care CBS event"
+        }
+      ]
+    }
+  ],
+  "period": {
+    "start": "",
+    "end": ""
+  },
+  "location": [
+    {
+      "location": {
+        "display": ""
+      }
+    }
+  ],
+  "subject": {
+    "reference": ""
+  }
+}
