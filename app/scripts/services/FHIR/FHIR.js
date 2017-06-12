@@ -94,7 +94,7 @@ module.exports = function () {
   var getOptionDisplayValue = function (options, keyToMatch) {
     var optionVal = null
 
-    options.some(function (option) {
+    options.forEach(function (option) {
       if (option.key === keyToMatch) {
         optionVal = option.value
       }
