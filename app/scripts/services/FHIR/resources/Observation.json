@@ -1,0 +1,47 @@
+{
+  "resourceType": "Observation",
+  "identifier": [
+    {
+      "system": "",
+      "value": ""
+    }
+  ],
+  "status": "final",
+  "category": {
+    "coding": {
+      "system": "http://hl7.org/fhir/ValueSet/observation-category",
+      "code": "laboratory"
+    },
+    "text": "laboratory",
+  },
+  "code": {
+    "coding": {
+      "system": "http://loinc.org",
+      "code": ""
+    },
+    "text": ""
+  },
+  "subject": {
+    "reference": ""
+  },
+  "effectiveDateTime": "",
+  "issued": "",
+  "performer": [
+    {
+      "reference": ""
+    }
+  ],
+  "valueCodeableConcept": {
+    "coding": {
+      "system": "http://loinc.org",
+      "code": ""
+    },
+    "text": ""
+  },
+  "extension": [
+    {
+      "url": "rcbs:partnerStatus:hiv",
+      "valueString": ""
+    }
+  ]
+}
