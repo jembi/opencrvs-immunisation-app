@@ -6,14 +6,9 @@
     {
       "coding": [
         {
-          "system": "http://hearth.org/event-types",
+          "system": "http://hearth.org/cbs/event-types",
           "code": "hiv-confirmation",
           "display": "HIV Confirmation"
-        }, 
-        {
-          "system": "http://hearth.org/encounter-types",
-          "code": "hiv-visits",
-          "display": "HIV Visit"
         }
       ]
     }
