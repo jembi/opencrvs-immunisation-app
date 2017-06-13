@@ -1,18 +1,14 @@
 {
   "resourceType": "Encounter",
   "status": "finished",
-  "class": {
-    "system": "http://hl7.org/fhir/v3/ActCode",
-    "code": "HIVAIDS",
-    "display": "HIV-AIDS program"
-  },
+  "class": "HIVAIDS",
   "type": [
     {
       "coding": [
         {
-          "system": "http://hearth.org/event-types",
-          "code": "",
-          "display": ""
+          "system": "http://hearth.org/cbs/event-types",
+          "code": "viral-load",
+          "display": "Viral load CBS event"
         }
       ]
     }
@@ -28,7 +24,7 @@
       }
     }
   ],
-  "patient": {
+  "subject": {
     "reference": ""
   }
 }

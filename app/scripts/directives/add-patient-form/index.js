@@ -30,10 +30,10 @@ module.exports = function (Api, loadResource, $q, state, FHIR, $location) {
           var fhirObject = FHIR.mapFHIRObject(fhirDoc, scope.state.FormBuilderAddPatient, formFieldsValues)
 
           Api.Patients.save(fhirObject, function (bundle) {
-            defer.resolve({ isValid: true, msg: 'Patient has been created successfully' })
+            defer.resolve({ isValid: true, msg: 'Patient created successfully' })
           }, function (err) {
             console.error(err)
-            defer.reject(err)
+            defer.reject({ isValid: false, msg: err.statusText || 'Could not connect to server' })
           })
         })
 
@@ -47,7 +47,8 @@ module.exports = function (Api, loadResource, $q, state, FHIR, $location) {
         globals: {
           viewModeOnly: false,
           showDraftSubmitButton: false,
-          showReviewButton: false
+          showReviewButton: false,
+          messageTimeout: 5000
         },
         sections: [],
         buttons: {
@@ -65,7 +66,6 @@ module.exports = function (Api, loadResource, $q, state, FHIR, $location) {
       promises.push(loadResource.fetch('app/scripts/directives/add-patient-form/forms/basic-info.json'))
       promises.push(loadResource.fetch('app/scripts/directives/add-patient-form/forms/address-info.json'))
       promises.push(loadResource.fetch('app/scripts/directives/add-patient-form/forms/emergency-contact-info.json'))
-      promises.push(loadResource.fetch('app/scripts/directives/add-patient-form/forms/hiv-info.json'))
 
       $q.all(promises).then(function (results) {
         // set partial patient demographics in the form

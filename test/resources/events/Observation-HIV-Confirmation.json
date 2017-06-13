@@ -1,0 +1,37 @@
+{
+  "id": "observation-identifier-hiv-confirmation",
+  "resourceType": "Observation",
+  "identifier": [
+    {
+      "system": "urn:ietf:rfc:3986",
+      "value": "a7df57e0-4774-11e7-8aa3-6b109d652cc5"
+    }
+  ],
+  "status": "final",
+  "encounter": {
+    "reference": "Encounter/encounter-identifier-hiv-confirmation"
+  },
+  "category": {
+    "coding": {
+      "system": "http://hl7.org/fhir/ValueSet/observation-category",
+      "code": "laboratory"
+    },
+    "text": "laboratory"
+  },
+  "code": {
+    "coding": {
+      "system": "http://loinc.org",
+      "code": "33660-2"
+    },
+    "text": "HIV 1 p24 Ag [Presence] in Serum by Neutralization test"
+  },
+  "effectiveDateTime": "2010-06-30",
+  "issued": "2010-07-25",
+  "valueCodeableConcept": {
+    "coding": {
+      "system": "http://loinc.org",
+      "code": "LA6576-8"
+    },
+    "text": "Positive"
+  }
+}

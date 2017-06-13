@@ -2641,9 +2641,9 @@ lru-cache@^4.0.1:
     pseudomap "^1.0.1"
     yallist "^2.0.0"
 
-md-form-builder@^0.5.3:
-  version "0.5.3"
-  resolved "https://registry.yarnpkg.com/md-form-builder/-/md-form-builder-0.5.3.tgz#163ec1395ad0b1662fbb8dc9f15301a7c522b8b0"
+md-form-builder@^0.5.4:
+  version "0.5.4"
+  resolved "https://registry.yarnpkg.com/md-form-builder/-/md-form-builder-0.5.4.tgz#b260738c9165e3139e2827d327f9b76451798532"
   dependencies:
     angular "^1.5.8"
     angular-animate "^1.5.8"
