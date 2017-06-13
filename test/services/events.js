@@ -17,7 +17,7 @@ tap.tearDown(() => {
 tap.test('Events service', { autoend: true }, (t) => {
   t.test('.sortEventsDesc', { autoend: true }, (t) => {
     t.test('should sort events in descending order', (t) => {
-      const sortedDates = eventService.sortEventsDesc([
+      const sortedDates = Events().sortEventsDesc([
         { expectedOrder: 4, eventDate: new Date('2017-01-13T11:11:59+02:00') },
         { expectedOrder: 0, eventDate: new Date('2017-06-13T11:11:59+02:00') },
         { expectedOrder: 3, eventDate: new Date('2017-03-13T11:11:59+02:00') },
@@ -33,7 +33,7 @@ tap.test('Events service', { autoend: true }, (t) => {
     })
 
     t.test('should work when dates are strings', (t) => {
-      const sortedDates = eventService.sortEventsDesc([
+      const sortedDates = Events().sortEventsDesc([
         { expectedOrder: 4, eventDate: new Date('2017-01-13T11:11:59+02:00') },
         { expectedOrder: 0, eventDate: '2017-06-13T11:11:59+02:00' },
         { expectedOrder: 3, eventDate: new Date('2017-03-13T11:11:59+02:00') },
