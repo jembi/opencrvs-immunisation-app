@@ -10,10 +10,11 @@ module.exports = function () {
     constructSimpleLinkageToCareObject: (encounter) => {
       return {
         eventType: LINKAGE_TO_CARE,
-        encounterDate: encounter.period.start,
-        encounterType: encounter.type[0].coding[0].display,
-        encounterLocation: encounter.location[0].location.display,
-        data: {}
+        eventDate: encounter.period.start,
+        data: {
+          encounterType: encounter.type[0].coding[0].display,
+          encounterLocation: encounter.location[0].location.display
+        }
       }
     }
   }

@@ -15,8 +15,8 @@ tap.test('events .constructSimpleLinkageToCareObject should construct simple lin
   const event = events.constructSimpleLinkageToCareObject(encounter)
 
   t.equals(event.eventType, 'linkage-to-care')
-  t.equals(event.encounterDate, '2017-04-04')
-  t.equals(event.encounterType, 'ANC Visit')
-  t.equals(event.encounterLocation, 'Chuk')
+  t.equals(event.eventDate, '2017-04-04')
+  t.equals(event.data.encounterType, 'ANC Visit')
+  t.equals(event.data.encounterLocation, 'Chuk')
   t.end()
 })
