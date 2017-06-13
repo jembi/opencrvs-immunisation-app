@@ -15,10 +15,10 @@
     "text": "laboratory"
   },
   "code": {
-    "coding": {
+    "coding": [{
       "system": "http://loinc.org",
       "code": ""
-    },
+    }],
     "text": ""
   },
   "subject": {
@@ -37,5 +37,6 @@
       "code": ""
     },
     "text": ""
-  }
+  },
+  "contained": []
 }
