@@ -1,6 +1,22 @@
 <!doctype html>
 <header state="state"></header>
 
-<div>
-  <span>Timeline will go here</span>
+<div md-whiteframe="2">
+  <patients-list ng-if="state.patients" results="state.patients" single-patient="state.singlePatient"></patients-list>
+</div>
+
+<div flex="70" flex-offset="15">
+  <timeline>
+    <timeline-event ng-repeat="event in events">
+      <timeline-badge class="info">
+        <md-icon>event_note</md-icon>
+      </timeline-badge>
+      <timeline-panel class="info">
+        <timeline-heading>
+          <h4>{{event.eventTitle}} - {{event.eventDate}}</h4>
+        </timeline-heading>
+        <p>TODO: Insert directive here to display event data</p>
+      </timeline-panel>
+    </timeline-event>
+  </timeline>
 </div>
