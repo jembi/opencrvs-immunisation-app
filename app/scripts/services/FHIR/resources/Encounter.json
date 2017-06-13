@@ -11,7 +11,7 @@
       "coding": [
         {
           "system": "http://hearth.org/event-types",
-          "code": "NEEDTOSETTHIS",
+          "code": "",
           "display": ""
         }
       ]
@@ -28,7 +28,7 @@
       }
     }
   ],
-  "subject": {
+  "patient": {
     "reference": ""
   }
 }

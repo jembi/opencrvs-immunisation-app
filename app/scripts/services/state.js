@@ -4,6 +4,7 @@ module.exports = function () {
   var searchResults = null
   var eventsArray = []
   var partialPatientDemographics = null
+  var searchType = null
 
   return {
     getSearchResults: function () {
@@ -27,6 +28,12 @@ module.exports = function () {
     },
     getPartialPatientDemographics: function () {
       return partialPatientDemographics
+    },
+    setSearchType: function (type) {
+      searchType = type
+    },
+    getSearchType: function () {
+      return searchType
     }
   }
 }

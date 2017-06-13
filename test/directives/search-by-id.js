@@ -48,13 +48,13 @@ tap.test('.link()', { autoend: true }, (t) => {
         return {
           resolve: (result) => {
             t.equals(result.isValid, true)
-            t.equals(result.msg, 'Success')
+            t.equals(result.msg, 'Search Successful')
             t.end()
           }
         }
       }
       const mock = () => {}
-      const directive = searchById({ Patients: apiMock }, { fetch: fetchMock }, { defer: deferMock }, { setSearchResults: mock })
+      const directive = searchById({ Patients: apiMock }, { fetch: fetchMock }, { defer: deferMock }, { setSearchResults: mock, setSearchType: mock })
       directive.link(scope)
       // when
       scope.state.FormBuilderSearchById.submit.execute()
@@ -108,7 +108,7 @@ tap.test('.link()', { autoend: true }, (t) => {
         return {
           reject: (err) => {
             t.equals(err.isValid, false)
-            t.equals(err.msg, 'Failed to perform search')
+            t.equals(err.msg, 'Could not connect to server')
             t.end()
           }
         }
@@ -143,7 +143,7 @@ tap.test('.link()', { autoend: true }, (t) => {
         }
       }
       const mock = () => {}
-      const directive = searchById({ Patients: apiMock }, { fetch: fetchMock }, { defer: deferMock }, { setSearchResults: mock })
+      const directive = searchById({ Patients: apiMock }, { fetch: fetchMock }, { defer: deferMock }, { setSearchResults: mock, setSearchType: mock })
       directive.link(scope)
       // when
       scope.state.FormBuilderSearchById.submit.execute({ tracNetID: { $dirty: true, $modelValue: '1234' } })
