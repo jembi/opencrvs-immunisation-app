@@ -21,10 +21,11 @@ module.exports = function (Api, loadResource, $q, state) {
         var patientId = formFieldsValues.tracNetID
         Api.Patients.get({ identifier: patientId }, function (result) {
           state.setSearchResults(result.entry)
-          defer.resolve({ isValid: true, msg: 'Success' })
+          state.setSearchType('tracNetId')
+          defer.resolve({ isValid: true, msg: 'Search Successful' })
         }, function (err) {
           console.error(err)
-          defer.reject({ isValid: false, msg: err.statusText || 'Failed to perform search' })
+          defer.reject({ isValid: false, msg: err.statusText || 'Could not connect to server' })
         })
 
         return defer.promise
@@ -34,7 +35,9 @@ module.exports = function (Api, loadResource, $q, state) {
       scope.state.FormBuilderSearchById = {
         name: 'searchById',
         displayType: null,
-        globals: {},
+        globals: {
+          messageTimeout: 5000
+        },
         sections: [],
         searchById: {},
         buttons: {

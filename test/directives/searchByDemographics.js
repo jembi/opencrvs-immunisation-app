@@ -44,7 +44,7 @@ tap.test('.link()', { autoend: true }, (t) => {
           resolve: (result) => {
             // then
             t.equals(result.isValid, true)
-            t.equals(result.msg, 'Found some potential matches')
+            t.equals(result.msg, 'Search Successful')
             t.end()
           }
         }
@@ -54,7 +54,8 @@ tap.test('.link()', { autoend: true }, (t) => {
       }
       const stateMock = {
         setSearchResults: () => {},
-        setPartialPatientDemographics: () => {}
+        setPartialPatientDemographics: () => {},
+        setSearchType: () => {}
       }
       const directive = searchByDemographics({ Patients: { match: matchMock } }, { fetch: fetchMock }, { defer: deferMock }, stateMock)
       directive.link(scope)
@@ -110,7 +111,8 @@ tap.test('.link()', { autoend: true }, (t) => {
       }
       const stateMock = {
         setSearchResults: () => {},
-        setPartialPatientDemographics: () => {}
+        setPartialPatientDemographics: () => {},
+        setSearchType: () => {}
       }
       const directive = searchByDemographics({ Patients: { match: matchMock } }, { fetch: fetchMock }, { defer: deferMock }, stateMock)
       directive.link(scope)
@@ -145,7 +147,8 @@ tap.test('.link()', { autoend: true }, (t) => {
         setSearchResults: (results) => {
           t.deepEquals(results, [ 'one', 'two' ])
         },
-        setPartialPatientDemographics: () => {}
+        setPartialPatientDemographics: () => {},
+        setSearchType: () => {}
       }
       const directive = searchByDemographics({ Patients: { match: matchMock } }, { fetch: fetchMock }, { defer: deferMock }, stateMock)
       directive.link(scope)
@@ -153,7 +156,7 @@ tap.test('.link()', { autoend: true }, (t) => {
       scope.state.FormBuilderDemographics.submit.execute()
     })
 
-    t.test('should reject submit promise if an error occurs', (t) => {
+    t.test('should reject submit promise if an error occurs with statusText Property', (t) => {
       // given
       const scope = {}
       const fetchMock = (file) => {
@@ -164,7 +167,34 @@ tap.test('.link()', { autoend: true }, (t) => {
       const deferMock = () => {
         return {
           reject: (err) => {
-            t.equals(err.message, 'I failed :(')
+            t.equals(err.isValid, false)
+            t.equals(err.msg, 'Internal Server Error')
+            t.end()
+          }
+        }
+      }
+      const matchMock = (body, success, error) => {
+        error({ statusText: 'Internal Server Error' })
+      }
+      const directive = searchByDemographics({ Patients: { match: matchMock } }, { fetch: fetchMock }, { defer: deferMock }, { setPartialPatientDemographics: () => {} })
+      directive.link(scope)
+      // when
+      scope.state.FormBuilderDemographics.submit.execute()
+    })
+
+    t.test('should reject submit promise if an unexpected error occurs', (t) => {
+      // given
+      const scope = {}
+      const fetchMock = (file) => {
+        return new Promise((resolve, reject) => {
+          resolve()
+        })
+      }
+      const deferMock = () => {
+        return {
+          reject: (err) => {
+            t.equals(err.isValid, false)
+            t.equals(err.msg, 'Could not connect to server')
             t.end()
           }
         }

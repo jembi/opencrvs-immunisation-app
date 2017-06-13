@@ -9,6 +9,7 @@
     "test:code": "tap -R nyan --cov test/**/*.js",
     "test:style": "standard --verbose | snazzy",
     "test:debug": "tap --debug -t 0 test/**/*.js",
+    "test:these": "tap -R nyan",
     "cov": "npm run test:code -- --coverage-report=lcov"
   },
   "main": "app/scripts/app.js",
@@ -38,7 +39,7 @@
     "angular-route": "^1.6.4",
     "crypto-js": "^3.1.9-1",
     "js-base64": "^2.1.9",
-    "md-form-builder": "^0.5.3",
+    "md-form-builder": "^0.5.4",
     "moment": "^2.18.1",
     "uuid": "^3.0.1"
   }
