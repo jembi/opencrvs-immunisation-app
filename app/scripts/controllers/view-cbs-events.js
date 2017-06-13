@@ -5,6 +5,10 @@ const moment = require('moment')
 module.exports = function ($scope, $routeParams, events, $location, Api) {
   const GET_PATIENT_ERROR = 'Error: Failed to find patient with id:' + $routeParams.patientId
 
+  $scope.addEvent = () => {
+    $location.path('/patients/' + $routeParams.patientId + '/add-events')
+  }
+
   $scope.state = {
     patients: null,
     singlePatient: true,
@@ -21,9 +25,7 @@ module.exports = function ($scope, $routeParams, events, $location, Api) {
       right: [
         {
           text: 'Add Event',
-          onClick: function () {
-            $location.path('/patients/' + $routeParams.patientId + '/add-events')
-          }
+          onClick: $scope.addEvent
         }
       ]
     }
