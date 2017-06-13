@@ -1,6 +1,6 @@
 'use strict'
 
-module.exports = function () {
+module.exports = function (Api, $q) {
   const HIV_CONFIRMATION = 'hiv-confirmation'
 
   const isHIVEncounter = (event) => {
@@ -29,6 +29,32 @@ module.exports = function () {
   return {
     test: () => {
       console.log('Event service test')
+    },
+
+    getAllEncountersForPatient: (patientId, callback) => {
+      Api.Encounters.get({ patient: patientId }, (res) => {
+        callback(null, res.entry)
+      }, (err) => {
+        callback(err)
+      })
+    },
+
+    addObservationsToEncounters: (encountersArray) => {
+      const defer = $q.defer()
+
+      const promises = []
+      encountersArray.forEach((encounter) => {
+        const resource = Api.Observations.get({'encounter.reference': { $eq: 'Encounter/' + encounter.id }})
+        encounter._observations = resource.$resolved ? resource.entry : []
+        promises.push(resource.$promise)
+      })
+
+      $q.all(promises).then(() => {
+        defer.resolve(encountersArray)
+      }).catch((err) => {
+        console.error(err)
+        defer.reject(err)
+      })
     },
 
     isEventOfType: isEventOfType,
