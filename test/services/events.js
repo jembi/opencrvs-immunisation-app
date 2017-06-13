@@ -17,13 +17,41 @@ tap.tearDown(() => {
 tap.test('.constructSimpleHIVConfirmationObject()', { autoend: true }, (t) => {
   t.test('should construct a simple object for HIV confirmation', (t) => {
     // given
-    const Encounter = require('../resources/events/Encounter-HIV-Confirmation.json')
-    const Observation = require('../resources/events/Observation-HIV-Confirmation.json')
-    const ObservationPartner = require('../resources/events/Observation-HIV-Confirmation-partner.json')
-    const Observations = [Observation, ObservationPartner]
+    const encounter = JSON.parse(JSON.stringify(encounterTemplate))
+    const observation = JSON.parse(JSON.stringify(observationTemplate))
+    const observationPartner = JSON.parse(JSON.stringify(observationTemplate))
+
+    encounter.period.start = '2017-06-01'
+    encounter.type[0].coding[0].code = 'hiv-confirmation'
+    encounter.type[0].coding[0].display = 'HIV Confirmation'
+    encounter.location[0].location.display = 'Chuk'
+
+    observation.effectiveDateTime = '2010-06-30'
+    observation.code.coding[0].system = 'http://loinc.org'
+    observation.code.coding[0].code = '33660-2'
+    observation.code.coding[0].display = 'HIV 1 p24 Ag [Presence] in Serum by Neutralization test'
+    observation.valueCodeableConcept = {
+      coding: {
+        system: 'http://loinc.org',
+        code: 'LA6576-8'
+      },
+      text: 'Positive'
+    }
+
+    observationPartner.effectiveDateTime = '2010-06-30'
+    observationPartner.code.coding[0].system = 'http://hearth.org/cbs'
+    observationPartner.code.coding[0].code = 'partner-hiv-status'
+    observationPartner.code.coding[0].display = 'Partners HIV status'
+    observationPartner.valueCodeableConcept = {
+      coding: {
+        system: 'http://loinc.org',
+        code: 'LA6576-8'
+      },
+      text: 'Positive'
+    }
 
     // when
-    const hivConfimObj = EventsService.constructSimpleHIVConfirmationObject(Encounter, Observations)
+    const hivConfimObj = EventsService.constructSimpleHIVConfirmationObject(encounter, [observation, observationPartner])
 
     t.ok(hivConfimObj)
 
