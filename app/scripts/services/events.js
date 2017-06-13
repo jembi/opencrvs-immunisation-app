@@ -13,7 +13,7 @@ module.exports = function () {
       let firstPositiveHivTestDate, partnerStatus
 
       observations.forEach((obs) => {
-        switch (obs.code.coding.code) {
+        switch (obs.code.coding[0].code) {
           case '33660-2': // HIV test
             firstPositiveHivTestDate = obs.effectiveDateTime
             break
