@@ -46,8 +46,13 @@ tap.test('fetch encounters and return array', (t) => {
     }
   }
 
-  const events = Events(apiMock, qMock)
-  events.getAllEncountersForPatient('12345')
+  const events = Events(apiMock)
+  events.getAllEncountersForPatient('12345', (err, res) => {
+    t.error(err)
+
+    t.equals(res[0].id, '1')
+    t.equals(res[1].id, '2')
+  })
   t.end()
 })
 

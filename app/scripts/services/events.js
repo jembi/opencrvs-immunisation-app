@@ -6,18 +6,12 @@ module.exports = function (Api, $q) {
       console.log('Event service test')
     },
 
-    getAllEncountersForPatient: (patientId) => {
-      const defer = $q.defer()
-
-      const success = (encountersBundle) => {
-        defer.resolve(encountersBundle.entry)
-      }
-      const error = (err) => {
-        console.error(err)
-        defer.reject(err)
-      }
-
-      Api.Encounters.get({ patient: patientId }, success, error)
+    getAllEncountersForPatient: (patientId, callback) => {
+      Api.Encounters.get({ patient: patientId }, (res) => {
+        callback(res.entry)
+      }, (err) => {
+        callback(err)
+      })
     },
 
     addObservationsToEncounters: (encountersArray) => {
