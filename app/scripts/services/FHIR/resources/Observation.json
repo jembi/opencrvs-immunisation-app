@@ -24,6 +24,9 @@
   "subject": {
     "reference": ""
   },
+  "encounter": {
+    "reference": ""
+  },
   "effectiveDateTime": "",
   "issued": "",
   "performer": [
