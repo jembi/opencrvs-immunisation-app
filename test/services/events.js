@@ -12,6 +12,40 @@ tap.tearDown(() => {
   sandbox.restore()
 })
 
+tap.test('Events service', { autoend: true }, (t) => {
+  t.test('should sort events in descending order', (t) => {
+    const sortedDates = EventsService.sortEventsDesc([
+      { expectedOrder: 4, eventDate: new Date('2017-01-13T11:11:59+02:00') },
+      { expectedOrder: 0, eventDate: new Date('2017-06-13T11:11:59+02:00') },
+      { expectedOrder: 3, eventDate: new Date('2017-03-13T11:11:59+02:00') },
+      { expectedOrder: 1, eventDate: new Date('2017-04-14T11:11:59+02:00') },
+      { expectedOrder: 2, eventDate: new Date('2017-04-13T11:11:59+02:00') }
+    ])
+    t.equals(sortedDates[0].expectedOrder, 0)
+    t.equals(sortedDates[1].expectedOrder, 1)
+    t.equals(sortedDates[2].expectedOrder, 2)
+    t.equals(sortedDates[3].expectedOrder, 3)
+    t.equals(sortedDates[4].expectedOrder, 4)
+    t.end()
+  })
+
+  t.test('should work when dates are strings', (t) => {
+    const sortedDates = EventsService.sortEventsDesc([
+      { expectedOrder: 4, eventDate: new Date('2017-01-13T11:11:59+02:00') },
+      { expectedOrder: 0, eventDate: '2017-06-13T11:11:59+02:00' },
+      { expectedOrder: 3, eventDate: new Date('2017-03-13T11:11:59+02:00') },
+      { expectedOrder: 1, eventDate: '2017-04-14T11:11:59+02:00' },
+      { expectedOrder: 2, eventDate: '2017-04-13T11:11:59+02:00' }
+    ])
+    t.equals(sortedDates[0].expectedOrder, 0)
+    t.equals(sortedDates[1].expectedOrder, 1)
+    t.equals(sortedDates[2].expectedOrder, 2)
+    t.equals(sortedDates[3].expectedOrder, 3)
+    t.equals(sortedDates[4].expectedOrder, 4)
+    t.end()
+  })
+})
+
 tap.test('.constructSimpleHIVConfirmationObject()', { autoend: true }, (t) => {
   t.test('should construct a simple ofbject for HIV confirmation', (t) => {
     // given
