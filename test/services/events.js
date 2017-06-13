@@ -3,8 +3,8 @@
 const tap = require('tap')
 
 const Events = require('../../app/scripts/services/events')
-const encounterTemplate = require('../resources/encounter')
-const observationTemplate = require('../resources/observation')
+const encounterTemplate = require('../../app/scripts/services/FHIR/resources/Encounter')
+const observationTemplate = require('../../app/scripts/services/FHIR/resources/Observation')
 
 tap.test('fetch encounters and return array', (t) => {
   // Encounters for Patient/12345
