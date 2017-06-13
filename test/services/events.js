@@ -212,7 +212,7 @@ tap.test('Events service', { autoend: true }, (t) => {
 
   t.test('.getAllEncountersForPatient', { autoend: true }, (t) => {
     t.test('fetch encounters and return array', (t) => {
-    // Encounters for Patient/12345
+      // Encounters for Patient/12345
       const encounter1 = JSON.parse(JSON.stringify(encounterTemplate))
       encounter1.id = '1'
       encounter1.period.start = '2017-01-01'
@@ -252,7 +252,7 @@ tap.test('Events service', { autoend: true }, (t) => {
 
   t.test('.addObservationsToEncounters', { autoend: true }, (t) => {
     t.test('attach observations to encounters and return array', (t) => {
-    // Encounters for Patient/12345
+      // Encounters for Patient/12345
       const encounter1 = JSON.parse(JSON.stringify(encounterTemplate))
       encounter1.id = '1'
       encounter1.period.start = '2017-01-01'
@@ -266,7 +266,7 @@ tap.test('Events service', { autoend: true }, (t) => {
       encounter2.patient.reference = 'Patient/12345'
       encounter2.type[0].coding[0].code = 'first-cd4-count'
 
-    // Observations for Encounters 1 and 2
+      // Observations for Encounters 1 and 2
       const observation1 = JSON.parse(JSON.stringify(observationTemplate))
       observation1.encounter.reference = 'Encounter/1'
       observation1.valueCodeableConcept.coding = { system: 'Test System 1', code: 'Test Code 1' }
