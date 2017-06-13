@@ -65,7 +65,7 @@ tap.test('Events service', { autoend: true }, (t) => {
     })
   })
 
-  tap.test('.constructSimpleHIVConfirmationObject()', { autoend: true }, (t) => {
+  t.test('.constructSimpleHIVConfirmationObject()', { autoend: true }, (t) => {
     t.test('should construct a simple object for HIV confirmation', (t) => {
       // given
       const encounter = JSON.parse(JSON.stringify(encounterTemplate))
@@ -116,7 +116,7 @@ tap.test('Events service', { autoend: true }, (t) => {
     })
   })
 
-  tap.test('.constructSimpleFirstViralLoadObject()', { autoend: true }, (t) => {
+  t.test('.constructSimpleFirstViralLoadObject()', { autoend: true }, (t) => {
     t.test('should construct a simple object for First Viral Load', (t) => {
       // given
       const encounter = JSON.parse(JSON.stringify(encounterTemplate))
