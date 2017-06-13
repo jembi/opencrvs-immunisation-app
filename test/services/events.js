@@ -47,7 +47,7 @@ tap.test('fetch encounters and return array', (t) => {
   }
 
   const events = Events(apiMock, qMock)
-  events.fetchAllEncountersForPatient('12345')
+  events.getAllEncountersForPatient('12345')
   t.end()
 })
 

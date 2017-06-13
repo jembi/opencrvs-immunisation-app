@@ -6,7 +6,7 @@ module.exports = function (Api, $q) {
       console.log('Event service test')
     },
 
-    fetchAllEncountersForPatient: (patientId) => {
+    getAllEncountersForPatient: (patientId) => {
       const defer = $q.defer()
 
       const success = (encountersBundle) => {
