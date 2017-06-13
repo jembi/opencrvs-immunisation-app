@@ -1,0 +1,30 @@
+{
+  "resourceType": "Encounter",
+  "status": "finished",
+  "class": "HIVAIDS",
+  "type": [
+    {
+      "coding": [
+        {
+          "system": "http://hearth.org/cbs/event-types",
+          "code": "viral-load",
+          "display": "Viral load CBS event"
+        }
+      ]
+    }
+  ],
+  "period": {
+    "start": "",
+    "end": ""
+  },
+  "location": [
+    {
+      "location": {
+        "display": ""
+      }
+    }
+  ],
+  "subject": {
+    "reference": ""
+  }
+}
