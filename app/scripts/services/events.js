@@ -28,8 +28,12 @@ module.exports = function (Api, $q) {
   }
 
   return {
-    test: () => {
-      console.log('Event service test')
+    sortEventsDesc: (events) => {
+      return events.sort((a, b) => {
+        if (!(a.eventDate instanceof Date)) { a.eventDate = new Date(a.eventDate) }
+        if (!(b.eventDate instanceof Date)) { b.eventDate = new Date(b.eventDate) }
+        return b.eventDate - a.eventDate
+      })
     },
 
     getAllEncountersForPatient: (patientId, callback) => {
