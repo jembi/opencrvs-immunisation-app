@@ -19,13 +19,11 @@ module.exports = function (Api, $q) {
 
       const promises = []
       encountersArray.forEach((encounter) => {
-        promises.push(Api.Observations.get({'encounter.reference': { $eq: 'Encounter/' + encounter.id }}))
+        encounter._observations = Api.Observations.get({'encounter.reference': { $eq: 'Encounter/' + encounter.id }}).entry
+        promises.push(encounter._observations.$promise)
       })
 
-      $q.all(promises).then((arrayOfObservationBundles) => {
-        encountersArray.forEach((v, k) => {
-          encountersArray[k]._observations = arrayOfObservationBundles[k].entry
-        })
+      $q.all(promises).then(() => {
         defer.resolve(encountersArray)
       }).catch((err) => {
         console.error(err)

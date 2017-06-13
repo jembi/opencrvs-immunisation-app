@@ -23,18 +23,6 @@ tap.test('fetch encounters and return array', (t) => {
 
   const encountersBundle = { entry: [encounter1, encounter2] }
 
-  const qMock = {
-    defer: () => {
-      return {
-        resolve: (result) => {
-          t.equals(result[0].id, '1')
-          t.equals(result[1].id, '2')
-          t.end()
-        }
-      }
-    }
-  }
-
   const apiMock = {
     Encounters: {
       get: (params) => {
@@ -99,9 +87,11 @@ tap.test('attach observations to encounters and return array', (t) => {
             observations = [observation3]
             break
         }
-        return new Promise((resolve, reject) => {
-          resolve({ entry: observations })
-        })
+        const result = {
+          entry: observations,
+          $promise: Promise.resolve()
+        }
+        return result
       }
     }
   }
