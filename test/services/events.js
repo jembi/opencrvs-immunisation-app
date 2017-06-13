@@ -178,7 +178,8 @@ tap.test('Events service', { autoend: true }, (t) => {
             }
             const result = {
               entry: observations,
-              $promise: Promise.resolve()
+              $promise: Promise.resolve(),
+              $resolved: true
             }
             return result
           }
