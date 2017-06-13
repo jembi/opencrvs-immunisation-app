@@ -12,7 +12,7 @@
       "system": "http://hl7.org/fhir/ValueSet/observation-category",
       "code": "laboratory"
     },
-    "text": "laboratory",
+    "text": "laboratory"
   },
   "code": {
     "coding": {
