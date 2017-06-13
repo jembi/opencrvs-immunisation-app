@@ -15,13 +15,16 @@
     "text": "laboratory"
   },
   "code": {
-    "coding": {
+    "coding": [{
       "system": "http://loinc.org",
       "code": ""
-    },
+    }],
     "text": ""
   },
   "subject": {
+    "reference": ""
+  },
+  "encounter": {
     "reference": ""
   },
   "effectiveDateTime": "",
@@ -37,5 +40,6 @@
       "code": ""
     },
     "text": ""
-  }
+  },
+  "contained": []
 }

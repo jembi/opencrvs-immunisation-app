@@ -1,7 +1,8 @@
 'use strict'
 
-module.exports = function () {
+module.exports = function (Api, $q) {
   const HIV_CONFIRMATION = 'hiv-confirmation'
+  const FIRST_VIRAL_LOAD = 'first-viral-load'
   const LINKAGE_TO_CARE = 'linkage-to-care'
 
   const isHIVEncounter = (event) => {
@@ -28,8 +29,38 @@ module.exports = function () {
   }
 
   return {
-    test: () => {
-      console.log('Event service test')
+    sortEventsDesc: (events) => {
+      return events.sort((a, b) => {
+        if (!(a.eventDate instanceof Date)) { a.eventDate = new Date(a.eventDate) }
+        if (!(b.eventDate instanceof Date)) { b.eventDate = new Date(b.eventDate) }
+        return b.eventDate - a.eventDate
+      })
+    },
+
+    getAllEncountersForPatient: (patientId, callback) => {
+      Api.Encounters.get({ patient: patientId }, (res) => {
+        callback(null, res.entry)
+      }, (err) => {
+        callback(err)
+      })
+    },
+
+    addObservationsToEncounters: (encountersArray) => {
+      const defer = $q.defer()
+
+      const promises = []
+      encountersArray.forEach((encounter) => {
+        const resource = Api.Observations.get({'encounter.reference': { $eq: 'Encounter/' + encounter.id }})
+        encounter._observations = resource.$resolved ? resource.entry : []
+        promises.push(resource.$promise)
+      })
+
+      $q.all(promises).then(() => {
+        defer.resolve(encountersArray)
+      }).catch((err) => {
+        console.error(err)
+        defer.reject(err)
+      })
     },
 
     isEventOfType: isEventOfType,
@@ -55,7 +86,7 @@ module.exports = function () {
       let firstPositiveHivTestDate, partnerStatus
 
       observations.forEach((obs) => {
-        switch (obs.code.coding.code) {
+        switch (obs.code.coding[0].code) {
           case '33660-2': // HIV test
             firstPositiveHivTestDate = obs.effectiveDateTime
             break
@@ -72,6 +103,29 @@ module.exports = function () {
           partnerStatus: partnerStatus,
           firstPositiveHivTestLocation: encounter.location[0].location.display,
           firstPositiveHivTestDate: firstPositiveHivTestDate
+        }
+      }
+    },
+
+    constructSimpleFirstViralLoadObject: (encounter, observations) => {
+      let providerName
+
+      observations[0].contained.forEach((containedResource) => {
+        if (containedResource.id === observations[0].performer[0].reference.substring(1)) {
+          const providerGivenName = containedResource.name[0].given.join(' ')
+          const providerFamilyName = containedResource.name[0].family.join(' ')
+          providerName = providerGivenName + ' ' + providerFamilyName
+        }
+      })
+
+      return {
+        eventType: FIRST_VIRAL_LOAD,
+        eventDate: encounter.period.start,
+        data: {
+          firstViralLoadDate: observations[0].effectiveDateTime,
+          firstViralLoadResults: observations[0].valueQuantity,
+          firstViralLoadLocation: encounter.location[0].location.display,
+          firstViralLoadProvider: providerName
         }
       }
     },
