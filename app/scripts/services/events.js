@@ -5,10 +5,7 @@ module.exports = function () {
     return event.resourceType &&
       event.resourceType === 'Encounter' &&
       event.class &&
-      event.class.system &&
-      event.class.system === 'http://hl7.org/fhir/v3/ActCode' &&
-      event.class.code &&
-      event.class.code === 'HIVAIDS'
+      event.class === 'HIVAIDS'
   }
 
   const isEventOfType = (eventTypeCode, event) => {

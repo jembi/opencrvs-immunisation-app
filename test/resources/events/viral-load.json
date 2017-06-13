@@ -1,11 +1,7 @@
 {
   "resourceType": "Encounter",
   "status": "finished",
-  "class": {
-    "system": "http://hl7.org/fhir/v3/ActCode",
-    "code": "HIVAIDS",
-    "display": "HIV-AIDS program"
-  },
+  "class": "HIVAIDS",
   "type": [
     {
       "coding": [
