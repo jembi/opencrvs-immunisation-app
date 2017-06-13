@@ -1,6 +1,6 @@
 'use strict'
 
-module.exports = function ($scope, $routeParams, events, $location) {
+module.exports = function ($scope, $routeParams, events, $location, Api) {
   console.log('View CBS event controller loaded')
 
   events.test()
@@ -26,4 +26,19 @@ module.exports = function ($scope, $routeParams, events, $location) {
       ]
     }
   }
+
+  // API test
+  var patientId = $routeParams.patientId
+
+  Api.Encounters.get({patient: patientId}, function (result) {
+    console.log(result)
+  }, function (err) {
+    console.error(err)
+  })
+
+  Api.Observations.get({'subject.reference': { $eq: 'Patient/' + patientId }}, function (result) {
+    console.log(result)
+  }, function (err) {
+    console.error(err)
+  })
 }
