@@ -1,12 +1,11 @@
 'use strict'
 
-const moment = require('moment')
-
 module.exports = function ($scope, $routeParams, events, $location, Api) {
-  const GET_PATIENT_ERROR = 'Error: Failed to find patient with id:' + $routeParams.patientId
+  const patientId = $routeParams.patientId
+  const GET_PATIENT_ERROR = 'Error: Failed to find patient with id:' + patientId
 
   $scope.addEvent = () => {
-    $location.path('/patients/' + $routeParams.patientId + '/add-events')
+    $location.path('/patients/' + patientId + '/add-events')
   }
 
   $scope.state = {
@@ -43,10 +42,8 @@ module.exports = function ($scope, $routeParams, events, $location, Api) {
     console.error(err)
   }
 
-  Api.Patients.get({ id: $routeParams.patientId }, success, error)
+  Api.Patients.get({ id: patientId }, success, error)
 
-
-  var patientId = $routeParams.patientId
   // get all encounters for a given patient ID
   events.getAllEncountersForPatient(patientId, (err, result) => {
     if (err) {
