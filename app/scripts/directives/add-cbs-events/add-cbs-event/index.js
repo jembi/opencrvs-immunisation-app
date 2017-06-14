@@ -28,7 +28,6 @@ module.exports = function (loadResource, $q, state, FHIR, FormBuilderService) {
             // add the Subject Refernce - Patient/Reference
             fhirObject.subject.reference = scope.patient.resourceType + '/' + scope.patient.id
 
-            // TODO: Add document to state bundle for submission
             state.pushToEventsArray(fhirObject)
 
             scope.resetForm(scope.state[scope.cbsEvent.formName], form)
