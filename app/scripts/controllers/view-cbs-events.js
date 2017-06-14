@@ -59,8 +59,8 @@ module.exports = function ($scope, $routeParams, events, $location, Api) {
 
     let promise = events.addObservationsToEncounters(result)
     promise.then(results => {
-      const eventsDesc = events.sortEventsDesc(results)
-      $scope.events = events.formatEvents(eventsDesc)
+      const formattedEvents = events.formatEvents(results)
+      $scope.events = events.sortEventsDesc(formattedEvents)
     })
   })
 }
