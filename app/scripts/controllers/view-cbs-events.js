@@ -45,25 +45,18 @@ module.exports = function ($scope, $routeParams, events, $location, Api) {
 
   Api.Patients.get({ id: $routeParams.patientId }, success, error)
 
-  $scope.events = [
-    {
-      eventTitle: 'CD4 count',
-      eventDate: moment(new Date()).fromNow()
-    },
-    {
-      eventTitle: 'Viral Load',
-      eventDate: moment(new Date('2017-06-10')).fromNow()
-    },
-    {
-      eventTitle: 'Linkage to care',
-      eventDate: moment(new Date('2017-06-03')).fromNow()
-    },
-    {
-      eventTitle: 'HIV Confirmation',
-      eventDate: moment(new Date('2017-06-01')).fromNow()
-    }
-  ]
 
-  // TODO
-  // $scope.event = events.getAllEvents($routeParams.patientId) // or similar
+  var patientId = $routeParams.patientId
+  // get all encounters for a given patient ID
+  events.getAllEncountersForPatient(patientId, (err, result) => {
+    if (err) {
+      console.err(err)
+      // TODO: some UI message informing the user of the error
+    }
+
+    let promise = events.addObservationsToEncounters(result)
+    promise.then(results => {
+      $scope.events = events.formatEvents(results)
+    })
+  })
 }
