@@ -133,14 +133,11 @@ module.exports = function (Api, $q) {
       let eventType, encounterType
 
       encounter.type.forEach((type) => {
-        switch (type.coding[0].code) {
-          case 'linkage-to-care':
+        switch (type.coding[0].system) {
+          case 'http://hearth.org/event-types':
             eventType = type.coding[0].display
             break
-          case 'anc-visit':
-          case 'hiv-visit':
-          case 'pmtct-visit':
-          case 'other':
+          case 'http://hearth.org/encounter-types':
             encounterType = type.coding[0].display
             break
         }

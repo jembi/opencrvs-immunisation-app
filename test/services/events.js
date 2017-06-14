@@ -331,8 +331,8 @@ tap.test('Events service', { autoend: true }, (t) => {
       const encounter = JSON.parse(JSON.stringify(encounterTemplate))
       encounter.period.start = '2017-04-04'
       encounter.type = [
-        { coding: [ { code: 'linkage-to-care', display: 'Linkage to Care' } ] },
-        { coding: [ { code: 'anc-visit', display: 'ANC Visit' } ] }
+        { coding: [ { system: 'http://hearth.org/event-types', display: 'Linkage to Care' } ] },
+        { coding: [ { system: 'http://hearth.org/encounter-types', display: 'ANC Visit' } ] }
       ]
       encounter.location[0].location.display = 'Chuk'
       const event = events.constructSimpleLinkageToCareObject(encounter)
