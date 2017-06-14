@@ -34,13 +34,14 @@ module.exports = function (Api, $scope, $routeParams, $location) {
 
   Api.Patients.get({ id: $routeParams.patientId }, success, error)
 
-  $scope.eventTitles = [
-    'HIV confirmation',
-    'Linkage to care',
-    'First CD4 count',
-    'First viral load'
+  $scope.cbsEvents = [
+    { code: 'linkage-to-care', display: 'Linkage to care', formName: 'FormBuilderAddCbsEventLinkageToCare' },
+    { code: 'hiv-confirmation', display: 'HIV confirmation', formName: 'FormBuilderAddCbsEventHIVConfirmation' },
+    { code: 'cd4-count', display: 'CD4 count', formName: 'FormBuilderAddCbsEventCD4Count' },
+    { code: 'first-viral-load', display: 'First viral load', formName: 'FormBuilderAddCbsEventFirstViralLoad' }
   ]
 
+  $scope.selectedEvent = $scope.cbsEvents[0]
   $scope.setSelectedEvent = function (selectedEvent) {
     $scope.selectedEvent = selectedEvent
   }
