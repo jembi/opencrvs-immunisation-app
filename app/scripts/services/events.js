@@ -166,11 +166,11 @@ module.exports = function (Api, $q) {
         if (isEventOfType('linkage-to-care', event.resource)) {
           event = constructSimpleLinkageToCareObject(event.resource, event._observations)
         } else if (isEventOfType('hiv-confirmation', event.resource)) {
-          constructSimpleHIVConfirmationObject(event.resource, event._observations)
+          event = constructSimpleHIVConfirmationObject(event.resource, event._observations)
         } else if (isEventOfType('cd4-count', event.resource)) {
-          constructSimpleCD4CountObject(event.resource, event._observations)
+          event = constructSimpleCD4CountObject(event.resource, event._observations)
         } else if (isEventOfType('viral-load', event.resource)) {
-          constructSimpleFirstViralLoadObject(event.resource, event._observations)
+          event = constructSimpleFirstViralLoadObject(event.resource, event._observations)
         } else {
           console.error('Unknown event type found', event)
         }
