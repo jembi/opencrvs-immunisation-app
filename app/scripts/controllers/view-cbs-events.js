@@ -1,8 +1,14 @@
 'use strict'
 
+const moment = require('moment')
+
 module.exports = function ($scope, $routeParams, events, $location, Api) {
   const patientId = $routeParams.patientId
   const GET_PATIENT_ERROR = 'Error: Failed to find patient with id:' + patientId
+
+  $scope.fromNowDate = (date) => {
+    return moment(date).fromNow()
+  }
 
   $scope.addEvent = () => {
     $location.path('/patients/' + patientId + '/add-events')
