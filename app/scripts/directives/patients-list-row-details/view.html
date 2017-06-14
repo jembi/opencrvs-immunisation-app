@@ -67,7 +67,7 @@
     <div class="title">Extensions</div>
     <div class="details" flex>
       <div class="detailsRow" ng-repeat="extension in patient.extension track by $index" layout="row">
-        <div flex ng-repeat="(key, value) in extension" ng-class="{'system': $first , 'value': $last } ">
+        <div ng-repeat="(key, value) in extension" ng-class="{'system': $first , 'value': $last } ">
           {{value}}<span ng-if="$first">:</span>
         </div>
       </div>

@@ -23,8 +23,8 @@ module.exports = function (loadResource, $q, state, FHIR, FormBuilderService) {
         loadResource.fetch('app/scripts/services/FHIR/resources/Encounter.json').then(function (fhirDoc) {
           var fhirObject = FHIR.mapFHIRObject(fhirDoc, scope.state.FormBuilderAddCbsEventLinkageToCare, formFieldsValues)
 
-          // add the Subject Refernce - Patient/Reference
-          fhirObject.subject.reference = scope.patient.resourceType + '/' + scope.patient.id
+          // add the patient Reference - Patient/Reference
+          fhirObject.patient.reference = scope.patient.resourceType + '/' + scope.patient.id
 
           // TODO: Add document to state bundle for submission
           state.pushToEventsArray(fhirObject)
