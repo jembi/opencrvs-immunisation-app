@@ -11,7 +11,7 @@ const FormBuilderLinkageToCare = require('../../app/scripts/directives/add-cbs-e
 
 const sandbox = sinon.sandbox.create()
 sandbox.stub(console, 'error').callsFake((msg) => {})
-// sandbox.stub(console, 'log').callsFake((msg) => {})
+sandbox.stub(console, 'log').callsFake((msg) => {})
 tap.tearDown(() => {
   sandbox.restore()
 })
