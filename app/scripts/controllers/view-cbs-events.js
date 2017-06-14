@@ -47,20 +47,45 @@ module.exports = function ($scope, $routeParams, events, $location, Api) {
 
   $scope.events = [
     {
+      eventType: 'cd4-count',
       eventTitle: 'CD4 count',
-      eventDate: moment(new Date()).fromNow()
+      eventDate: moment(new Date()).fromNow(),
+      data: {
+        cd4CountDate: new Date().toLocaleString(),
+        cd4CountLocation: 'Test Clinic',
+        cd4CountResult: '285',
+        cd4CountProvider: 'Dr Smith'
+      }
     },
     {
+      eventType: 'viral-load',
       eventTitle: 'Viral Load',
-      eventDate: moment(new Date('2017-06-10')).fromNow()
+      eventDate: moment(new Date('2017-06-10')).fromNow(),
+      data: {
+        firstViralLoadDate: new Date().toLocaleString(),
+        firstViralLoadResults: '400',
+        firstViralLoadLocation: 'Test Clinic',
+        firstViralLoadProvider: 'Dr Smith'
+      }
     },
     {
+      eventType: 'linkage-to-care',
       eventTitle: 'Linkage to care',
-      eventDate: moment(new Date('2017-06-03')).fromNow()
+      eventDate: moment(new Date('2017-06-03')).fromNow(),
+      data: {
+        encounterType: 'PMTCT',
+        encounterLocation: 'Test Clinic'
+      }
     },
     {
-      eventTitle: 'HIV Confirmation',
-      eventDate: moment(new Date('2017-06-01')).fromNow()
+      eventType: 'hiv-confirmation',
+      eventTitle: 'HIV positive confirmation',
+      eventDate: moment(new Date('2017-06-01')).fromNow(),
+      data: {
+        partnerStatus: 'Negative',
+        firstPositiveHivTestLocation: 'Test Clinic',
+        firstPositiveHivTestDate: new Date().toLocaleString()
+      }
     }
   ]
 

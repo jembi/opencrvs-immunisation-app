@@ -195,7 +195,7 @@ tap.test('Events service', { autoend: true }, (t) => {
 
       t.ok(highViralLoadObj)
 
-      t.equal(highViralLoadObj.eventType, 'first-viral-load', 'should have a eventType of "first-viral-load"')
+      t.equal(highViralLoadObj.eventType, 'viral-load', 'should have a eventType of "viral-load"')
       t.equal(highViralLoadObj.eventDate, '2017-04-04', 'should have a eventDate of "2017-04-04"')
       t.equal(highViralLoadObj.data.firstViralLoadDate, '2017-04-04', 'should have a data.firstViralLoadDate of "2017-04-04"')
       t.deepEquals(highViralLoadObj.data.firstViralLoadResults, observation.valueQuantity, 'should have a data.firstViralLoadResults object with results')

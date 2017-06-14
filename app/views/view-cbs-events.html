@@ -17,15 +17,15 @@
         <md-button class="md-primary md-raised" ng-click="addEvent()">Add new event</md-button>
       </timeline-panel>
     </timeline-event>
-    <timeline-event ng-repeat="event in events">
+    <timeline-event ng-repeat="eventItem in events">
       <timeline-badge class="info">
         <md-icon>event_note</md-icon>
       </timeline-badge>
       <timeline-panel flex class="info">
         <timeline-heading>
-          <h4>{{event.eventTitle}} - {{event.eventDate}}</h4>
+          <h4>{{eventItem.eventTitle}} - {{eventItem.eventDate}}</h4>
         </timeline-heading>
-        <p>TODO: Insert directive here to display event data</p>
+        <display-event-data event="eventItem"></display-event-data>
       </timeline-panel>
     </timeline-event>
   </timeline>

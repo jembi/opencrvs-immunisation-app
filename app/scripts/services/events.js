@@ -2,7 +2,7 @@
 
 module.exports = function (Api, $q) {
   const HIV_CONFIRMATION = 'hiv-confirmation'
-  const FIRST_VIRAL_LOAD = 'first-viral-load'
+  const VIRAL_LOAD = 'viral-load'
   const CD4_COUNT = 'cd4-count'
 
   const isHIVEncounter = (event) => {
@@ -97,6 +97,7 @@ module.exports = function (Api, $q) {
       })
 
       return {
+        eventTitle: 'HIV positive confirmation',
         eventType: HIV_CONFIRMATION,
         eventDate: encounter.period.start,
         data: {
@@ -119,7 +120,8 @@ module.exports = function (Api, $q) {
       })
 
       return {
-        eventType: FIRST_VIRAL_LOAD,
+        eventTitle: 'Viral load',
+        eventType: VIRAL_LOAD,
         eventDate: encounter.period.start,
         data: {
           firstViralLoadDate: observations[0].effectiveDateTime,
@@ -145,6 +147,7 @@ module.exports = function (Api, $q) {
       })
 
       return {
+        eventTitle: 'Linkage to care',
         eventType: eventType,
         eventDate: encounter.period.start,
         data: {
@@ -166,6 +169,7 @@ module.exports = function (Api, $q) {
       })
 
       return {
+        eventTitle: 'CD4 count',
         eventType: CD4_COUNT,
         eventDate: encounter.period.start,
         data: {
