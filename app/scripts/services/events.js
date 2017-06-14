@@ -3,7 +3,6 @@
 module.exports = function (Api, $q) {
   const HIV_CONFIRMATION = 'hiv-confirmation'
   const FIRST_VIRAL_LOAD = 'first-viral-load'
-  const LINKAGE_TO_CARE = 'linkage-to-care'
 
   const isHIVEncounter = (event) => {
     return event.resourceType &&
@@ -131,11 +130,27 @@ module.exports = function (Api, $q) {
     },
 
     constructSimpleLinkageToCareObject: (encounter) => {
+      let eventType, encounterType
+
+      encounter.type.forEach((type) => {
+        switch (type.coding[0].code) {
+          case 'linkage-to-care':
+            eventType = type.coding[0].display
+            break
+          case 'anc-visit':
+          case 'hiv-visit':
+          case 'pmtct-visit':
+          case 'other':
+            encounterType = type.coding[0].display
+            break
+        }
+      })
+
       return {
-        eventType: LINKAGE_TO_CARE,
+        eventType: eventType,
         eventDate: encounter.period.start,
         data: {
-          encounterType: encounter.type[0].coding[0].display,
+          encounterType: encounterType,
           encounterLocation: encounter.location[0].location.display
         }
       }

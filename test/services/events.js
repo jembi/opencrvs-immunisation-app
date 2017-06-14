@@ -330,11 +330,14 @@ tap.test('Events service', { autoend: true }, (t) => {
 
       const encounter = JSON.parse(JSON.stringify(encounterTemplate))
       encounter.period.start = '2017-04-04'
-      encounter.type[0].coding[0].display = 'ANC Visit'
+      encounter.type = [
+        { coding: [ { code: 'linkage-to-care', display: 'Linkage to Care' } ] },
+        { coding: [ { code: 'anc-visit', display: 'ANC Visit' } ] }
+      ]
       encounter.location[0].location.display = 'Chuk'
       const event = events.constructSimpleLinkageToCareObject(encounter)
 
-      t.equals(event.eventType, 'linkage-to-care')
+      t.equals(event.eventType, 'Linkage to Care')
       t.equals(event.eventDate, '2017-04-04')
       t.equals(event.data.encounterType, 'ANC Visit')
       t.equals(event.data.encounterLocation, 'Chuk')
