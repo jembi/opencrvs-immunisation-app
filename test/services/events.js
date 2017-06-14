@@ -324,13 +324,12 @@ tap.test('Events service', { autoend: true }, (t) => {
     })
   })
 
-  t.test('.constructSimpleLinkageToCareObject', { autoend: true }, (t) => {
-    t.test('should construct simple linkage to care object', (t) => {
+  t.test('.constructSimpleCD4CountObject', { autoend: true }, (t) => {
+    t.test('should construct simple cd4 count object', (t) => {
       const events = Events()
 
       const encounter = JSON.parse(JSON.stringify(encounterTemplate))
       encounter.period.start = '2017-04-04'
-      encounter.type[0].coding[0].display = 'ANC Visit'
       encounter.location[0].location.display = 'Chuk'
 
       const observation = JSON.parse(JSON.stringify(observationTemplate))
