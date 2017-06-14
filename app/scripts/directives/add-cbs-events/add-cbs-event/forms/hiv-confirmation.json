@@ -1,14 +1,14 @@
 {
   "key": "sec1",
   "name": "Section 1",
-  "displayName": "Linkage to Care",
+  "displayName": "HIV Confirmation",
   "flex": "100",
   "rows": [{
       "name": "Row 1",
       "layout": "row",
       "fields": [{
         "type": "date",
-        "flex": "33",
+        "flex": "30",
         "name": "encounterDate",
         "title": "Date of First HIV Positive test",
         "settings": {
@@ -35,7 +35,7 @@
       },
       {
         "type": "select",
-        "flex": "33",
+        "flex": "30",
         "name": "encounterLocation",
         "title": "Location of First HIV Positive test",
         "settings": {
@@ -78,7 +78,7 @@
       }, 
       {
         "type": "select",
-        "flex": "33",
+        "flex": "20",
         "name": "hivStatus",
         "title": "HIV Status",
         "settings": {
@@ -108,7 +108,7 @@
         "value": null
       }, {
         "type": "select",
-        "flex": "33",
+        "flex": "20",
         "name": "partnerHivStatus",
         "title": "Partner HIV Status",
         "settings": {
