@@ -127,6 +127,30 @@ module.exports = function (Api, $q) {
           firstViralLoadProvider: providerName
         }
       }
+    },
+
+    constructSimpleLinkageToCareObject: (encounter) => {
+      let eventType, encounterType
+
+      encounter.type.forEach((type) => {
+        switch (type.coding[0].system) {
+          case 'http://hearth.org/event-types':
+            eventType = type.coding[0].display
+            break
+          case 'http://hearth.org/encounter-types':
+            encounterType = type.coding[0].display
+            break
+        }
+      })
+
+      return {
+        eventType: eventType,
+        eventDate: encounter.period.start,
+        data: {
+          encounterType: encounterType,
+          encounterLocation: encounter.location[0].location.display
+        }
+      }
     }
   }
 }
