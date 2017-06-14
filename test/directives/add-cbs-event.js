@@ -6,8 +6,8 @@ const sinon = require('sinon')
 const FHIR = require('../../app/scripts/services/FHIR/FHIR.js')()
 const FormBuilderService = require('../../app/scripts/services/FormBuilder.js')()
 const stateService = require('../../app/scripts/services/state.js')()
-const linkageToCare = require('../../app/scripts/directives/add-cbs-events/linkage-to-care')
-const FormBuilderLinkageToCare = require('../../app/scripts/directives/add-cbs-events/linkage-to-care/form.json')
+const linkageToCare = require('../../app/scripts/directives/add-cbs-events/add-cbs-event')
+const FormBuilderLinkageToCare = require('../../app/scripts/directives/add-cbs-events/add-cbs-event/forms/linkage-to-care.json')
 
 const sandbox = sinon.sandbox.create()
 sandbox.stub(console, 'error').callsFake((msg) => {})
@@ -19,9 +19,12 @@ tap.tearDown(() => {
 tap.test('.link()', { autoend: true }, (t) => {
   t.test('should set state.FormBuilderAddCbsEventLinkageToCare on scope and fetch correct form file', (t) => {
     // given
-    const scope = {}
+    const scope = {
+      $watch: (args, callback) => { callback() },
+      cbsEvent: { code: 'linkage-to-care', display: 'Linkage to care', formName: 'FormBuilderAddCbsEventLinkageToCare' }
+    }
     const fetchMock = (file) => {
-      t.equals(file, 'app/scripts/directives/add-cbs-events/linkage-to-care/form.json')
+      t.equals(file, 'app/scripts/directives/add-cbs-events/add-cbs-event/forms/linkage-to-care.json')
       return new Promise((resolve, reject) => {
         resolve()
       })
@@ -39,6 +42,8 @@ tap.test('.submit()', { autoend: true }, (t) => {
   t.test('should resolve with a success message', (t) => {
     // given
     const scope = {
+      $watch: (args, callback) => { callback() },
+      cbsEvent: { code: 'linkage-to-care', display: 'Linkage to care', formName: 'FormBuilderAddCbsEventLinkageToCare' },
       patient: {
         resourceType: 'Patient',
         id: 'AAAAA-BBBB-CCCC-DDDDD-EEEEEE'
@@ -63,7 +68,7 @@ tap.test('.submit()', { autoend: true }, (t) => {
     const fetchMock = (file) => {
       return new Promise((resolve, reject) => {
         if (file === 'app/scripts/directives/add-cbs-events/linkage-to-care/form.json') {
-          const FormBuilderLinkageToCare = require('../../app/scripts/directives/add-cbs-events/linkage-to-care/form.json')
+          const FormBuilderLinkageToCare = require('../../app/scripts/directives/add-cbs-events/add-cbs-event/forms/linkage-to-care.json')
           resolve(FormBuilderLinkageToCare)
         } else if (file === 'app/scripts/services/FHIR/resources/Encounter.json') {
           const FHIREncounterResource = require('../../app/scripts/services/FHIR/resources/Encounter.json')

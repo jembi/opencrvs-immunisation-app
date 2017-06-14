@@ -5,7 +5,7 @@
     <md-toolbar layout="row" layout-align="center center">
       <span>Select an event to add</span>
     </md-toolbar>
-    <md-button ng-repeat="title in eventTitles" ng-click="selectEventClick(title)" ng-class="{'md-primary': title == selectedEvent}" class="md-button md-raised" flex="100">{{ title }}</md-button>
+    <md-button ng-repeat="cbsEvent in cbsEvents" ng-click="selectEventClick(cbsEvent)" ng-class="{'md-primary': cbsEvent.code == selectedEvent.code}" class="md-button md-raised" flex="100">{{ cbsEvent.display }}</md-button>
 
     <div class="eventsSubmitControl" layout="column" ng-if="submitControl">
       <div layout="row" layout-align="center center" class="eventsSubmitControlMsg" ng-class="{'error': submitControl.status == 'error' , 'success': submitControl.status == 'success' , 'processing': submitControl.status == 'processing' , 'info': submitControl.status == 'info'}">
