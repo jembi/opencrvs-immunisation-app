@@ -169,7 +169,7 @@ module.exports = function (Api, $q) {
           event = constructSimpleLinkageToCareObject(event.resource, event._observations)
         } else if (isEventOfType(HIV_CONFIRMATION, event.resource)) {
           event = constructSimpleHIVConfirmationObject(event.resource, event._observations)
-        } else if (isEventOfType(CD$_COUNT, event.resource)) {
+        } else if (isEventOfType(CD4_COUNT, event.resource)) {
           event = constructSimpleCD4CountObject(event.resource, event._observations)
         } else if (isEventOfType(VIRAL_LOAD, event.resource)) {
           event = constructSimpleFirstViralLoadObject(event.resource, event._observations)
