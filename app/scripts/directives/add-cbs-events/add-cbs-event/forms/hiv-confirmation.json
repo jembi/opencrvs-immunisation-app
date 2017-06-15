@@ -17,14 +17,26 @@
           "required": true
         },
         "FHIRMappings": [{
-          "main": { "resourceType": "Encounter" },
+          "resourceKey": "main",
           "path": "period.start",
           "params": null,
           "valueType": "formValue",
           "value": "encounterDate"
         }, {
-          "main": { "resourceType": "Encounter" },
+          "resourceKey": "main",
           "path": "period.end",
+          "params": null,
+          "valueType": "formValue",
+          "value": "encounterDate"
+        }, {
+          "resourceKey": "partnerHIVObs",
+          "path": "effectiveDateTime",
+          "params": null,
+          "valueType": "formValue",
+          "value": "encounterDate"
+        }, {
+          "resourceKey": "subjectHIVObs",
+          "path": "effectiveDateTime",
           "params": null,
           "valueType": "formValue",
           "value": "encounterDate"
@@ -47,7 +59,7 @@
           "searchOptions": true
         },
         "FHIRMappings": [{
-          "main": { "resourceType": "Encounter" },
+          "resourceKey": "main",
           "path": "location[0].location.display",
           "params": null,
           "valueType": "formValue",
@@ -90,8 +102,20 @@
           "required": true
         },
         "FHIRMappings": [{
-          "subjectHIVObs": { "resourceType": "Observation" },
-          "path": "code.coding[0].display",
+          "resourceKey": "subjectHIVObs",
+          "path": "encounter.reference",
+          "params": null,
+          "valueType": "staticValue",
+          "value": "@main"
+        }, {
+          "resourceKey": "subjectHIVObs",
+          "path": "code.coding[0].code",
+          "params": null,
+          "valueType": "staticValue",
+          "value": "33660-2"
+        }, {
+          "resourceKey": "subjectHIVObs",
+          "path": "valueCodeableConcept.text",
           "params": null,
           "valueType": "formValue",
           "value": "hivStatus"
@@ -121,11 +145,23 @@
           "required": true
         },
         "FHIRMappings": [{
-          "partnerHIVObs": { "resourceType": "Observation" },
-          "path": "code.coding[0].display",
+          "resourceKey": "partnerHIVObs",
+          "path": "valueCodeableConcept.text",
           "params": null,
           "valueType": "formValue",
           "value": "partnerHivStatus"
+        }, {
+          "resourceKey": "partnerHIVObs",
+          "path": "encounter.reference",
+          "params": null,
+          "valueType": "staticValue",
+          "value": "@main"
+        }, {
+          "resourceKey": "partnerHIVObs",
+          "path": "code.coding[0].code",
+          "params": null,
+          "valueType": "staticValue",
+          "value": "partner-hiv-status"
         }],
         "skipLogic": {
           "func": {},

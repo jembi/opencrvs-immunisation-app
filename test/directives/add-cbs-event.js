@@ -180,20 +180,24 @@ tap.test('.submit()', { autoend: true }, (t) => {
           t.equals(result.msg, 'Event has been successfully added for submission')
 
           // Encounter
-          t.equals(stateService.pushToEventsArray.getCall(0).args[0].resourceType, 'Encounter')
-          t.equals(stateService.pushToEventsArray.getCall(0).args[0].period.start, '2017-01-01')
-          t.equals(stateService.pushToEventsArray.getCall(0).args[0].location[0].location.display, 'Chuk')
-          t.equals(stateService.pushToEventsArray.getCall(0).args[0].subject.reference, 'Patient/AAAAA-BBBB-CCCC-DDDDD-GG')
+          t.equals(stateService.pushToEventsArray.getCall(0).args[0].main.resourceType, 'Encounter')
+          t.equals(stateService.pushToEventsArray.getCall(0).args[0].main.period.start, '2017-01-01')
+          t.equals(stateService.pushToEventsArray.getCall(0).args[0].main.location[0].location.display, 'Chuk')
+          t.equals(stateService.pushToEventsArray.getCall(0).args[0].main.subject.reference, 'Patient/AAAAA-BBBB-CCCC-DDDDD-GG')
 
           // Patient HIV Observation
-          t.equals(stateService.pushToEventsArray.getCall(1).args[0].resourceType, 'Observation')
-          t.equals(stateService.pushToEventsArray.getCall(1).args[0].encounter.reference, 'Encounter/xxxx')
-          t.equals(stateService.pushToEventsArray.getCall(1).args[0].code.coding[0].display, 'Positive')
+          t.equals(stateService.pushToEventsArray.getCall(0).args[0].subjectHIVObs.resourceType, 'Observation')
+          t.equals(stateService.pushToEventsArray.getCall(0).args[0].subjectHIVObs.encounter.reference, '@main')
+          t.equals(stateService.pushToEventsArray.getCall(0).args[0].subjectHIVObs.code.coding[0].code, '33660-2')
+          t.equals(stateService.pushToEventsArray.getCall(0).args[0].subjectHIVObs.valueCodeableConcept.text, 'Positive')
+          t.equals(stateService.pushToEventsArray.getCall(0).args[0].subjectHIVObs.effectiveDateTime, '2017-01-01')
 
           // Partner HIV Observation
-          t.equals(stateService.pushToEventsArray.getCall(2).args[0].resourceType, 'Observation')
-          t.equals(stateService.pushToEventsArray.getCall(2).args[0].encounter.reference, 'Encounter/xxxx')
-          t.equals(stateService.pushToEventsArray.getCall(2).args[0].code.coding[0].display, 'Negative')
+          t.equals(stateService.pushToEventsArray.getCall(0).args[0].partnerHIVObs.resourceType, 'Observation')
+          t.equals(stateService.pushToEventsArray.getCall(0).args[0].partnerHIVObs.encounter.reference, '@main')
+          t.equals(stateService.pushToEventsArray.getCall(0).args[0].partnerHIVObs.code.coding[0].code, 'partner-hiv-status')
+          t.equals(stateService.pushToEventsArray.getCall(0).args[0].partnerHIVObs.valueCodeableConcept.text, 'Negative')
+          t.equals(stateService.pushToEventsArray.getCall(0).args[0].partnerHIVObs.effectiveDateTime, '2017-01-01')
 
           testSandbox.restore()
           t.end()
