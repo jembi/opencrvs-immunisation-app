@@ -184,19 +184,20 @@ tap.test('.submit()', { autoend: true }, (t) => {
           t.equals(result.msg, 'Event has been successfully added for submission')
 
           // Encounter resource
-          t.equals(stateService.pushToEventsArray.getCall(0).args[0].resourceType, 'Encounter')
-          t.equals(stateService.pushToEventsArray.getCall(0).args[0].period.start, '2017-02-02')
-          t.equals(stateService.pushToEventsArray.getCall(0).args[0].location[0].location.display, 'Kacyiru Police Hospital')
-          t.equals(stateService.pushToEventsArray.getCall(0).args[0].patient.reference, 'Patient/AAAAA-BBBB-CCCC-DDDDD-AA')
+          t.equals(stateService.pushToEventsArray.getCall(0).args[0].main.resourceType, 'Encounter')
+          t.equals(stateService.pushToEventsArray.getCall(0).args[0].main.period.start, '2017-02-02')
+          t.equals(stateService.pushToEventsArray.getCall(0).args[0].main.location[0].location.display, 'Kacyiru Police Hospital')
+          t.equals(stateService.pushToEventsArray.getCall(0).args[0].main.patient.reference, 'Patient/AAAAA-BBBB-CCCC-DDDDD-AA')
 
           // Observation resource
-          t.equals(stateService.pushToEventsArray.getCall(1).args[0].resourceType, 'Observation')
-          t.equals(stateService.pushToEventsArray.getCall(1).args[0].effectiveDateTime, '2017-02-02')
-          t.equals(stateService.pushToEventsArray.getCall(1).args[0].contained[0].name[0].given[0], 'GivenNamey')
-          t.equals(stateService.pushToEventsArray.getCall(1).args[0].contained[0].name[0].family[0], 'FamilyNamey')
-          t.equals(stateService.pushToEventsArray.getCall(1).args[0].contained[0].id, '#provider-1')
-          t.equals(stateService.pushToEventsArray.getCall(1).args[0].performer[0].reference, 'provider-1')
-          t.equals(stateService.pushToEventsArray.getCall(1).args[0].valueQuantity, 'Example Viral Load Result')
+          t.equals(stateService.pushToEventsArray.getCall(0).args[0].viralLoadObs.resourceType, 'Observation')
+          t.equals(stateService.pushToEventsArray.getCall(0).args[0].viralLoadObs.encounter.reference, '@main')
+          t.equals(stateService.pushToEventsArray.getCall(0).args[0].viralLoadObs.effectiveDateTime, '2017-02-02')
+          t.equals(stateService.pushToEventsArray.getCall(0).args[0].viralLoadObs.contained[0].name[0].given[0], 'GivenNamey')
+          t.equals(stateService.pushToEventsArray.getCall(0).args[0].viralLoadObs.contained[0].name[0].family[0], 'FamilyNamey')
+          t.equals(stateService.pushToEventsArray.getCall(0).args[0].viralLoadObs.contained[0].id, '#provider-1')
+          t.equals(stateService.pushToEventsArray.getCall(0).args[0].viralLoadObs.performer[0].reference, 'provider-1')
+          t.equals(stateService.pushToEventsArray.getCall(0).args[0].viralLoadObs.valueQuantity, 'Example Viral Load Result')
 
           testSandbox.restore()
           t.end()

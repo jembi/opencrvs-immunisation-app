@@ -17,19 +17,19 @@
           "required": true
         },
         "FHIRMappings": [{
-          "main": { "resourceType": "Encounter" },
+          "resourceKey": "main",
           "path": "period.start",
           "params": null,
           "valueType": "formValue",
           "value": "encounterDate"
         }, {
-          "main": { "resourceType": "Encounter" },
+          "resourceKey": "main",
           "path": "period.end",
           "params": null,
           "valueType": "formValue",
           "value": "encounterDate"
         }, {
-          "viralLoadObs": { "resourceType": "Observation" },
+          "resourceKey": "viralLoadObs",
           "path": "effectiveDateTime",
           "params": null,
           "valueType": "formValue",
@@ -53,7 +53,7 @@
           "searchOptions": true
         },
         "FHIRMappings": [{
-          "main": { "resourceType": "Encounter" },
+          "resourceKey": "main",
           "path": "location[0].location.display",
           "params": null,
           "valueType": "formValue",
@@ -95,19 +95,25 @@
           "required": true
         },
         "FHIRMappings": [{
-          "viralLoadObs": { "resourceType": "Observation" },
+          "resourceKey": "viralLoadObs",
+          "path": "encounter.reference",
+          "params": null,
+          "valueType": "staticValue",
+          "value": "@main"
+        }, {
+          "resourceKey": "viralLoadObs",
           "path": "contained[0].name[0].given[0]",
           "params": null,
           "valueType": "formValue",
           "value": "providerGivenName"
         }, {
-          "viralLoadObs": { "resourceType": "Observation" },
+          "resourceKey": "viralLoadObs",
           "path": "contained[0].id",
           "params": null,
           "valueType": "staticValue",
           "value": "#provider-1"
         }, {
-          "viralLoadObs": { "resourceType": "Observation" },
+          "resourceKey": "viralLoadObs",
           "path": "performer[0].reference",
           "params": null,
           "valueType": "staticValue",
@@ -129,7 +135,7 @@
           "required": true
         },
         "FHIRMappings": [{
-          "viralLoadObs": { "resourceType": "Observation" },
+          "resourceKey": "viralLoadObs",
           "path": "contained[0].name[0].family[0]",
           "params": null,
           "valueType": "formValue",
@@ -151,7 +157,7 @@
           "required": true
         },
         "FHIRMappings": [{
-          "viralLoadObs": { "resourceType": "Observation" },
+          "resourceKey": "viralLoadObs",
           "path": "valueQuantity",
           "params": null,
           "valueType": "formValue",
