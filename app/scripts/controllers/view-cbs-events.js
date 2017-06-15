@@ -3,10 +3,15 @@
 const moment = require('moment')
 
 module.exports = function ($scope, $routeParams, events, $location, Api) {
-  const GET_PATIENT_ERROR = 'Error: Failed to find patient with id:' + $routeParams.patientId
+  const patientId = $routeParams.patientId
+  const GET_PATIENT_ERROR = 'Error: Failed to find patient with id:' + patientId
+
+  $scope.fromNowDate = (date) => {
+    return moment(date).fromNow()
+  }
 
   $scope.addEvent = () => {
-    $location.path('/patients/' + $routeParams.patientId + '/add-events')
+    $location.path('/patients/' + patientId + '/add-events')
   }
 
   $scope.state = {
@@ -43,52 +48,19 @@ module.exports = function ($scope, $routeParams, events, $location, Api) {
     console.error(err)
   }
 
-  Api.Patients.get({ id: $routeParams.patientId }, success, error)
+  Api.Patients.get({ id: patientId }, success, error)
 
-  $scope.events = [
-    {
-      eventType: 'cd4-count',
-      eventTitle: 'CD4 count',
-      eventDate: moment(new Date()).fromNow(),
-      data: {
-        cd4CountDate: new Date().toLocaleString(),
-        cd4CountLocation: 'Test Clinic',
-        cd4CountResult: '285',
-        cd4CountProvider: 'Dr Smith'
-      }
-    },
-    {
-      eventType: 'viral-load',
-      eventTitle: 'Viral Load',
-      eventDate: moment(new Date('2017-06-10')).fromNow(),
-      data: {
-        firstViralLoadDate: new Date().toLocaleString(),
-        firstViralLoadResults: '400',
-        firstViralLoadLocation: 'Test Clinic',
-        firstViralLoadProvider: 'Dr Smith'
-      }
-    },
-    {
-      eventType: 'linkage-to-care',
-      eventTitle: 'Linkage to care',
-      eventDate: moment(new Date('2017-06-03')).fromNow(),
-      data: {
-        encounterType: 'PMTCT',
-        encounterLocation: 'Test Clinic'
-      }
-    },
-    {
-      eventType: 'hiv-confirmation',
-      eventTitle: 'HIV positive confirmation',
-      eventDate: moment(new Date('2017-06-01')).fromNow(),
-      data: {
-        partnerStatus: 'Negative',
-        firstPositiveHivTestLocation: 'Test Clinic',
-        firstPositiveHivTestDate: new Date().toLocaleString()
-      }
+  // get all encounters for a given patient ID
+  events.getAllEncountersForPatient(patientId, (err, result) => {
+    if (err) {
+      console.err(err)
+      // TODO: some UI message informing the user of the error
     }
-  ]
 
-  // TODO
-  // $scope.event = events.getAllEvents($routeParams.patientId) // or similar
+    let promise = events.addObservationsToEncounters(result)
+    promise.then(results => {
+      const formattedEvents = events.formatEvents(results)
+      $scope.events = events.sortEventsDesc(formattedEvents)
+    })
+  })
 }
