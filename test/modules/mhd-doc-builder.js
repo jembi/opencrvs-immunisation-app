@@ -46,6 +46,56 @@ tap.test('MHD document builder', { autoend: true }, (t) => {
       t.ok(docBundle.entry[2].fullUrl)
       t.end()
     })
+
+    t.test('should resolve references in events dictionary', (t) => {
+      const docBundle = mhdBuilder.createDocumentBundle('Patient/test', [
+        {
+          main: {
+            test1: 'event1'
+          },
+          obs1: {
+            test2: 'event2',
+            encounter: {
+              reference: '@main'
+            }
+          },
+          obs2: {
+            test2: 'event2',
+            encounter: {
+              reference: '@main'
+            },
+            nested: {
+              observation: {
+                reference: '@obs1'
+              }
+            }
+          }
+        }
+      ])
+      t.equals(docBundle.entry.length, 4) // composition then two events
+      t.equals(docBundle.entry[2].resource.encounter.reference, docBundle.entry[1].fullUrl)
+      t.equals(docBundle.entry[3].resource.encounter.reference, docBundle.entry[1].fullUrl)
+      t.equals(docBundle.entry[3].resource.nested.observation.reference, docBundle.entry[2].fullUrl)
+      t.end()
+    })
+
+    t.test('should resolve references in events dictionary', (t) => {
+      try {
+        mhdBuilder.createDocumentBundle('Patient/test', [
+          {
+            main: {
+              test1: 'event1',
+              encounter: {
+                reference: '@unknown'
+              }
+            }
+          }
+        ])
+      } catch (err) {
+        t.ok(err)
+        t.end()
+      }
+    })
   })
 
   t.test('.createBinaryResource', { autoend: true }, (t) => {

@@ -19,6 +19,43 @@ exports.returnResourceAsEntry = (resource, isTransaction) => {
   return entry
 }
 
+/**
+ * resolveReferences - Resolve the references in the passed in resource.
+ * Any references starting with @<resourceKey> will be replaces by the fullUrl
+ * for that entry.
+ *
+ * @param  {Object} resource the resource to resolve referenced in
+ * @param  {String} eventDict the dictionary of events to lookup fullUrls from
+ */
+const resolveReferences = (resource, eventDict) => {
+  for (let prop in resource) {
+    if (prop === 'reference' && resource[prop].charAt(0) === '@') {
+      const resourceKey = resource[prop].substring(1)
+      if (!eventDict[resourceKey]) {
+        throw new Error('Unknown reference to event dictionary encountered')
+      }
+      resource[prop] = eventDict[resourceKey].fullUrl
+    } else if (typeof resource[prop] === 'object') {
+      if (Array.isArray(resource[prop])) {
+        resource[prop].forEach((element) => {
+          resolveReferences(element, eventDict)
+        })
+      } else {
+        resolveReferences(resource[prop], eventDict)
+      }
+    }
+  }
+}
+
+/**
+ * Resolve all references in the event dictionary's resource entries
+ */
+const resolveAllReferences = (eventDict) => {
+  Object.keys(eventDict).forEach((resourceKey) => {
+    resolveReferences(eventDict[resourceKey].resource, eventDict)
+  })
+}
+
 exports.createDocumentBundle = (patientRef, eventDictionaries, currentTime) => {
   const doc = {
     resourceType: 'Bundle',
@@ -68,7 +105,7 @@ exports.createDocumentBundle = (patientRef, eventDictionaries, currentTime) => {
       eventDict[resourceKey] = exports.returnResourceAsEntry(eventDict[resourceKey])
     })
 
-    // resolveReferences(eventDict)
+    resolveAllReferences(eventDict)
 
     Object.keys(eventDict).forEach((resourceKey) => {
       const resourceEntry = eventDict[resourceKey]
