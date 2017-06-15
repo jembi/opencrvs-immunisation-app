@@ -6,7 +6,7 @@
     "build": "browserify --entry app/scripts/app.js -t [ babelify --presets [ es2015 ] ] | uglifyjs --output dist/bundle.js",
     "start": "npm run build && light-server -s . -p 7777 -w \"app/**, index.html # npm run build # reload\"",
     "test": "npm run -s test:code && npm run -s test:style",
-    "test:code": "tap -R nyan --cov test/**/*.js",
+    "test:code": "tap -R nyan -b test/**/*.js",
     "test:style": "standard --verbose | snazzy",
     "test:debug": "tap --debug -t 0 test/**/*.js",
     "cov": "npm run test:code -- --coverage-report=lcov"

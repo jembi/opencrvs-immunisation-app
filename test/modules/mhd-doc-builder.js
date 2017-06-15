@@ -24,7 +24,7 @@ tap.test('MHD document builder', { autoend: true }, (t) => {
 
   t.test('.createDocumentBundle', { autoend: true }, (t) => {
     t.test('should produce a document bundle', (t) => {
-      const docBundle = mhdBuilder.createDocumentBundle('Patient/test', [ { test: 'event' } ])
+      const docBundle = mhdBuilder.createDocumentBundle('Patient/test', [ { main: { test: 'event' } } ])
       t.ok(docBundle)
       t.equals(docBundle.resourceType, 'Bundle')
       t.equals(docBundle.type, 'document')
@@ -32,13 +32,13 @@ tap.test('MHD document builder', { autoend: true }, (t) => {
     })
 
     t.test('should produce a composition resource in the first entry position', (t) => {
-      const docBundle = mhdBuilder.createDocumentBundle('Patient/test', [ { test: 'event' } ])
+      const docBundle = mhdBuilder.createDocumentBundle('Patient/test', [ { main: { test: 'event' } } ])
       t.equals(docBundle.entry[0].resource.resourceType, 'Composition')
       t.end()
     })
 
     t.test('should add entries for each event', (t) => {
-      const docBundle = mhdBuilder.createDocumentBundle('Patient/test', [ { test1: 'event1' }, { test2: 'event2' } ])
+      const docBundle = mhdBuilder.createDocumentBundle('Patient/test', [ { main: { test1: 'event1' } }, { main: { test2: 'event2' } } ])
       t.equals(docBundle.entry.length, 3) // composition then two events
       t.same(docBundle.entry[1].resource, { test1: 'event1' })
       t.ok(docBundle.entry[1].fullUrl)

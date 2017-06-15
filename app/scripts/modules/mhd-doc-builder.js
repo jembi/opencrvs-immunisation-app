@@ -19,7 +19,7 @@ exports.returnResourceAsEntry = (resource, isTransaction) => {
   return entry
 }
 
-exports.createDocumentBundle = (patientRef, eventResources, currentTime) => {
+exports.createDocumentBundle = (patientRef, eventDictionaries, currentTime) => {
   const doc = {
     resourceType: 'Bundle',
     type: 'document',
@@ -62,21 +62,32 @@ exports.createDocumentBundle = (patientRef, eventResources, currentTime) => {
     }
   }
 
-  const eventResourceEntries = []
-  eventResources.forEach((event) => {
-    const eventEntry = exports.returnResourceAsEntry(event)
-    composition.resource.section.entry.push({
-      title: 'CBS Event',
-      text: 'CBS Event',
-      reference: eventEntry.fullUrl
+  const resourceEntries = []
+  eventDictionaries.forEach((eventDict) => {
+    Object.keys(eventDict).forEach((resourceKey) => {
+      eventDict[resourceKey] = exports.returnResourceAsEntry(eventDict[resourceKey])
     })
-    eventResourceEntries.push(eventEntry)
+
+    // resolveReferences(eventDict)
+
+    Object.keys(eventDict).forEach((resourceKey) => {
+      const resourceEntry = eventDict[resourceKey]
+      resourceEntries.push(resourceEntry)
+
+      if (resourceKey === 'main') {
+        composition.resource.section.entry.push({
+          title: 'CBS Event',
+          text: 'CBS Event',
+          reference: resourceEntry.fullUrl
+        })
+      }
+    })
   })
 
   // composition must be at first position
   doc.entry[0] = composition
 
-  doc.entry.push(...eventResourceEntries)
+  doc.entry.push(...resourceEntries)
 
   return doc
 }
@@ -158,10 +169,20 @@ exports.createDocumentManifest = (patientRef, docRefEntry, currentTime) => {
   }
 }
 
-exports.buildMHDTransaction = (patientRef, events) => {
+/**
+ * @param {String} patientRef - a FHIR patient reference
+ * @param {Object} eventDictionaries - a dictionary where each key-value pair is
+ * a resourceKey and a resource object. The main resource that all the others link
+ * to must use a key of 'main', otherwise the keys can be anything you choose. If
+ * the resources have references that you need to preserve, you can use the
+ * key of the resource prefixed by an '@' to reference it in the resource object
+ * itself. e.g. { ..., encounter: { reference: '@main' } }
+ * @return {Object} a transaction bundle containing all events
+ */
+exports.buildMHDTransaction = (patientRef, eventDictionaries) => {
   const currentTime = new Date()
 
-  const docBundle = exports.createDocumentBundle(patientRef, events, currentTime)
+  const docBundle = exports.createDocumentBundle(patientRef, eventDictionaries, currentTime)
 
   const binaryResource = exports.createBinaryResource(docBundle)
   const binaryResourceEntry = exports.returnResourceAsEntry(binaryResource, true)

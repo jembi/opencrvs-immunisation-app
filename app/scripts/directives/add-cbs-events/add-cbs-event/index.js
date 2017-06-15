@@ -22,13 +22,31 @@ module.exports = function (loadResource, $q, state, FHIR, FormBuilderService) {
             }
           }
 
-          loadResource.fetch('app/scripts/services/FHIR/resources/Encounter.json').then(function (fhirDoc) {
-            var fhirObject = FHIR.mapFHIRObject(fhirDoc, scope.state[scope.cbsEvent.formName], formFieldsValues)
+          loadResource.fetch('app/scripts/services/FHIR/resources/Encounter.json').then(function (encounterTemplate) {
+            let resourceTemplateDict
+            switch (scope.cbsEvent.code) {
+              case 'linkage-to-care':
+                resourceTemplateDict = { main: encounterTemplate }
+                break
+              case 'hiv-confirmation':
+                resourceTemplateDict = { main: encounterTemplate } // TODO
+                break
+              case 'cd4-count':
+                resourceTemplateDict = { main: encounterTemplate } // TODO
+                break
+              case 'first-viral-load':
+                resourceTemplateDict = { main: encounterTemplate } // TODO
+                break
+              default:
+                console.error(`Unknown event code ${scope.cbsEvent.code}`)
+            }
 
-            // add the Subject Refernce - Patient/Reference
-            fhirObject.subject.reference = scope.patient.resourceType + '/' + scope.patient.id
+            const resourceDict = FHIR.mapFHIRResources(resourceTemplateDict, scope.state[scope.cbsEvent.formName], formFieldsValues)
 
-            state.pushToEventsArray(fhirObject)
+            // add the Subject Reference - Patient/Reference
+            resourceDict.main.subject.reference = scope.patient.resourceType + '/' + scope.patient.id
+
+            state.pushToEventsArray(resourceDict)
 
             scope.resetForm(scope.state[scope.cbsEvent.formName], form)
 

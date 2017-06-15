@@ -16,22 +16,25 @@
       	"required": true
       },
       "FHIRMappings": [{
+				"resourceKey": "main",
         "path": "identifier[0].system",
         "params": null,
         "valueType": "staticValue",
         "value": "rcbs:tracnet:id"
       }, {
+				"resourceKey": "main",
         "path": "identifier[0].assigner.display",
         "params": null,
         "valueType": "staticValue",
         "value": "TracNet ID"
       }, {
+				"resourceKey": "main",
       	"path": "identifier[0].value",
         "params": null,
       	"valueType": "formValue",
       	"value": "TracNetID"
       }]
-    }, { 
+    }, {
       "type": "select",
   		"flex": "10",
   		"name": "title",
@@ -41,12 +44,13 @@
       },
       "options": [{"key": "Mr",  "value": "Mr"}, {"key": "Mrs",  "value": "Mrs"}, {"key": "Ms",  "value": "Ms"}, {"key": "Dr",  "value": "Dr"}],
       "FHIRMappings": [{
+				"resourceKey": "main",
         "path": "name[0].prefix[0]",
         "params": null,
         "valueType": "formValue",
         "value": "title"
       }]
-    }, { 
+    }, {
       "type": "input",
   		"flex": "20",
   		"name": "firstname",
@@ -55,12 +59,13 @@
       	"required": true
       },
       "FHIRMappings": [{
+				"resourceKey": "main",
         "path": "name[0].given[0]",
         "params": null,
         "valueType": "formValue",
         "value": "firstname"
       }]
-    }, { 
+    }, {
       "type": "input",
   		"flex": "20",
   		"name": "middleNames",
@@ -69,12 +74,13 @@
       	"required": false
       },
       "FHIRMappings": [{
+				"resourceKey": "main",
         "path": "name[0].given[1]",
         "params": null,
         "valueType": "formValue",
         "value": "middleNames"
       }]
-    }, { 
+    }, {
       "type": "input",
   		"flex": "30",
   		"name": "lastName",
@@ -83,12 +89,13 @@
       	"required": true
       },
       "FHIRMappings": [{
+				"resourceKey": "main",
         "path": "name[0].family[0]",
         "params": "",
         "valueType": "formValue",
         "value": "lastName"
       }]
-    }, { 
+    }, {
       "type": "select",
   		"flex": "20",
   		"name": "contactNumberType",
@@ -98,12 +105,13 @@
       },
       "options": [{"key": "Mobile",  "value": "Mobile"}, {"key": "Home",  "value": "Home"}, {"key": "Other",  "value": "Other"}],
       "FHIRMappings": [{
+				"resourceKey": "main",
         "path": "telecom.use",
         "params": "telecom.system=phone",
         "valueType": "formValue",
         "value": "contactNumberType"
       }]
-    }, { 
+    }, {
       "type": "input",
   		"flex": "30",
   		"name": "contactNumber",
@@ -112,12 +120,13 @@
       	"required": true
       },
       "FHIRMappings": [{
+				"resourceKey": "main",
         "path": "telecom.value",
         "params": "telecom.system=phone",
         "valueType": "formValue",
         "value": "contactNumber"
       }]
-    }, { 
+    }, {
       "type": "select",
   		"flex": "20",
   		"name": "gender",
@@ -144,12 +153,13 @@
 				 }
 			],
       "FHIRMappings": [{
+				"resourceKey": "main",
         "path": "gender",
         "params": null,
       	"valueType": "formValue",
       	"value": "gender"
       }]
-    }, { 
+    }, {
       "type": "date",
   		"flex": "30",
   		"name": "dob",
@@ -160,13 +170,14 @@
       	"required": true
       },
       "FHIRMappings": [{
+				"resourceKey": "main",
         "path": "birthDate",
         "params": null,
       	"valueType": "formValue",
       	"value": "dob"
       }],
 			"value": null
-    }, { 
+    }, {
       "type": "email",
   		"flex": "50",
   		"name": "emailAddress",
@@ -175,6 +186,7 @@
       	"required": true
       },
       "FHIRMappings": [{
+				"resourceKey": "main",
         "path": "telecom.value",
         "params": "telecom.system=email",
         "valueType": "formValue",
@@ -197,12 +209,13 @@
         "required": true
       },
       "FHIRMappings": [{
+				"resourceKey": "main",
         "path": "extension.valueString",
         "params": "extension.url=rcbs:profession",
         "valueType": "formValue",
         "value": "profession"
       }]
-    }, { 
+    }, {
       "type": "select",
   		"flex": "20",
   		"name": "preferredLanguage",
@@ -218,12 +231,13 @@
 				{"key": "Other",  "value": "Other"}
 			],
       "FHIRMappings": [{
+				"resourceKey": "main",
         "path": "communication[0].language.text",
         "params": null,
         "valueType": "formValue",
         "value": "preferredLanguage"
       }]
-    }, { 
+    }, {
       "type": "input",
   		"flex": "20",
   		"name": "preferredLanguageOther",
@@ -240,6 +254,7 @@
       	}]
       },
       "FHIRMappings": [{
+				"resourceKey": "main",
         "path": "communication[0].language.text",
         "params": null,
         "valueType": "formValue",

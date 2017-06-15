@@ -13,7 +13,6 @@ module.exports = function () {
     setSearchResults: function (results) {
       searchResults = results
     },
-    // Mocked out state service function for events
     getEventsArray: function () {
       return eventsArray
     },
