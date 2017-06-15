@@ -97,9 +97,6 @@ tap.test('.submit()', { autoend: true }, (t) => {
         } else if (file === 'app/scripts/services/FHIR/resources/Encounter.json') {
           const FHIREncounterResource = require('../../app/scripts/services/FHIR/resources/Encounter.json')
           resolve(FHIREncounterResource)
-        } else if (file === 'app/scripts/services/FHIR/resources/Observation.json') {
-          const FHIRObservationResource = require('../../app/scripts/services/FHIR/resources/Observation.json')
-          resolve(FHIRObservationResource)
         }
       })
     }
@@ -172,6 +169,9 @@ tap.test('.submit()', { autoend: true }, (t) => {
         } else if (file === 'app/scripts/services/FHIR/resources/Encounter.json') {
           const FHIREncounterResource = require('../../app/scripts/services/FHIR/resources/Encounter.json')
           resolve(FHIREncounterResource)
+        } else if (file === 'app/scripts/services/FHIR/resources/Observation.json') {
+          const FHIRObservationResource = require('../../app/scripts/services/FHIR/resources/Observation.json')
+          resolve(FHIRObservationResource)
         }
       })
     }
