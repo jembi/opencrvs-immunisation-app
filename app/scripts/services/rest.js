@@ -11,6 +11,18 @@ module.exports = function ($resource, config) {
       match: { method: 'POST', url: server + '/fhir/Patient/$match' }
     }),
 
-    FhirRoot: $resource(server + '/fhir')
+    FhirRoot: $resource(server + '/fhir'),
+
+    Encounters: $resource(server + '/fhir/Encounter'),
+
+    Observations: $resource(server + '/fhir/Observations'),
+
+    Binary: $resource(server + '/fhir/Binary'),
+
+    Composition: $resource(server + '/fhir/Composition'),
+
+    DocumentManifest: $resource(server + '/fhir/DocumentManifest'),
+
+    DocumentReference: $resource(server + '/fhir/DocumentReference')
   }
 }

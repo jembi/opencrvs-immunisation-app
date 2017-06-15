@@ -6,9 +6,9 @@
     {
       "coding": [
         {
-          "system": "http://hearth.org/event-types",
-          "code": "",
-          "display": ""
+          "system": "http://hearth.org/cbs/event-types",
+          "code": "cd4-count",
+          "display": "CD4 count CBS event"
         }
       ]
     }
@@ -24,7 +24,7 @@
       }
     }
   ],
-  "patient": {
+  "subject": {
     "reference": ""
   }
 }
