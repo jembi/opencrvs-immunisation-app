@@ -91,9 +91,15 @@
         },
         "FHIRMappings": [{
           "resourceKey": "main",
-          "path": "type.coding[0].display",
+          "path": "type.coding[0].code",
           "params": null,
           "valueType": "formValue",
+          "value": "encounterType"
+        }, {
+          "resourceKey": "main",
+          "path": "type.coding[0].display",
+          "params": null,
+          "valueType": "optionValue",
           "value": "encounterType"
         }],
         "skipLogic": {

@@ -1,17 +1,19 @@
 'use strict'
 
-var moment = require('moment')
-var angular = require('angular')
-var ngRoute = require('angular-route')
-var ngCookies = require('angular-cookies')
-var ngResource = require('angular-resource')
-var ngMessages = require('angular-messages')
-var ngMaterial = require('angular-material')
-var mdDataTable = require('angular-material-data-table')
-var formBuilder = require('md-form-builder')
+const moment = require('moment')
+const angular = require('angular')
+const ngRoute = require('angular-route')
+const ngCookies = require('angular-cookies')
+const ngResource = require('angular-resource')
+const ngMessages = require('angular-messages')
+const ngMaterial = require('angular-material')
+const mdDataTable = require('angular-material-data-table')
+const formBuilder = require('md-form-builder')
 
-var dependencies = [ ngRoute, formBuilder, ngMaterial, ngCookies, ngResource, ngMessages, mdDataTable ]
-var app = angular.module('rcbsApp', dependencies)
+require('angular-timeline')
+
+const dependencies = [ ngRoute, formBuilder, ngMaterial, ngCookies, ngResource, ngMessages, mdDataTable, 'angular-timeline' ]
+const app = angular.module('rcbsApp', dependencies)
 
 app.config(function ($routeProvider) {
   $routeProvider
@@ -23,9 +25,13 @@ app.config(function ($routeProvider) {
     templateUrl: 'app/views/add-patient.html',
     controller: 'AddPatientControl'
   })
-  .when('/patients/:patientId/add-event', {
+  .when('/patients/:patientId/add-events', {
     templateUrl: 'app/views/add-cbs-events.html',
     controller: 'AddCbsEventsControl'
+  })
+  .when('/events/:patientId', {
+    templateUrl: 'app/views/view-cbs-events.html',
+    controller: 'ViewCbsEventsControl'
   })
   .otherwise({
     redirectTo: '/patients'

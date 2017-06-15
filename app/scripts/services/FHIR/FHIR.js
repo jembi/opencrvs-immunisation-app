@@ -91,6 +91,18 @@ module.exports = function () {
     }
   }
 
+  var getOptionDisplayValue = function (options, keyToMatch) {
+    var optionVal = null
+
+    options.forEach(function (option) {
+      if (option.key === keyToMatch) {
+        optionVal = option.value
+      }
+    })
+
+    return optionVal
+  }
+
   const forEachFormBuilderField = (FormBuilder, func) => {
     FormBuilder.sections.forEach((section) => {
       section.rows.forEach((row) => {
@@ -131,7 +143,11 @@ module.exports = function () {
             var newVal
             switch (fhirMap.valueType) {
               case 'formValue':
-                newVal = formData[ fhirMap.value ]
+                newVal = formData[fhirMap.value]
+                break
+              case 'optionValue':
+                const keyVal = formData[fhirMap.value]
+                newVal = getOptionDisplayValue(field.options, keyVal)
                 break
               case 'staticValue':
                 newVal = fhirMap.value

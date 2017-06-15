@@ -44,7 +44,7 @@ module.exports = function (loadResource, $q, state, FHIR, FormBuilderService) {
             const resourceDict = FHIR.mapFHIRResources(resourceTemplateDict, scope.state[scope.cbsEvent.formName], formFieldsValues)
 
             // add the Subject Reference - Patient/Reference
-            resourceDict.main.subject.reference = scope.patient.resourceType + '/' + scope.patient.id
+            resourceDict.main.patient.reference = scope.patient.resourceType + '/' + scope.patient.id
 
             state.pushToEventsArray(resourceDict)
 
