@@ -3,7 +3,7 @@
 module.exports = function (Api, $q) {
   const HIV_CONFIRMATION = 'hiv-confirmation'
   const LINKAGE_TO_CARE = 'linkage-to-care'
-  const VIRAL_LOAD = 'viral-load'  
+  const VIRAL_LOAD = 'viral-load'
   const CD4_COUNT = 'cd4-count'
 
   const isHIVEncounter = (event) => {
