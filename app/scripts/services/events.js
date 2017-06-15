@@ -67,14 +67,14 @@ module.exports = function (Api, $q) {
     })
 
     return {
-      eventTitle: 'First Viral Load',
+      eventTitle: 'Viral Load',
       eventType: VIRAL_LOAD,
       eventDate: encounter.period.start,
       data: {
-        firstViralLoadDate: observations[0].effectiveDateTime,
-        firstViralLoadResults: observations[0].valueQuantity,
-        firstViralLoadLocation: encounter.location[0].location.display,
-        firstViralLoadProvider: providerName
+        viralLoadDate: observations[0].effectiveDateTime,
+        viralLoadResults: observations[0].valueQuantity,
+        viralLoadLocation: encounter.location[0].location.display,
+        viralLoadProvider: providerName
       }
     }
   }

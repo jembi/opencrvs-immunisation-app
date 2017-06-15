@@ -198,10 +198,10 @@ tap.test('Events service', { autoend: true }, (t) => {
 
       t.equal(highViralLoadObj.eventType, 'viral-load', 'should have a eventType of "viral-load"')
       t.equal(highViralLoadObj.eventDate, '2017-04-04', 'should have a eventDate of "2017-04-04"')
-      t.equal(highViralLoadObj.data.firstViralLoadDate, '2017-04-04', 'should have a data.firstViralLoadDate of "2017-04-04"')
-      t.deepEquals(highViralLoadObj.data.firstViralLoadResults, observation.valueQuantity, 'should have a data.firstViralLoadResults object with results')
-      t.equal(highViralLoadObj.data.firstViralLoadLocation, 'Chuk', 'should have a data.firstViralLoadLocation of "Chuk"')
-      t.equal(highViralLoadObj.data.firstViralLoadProvider, 'Jane Smith', 'should have a data.firstViralLoadProvider of "Jane Smith"')
+      t.equal(highViralLoadObj.data.viralLoadDate, '2017-04-04', 'should have a data.firstViralLoadDate of "2017-04-04"')
+      t.deepEquals(highViralLoadObj.data.viralLoadResults, observation.valueQuantity, 'should have a data.firstViralLoadResults object with results')
+      t.equal(highViralLoadObj.data.viralLoadLocation, 'Chuk', 'should have a data.firstViralLoadLocation of "Chuk"')
+      t.equal(highViralLoadObj.data.viralLoadProvider, 'Jane Smith', 'should have a data.firstViralLoadProvider of "Jane Smith"')
 
       t.end()
     })
@@ -354,11 +354,11 @@ tap.test('Events service', { autoend: true }, (t) => {
 
     t.equal(formattedEvents[3].eventType, 'viral-load', 'should have a eventType of "viral-load"')
     t.equal(formattedEvents[3].eventDate, '2017-04-04', 'should have a eventDate of "2017-04-04"')
-    t.equal(formattedEvents[3].data.firstViralLoadDate, '2017-04-04', 'should have a firstViralLoadDate of "2017-04-04"')
-    t.equal(formattedEvents[3].data.firstViralLoadResults.unit, 'copies/mL', 'should have a firstViralLoadResults.unit of "copies/mL"')
-    t.equal(formattedEvents[3].data.firstViralLoadResults.value, 599, 'should have a firstViralLoadResults.value of "599"')
-    t.equal(formattedEvents[3].data.firstViralLoadLocation, 'Chuk', 'should have a firstViralLoadLocation of "Chuk"')
-    t.equal(formattedEvents[3].data.firstViralLoadProvider, 'Jane Smith', 'should have a firstViralLoadProvider of "Jane Smith"')
+    t.equal(formattedEvents[3].data.viralLoadDate, '2017-04-04', 'should have a viralLoadDate of "2017-04-04"')
+    t.equal(formattedEvents[3].data.viralLoadResults.unit, 'copies/mL', 'should have a viralLoadResults.unit of "copies/mL"')
+    t.equal(formattedEvents[3].data.viralLoadResults.value, 599, 'should have a viralLoadResults.value of "599"')
+    t.equal(formattedEvents[3].data.viralLoadLocation, 'Chuk', 'should have a viralLoadLocation of "Chuk"')
+    t.equal(formattedEvents[3].data.viralLoadProvider, 'Jane Smith', 'should have a viralLoadProvider of "Jane Smith"')
 
     t.end()
   })
