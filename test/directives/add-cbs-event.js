@@ -200,7 +200,7 @@ tap.test('.submit()', { autoend: true }, (t) => {
           t.equals(stateService.pushToEventsArray.getCall(0).args[0].cd4CountObs.contained[0].name[0].family[0], 'FamilyNamey')
           t.equals(stateService.pushToEventsArray.getCall(0).args[0].cd4CountObs.contained[0].id, '#provider-1')
           t.equals(stateService.pushToEventsArray.getCall(0).args[0].cd4CountObs.performer[0].reference, 'provider-1')
-          t.equals(stateService.pushToEventsArray.getCall(0).args[0].cd4CountObs.valueQuantity, 'Example Viral Load Result')
+          t.equals(stateService.pushToEventsArray.getCall(0).args[0].cd4CountObs.valueQuantity, 'Example CD4 Count Result')
 
           testSandbox.restore()
           t.end()
