@@ -6,7 +6,7 @@ const sinon = require('sinon')
 const FHIR = require('../../app/scripts/services/FHIR/FHIR.js')()
 const FormBuilderService = require('../../app/scripts/services/FormBuilder.js')()
 const stateService = require('../../app/scripts/services/state.js')()
-const linkageToCare = require('../../app/scripts/directives/add-cbs-events/add-cbs-event')
+const addCbsEvent = require('../../app/scripts/directives/add-cbs-events/add-cbs-event')
 const FormBuilderLinkageToCare = require('../../app/scripts/directives/add-cbs-events/add-cbs-event/forms/linkage-to-care.json')
 
 const sandbox = sinon.sandbox.create()
@@ -29,7 +29,7 @@ tap.test('.link()', { autoend: true }, (t) => {
         resolve()
       })
     }
-    const directive = linkageToCare({ fetch: fetchMock })
+    const directive = addCbsEvent({ fetch: fetchMock })
     // when
     directive.link(scope)
     // then
@@ -39,8 +39,11 @@ tap.test('.link()', { autoend: true }, (t) => {
 })
 
 tap.test('.submit()', { autoend: true }, (t) => {
-  t.test('should resolve with a success message', (t) => {
+  t.test('state.FormBuilderAddCbsEventLinkageToCare should resolve with a success message', (t) => {
     // given
+    const testSandbox = sinon.sandbox.create()
+    testSandbox.spy(stateService, 'pushToEventsArray')
+
     const scope = {
       $watch: (args, callback) => { callback() },
       cbsEvent: { code: 'linkage-to-care', display: 'Linkage to care', formName: 'FormBuilderAddCbsEventLinkageToCare' },
@@ -67,7 +70,7 @@ tap.test('.submit()', { autoend: true }, (t) => {
     }
     const fetchMock = (file) => {
       return new Promise((resolve, reject) => {
-        if (file === 'app/scripts/directives/add-cbs-events/linkage-to-care/form.json') {
+        if (file === 'app/scripts/directives/add-cbs-events/add-cbs-event/forms/linkage-to-care.json') {
           const FormBuilderLinkageToCare = require('../../app/scripts/directives/add-cbs-events/add-cbs-event/forms/linkage-to-care.json')
           resolve(FormBuilderLinkageToCare)
         } else if (file === 'app/scripts/services/FHIR/resources/Encounter.json') {
@@ -80,15 +83,21 @@ tap.test('.submit()', { autoend: true }, (t) => {
       return {
         resolve: (result) => {
           // then
-          // TODO: Used in API call
           t.equals(result.isValid, true)
           t.equals(result.msg, 'Event has been successfully added for submission')
+
+          t.equals(stateService.pushToEventsArray.getCall(0).args[0].resourceType, 'Encounter')
+          t.equals(stateService.pushToEventsArray.getCall(0).args[0].period.start, '2017-02-23')
+          t.equals(stateService.pushToEventsArray.getCall(0).args[0].location[0].location.display, 'Kacyiru Police Hospital')
+          t.equals(stateService.pushToEventsArray.getCall(0).args[0].type[0].coding[0].display, 'pmtct-visit')
+          t.equals(stateService.pushToEventsArray.getCall(0).args[0].subject.reference, 'Patient/AAAAA-BBBB-CCCC-DDDDD-EEEEEE')
+          testSandbox.restore()
           t.end()
         }
       }
     }
 
-    const directive = linkageToCare({ fetch: fetchMock }, { defer: deferMock }, stateService, FHIR, FormBuilderService)
+    const directive = addCbsEvent({ fetch: fetchMock }, { defer: deferMock }, stateService, FHIR, FormBuilderService)
     directive.link(scope)
     // when
     scope.state.FormBuilderAddCbsEventLinkageToCare.sections = [FormBuilderLinkageToCare]
