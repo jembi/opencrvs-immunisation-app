@@ -179,19 +179,21 @@ tap.test('.submit()', { autoend: true }, (t) => {
           t.equals(result.isValid, true)
           t.equals(result.msg, 'Event has been successfully added for submission')
 
+          // Encounter
           t.equals(stateService.pushToEventsArray.getCall(0).args[0].resourceType, 'Encounter')
           t.equals(stateService.pushToEventsArray.getCall(0).args[0].period.start, '2017-01-01')
           t.equals(stateService.pushToEventsArray.getCall(0).args[0].location[0].location.display, 'Chuk')
           t.equals(stateService.pushToEventsArray.getCall(0).args[0].subject.reference, 'Patient/AAAAA-BBBB-CCCC-DDDDD-GG')
 
-          // TODO get below tests to pass
-          // t.equals(stateService.pushToEventsArray.getCall(1).args[0].resourceType, 'Observation')
-          // t.equals(stateService.pushToEventsArray.getCall(1).args[0].encounter.reference, 'Encounter/xxxx')
-          // t.equals(stateService.pushToEventsArray.getCall(1).args[0].code.coding[0].display, 'Positive')
-          //
-          // t.equals(stateService.pushToEventsArray.getCall(2).args[0].resourceType, 'Observation')
-          // t.equals(stateService.pushToEventsArray.getCall(2).args[0].encounter.reference, 'Encounter/xxxx')
-          // t.equals(stateService.pushToEventsArray.getCall(2).args[0].code.coding[0].display, 'Negative')
+          // Patient HIV Observation
+          t.equals(stateService.pushToEventsArray.getCall(1).args[0].resourceType, 'Observation')
+          t.equals(stateService.pushToEventsArray.getCall(1).args[0].encounter.reference, 'Encounter/xxxx')
+          t.equals(stateService.pushToEventsArray.getCall(1).args[0].code.coding[0].display, 'Positive')
+
+          // Partner HIV Observation
+          t.equals(stateService.pushToEventsArray.getCall(2).args[0].resourceType, 'Observation')
+          t.equals(stateService.pushToEventsArray.getCall(2).args[0].encounter.reference, 'Encounter/xxxx')
+          t.equals(stateService.pushToEventsArray.getCall(2).args[0].code.coding[0].display, 'Negative')
 
           testSandbox.restore()
           t.end()
