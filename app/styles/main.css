@@ -2,8 +2,12 @@
   display: none !important;
 }
 
+html {
+background: #ddd;
+}
+
 body {
-  margin: 0px;
+  margin: 0;
   background: #ddd;
 }
 

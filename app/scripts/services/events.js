@@ -2,7 +2,8 @@
 
 module.exports = function (Api, $q) {
   const HIV_CONFIRMATION = 'hiv-confirmation'
-  const FIRST_VIRAL_LOAD = 'viral-load'
+  const LINKAGE_TO_CARE = 'linkage-to-care'
+  const VIRAL_LOAD = 'viral-load'  
   const CD4_COUNT = 'cd4-count'
 
   const isHIVEncounter = (event) => {
@@ -43,6 +44,7 @@ module.exports = function (Api, $q) {
     })
 
     return {
+      eventTitle: 'HIV Confirmation',
       eventType: HIV_CONFIRMATION,
       eventDate: encounter.period.start,
       data: {
@@ -65,7 +67,8 @@ module.exports = function (Api, $q) {
     })
 
     return {
-      eventType: FIRST_VIRAL_LOAD,
+      eventTitle: 'First Viral Load',
+      eventType: VIRAL_LOAD,
       eventDate: encounter.period.start,
       data: {
         firstViralLoadDate: observations[0].effectiveDateTime,
@@ -77,21 +80,17 @@ module.exports = function (Api, $q) {
   }
 
   const constructSimpleLinkageToCareObject = (encounter) => {
-    let eventType, encounterType
+    let encounterType
 
     encounter.type.forEach((type) => {
-      switch (type.coding[0].system) {
-        case 'http://hearth.org/cbs/event-types':
-          eventType = type.coding[0].code
-          break
-        case 'http://hearth.org/cbs/encounter-types':
-          encounterType = type.coding[0].display
-          break
+      if (type.coding[0].system === 'http://hearth.org/cbs/encounter-types') {
+        encounterType = type.coding[0].display
       }
     })
 
     return {
-      eventType: eventType,
+      eventTitle: 'Linkage to Care',
+      eventType: LINKAGE_TO_CARE,
       eventDate: encounter.period.start,
       data: {
         encounterType: encounterType,
@@ -114,6 +113,7 @@ module.exports = function (Api, $q) {
     }
 
     return {
+      eventTitle: 'CD4 count',
       eventType: CD4_COUNT,
       eventDate: encounter.period.start,
       data: {
@@ -165,13 +165,13 @@ module.exports = function (Api, $q) {
     formatEvents: (events) => {
       const simpleEvents = []
       events.forEach((event) => {
-        if (isEventOfType('linkage-to-care', event.resource)) {
+        if (isEventOfType(LINKAGE_TO_CARE, event.resource)) {
           event = constructSimpleLinkageToCareObject(event.resource, event._observations)
-        } else if (isEventOfType('hiv-confirmation', event.resource)) {
+        } else if (isEventOfType(HIV_CONFIRMATION, event.resource)) {
           event = constructSimpleHIVConfirmationObject(event.resource, event._observations)
-        } else if (isEventOfType('cd4-count', event.resource)) {
+        } else if (isEventOfType(CD$_COUNT, event.resource)) {
           event = constructSimpleCD4CountObject(event.resource, event._observations)
-        } else if (isEventOfType('viral-load', event.resource)) {
+        } else if (isEventOfType(VIRAL_LOAD, event.resource)) {
           event = constructSimpleFirstViralLoadObject(event.resource, event._observations)
         } else {
           console.error('Unknown event type found', event)
