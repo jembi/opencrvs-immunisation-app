@@ -360,8 +360,6 @@ tap.test('Events service', { autoend: true }, (t) => {
     t.equal(formattedEvents[3].data.firstViralLoadLocation, 'Chuk', 'should have a firstViralLoadLocation of "Chuk"')
     t.equal(formattedEvents[3].data.firstViralLoadProvider, 'Jane Smith', 'should have a firstViralLoadProvider of "Jane Smith"')
 
-    // More tests
-
     t.end()
   })
 
