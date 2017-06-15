@@ -17,11 +17,13 @@
           "required": true
         },
         "FHIRMappings": [{
+          "main": { "resourceType": "Encounter" },
           "path": "period.start",
           "params": null,
           "valueType": "formValue",
           "value": "encounterDate"
         }, {
+          "main": { "resourceType": "Encounter" },
           "path": "period.end",
           "params": null,
           "valueType": "formValue",
@@ -45,6 +47,7 @@
           "searchOptions": true
         },
         "FHIRMappings": [{
+          "main": { "resourceType": "Encounter" },
           "path": "location[0].location.display",
           "params": null,
           "valueType": "formValue",
@@ -87,7 +90,8 @@
           "required": true
         },
         "FHIRMappings": [{
-          "path": "type.coding[0].display",
+          "subjectHIVObs": { "resourceType": "Observation" },
+          "path": "code.coding[0].display",
           "params": null,
           "valueType": "formValue",
           "value": "hivStatus"
@@ -117,7 +121,8 @@
           "required": true
         },
         "FHIRMappings": [{
-          "path": "type.coding[0].display",
+          "partnerHIVObs": { "resourceType": "Observation" },
+          "path": "code.coding[0].display",
           "params": null,
           "valueType": "formValue",
           "value": "partnerHivStatus"
