@@ -169,7 +169,7 @@ tap.test('.link()', { autoend: true }, (t) => {
       }
       const patientApiMock = {
         save: (body, success) => {
-          return success()
+          return success({ id: 'dummyId' })
         }
       }
       const stateMock = {
@@ -177,7 +177,7 @@ tap.test('.link()', { autoend: true }, (t) => {
         setPartialPatientDemographics: () => {}
       }
 
-      const directive = addPatient({ Patients: patientApiMock }, { fetch: fetchMock }, { all: allMock, defer: deferMock }, stateMock, FHIR)
+      const directive = addPatient({ Patients: patientApiMock }, { fetch: fetchMock }, { all: allMock, defer: deferMock }, stateMock, FHIR, { path: () => {} })
       directive.link(scope)
       // when
       setTimeout(() => {

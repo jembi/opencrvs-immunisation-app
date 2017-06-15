@@ -31,6 +31,7 @@ module.exports = function (Api, loadResource, $q, state, FHIR, $location) {
 
           Api.Patients.save(fhirObject, function (bundle) {
             defer.resolve({ isValid: true, msg: 'Patient created successfully' })
+            $location.path('/events/' + bundle.id)
           }, function (err) {
             console.error(err)
             defer.reject({ isValid: false, msg: err.statusText || 'Could not connect to server' })
