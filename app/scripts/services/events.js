@@ -2,7 +2,7 @@
 
 module.exports = function (Api, $q) {
   const HIV_CONFIRMATION = 'hiv-confirmation'
-  const FIRST_VIRAL_LOAD = 'first-viral-load'
+  const FIRST_VIRAL_LOAD = 'viral-load'
   const CD4_COUNT = 'cd4-count'
 
   const isHIVEncounter = (event) => {
@@ -81,10 +81,10 @@ module.exports = function (Api, $q) {
 
     encounter.type.forEach((type) => {
       switch (type.coding[0].system) {
-        case 'http://hearth.org/event-types':
-          eventType = type.coding[0].display
+        case 'http://hearth.org/cbs/event-types':
+          eventType = type.coding[0].code
           break
-        case 'http://hearth.org/encounter-types':
+        case 'http://hearth.org/cbs/encounter-types':
           encounterType = type.coding[0].display
           break
       }
@@ -100,24 +100,26 @@ module.exports = function (Api, $q) {
     }
   }
 
-  const constructSimpleCD4CountObject = (encounter) => {
+  const constructSimpleCD4CountObject = (encounter, observations) => {
     let providerName
 
-    encounter._observations[0].contained.forEach((containedResource) => {
-      if (containedResource.id === encounter._observations[0].performer[0].reference.substring(1)) {
-        const providerGivenName = containedResource.name[0].given.join(' ')
-        const providerFamilyName = containedResource.name[0].family.join(' ')
-        providerName = providerGivenName + ' ' + providerFamilyName
-      }
-    })
+    if (observations) {
+      observations[0].contained.forEach((containedResource) => {
+        if (containedResource.id === observations[0].performer[0].reference.substring(1)) {
+          const providerGivenName = containedResource.name[0].given.join(' ')
+          const providerFamilyName = containedResource.name[0].family.join(' ')
+          providerName = providerGivenName + ' ' + providerFamilyName
+        }
+      })
+    }
 
     return {
       eventType: CD4_COUNT,
       eventDate: encounter.period.start,
       data: {
-        cd4CountDate: encounter._observations[0].effectiveDateTime,
+        cd4CountDate: observations[0].effectiveDateTime,
         cd4CountLocation: encounter.location[0].location.display,
-        cd4CountResult: encounter._observations[0].valueQuantity,
+        cd4CountResult: observations[0].valueQuantity,
         cd4CountProvider: providerName
       }
     }
