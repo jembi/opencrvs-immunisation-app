@@ -55,7 +55,7 @@ module.exports = function (Api, $q) {
     }
   }
 
-  const constructSimpleFirstViralLoadObject = (encounter, observations) => {
+  const constructSimpleViralLoadObject = (encounter, observations) => {
     let providerName
 
     observations[0].contained.forEach((containedResource) => {
@@ -67,14 +67,14 @@ module.exports = function (Api, $q) {
     })
 
     return {
-      eventTitle: 'First Viral Load',
+      eventTitle: 'Viral Load',
       eventType: VIRAL_LOAD,
       eventDate: encounter.period.start,
       data: {
-        firstViralLoadDate: observations[0].effectiveDateTime,
-        firstViralLoadResults: observations[0].valueQuantity,
-        firstViralLoadLocation: encounter.location[0].location.display,
-        firstViralLoadProvider: providerName
+        viralLoadDate: observations[0].effectiveDateTime,
+        viralLoadResults: observations[0].valueQuantity,
+        viralLoadLocation: encounter.location[0].location.display,
+        viralLoadProvider: providerName
       }
     }
   }
@@ -172,7 +172,7 @@ module.exports = function (Api, $q) {
         } else if (isEventOfType(CD4_COUNT, event.resource)) {
           event = constructSimpleCD4CountObject(event.resource, event._observations)
         } else if (isEventOfType(VIRAL_LOAD, event.resource)) {
-          event = constructSimpleFirstViralLoadObject(event.resource, event._observations)
+          event = constructSimpleViralLoadObject(event.resource, event._observations)
         } else {
           console.error('Unknown event type found', event)
         }
@@ -185,7 +185,7 @@ module.exports = function (Api, $q) {
 
     constructSimpleHIVConfirmationObject: constructSimpleHIVConfirmationObject,
 
-    constructSimpleFirstViralLoadObject: constructSimpleFirstViralLoadObject,
+    constructSimpleViralLoadObject: constructSimpleViralLoadObject,
 
     constructSimpleLinkageToCareObject: constructSimpleLinkageToCareObject,
 

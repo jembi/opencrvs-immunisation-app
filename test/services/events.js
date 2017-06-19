@@ -150,8 +150,8 @@ tap.test('Events service', { autoend: true }, (t) => {
     })
   })
 
-  t.test('.constructSimpleFirstViralLoadObject()', { autoend: true }, (t) => {
-    t.test('should construct a simple object for First Viral Load', (t) => {
+  t.test('.constructSimpleViralLoadObject()', { autoend: true }, (t) => {
+    t.test('should construct a simple object for Viral Load', (t) => {
       // given
       const encounter = JSON.parse(JSON.stringify(encounterTemplate))
       const observation = JSON.parse(JSON.stringify(observationTemplate))
@@ -192,16 +192,16 @@ tap.test('Events service', { autoend: true }, (t) => {
       ]
 
       // when
-      const highViralLoadObj = Events().constructSimpleFirstViralLoadObject(encounter, [observation])
+      const highViralLoadObj = Events().constructSimpleViralLoadObject(encounter, [observation])
 
       t.ok(highViralLoadObj)
 
       t.equal(highViralLoadObj.eventType, 'viral-load', 'should have a eventType of "viral-load"')
       t.equal(highViralLoadObj.eventDate, '2017-04-04', 'should have a eventDate of "2017-04-04"')
-      t.equal(highViralLoadObj.data.firstViralLoadDate, '2017-04-04', 'should have a data.firstViralLoadDate of "2017-04-04"')
-      t.deepEquals(highViralLoadObj.data.firstViralLoadResults, observation.valueQuantity, 'should have a data.firstViralLoadResults object with results')
-      t.equal(highViralLoadObj.data.firstViralLoadLocation, 'Chuk', 'should have a data.firstViralLoadLocation of "Chuk"')
-      t.equal(highViralLoadObj.data.firstViralLoadProvider, 'Jane Smith', 'should have a data.firstViralLoadProvider of "Jane Smith"')
+      t.equal(highViralLoadObj.data.viralLoadDate, '2017-04-04', 'should have a data.viralLoadDate of "2017-04-04"')
+      t.deepEquals(highViralLoadObj.data.viralLoadResults, observation.valueQuantity, 'should have a data.viralLoadResults object with results')
+      t.equal(highViralLoadObj.data.viralLoadLocation, 'Chuk', 'should have a data.viralLoadLocation of "Chuk"')
+      t.equal(highViralLoadObj.data.viralLoadProvider, 'Jane Smith', 'should have a data.viralLoadProvider of "Jane Smith"')
 
       t.end()
     })
@@ -280,7 +280,7 @@ tap.test('Events service', { autoend: true }, (t) => {
       const viralLoadObservation = JSON.parse(JSON.stringify(observationTemplate))
       viralLoadEncounter.period.start = '2017-04-04'
       viralLoadEncounter.type = [
-        { coding: [ { system: 'http://hearth.org/cbs/event-types', code: 'viral-load', display: 'First Viral Load' } ] }
+        { coding: [ { system: 'http://hearth.org/cbs/event-types', code: 'viral-load', display: 'Viral Load' } ] }
       ]
       viralLoadEncounter.location[0].location.display = 'Chuk'
 
@@ -354,11 +354,11 @@ tap.test('Events service', { autoend: true }, (t) => {
 
       t.equal(formattedEvents[3].eventType, 'viral-load', 'should have a eventType of "viral-load"')
       t.equal(formattedEvents[3].eventDate, '2017-04-04', 'should have a eventDate of "2017-04-04"')
-      t.equal(formattedEvents[3].data.firstViralLoadDate, '2017-04-04', 'should have a firstViralLoadDate of "2017-04-04"')
-      t.equal(formattedEvents[3].data.firstViralLoadResults.unit, 'copies/mL', 'should have a firstViralLoadResults.unit of "copies/mL"')
-      t.equal(formattedEvents[3].data.firstViralLoadResults.value, 599, 'should have a firstViralLoadResults.value of "599"')
-      t.equal(formattedEvents[3].data.firstViralLoadLocation, 'Chuk', 'should have a firstViralLoadLocation of "Chuk"')
-      t.equal(formattedEvents[3].data.firstViralLoadProvider, 'Jane Smith', 'should have a firstViralLoadProvider of "Jane Smith"')
+      t.equal(formattedEvents[3].data.viralLoadDate, '2017-04-04', 'should have a viralLoadDate of "2017-04-04"')
+      t.equal(formattedEvents[3].data.viralLoadResults.unit, 'copies/mL', 'should have a viralLoadResults.unit of "copies/mL"')
+      t.equal(formattedEvents[3].data.viralLoadResults.value, 599, 'should have a viralLoadResults.value of "599"')
+      t.equal(formattedEvents[3].data.viralLoadLocation, 'Chuk', 'should have a viralLoadLocation of "Chuk"')
+      t.equal(formattedEvents[3].data.viralLoadProvider, 'Jane Smith', 'should have a viralLoadProvider of "Jane Smith"')
 
       t.end()
     })
@@ -378,7 +378,7 @@ tap.test('Events service', { autoend: true }, (t) => {
       encounter2.period.start = '2017-02-02'
       encounter2.location[0].location.display = 'Test Hospital 2'
       encounter2.patient.reference = 'Patient/12345'
-      encounter2.type[0].coding[0].code = 'first-cd4-count'
+      encounter2.type[0].coding[0].code = 'cd4-count'
 
       const encountersBundle = { entry: [encounter1, encounter2] }
 
@@ -418,7 +418,7 @@ tap.test('Events service', { autoend: true }, (t) => {
       encounter2.period.start = '2017-02-02'
       encounter2.location[0].location.display = 'Test Hospital 2'
       encounter2.patient.reference = 'Patient/12345'
-      encounter2.type[0].coding[0].code = 'first-cd4-count'
+      encounter2.type[0].coding[0].code = 'cd4-count'
 
       // Observations for Encounters 1 and 2
       const observation1 = JSON.parse(JSON.stringify(observationTemplate))

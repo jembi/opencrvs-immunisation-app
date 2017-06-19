@@ -44,9 +44,9 @@ module.exports = function (loadResource, $q, state, FHIR, FormBuilderService) {
                   setProcedureEventType(encounterTemplate, scope.cbsEvent.code, 'CD4 Count')
                   resourceTemplateDict = { main: encounterTemplate, cd4CountObs: cloneDeep(observationTemplate) }
                   break
-                case 'first-viral-load':
-                  setProcedureEventType(encounterTemplate, scope.cbsEvent.code, 'First Viral Load')
-                  resourceTemplateDict = { main: encounterTemplate } // TODO
+                case 'viral-load':
+                  setProcedureEventType(encounterTemplate, scope.cbsEvent.code, 'Viral Load')
+                  resourceTemplateDict = { main: encounterTemplate, viralLoadObs: cloneDeep(observationTemplate) }
                   break
                 default:
                   console.error(`Unknown event code ${scope.cbsEvent.code}`)
