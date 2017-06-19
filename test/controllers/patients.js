@@ -2,7 +2,7 @@
 
 const tap = require('tap')
 
-const dashboardController = require('../../app/scripts/controllers/dashboard')
+const PatientsController = require('../../app/scripts/controllers/patients')
 
 tap.test('.someFunction()', { autoend: true }, (t) => {
   t.test('should reset search results when navigating away from page', (t) => {
@@ -23,6 +23,6 @@ tap.test('.someFunction()', { autoend: true }, (t) => {
       }
     }
     // when
-    dashboardController(scope, stateMock)
+    PatientsController(scope, stateMock)
   })
 })
