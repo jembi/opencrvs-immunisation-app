@@ -55,7 +55,7 @@ module.exports = function (Api, $q) {
     }
   }
 
-  const constructSimpleFirstViralLoadObject = (encounter, observations) => {
+  const constructSimpleViralLoadObject = (encounter, observations) => {
     let providerName
 
     observations[0].contained.forEach((containedResource) => {
@@ -172,7 +172,7 @@ module.exports = function (Api, $q) {
         } else if (isEventOfType(CD4_COUNT, event.resource)) {
           event = constructSimpleCD4CountObject(event.resource, event._observations)
         } else if (isEventOfType(VIRAL_LOAD, event.resource)) {
-          event = constructSimpleFirstViralLoadObject(event.resource, event._observations)
+          event = constructSimpleViralLoadObject(event.resource, event._observations)
         } else {
           console.error('Unknown event type found', event)
         }
@@ -185,7 +185,7 @@ module.exports = function (Api, $q) {
 
     constructSimpleHIVConfirmationObject: constructSimpleHIVConfirmationObject,
 
-    constructSimpleFirstViralLoadObject: constructSimpleFirstViralLoadObject,
+    constructSimpleViralLoadObject: constructSimpleViralLoadObject,
 
     constructSimpleLinkageToCareObject: constructSimpleLinkageToCareObject,
 
