@@ -17,11 +17,13 @@
           "required": true
         },
         "FHIRMappings": [{
+          "resourceKey": "main",
           "path": "period.start",
           "params": null,
           "valueType": "formValue",
           "value": "encounterDate"
         }, {
+          "resourceKey": "main",
           "path": "period.end",
           "params": null,
           "valueType": "formValue",
@@ -45,6 +47,7 @@
           "searchOptions": true
         },
         "FHIRMappings": [{
+          "resourceKey": "main",
           "path": "location[0].location.display",
           "params": null,
           "valueType": "formValue",
@@ -55,27 +58,27 @@
           "checks": []
         },
         "options": [
-          {"key": "Chuk", "value": "Chuk"}, 
-          {"key": "Kacyiru Police Hospital", "value": "Kacyiru Police Hospital"}, 
-          {"key": "Muhima Hospital", "value": "Muhima Hospital"}, 
-          {"key": "Kibagabaga Hospital", "value": "Kibagabaga Hospital"}, 
-          {"key": "Kanombe Military Hospital", "value": "Kanombe Military Hospital"}, 
-          {"key": "King Faisal Hospital", "value": "King Faisal Hospital"}, 
-          {"key": "Ndera Hospital", "value": "Ndera Hospital"}, 
-          {"key": "Masaka Hospital", "value": "Masaka Hospital"}, 
-          {"key": "Rwinkwavu Hospital", "value": "Rwinkwavu Hospital"}, 
-          {"key": "Kirehe Hospital", "value": "Kirehe Hospital"}, 
-          {"key": "Kibungo Hospital", "value": "Kibungo Hospital"}, 
-          {"key": "Nyagatare Hospital", "value": "Nyagatare Hospital"}, 
-          {"key": "Gahini Hospital", "value": "Gahini Hospital"}, 
-          {"key": "Nyamata Hospital", "value": "Nyamata Hospital"}, 
-          {"key": "Ngarama Hospital", "value": "Ngarama Hospital"}, 
-          {"key": "Kiziguro Hospital", "value": "Kiziguro Hospital"}, 
-          {"key": "Rwamagana Hospital", "value": "Rwamagana Hospital"}, 
+          {"key": "Chuk", "value": "Chuk"},
+          {"key": "Kacyiru Police Hospital", "value": "Kacyiru Police Hospital"},
+          {"key": "Muhima Hospital", "value": "Muhima Hospital"},
+          {"key": "Kibagabaga Hospital", "value": "Kibagabaga Hospital"},
+          {"key": "Kanombe Military Hospital", "value": "Kanombe Military Hospital"},
+          {"key": "King Faisal Hospital", "value": "King Faisal Hospital"},
+          {"key": "Ndera Hospital", "value": "Ndera Hospital"},
+          {"key": "Masaka Hospital", "value": "Masaka Hospital"},
+          {"key": "Rwinkwavu Hospital", "value": "Rwinkwavu Hospital"},
+          {"key": "Kirehe Hospital", "value": "Kirehe Hospital"},
+          {"key": "Kibungo Hospital", "value": "Kibungo Hospital"},
+          {"key": "Nyagatare Hospital", "value": "Nyagatare Hospital"},
+          {"key": "Gahini Hospital", "value": "Gahini Hospital"},
+          {"key": "Nyamata Hospital", "value": "Nyamata Hospital"},
+          {"key": "Ngarama Hospital", "value": "Ngarama Hospital"},
+          {"key": "Kiziguro Hospital", "value": "Kiziguro Hospital"},
+          {"key": "Rwamagana Hospital", "value": "Rwamagana Hospital"},
           {"key": "Other", "value": "Other"}
         ],
         "value": null
-      }, 
+      },
       {
         "type": "select",
         "flex": "33",
@@ -87,12 +90,14 @@
           "required": true
         },
         "FHIRMappings": [{
-          "path": "type[1].coding[0].code",
+          "resourceKey": "main",
+          "path": "type.coding[0].code",
           "params": null,
           "valueType": "formValue",
           "value": "encounterType"
         }, {
-          "path": "type[1].coding[0].display", 
+          "resourceKey": "main",
+          "path": "type.coding[0].display",
           "params": null,
           "valueType": "optionValue",
           "value": "encounterType"

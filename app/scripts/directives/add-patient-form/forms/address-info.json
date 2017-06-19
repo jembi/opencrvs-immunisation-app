@@ -16,6 +16,7 @@
         "required": true
       },
       "FHIRMappings": [{
+        "resourceKey": "main",
         "path": "address[0].state",
         "params": null,
         "valueType": "formValue",
@@ -30,6 +31,7 @@
         "required": true
       },
       "FHIRMappings": [{
+        "resourceKey": "main",
         "path": "address[0].district",
         "params": null,
         "valueType": "formValue",
@@ -44,6 +46,7 @@
         "required": true
       },
       "FHIRMappings": [{
+        "resourceKey": "main",
         "path": "address[0].line[0]",
         "params": null,
         "valueType": "formValue",
@@ -58,6 +61,7 @@
         "required": true
       },
       "FHIRMappings": [{
+        "resourceKey": "main",
         "path": "address[0].line[1]",
         "params": null,
         "valueType": "formValue",
@@ -72,6 +76,7 @@
         "required": true
       },
       "FHIRMappings": [{
+        "resourceKey": "main",
         "path": "address[0].line[2]",
         "params": null,
         "valueType": "formValue",
