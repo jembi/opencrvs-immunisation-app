@@ -86,12 +86,12 @@ tap.test('.submit()', { autoend: true }, (t) => {
           t.equals(result.isValid, true)
           t.equals(result.msg, 'Event has been successfully added for submission')
 
-          t.equals(stateService.pushToEventsArray.getCall(0).args[0].resourceType, 'Encounter')
-          t.equals(stateService.pushToEventsArray.getCall(0).args[0].period.start, '2017-02-23')
-          t.equals(stateService.pushToEventsArray.getCall(0).args[0].location[0].location.display, 'Kacyiru Police Hospital')
-          t.equals(stateService.pushToEventsArray.getCall(0).args[0].type[0].coding[0].display, 'PMTCT visit')
-          t.equals(stateService.pushToEventsArray.getCall(0).args[0].type[0].coding[0].code, 'pmtct-visit')
-          t.equals(stateService.pushToEventsArray.getCall(0).args[0].patient.reference, 'Patient/AAAAA-BBBB-CCCC-DDDDD-EEEEEE')
+          t.equals(stateService.pushToEventsArray.getCall(0).args[0].main.resourceType, 'Encounter')
+          t.equals(stateService.pushToEventsArray.getCall(0).args[0].main.period.start, '2017-02-23')
+          t.equals(stateService.pushToEventsArray.getCall(0).args[0].main.location[0].location.display, 'Kacyiru Police Hospital')
+          t.equals(stateService.pushToEventsArray.getCall(0).args[0].main.type[0].coding[0].display, 'PMTCT visit')
+          t.equals(stateService.pushToEventsArray.getCall(0).args[0].main.type[0].coding[0].code, 'pmtct-visit')
+          t.equals(stateService.pushToEventsArray.getCall(0).args[0].main.patient.reference, 'Patient/AAAAA-BBBB-CCCC-DDDDD-EEEEEE')
           testSandbox.restore()
           t.end()
         }
