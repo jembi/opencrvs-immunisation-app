@@ -32,16 +32,18 @@ module.exports = function (Api, $q) {
   const constructSimpleHIVConfirmationObject = (encounter, observations) => {
     let firstPositiveHivTestDate, partnerStatus
 
-    observations.forEach((obs) => {
-      switch (obs.code.coding[0].code) {
-        case '33660-2': // HIV test
-          firstPositiveHivTestDate = obs.effectiveDateTime
-          break
-        case 'partner-hiv-status':
-          partnerStatus = obs.valueCodeableConcept.text
-          break
-      }
-    })
+    if (observations && observations.length > 0) {
+      observations.forEach((obs) => {
+        switch (obs.code.coding[0].code) {
+          case '33660-2': // HIV test
+            firstPositiveHivTestDate = obs.effectiveDateTime
+            break
+          case 'partner-hiv-status':
+            partnerStatus = obs.valueCodeableConcept.text
+            break
+        }
+      })
+    }
 
     return {
       eventTitle: 'HIV Confirmation',
@@ -56,23 +58,28 @@ module.exports = function (Api, $q) {
   }
 
   const constructSimpleViralLoadObject = (encounter, observations) => {
-    let providerName
+    let providerName, viralLoadDate, viralLoadResults
 
-    observations[0].contained.forEach((containedResource) => {
-      if (containedResource.id === observations[0].performer[0].reference.substring(1)) {
-        const providerGivenName = containedResource.name[0].given.join(' ')
-        const providerFamilyName = containedResource.name[0].family.join(' ')
-        providerName = providerGivenName + ' ' + providerFamilyName
-      }
-    })
+    if (observations && observations.length > 0) {
+      viralLoadDate = observations[0].effectiveDateTime
+      viralLoadResults = observations[0].valueQuantity
+
+      observations[0].contained.forEach((containedResource) => {
+        if (containedResource.id === observations[0].performer[0].reference.substring(1)) {
+          const providerGivenName = containedResource.name[0].given.join(' ')
+          const providerFamilyName = containedResource.name[0].family.join(' ')
+          providerName = providerGivenName + ' ' + providerFamilyName
+        }
+      })
+    }
 
     return {
       eventTitle: 'Viral Load',
       eventType: VIRAL_LOAD,
       eventDate: encounter.period.start,
       data: {
-        viralLoadDate: observations[0].effectiveDateTime,
-        viralLoadResults: observations[0].valueQuantity,
+        viralLoadDate: viralLoadDate,
+        viralLoadResults: viralLoadResults,
         viralLoadLocation: encounter.location[0].location.display,
         viralLoadProvider: providerName
       }
@@ -100,9 +107,12 @@ module.exports = function (Api, $q) {
   }
 
   const constructSimpleCD4CountObject = (encounter, observations) => {
-    let providerName
+    let providerName, cd4CountDate, cd4CountResult
 
-    if (observations) {
+    if (observations && observations.length > 0) {
+      cd4CountDate = observations[0].effectiveDateTime
+      cd4CountResult = observations[0].valueQuantity
+
       observations[0].contained.forEach((containedResource) => {
         if (containedResource.id === observations[0].performer[0].reference.substring(1)) {
           const providerGivenName = containedResource.name[0].given.join(' ')
@@ -117,9 +127,9 @@ module.exports = function (Api, $q) {
       eventType: CD4_COUNT,
       eventDate: encounter.period.start,
       data: {
-        cd4CountDate: observations[0].effectiveDateTime,
+        cd4CountDate: cd4CountDate,
         cd4CountLocation: encounter.location[0].location.display,
-        cd4CountResult: observations[0].valueQuantity,
+        cd4CountResult: cd4CountResult,
         cd4CountProvider: providerName
       }
     }
@@ -147,7 +157,7 @@ module.exports = function (Api, $q) {
 
       const promises = []
       encountersArray.forEach((encounter) => {
-        const resource = Api.Observations.get({'encounter.reference': { $eq: 'Encounter/' + encounter.id }})
+        const resource = Api.Observations.get({'encounterId': encounter.resource.id })
         encounter._observations = resource.$resolved ? resource.entry : []
         promises.push(resource.$promise)
       })
