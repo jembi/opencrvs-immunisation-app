@@ -208,159 +208,162 @@ tap.test('Events service', { autoend: true }, (t) => {
   })
 
   t.test('.formatEvents', { autoend: true }, (t) => {
-    t.test('should delegate event formatting depending on event type')
-    // given
-    // HIV Confirmation
-    const hivConfirmationEncounter = JSON.parse(JSON.stringify(encounterTemplate))
-    const hivConfirmationObservation = JSON.parse(JSON.stringify(observationTemplate))
-    const hivConfirmationObservationPartnerStatus = JSON.parse(JSON.stringify(observationTemplate))
-    hivConfirmationEncounter.period.start = '2017-06-01'
-    hivConfirmationEncounter.type = [
-      { coding: [ { system: 'http://hearth.org/cbs/event-types', code: 'hiv-confirmation', display: 'HIV Confirmation' } ] }
-    ]
-    hivConfirmationEncounter.type[0].coding[0].code = 'hiv-confirmation'
-    hivConfirmationEncounter.type[0].coding[0].display = 'HIV Confirmation'
-    hivConfirmationEncounter.location[0].location.display = 'Chuk'
+    t.test('should delegate event formatting depending on event type', (t) => {
+      // given
+      // HIV Confirmation
+      const hivConfirmationEncounter = JSON.parse(JSON.stringify(encounterTemplate))
+      const hivConfirmationObservation = JSON.parse(JSON.stringify(observationTemplate))
+      const hivConfirmationObservationPartnerStatus = JSON.parse(JSON.stringify(observationTemplate))
+      hivConfirmationEncounter.period.start = '2017-06-01'
+      hivConfirmationEncounter.type = [
+        { coding: [ { system: 'http://hearth.org/cbs/event-types', code: 'hiv-confirmation', display: 'HIV Confirmation' } ] }
+      ]
+      hivConfirmationEncounter.type[0].coding[0].code = 'hiv-confirmation'
+      hivConfirmationEncounter.type[0].coding[0].display = 'HIV Confirmation'
+      hivConfirmationEncounter.location[0].location.display = 'Chuk'
 
-    hivConfirmationObservation.effectiveDateTime = '2010-06-30'
-    hivConfirmationObservation.code.coding[0].system = 'http://loinc.org'
-    hivConfirmationObservation.code.coding[0].code = '33660-2'
-    hivConfirmationObservation.code.coding[0].display = 'HIV 1 p24 Ag [Presence] in Serum by Neutralization test'
-    hivConfirmationObservation.valueCodeableConcept = {
-      coding: {
-        system: 'http://loinc.org',
-        code: 'LA6576-8'
-      },
-      text: 'Positive'
-    }
+      hivConfirmationObservation.effectiveDateTime = '2010-06-30'
+      hivConfirmationObservation.code.coding[0].system = 'http://loinc.org'
+      hivConfirmationObservation.code.coding[0].code = '33660-2'
+      hivConfirmationObservation.code.coding[0].display = 'HIV 1 p24 Ag [Presence] in Serum by Neutralization test'
+      hivConfirmationObservation.valueCodeableConcept = {
+        coding: {
+          system: 'http://loinc.org',
+          code: 'LA6576-8'
+        },
+        text: 'Positive'
+      }
 
-    hivConfirmationObservationPartnerStatus.effectiveDateTime = '2010-06-30'
-    hivConfirmationObservationPartnerStatus.code.coding[0].system = 'http://hearth.org/cbs'
-    hivConfirmationObservationPartnerStatus.code.coding[0].code = 'partner-hiv-status'
-    hivConfirmationObservationPartnerStatus.code.coding[0].display = 'Partners HIV status'
-    hivConfirmationObservationPartnerStatus.valueCodeableConcept = {
-      coding: {
-        system: 'http://loinc.org',
-        code: 'LA6576-8'
-      },
-      text: 'Positive'
-    }
+      hivConfirmationObservationPartnerStatus.effectiveDateTime = '2010-06-30'
+      hivConfirmationObservationPartnerStatus.code.coding[0].system = 'http://hearth.org/cbs'
+      hivConfirmationObservationPartnerStatus.code.coding[0].code = 'partner-hiv-status'
+      hivConfirmationObservationPartnerStatus.code.coding[0].display = 'Partners HIV status'
+      hivConfirmationObservationPartnerStatus.valueCodeableConcept = {
+        coding: {
+          system: 'http://loinc.org',
+          code: 'LA6576-8'
+        },
+        text: 'Positive'
+      }
 
-    // Linkage to Care
-    const linkageToCareEncounter = JSON.parse(JSON.stringify(encounterTemplate))
-    linkageToCareEncounter.period.start = '2017-04-04'
-    linkageToCareEncounter.type = [
-      { coding: [ { system: 'http://hearth.org/cbs/event-types', code: 'linkage-to-care', display: 'Linkage to Care' } ] },
-      { coding: [ { system: 'http://hearth.org/cbs/encounter-types', code: 'anc-visit', display: 'ANC Visit' } ] }
-    ]
-    linkageToCareEncounter.location[0].location.display = 'Chuk'
+      // Linkage to Care
+      const linkageToCareEncounter = JSON.parse(JSON.stringify(encounterTemplate))
+      linkageToCareEncounter.period.start = '2017-04-04'
+      linkageToCareEncounter.type = [
+        { coding: [ { system: 'http://hearth.org/cbs/event-types', code: 'linkage-to-care', display: 'Linkage to Care' } ] },
+        { coding: [ { system: 'http://hearth.org/cbs/encounter-types', code: 'anc-visit', display: 'ANC Visit' } ] }
+      ]
+      linkageToCareEncounter.location[0].location.display = 'Chuk'
 
-    // CD4 Count
-    const cd4CountEncounter = JSON.parse(JSON.stringify(encounterTemplate))
-    const cd4CountObservation = JSON.parse(JSON.stringify(observationTemplate))
-    cd4CountEncounter.period.start = '2017-04-04'
-    cd4CountEncounter.type = [
-      { coding: [ { system: 'http://hearth.org/cbs/event-types', code: 'cd4-count', display: 'CD4 Count' } ] }
-    ]
-    cd4CountEncounter.location[0].location.display = 'Chuk'
-    cd4CountObservation.effectiveDateTime = '2017-05-05'
-    cd4CountObservation.valueQuantity = 'Test Result'
-    cd4CountObservation.performer[0].reference = '#practioner-1'
-    cd4CountObservation.contained = [{
-      resourceType: 'Practitioner',
-      id: 'practioner-1',
-      name: [{
-        family: ['Provider'],
-        given: ['Test']
+      // CD4 Count
+      const cd4CountEncounter = JSON.parse(JSON.stringify(encounterTemplate))
+      const cd4CountObservation = JSON.parse(JSON.stringify(observationTemplate))
+      cd4CountEncounter.period.start = '2017-04-04'
+      cd4CountEncounter.type = [
+        { coding: [ { system: 'http://hearth.org/cbs/event-types', code: 'cd4-count', display: 'CD4 Count' } ] }
+      ]
+      cd4CountEncounter.location[0].location.display = 'Chuk'
+      cd4CountObservation.effectiveDateTime = '2017-05-05'
+      cd4CountObservation.valueQuantity = 'Test Result'
+      cd4CountObservation.performer[0].reference = '#practioner-1'
+      cd4CountObservation.contained = [{
+        resourceType: 'Practitioner',
+        id: 'practioner-1',
+        name: [{
+          family: ['Provider'],
+          given: ['Test']
+        }]
       }]
     }]
 
-    // Viral Load
-    const viralLoadEncounter = JSON.parse(JSON.stringify(encounterTemplate))
-    const viralLoadObservation = JSON.parse(JSON.stringify(observationTemplate))
-    viralLoadEncounter.period.start = '2017-04-04'
-    viralLoadEncounter.type = [
-      { coding: [ { system: 'http://hearth.org/cbs/event-types', code: 'viral-load', display: 'First Viral Load' } ] }
-    ]
-    viralLoadEncounter.location[0].location.display = 'Chuk'
+      // Viral Load
+      const viralLoadEncounter = JSON.parse(JSON.stringify(encounterTemplate))
+      const viralLoadObservation = JSON.parse(JSON.stringify(observationTemplate))
+      viralLoadEncounter.period.start = '2017-04-04'
+      viralLoadEncounter.type = [
+        { coding: [ { system: 'http://hearth.org/cbs/event-types', code: 'viral-load', display: 'First Viral Load' } ] }
+      ]
+      viralLoadEncounter.location[0].location.display = 'Chuk'
 
-    viralLoadObservation.effectiveDateTime = '2017-04-04'
-    viralLoadObservation.code.coding[0].system = 'http://loinc.org'
-    viralLoadObservation.code.coding[0].code = '25836-8'
-    viralLoadObservation.code.coding[0].display = 'HIV 1 RNA [#/​volume] (viral load) in Unspecified specimen by Probe and target amplification method'
+      viralLoadObservation.effectiveDateTime = '2017-04-04'
+      viralLoadObservation.code.coding[0].system = 'http://loinc.org'
+      viralLoadObservation.code.coding[0].code = '25836-8'
+      viralLoadObservation.code.coding[0].display = 'HIV 1 RNA [#/​volume] (viral load) in Unspecified specimen by Probe and target amplification method'
 
-    viralLoadObservation.valueQuantity = {
-      value: 599,
-      unit: 'copies/mL',
-      system: 'http://unitsofmeasure.org',
-      code: 'copies/mL'
-    }
-
-    viralLoadObservation.contained = [
-      {
-        resourceType: 'Practitioner',
-        id: 'practioner-1',
-        'name': [{
-          'family': ['Smith'],
-          'given': ['Jane']
-        }]
+      viralLoadObservation.valueQuantity = {
+        value: 599,
+        unit: 'copies/mL',
+        system: 'http://unitsofmeasure.org',
+        code: 'copies/mL'
       }
     ]
 
-    viralLoadObservation.performer = [
-      {
-        reference: '#practioner-1'
-      }
-    ]
+      viralLoadObservation.contained = [
+        {
+          resourceType: 'Practitioner',
+          id: 'practioner-1',
+          'name': [{
+            'family': ['Smith'],
+            'given': ['Jane']
+          }]
+        }
+      ]
 
-    const encounters = [
-      {
-        'resource': hivConfirmationEncounter,
-        '_observations': [hivConfirmationObservation, hivConfirmationObservationPartnerStatus]
-      }, {
-        'resource': linkageToCareEncounter,
-        '_observations': []
-      }, {
-        'resource': cd4CountEncounter,
-        '_observations': [cd4CountObservation]
-      }, {
-        'resource': viralLoadEncounter,
-        '_observations': [viralLoadObservation]
-      }
-    ]
+      viralLoadObservation.performer = [
+        {
+          reference: '#practioner-1'
+        }
+      ]
 
-    // when
-    const formattedEvents = Events().formatEvents(encounters)
+      const encounters = [
+        {
+          'resource': hivConfirmationEncounter,
+          '_observations': [hivConfirmationObservation, hivConfirmationObservationPartnerStatus]
+        }, {
+          'resource': linkageToCareEncounter,
+          '_observations': []
+        }, {
+          'resource': cd4CountEncounter,
+          '_observations': [cd4CountObservation]
+        }, {
+          'resource': viralLoadEncounter,
+          '_observations': [viralLoadObservation]
+        }
+      ]
 
-    t.ok(formattedEvents)
+      // when
+      const formattedEvents = Events().formatEvents(encounters)
 
-    t.equal(formattedEvents[0].eventType, 'hiv-confirmation', 'should have a eventType of "hiv-confirmation"')
-    t.equal(formattedEvents[0].eventDate, '2017-06-01', 'should have a eventDate of "2017-06-01"')
-    t.equal(formattedEvents[0].data.partnerStatus, 'Positive', 'should have a partnerStatus of "Positive"')
-    t.equal(formattedEvents[0].data.firstPositiveHivTestLocation, 'Chuk', 'should have a firstPositiveHivTestLocation of "Chuk"')
-    t.equal(formattedEvents[0].data.firstPositiveHivTestDate, '2010-06-30', 'should have a firstPositiveHivTestDate of "2010-06-30"')
+      t.ok(formattedEvents)
 
-    t.equal(formattedEvents[1].eventType, 'linkage-to-care', 'should have a eventType of "linkage-to-care"')
-    t.equal(formattedEvents[1].eventDate, '2017-04-04', 'should have a eventDate of "2017-04-04"')
-    t.equal(formattedEvents[1].data.encounterType, 'ANC Visit', 'should have a "encounterType" of "ANC Visit"')
-    t.equal(formattedEvents[1].data.encounterLocation, 'Chuk', 'should have a encounterLocation of "Chuk"')
+      t.equal(formattedEvents[0].eventType, 'hiv-confirmation', 'should have a eventType of "hiv-confirmation"')
+      t.equal(formattedEvents[0].eventDate, '2017-06-01', 'should have a eventDate of "2017-06-01"')
+      t.equal(formattedEvents[0].data.partnerStatus, 'Positive', 'should have a partnerStatus of "Positive"')
+      t.equal(formattedEvents[0].data.firstPositiveHivTestLocation, 'Chuk', 'should have a firstPositiveHivTestLocation of "Chuk"')
+      t.equal(formattedEvents[0].data.firstPositiveHivTestDate, '2010-06-30', 'should have a firstPositiveHivTestDate of "2010-06-30"')
 
-    t.equal(formattedEvents[2].eventType, 'cd4-count', 'should have a eventType of "cd4-count"')
-    t.equal(formattedEvents[2].eventDate, '2017-04-04', 'should have a eventDate of "2017-04-04"')
-    t.equal(formattedEvents[2].data.cd4CountDate, '2017-05-05', 'should have a cd4CountDate of "2017-05-05"')
-    t.equal(formattedEvents[2].data.cd4CountLocation, 'Chuk', 'should have a cd4CountLocation of "Chuk"')
-    t.equal(formattedEvents[2].data.cd4CountResult, 'Test Result', 'should have a cd4CountResult of "Test Result"')
-    t.equal(formattedEvents[2].data.cd4CountProvider, 'Test Provider', 'should have a cd4CountProvider of "Test Provider"')
+      t.equal(formattedEvents[1].eventType, 'linkage-to-care', 'should have a eventType of "linkage-to-care"')
+      t.equal(formattedEvents[1].eventDate, '2017-04-04', 'should have a eventDate of "2017-04-04"')
+      t.equal(formattedEvents[1].data.encounterType, 'ANC Visit', 'should have a "encounterType" of "ANC Visit"')
+      t.equal(formattedEvents[1].data.encounterLocation, 'Chuk', 'should have a encounterLocation of "Chuk"')
 
-    t.equal(formattedEvents[3].eventType, 'viral-load', 'should have a eventType of "viral-load"')
-    t.equal(formattedEvents[3].eventDate, '2017-04-04', 'should have a eventDate of "2017-04-04"')
-    t.equal(formattedEvents[3].data.viralLoadDate, '2017-04-04', 'should have a viralLoadDate of "2017-04-04"')
-    t.equal(formattedEvents[3].data.viralLoadResults.unit, 'copies/mL', 'should have a viralLoadResults.unit of "copies/mL"')
-    t.equal(formattedEvents[3].data.viralLoadResults.value, 599, 'should have a viralLoadResults.value of "599"')
-    t.equal(formattedEvents[3].data.viralLoadLocation, 'Chuk', 'should have a viralLoadLocation of "Chuk"')
-    t.equal(formattedEvents[3].data.viralLoadProvider, 'Jane Smith', 'should have a viralLoadProvider of "Jane Smith"')
+      t.equal(formattedEvents[2].eventType, 'cd4-count', 'should have a eventType of "cd4-count"')
+      t.equal(formattedEvents[2].eventDate, '2017-04-04', 'should have a eventDate of "2017-04-04"')
+      t.equal(formattedEvents[2].data.cd4CountDate, '2017-05-05', 'should have a cd4CountDate of "2017-05-05"')
+      t.equal(formattedEvents[2].data.cd4CountLocation, 'Chuk', 'should have a cd4CountLocation of "Chuk"')
+      t.equal(formattedEvents[2].data.cd4CountResult, 'Test Result', 'should have a cd4CountResult of "Test Result"')
+      t.equal(formattedEvents[2].data.cd4CountProvider, 'Test Provider', 'should have a cd4CountProvider of "Test Provider"')
 
-    t.end()
+      t.equal(formattedEvents[3].eventType, 'viral-load', 'should have a eventType of "viral-load"')
+      t.equal(formattedEvents[3].eventDate, '2017-04-04', 'should have a eventDate of "2017-04-04"')
+      t.equal(formattedEvents[3].data.viralLoadDate, '2017-04-04', 'should have a firstViralLoadDate of "2017-04-04"')
+      t.equal(formattedEvents[3].data.viralLoadResults.unit, 'copies/mL', 'should have a firstViralLoadResults.unit of "copies/mL"')
+      t.equal(formattedEvents[3].data.viralLoadResults.value, 599, 'should have a firstViralLoadResults.value of "599"')
+      t.equal(formattedEvents[3].data.viralLoadLocation, 'Chuk', 'should have a firstViralLoadLocation of "Chuk"')
+      t.equal(formattedEvents[3].data.viralLoadProvider, 'Jane Smith', 'should have a firstViralLoadProvider of "Jane Smith"')
+
+      t.end()
+    })
   })
 
   t.test('.getAllEncountersForPatient', { autoend: true }, (t) => {

@@ -6,7 +6,15 @@
     {
       "coding": [
         {
-          "system": "http://hearth.org/event-types",
+          "system": "http://hearth.org/cbs/event-types",
+          "code": "",
+          "display": ""
+        }
+      ]
+    }, {
+      "coding": [
+        {
+          "system": "http://hearth.org/cbs/encounter-types",
           "code": "",
           "display": ""
         }

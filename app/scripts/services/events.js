@@ -135,7 +135,7 @@ module.exports = function (Api, $q) {
     },
 
     getAllEncountersForPatient: (patientId, callback) => {
-      Api.Encounters.get({ patient: patientId }, (res) => {
+      Api.Encounters.get({ patient: patientId, _count: 0 }, (res) => {
         callback(null, res.entry)
       }, (err) => {
         callback(err)
