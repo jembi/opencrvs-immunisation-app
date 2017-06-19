@@ -11,6 +11,14 @@
           "display": ""
         }
       ]
+    }, {
+      "coding": [
+        {
+          "system": "http://hearth.org/procedure-types",
+          "code": "",
+          "display": ""
+        }
+      ]
     }
   ],
   "period": {
