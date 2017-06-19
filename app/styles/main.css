@@ -16,6 +16,10 @@ body {
   background: rgb(250,250,250)
 }
 
+.center-text {
+  text-align: center;
+}
+
 /* FormBuilder DatePicker style override */
 .md-datepicker-input-container {
   width: calc(100% - 70px) !important;
