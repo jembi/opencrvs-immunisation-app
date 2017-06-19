@@ -261,11 +261,11 @@ tap.test('.submit()', { autoend: true }, (t) => {
     const mockFormData = {
       $setPristine: function () {},
       $setUntouched: function () {},
-      encounterDate: {
+      dateOfExam: {
         $modelValue: '2017-02-02',
         $dirty: true
       },
-      encounterLocation: {
+      location: {
         $modelValue: 'Kacyiru Police Hospital',
         $dirty: true
       },

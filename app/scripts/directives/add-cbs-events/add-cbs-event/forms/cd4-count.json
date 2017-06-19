@@ -9,8 +9,8 @@
       "fields": [{
         "type": "date",
         "flex": "20",
-        "name": "encounterDate",
-        "title": "Encounter Date",
+        "name": "dateOfExam",
+        "title": "Date of Exam",
         "settings": {
           "valueType": "valueString",
           "disabled": false,
@@ -21,19 +21,19 @@
           "path": "period.start",
           "params": null,
           "valueType": "formValue",
-          "value": "encounterDate"
+          "value": "dateOfExam"
         }, {
           "resourceKey": "main",
           "path": "period.end",
           "params": null,
           "valueType": "formValue",
-          "value": "encounterDate"
+          "value": "dateOfExam"
         }, {
           "resourceKey": "cd4CountObs",
           "path": "effectiveDateTime",
           "params": null,
           "valueType": "formValue",
-          "value": "encounterDate"
+          "value": "dateOfExam"
         }],
         "skipLogic": {
           "func": {},
@@ -44,7 +44,7 @@
       {
         "type": "select",
         "flex": "20",
-        "name": "encounterLocation",
+        "name": "location",
         "title": "Location",
         "settings": {
           "valueType": "valueString",
@@ -57,7 +57,7 @@
           "path": "location[0].location.display",
           "params": null,
           "valueType": "formValue",
-          "value": "encounterLocation"
+          "value": "location"
         }],
         "skipLogic": {
           "func": {},
