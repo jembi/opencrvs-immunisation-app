@@ -2,6 +2,20 @@
 <md-content>
   <link rel="stylesheet" href="app/scripts/directives/patients-list/style.css" />
 
+  <div layout="row" layout-align="center center" ng-if="patients && !singlePatient" style="padding: 10px;">
+    <div flex-sm="90" flex-gt-sm="70" flex-gt-md="50" layout="column" layout-align="center center">
+      <div ng-if="patients.count > 0">Not finding the Patient you are looking for? </div>
+      <div ng-if="patients.count === 0">No results found matching your query.</div>
+      <div ng-if="!partialPatientDemographics">Try searching by demographics</div>
+
+      <div>
+        <button class="md-button md-primary md-raised" ng-click="clearSearch()">Clear Search</button>
+        <span ng-if="partialPatientDemographics" flex>OR</span>
+        <button ng-if="partialPatientDemographics" class="md-button md-primary md-raised" ng-click="createPatient()">Create patient</button>
+      </div>
+    </div>
+  </div>
+
   <div ng-if="patients.count > 0">
     <md-table-container>
       <table md-table md-row-select="options.rowSelection" multiple="{{options.multiSelect}}" ng-model="selected" md-progress="promise">
@@ -50,19 +64,5 @@
     </md-table-container>
 
     <md-table-pagination ng-if="!singlePatient" md-limit="query.limit" md-limit-options="limitOptions" md-page="query.page" md-total="{{patients.count}}" md-page-select="options.pageSelect" md-boundary-links="options.boundaryLinks" md-on-paginate="logPagination"></md-table-pagination>
-  </div>
-
-  <div layout="row" layout-align="center center" ng-if="patients && !singlePatient" style="padding: 10px;">
-    <div flex-sm="90" flex-gt-sm="70" flex-gt-md="50" layout="column" layout-align="center center">
-      <div ng-if="patients.count > 0">Not finding the Patient you are looking for? </div>
-      <div ng-if="patients.count === 0">No results found matching your query.</div>
-      <div ng-if="!partialPatientDemographics">Try searching by demographics</div>
-
-      <div>
-        <button class="md-button md-primary md-raised" ng-click="clearSearch()">Clear Search</button>
-        <span ng-if="partialPatientDemographics" flex>OR</span>
-        <button ng-if="partialPatientDemographics" class="md-button md-primary md-raised" ng-click="createPatient()">Create patient</button>
-      </div>
-    </div>
   </div>
 </md-content>
