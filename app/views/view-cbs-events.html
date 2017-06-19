@@ -18,8 +18,17 @@
       </timeline-panel>
     </timeline-event>
     <timeline-event ng-repeat="eventItem in events">
-      <timeline-badge class="info">
-        <md-icon>event_note</md-icon>
+      <timeline-badge class="warning" ng-if="eventItem.eventType === 'linkage-to-care'">
+        <md-icon>link</md-icon>
+      </timeline-badge>
+      <timeline-badge class="danger" ng-if="eventItem.eventType === 'hiv-confirmation'">
+        <md-icon>start_rate</md-icon>
+      </timeline-badge>
+      <timeline-badge class="success" ng-if="eventItem.eventType === 'cd4-count'">
+        <md-icon>gradient</md-icon>
+      </timeline-badge>
+      <timeline-badge class="danger" ng-if="eventItem.eventType === 'viral-load'">
+        <md-icon>texture</md-icon>
       </timeline-badge>
       <timeline-panel flex class="info">
         <timeline-heading>
