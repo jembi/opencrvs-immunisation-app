@@ -111,13 +111,13 @@
           "path": "contained[0].id",
           "params": null,
           "valueType": "staticValue",
-          "value": "#provider-1"
+          "value": "provider-1"
         }, {
           "resourceKey": "viralLoadObs",
           "path": "performer[0].reference",
           "params": null,
           "valueType": "staticValue",
-          "value": "provider-1"
+          "value": "#provider-1"
         }],
         "skipLogic": {
           "func": {},
@@ -158,10 +158,16 @@
         },
         "FHIRMappings": [{
           "resourceKey": "viralLoadObs",
-          "path": "valueQuantity",
+          "path": "valueCodeableConcept.text",
           "params": null,
           "valueType": "formValue",
           "value": "viralLoadResult"
+        }, {
+          "resourceKey": "viralLoadObs",
+          "path": "valueCodeableConcept.coding.code",
+          "params": null,
+          "valueType": "staticValue",
+          "value": "66725-3"
         }],
         "skipLogic": {
           "func": {},

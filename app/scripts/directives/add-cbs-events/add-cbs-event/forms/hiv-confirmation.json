@@ -109,7 +109,7 @@
           "value": "@main"
         }, {
           "resourceKey": "subjectHIVObs",
-          "path": "code.coding[0].code",
+          "path": "valueCodeableConcept.coding.code",
           "params": null,
           "valueType": "staticValue",
           "value": "55277-8"
@@ -158,13 +158,13 @@
           "value": "@main"
         }, {
           "resourceKey": "partnerHIVObs",
-          "path": "code.coding[0].code",
+          "path": "valueCodeableConcept.coding.code",
           "params": null,
           "valueType": "staticValue",
           "value": "partner-hiv-status"
         }, {
           "resourceKey": "partnerHIVObs",
-          "path": "code.coding[0].system",
+          "path": "valueCodeableConcept.coding.system",
           "params": null,
           "valueType": "staticValue",
           "value": "http://hearth.org/cbs/observation-types"
