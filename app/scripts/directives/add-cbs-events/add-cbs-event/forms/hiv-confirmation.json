@@ -94,7 +94,7 @@
       {
         "type": "select",
         "flex": "20",
-        "name": "hivStatus",
+        "name": "subjectHIVStatus",
         "title": "HIV Status",
         "settings": {
           "valueType": "valueString",
@@ -117,8 +117,8 @@
           "resourceKey": "subjectHIVObs",
           "path": "valueCodeableConcept.text",
           "params": null,
-          "valueType": "formValue",
-          "value": "hivStatus"
+          "valueType": "optionValue",
+          "value": "subjectHIVStatus"
         }],
         "skipLogic": {
           "func": {},
@@ -148,8 +148,8 @@
           "resourceKey": "partnerHIVObs",
           "path": "valueCodeableConcept.text",
           "params": null,
-          "valueType": "formValue",
-          "value": "partnerHivStatus"
+          "valueType": "optionValue",
+          "value": "partnerHIVStatus"
         }, {
           "resourceKey": "partnerHIVObs",
           "path": "encounter.reference",

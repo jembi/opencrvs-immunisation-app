@@ -12,7 +12,7 @@ tap.tearDown(() => {
   sandbox.restore()
 })
 
-tap.test('.mapFHIRObject()', { autoend: true }, (t) => {
+tap.test('.mapFHIRResources()', { autoend: true }, (t) => {
   t.test('should map FormBuilder field values to a FHIR document', (t) => {
     // given
     const FormBuilderLinkageToCare = require('../../app/scripts/directives/add-cbs-events/add-cbs-event/forms/linkage-to-care.json')
@@ -27,7 +27,8 @@ tap.test('.mapFHIRObject()', { autoend: true }, (t) => {
       encounterType: 'pmtct-visit'
     }
     // when
-    const encounter = FHIR.mapFHIRObject(FHIREncounterResource, FormBuilderInstance, mockFormData)
+    const fhirResourceDict = FHIR.mapFHIRResources({ main: FHIREncounterResource }, FormBuilderInstance, mockFormData)
+    const encounter = fhirResourceDict.main
     // then
     t.ok(encounter)
 

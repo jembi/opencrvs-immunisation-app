@@ -103,44 +103,65 @@ module.exports = function () {
     return optionVal
   }
 
+  const forEachFormBuilderField = (FormBuilder, func) => {
+    FormBuilder.sections.forEach((section) => {
+      section.rows.forEach((row) => {
+        row.fields.forEach((field) => {
+          func(field, row, section)
+        })
+      })
+    })
+  }
+
   return {
-    mapFHIRObject: function (fhirObject, FormBuilder, formData) {
-      for (var fbs = 0; fbs < FormBuilder.sections.length; fbs++) {
-        var section = FormBuilder.sections[fbs]
 
-        for (var fbr = 0; fbr < section.rows.length; fbr++) {
-          var row = section.rows[fbr]
-
-          for (var fbf = 0; fbf < row.fields.length; fbf++) {
-            var field = row.fields[fbf]
-
-            if (field.FHIRMappings) {
-              for (var fbm = 0; fbm < field.FHIRMappings.length; fbm++) {
-                var FHIRMappingInstance = field.FHIRMappings[fbm]
-                var newVal
-                switch (FHIRMappingInstance.valueType) {
-                  case 'formValue':
-                    newVal = formData[ FHIRMappingInstance.value ]
-                    break
-                  case 'optionValue':
-                    var keyVal = formData[ FHIRMappingInstance.value ]
-                    newVal = getOptionDisplayValue(field.options, keyVal)
-                    break
-                  case 'staticValue':
-                    newVal = FHIRMappingInstance.value
-                    break
-                }
-
-                if (newVal) {
-                  setDataInResource(newVal, fhirObject, FHIRMappingInstance.path, FHIRMappingInstance.params)
-                }
-              }
+    /**
+     * mapFHIRResources - maps FormBuilder form fields to multiple FHIR resources
+     *
+     * @param  {Object} fhirResourceDict - a dictionary where each key-value pair is
+     * a resourceKey and a resource object. The main resource that all the others link
+     * to must use a key of 'main', otherwise the keys can be anything you choose. the
+     * FHIRMappings property on each field will be used to map it to these resources
+     * @param  {Object} FormBuilder - the formbuilder object
+     * @param  {Object} formData - the formdata set by formbuilder
+     * @return {Object} the fhirResourceDict with each resource mapped to the formData
+     * values
+     */
+    mapFHIRResources: function (fhirResourceDict, FormBuilder, formData) {
+      forEachFormBuilderField(FormBuilder, (field, row, section) => {
+        if (field.FHIRMappings) {
+          field.FHIRMappings.forEach((fhirMap) => {
+            if (!fhirMap.resourceKey) {
+              return console.error(`FHIRMapping for ${field.name} has no resourceKey, skipping`)
             }
-          }
-        }
-      }
 
-      return fhirObject
+            const resource = fhirResourceDict[fhirMap.resourceKey]
+            if (!resource) {
+              return console.error(`FHIR resource dictionary has no key ${fhirMap.resourceKey}, skipping`)
+            }
+
+            var newVal
+            switch (fhirMap.valueType) {
+              case 'formValue':
+                newVal = formData[fhirMap.value]
+                break
+              case 'optionValue':
+                const keyVal = formData[fhirMap.value]
+                newVal = getOptionDisplayValue(field.options, keyVal)
+                break
+              case 'staticValue':
+                newVal = fhirMap.value
+                break
+            }
+
+            if (newVal) {
+              setDataInResource(newVal, resource, fhirMap.path, fhirMap.params)
+            }
+          })
+        }
+      })
+
+      return fhirResourceDict
     }
   }
 }

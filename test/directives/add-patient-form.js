@@ -169,7 +169,10 @@ tap.test('.link()', { autoend: true }, (t) => {
       }
       const patientApiMock = {
         save: (body, success) => {
-          return success({ id: 'dummyId' })
+          return success({}, (header) => {
+            const headers = { location: 'aaa/bbb/ccc' }
+            return headers[header]
+          })
         }
       }
       const stateMock = {

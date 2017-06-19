@@ -97,6 +97,9 @@ tap.test('.submit()', { autoend: true }, (t) => {
         } else if (file === 'app/scripts/services/FHIR/resources/Encounter.json') {
           const FHIREncounterResource = require('../../app/scripts/services/FHIR/resources/Encounter.json')
           resolve(FHIREncounterResource)
+        } else if (file === 'app/scripts/services/FHIR/resources/Observation.json') {
+          const FHIRObservationResource = require('../../app/scripts/services/FHIR/resources/Observation.json')
+          resolve(FHIRObservationResource)
         }
       })
     }
@@ -107,12 +110,12 @@ tap.test('.submit()', { autoend: true }, (t) => {
           t.equals(result.isValid, true)
           t.equals(result.msg, 'Event has been successfully added for submission')
 
-          t.equals(stateService.pushToEventsArray.getCall(0).args[0].resourceType, 'Encounter')
-          t.equals(stateService.pushToEventsArray.getCall(0).args[0].period.start, '2017-02-23')
-          t.equals(stateService.pushToEventsArray.getCall(0).args[0].location[0].location.display, 'Kacyiru Police Hospital')
-          t.equals(stateService.pushToEventsArray.getCall(0).args[0].type[0].coding[0].display, 'PMTCT visit')
-          t.equals(stateService.pushToEventsArray.getCall(0).args[0].type[0].coding[0].code, 'pmtct-visit')
-          t.equals(stateService.pushToEventsArray.getCall(0).args[0].patient.reference, 'Patient/AAAAA-BBBB-CCCC-DDDDD-EEEEEE')
+          t.equals(stateService.pushToEventsArray.getCall(0).args[0].main.resourceType, 'Encounter')
+          t.equals(stateService.pushToEventsArray.getCall(0).args[0].main.period.start, '2017-02-23')
+          t.equals(stateService.pushToEventsArray.getCall(0).args[0].main.location[0].location.display, 'Kacyiru Police Hospital')
+          t.equals(stateService.pushToEventsArray.getCall(0).args[0].main.type[0].coding[0].display, 'PMTCT visit')
+          t.equals(stateService.pushToEventsArray.getCall(0).args[0].main.type[0].coding[0].code, 'pmtct-visit')
+          t.equals(stateService.pushToEventsArray.getCall(0).args[0].main.patient.reference, 'Patient/AAAAA-BBBB-CCCC-DDDDD-EEEEEE')
           testSandbox.restore()
           t.end()
         }
@@ -152,12 +155,12 @@ tap.test('.submit()', { autoend: true }, (t) => {
         $modelValue: 'Chuk',
         $dirty: true
       },
-      hivStatus: {
-        $modelValue: 'Positive',
+      subjectHIVStatus: {
+        $modelValue: 'positive',
         $dirty: true
       },
-      parnterHivStatus: {
-        $modelValue: 'Negative',
+      partnerHIVStatus: {
+        $modelValue: 'negative',
         $dirty: true
       }
     }
@@ -186,7 +189,7 @@ tap.test('.submit()', { autoend: true }, (t) => {
           t.equals(stateService.pushToEventsArray.getCall(0).args[0].main.resourceType, 'Encounter')
           t.equals(stateService.pushToEventsArray.getCall(0).args[0].main.period.start, '2017-01-01')
           t.equals(stateService.pushToEventsArray.getCall(0).args[0].main.location[0].location.display, 'Chuk')
-          t.equals(stateService.pushToEventsArray.getCall(0).args[0].main.subject.reference, 'Patient/AAAAA-BBBB-CCCC-DDDDD-GG')
+          t.equals(stateService.pushToEventsArray.getCall(0).args[0].main.patient.reference, 'Patient/AAAAA-BBBB-CCCC-DDDDD-GG')
 
           // Patient HIV Observation
           t.equals(stateService.pushToEventsArray.getCall(0).args[0].subjectHIVObs.resourceType, 'Observation')

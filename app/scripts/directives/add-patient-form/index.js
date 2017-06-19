@@ -27,14 +27,13 @@ module.exports = function (Api, loadResource, $q, state, FHIR, $location) {
         loadResource.fetch('app/scripts/services/FHIR/resources/Patient.json').then(function (fhirDoc) {
           formFieldsValues.dob = moment(formFieldsValues.dob).format('YYYY-MM-DD')
           formFieldsValues.firstPostitiveHivTestDate = moment(formFieldsValues.firstPostitiveHivTestDate).format('YYYY-MM-DD')
-          var fhirObject = FHIR.mapFHIRObject(fhirDoc, scope.state.FormBuilderAddPatient, formFieldsValues)
+          var fhirResourceDict = FHIR.mapFHIRResources({ main: fhirDoc }, scope.state.FormBuilderAddPatient, formFieldsValues)
 
-          Api.Patients.save(fhirObject, function (response, headers) {
+          Api.Patients.save(fhirResourceDict.main, function (bundle, headers) {
             defer.resolve({ isValid: true, msg: 'Patient created successfully' })
             const patientId = headers('location').split('/')[3]
             $location.path('/events/' + patientId)
           }, function (err) {
-            console.error(err)
             defer.reject({ isValid: false, msg: err.statusText || 'Could not connect to server' })
           })
         })
