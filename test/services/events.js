@@ -274,7 +274,6 @@ tap.test('Events service', { autoend: true }, (t) => {
           given: ['Test']
         }]
       }]
-    }]
 
       // Viral Load
       const viralLoadEncounter = JSON.parse(JSON.stringify(encounterTemplate))
@@ -296,7 +295,6 @@ tap.test('Events service', { autoend: true }, (t) => {
         system: 'http://unitsofmeasure.org',
         code: 'copies/mL'
       }
-    ]
 
       viralLoadObservation.contained = [
         {
