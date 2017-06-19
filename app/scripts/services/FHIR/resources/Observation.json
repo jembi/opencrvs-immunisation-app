@@ -41,5 +41,14 @@
     },
     "text": ""
   },
-  "contained": []
+  "contained": [
+    {
+      "name": [
+        {
+          "given": [],
+          "family": []
+        }
+      ]
+    }
+  ]
 }

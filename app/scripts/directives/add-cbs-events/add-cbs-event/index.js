@@ -42,7 +42,7 @@ module.exports = function (loadResource, $q, state, FHIR, FormBuilderService) {
                   break
                 case 'cd4-count':
                   setProcedureEventType(encounterTemplate, scope.cbsEvent.code, 'CD4 Count')
-                  resourceTemplateDict = { main: encounterTemplate } // TODO
+                  resourceTemplateDict = { main: encounterTemplate, cd4CountObs: cloneDeep(observationTemplate) }
                   break
                 case 'first-viral-load':
                   setProcedureEventType(encounterTemplate, scope.cbsEvent.code, 'First Viral Load')
