@@ -7,7 +7,7 @@
     "name": "Row 1",
     "title": "Please supply your emergency contact information below.",
     "layout": "row",
-    "fields": [{ 
+    "fields": [{
       "type": "input",
       "flex": "20",
       "name": "emergencyContactFirstName",
@@ -16,12 +16,13 @@
         "required": true
       },
       "FHIRMappings": [{
+        "resourceKey": "main",
         "path": "contact[0].name[0].given[0]",
         "params": null,
         "valueType": "formValue",
         "value": "emergencyContactFirstName"
       }]
-    }, { 
+    }, {
       "type": "input",
       "flex": "20",
       "name": "emergencyContactLastName",
@@ -30,12 +31,13 @@
         "required": true
       },
       "FHIRMappings": [{
+        "resourceKey": "main",
         "path": "contact[0].name[0].family[0]",
         "params": null,
         "valueType": "formValue",
         "value": "emergencyContactLastName"
       }]
-    }, { 
+    }, {
       "type": "select",
       "flex": "20",
       "name": "emergencyContactRelationship",
@@ -72,12 +74,13 @@
 						"value": "Parent"
 				 }],
       "FHIRMappings": [{
+        "resourceKey": "main",
         "path": "contact[0].relationship[1].coding[0].code",
         "params": null,
         "valueType": "formValue",
         "value": "emergencyContactRelationship"
       }]
-    }, { 
+    }, {
       "type": "input",
       "flex": "20",
       "name": "emergencyContactMobile",
@@ -86,17 +89,19 @@
         "required": true
       },
       "FHIRMappings": [{
+        "resourceKey": "main",
         "path": "contact.telecom.value",
         "params": "contact.telecom.system=phone",
         "valueType": "formValue",
         "value": "emergencyContactMobile"
       }, {
+        "resourceKey": "main",
         "path": "contact.telecom.use",
         "params": "contact.telecom.system=phone",
         "valueType": "staticValue",
         "value": "Mobile"
       }]
-    }, { 
+    }, {
       "type": "email",
       "flex": "20",
       "name": "emergencyContactEmail",
@@ -105,6 +110,7 @@
         "required": true
       },
       "FHIRMappings": [{
+        "resourceKey": "main",
         "path": "contact.telecom.value",
         "params": "contact.telecom.system=email",
         "valueType": "formValue",
