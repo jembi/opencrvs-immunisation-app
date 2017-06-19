@@ -19,7 +19,7 @@ module.exports = function () {
       // remove validation errors
       form.$setPristine()
       form.$setUntouched()
-    }, 
+    },
 
     getFormFieldValues: (form) => {
       var formFieldsValues = {}

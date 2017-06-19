@@ -35,8 +35,8 @@ tap.test('.mapFHIRResources()', { autoend: true }, (t) => {
     t.equal(encounter.period.start, '2017-02-23', 'should have a start period of "2017-02-23"')
     t.equal(encounter.period.end, '2017-02-23', 'should have a end period of "2017-02-23"')
 
-    t.equal(encounter.type[0].coding[0].code, 'pmtct-visit', 'should have a type.coding.code of "pmtct-visit"')
-    t.equal(encounter.type[0].coding[0].display, 'PMTCT visit', 'should have a end period of "PMTCT visit"')
+    t.equal(encounter.type[1].coding[0].code, 'pmtct-visit', 'should have a type.coding.code of "pmtct-visit"')
+    t.equal(encounter.type[1].coding[0].display, 'PMTCT visit', 'should have a end period of "PMTCT visit"')
 
     t.equal(encounter.class, 'HIVAIDS', 'should have a class of "HIVAIDS"')
 
