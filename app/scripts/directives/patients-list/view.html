@@ -22,6 +22,7 @@
         <thead ng-if="!options.decapitate" md-head md-order="query.order" md-on-reorder="logOrder">
           <tr md-row ng-class="{'squash-thead': singlePatient}">
             <th width="50"></th>
+            <th md-column md-numeric width="10">#</th>
             <th md-column><span>Name</span></th>
             <th md-column><span>Surname</span></th>
             <th md-column><span>Gender</span></th>
@@ -40,6 +41,7 @@
               <i class="material-icons" ng-if="patient._control.showPatientDetails">expand_less</i>
               <i class="material-icons" ng-if="!patient._control.showPatientDetails">expand_more</i>
             </td>
+            <td md-cell>{{$index + 1}}</td>
             <td md-cell>{{patient.name.given}}</td>
             <td md-cell>{{patient.name.family}}</td>
             <td md-cell>{{patient.gender}}</td>
