@@ -112,7 +112,7 @@
           "path": "code.coding[0].code",
           "params": null,
           "valueType": "staticValue",
-          "value": "33660-2"
+          "value": "55277-8"
         }, {
           "resourceKey": "subjectHIVObs",
           "path": "valueCodeableConcept.text",
@@ -162,6 +162,12 @@
           "params": null,
           "valueType": "staticValue",
           "value": "partner-hiv-status"
+        }, {
+          "resourceKey": "partnerHIVObs",
+          "path": "code.coding[0].system",
+          "params": null,
+          "valueType": "staticValue",
+          "value": "http://hearth.org/cbs/observation-types"
         }],
         "skipLogic": {
           "func": {},

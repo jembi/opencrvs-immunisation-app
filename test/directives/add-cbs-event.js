@@ -194,7 +194,8 @@ tap.test('.submit()', { autoend: true }, (t) => {
           // Patient HIV Observation
           t.equals(stateService.pushToEventsArray.getCall(0).args[0].subjectHIVObs.resourceType, 'Observation')
           t.equals(stateService.pushToEventsArray.getCall(0).args[0].subjectHIVObs.encounter.reference, '@main')
-          t.equals(stateService.pushToEventsArray.getCall(0).args[0].subjectHIVObs.code.coding[0].code, '33660-2')
+          t.equals(stateService.pushToEventsArray.getCall(0).args[0].subjectHIVObs.code.coding[0].code, '55277-8')
+          t.equals(stateService.pushToEventsArray.getCall(0).args[0].subjectHIVObs.code.coding[0].system, 'http://loinc.org')
           t.equals(stateService.pushToEventsArray.getCall(0).args[0].subjectHIVObs.valueCodeableConcept.text, 'Positive')
           t.equals(stateService.pushToEventsArray.getCall(0).args[0].subjectHIVObs.effectiveDateTime, '2017-01-01')
 
@@ -202,6 +203,7 @@ tap.test('.submit()', { autoend: true }, (t) => {
           t.equals(stateService.pushToEventsArray.getCall(0).args[0].partnerHIVObs.resourceType, 'Observation')
           t.equals(stateService.pushToEventsArray.getCall(0).args[0].partnerHIVObs.encounter.reference, '@main')
           t.equals(stateService.pushToEventsArray.getCall(0).args[0].partnerHIVObs.code.coding[0].code, 'partner-hiv-status')
+          t.equals(stateService.pushToEventsArray.getCall(0).args[0].partnerHIVObs.code.coding[0].system, 'http://hearth.org/cbs/observation-types')
           t.equals(stateService.pushToEventsArray.getCall(0).args[0].partnerHIVObs.valueCodeableConcept.text, 'Negative')
           t.equals(stateService.pushToEventsArray.getCall(0).args[0].partnerHIVObs.effectiveDateTime, '2017-01-01')
 
