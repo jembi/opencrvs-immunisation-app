@@ -14,7 +14,7 @@
     }, {
       "coding": [
         {
-          "system": "http://hearth.org/cbs/procedure-types",
+          "system": "http://hearth.org/cbs/encounter-types",
           "code": "",
           "display": ""
         }
