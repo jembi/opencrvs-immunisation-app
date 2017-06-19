@@ -13,14 +13,7 @@ module.exports = function (loadResource, $q, state, FHIR, FormBuilderService) {
         var submit = function (form) {
           var defer = $q.defer()
 
-          var formFieldsValues = {}
-          for (var k in form) {
-            if (form.hasOwnProperty(k)) {
-              if (typeof form[k] === 'object' && form[k].hasOwnProperty('$modelValue') && form[k].$dirty) {
-                formFieldsValues[k] = form[k].$modelValue
-              }
-            }
-          }
+          const formFieldsValues = FormBuilderService.getFormFieldValues(form)
 
           loadResource.fetch('app/scripts/services/FHIR/resources/Encounter.json').then(function (fhirDoc) {
             var fhirObject = FHIR.mapFHIRObject(fhirDoc, scope.state[scope.cbsEvent.formName], formFieldsValues)

@@ -19,6 +19,19 @@ module.exports = function () {
       // remove validation errors
       form.$setPristine()
       form.$setUntouched()
+    }, 
+
+    getFormFieldValues: (form) => {
+      var formFieldsValues = {}
+      for (var k in form) {
+        if (form.hasOwnProperty(k)) {
+          if (typeof form[k] === 'object' && form[k].hasOwnProperty('$modelValue')) {
+            formFieldsValues[k] = form[k].$modelValue
+          }
+        }
+      }
+
+      return formFieldsValues
     }
   }
 }
