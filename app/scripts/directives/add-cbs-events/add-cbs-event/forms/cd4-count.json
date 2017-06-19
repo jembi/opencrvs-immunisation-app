@@ -1,1 +1,174 @@
-{}
+{
+  "key": "sec1",
+  "name": "Section 1",
+  "displayName": "CD4 Count",
+  "flex": "100",
+  "rows": [{
+      "name": "Row 1",
+      "layout": "row",
+      "fields": [{
+        "type": "date",
+        "flex": "20",
+        "name": "dateOfExam",
+        "title": "Date of Exam",
+        "settings": {
+          "valueType": "valueString",
+          "disabled": false,
+          "required": true
+        },
+        "FHIRMappings": [{
+          "resourceKey": "main",
+          "path": "period.start",
+          "params": null,
+          "valueType": "formValue",
+          "value": "dateOfExam"
+        }, {
+          "resourceKey": "main",
+          "path": "period.end",
+          "params": null,
+          "valueType": "formValue",
+          "value": "dateOfExam"
+        }, {
+          "resourceKey": "cd4CountObs",
+          "path": "effectiveDateTime",
+          "params": null,
+          "valueType": "formValue",
+          "value": "dateOfExam"
+        }],
+        "skipLogic": {
+          "func": {},
+          "checks": []
+        },
+        "value": null
+      },
+      {
+        "type": "select",
+        "flex": "20",
+        "name": "location",
+        "title": "Location",
+        "settings": {
+          "valueType": "valueString",
+          "disabled": false,
+          "required": true,
+          "searchOptions": true
+        },
+        "FHIRMappings": [{
+          "resourceKey": "main",
+          "path": "location[0].location.display",
+          "params": null,
+          "valueType": "formValue",
+          "value": "location"
+        }],
+        "skipLogic": {
+          "func": {},
+          "checks": []
+        },
+        "options": [
+          {"key": "Chuk", "value": "Chuk"}, 
+          {"key": "Kacyiru Police Hospital", "value": "Kacyiru Police Hospital"}, 
+          {"key": "Muhima Hospital", "value": "Muhima Hospital"}, 
+          {"key": "Kibagabaga Hospital", "value": "Kibagabaga Hospital"}, 
+          {"key": "Kanombe Military Hospital", "value": "Kanombe Military Hospital"}, 
+          {"key": "King Faisal Hospital", "value": "King Faisal Hospital"}, 
+          {"key": "Ndera Hospital", "value": "Ndera Hospital"}, 
+          {"key": "Masaka Hospital", "value": "Masaka Hospital"}, 
+          {"key": "Rwinkwavu Hospital", "value": "Rwinkwavu Hospital"}, 
+          {"key": "Kirehe Hospital", "value": "Kirehe Hospital"}, 
+          {"key": "Kibungo Hospital", "value": "Kibungo Hospital"}, 
+          {"key": "Nyagatare Hospital", "value": "Nyagatare Hospital"}, 
+          {"key": "Gahini Hospital", "value": "Gahini Hospital"}, 
+          {"key": "Nyamata Hospital", "value": "Nyamata Hospital"}, 
+          {"key": "Ngarama Hospital", "value": "Ngarama Hospital"}, 
+          {"key": "Kiziguro Hospital", "value": "Kiziguro Hospital"}, 
+          {"key": "Rwamagana Hospital", "value": "Rwamagana Hospital"}, 
+          {"key": "Other", "value": "Other"}
+        ],
+        "value": null
+      }, {
+        "type": "input",
+        "flex": "20",
+        "name": "providerGivenName",
+        "title": "Provider Given Name",
+        "settings": {
+          "valueType": "valueString",
+          "disabled": false,
+          "required": true
+        },
+        "FHIRMappings": [{
+          "resourceKey": "cd4CountObs",
+          "path": "encounter.reference",
+          "params": null,
+          "valueType": "staticValue",
+          "value": "@main"
+        }, {
+          "resourceKey": "cd4CountObs",
+          "path": "contained[0].name[0].given[0]",
+          "params": null,
+          "valueType": "formValue",
+          "value": "providerGivenName"
+        }, {
+          "resourceKey": "cd4CountObs",
+          "path": "contained[0].id",
+          "params": null,
+          "valueType": "staticValue",
+          "value": "#provider-1"
+        }, {
+          "resourceKey": "cd4CountObs",
+          "path": "performer[0].reference",
+          "params": null,
+          "valueType": "staticValue",
+          "value": "provider-1"
+        }],
+        "skipLogic": {
+          "func": {},
+          "checks": []
+        },
+        "value": null
+      }, {
+        "type": "input",
+        "flex": "20",
+        "name": "providerFamilyName",
+        "title": "Provider Family Name",
+        "settings": {
+          "valueType": "valueString",
+          "disabled": false,
+          "required": true
+        },
+        "FHIRMappings": [{
+          "resourceKey": "cd4CountObs",
+          "path": "contained[0].name[0].family[0]",
+          "params": null,
+          "valueType": "formValue",
+          "value": "providerFamilyName"
+        }],
+        "skipLogic": {
+          "func": {},
+          "checks": []
+        },
+        "value": null
+      }, {
+        "type": "input",
+        "flex": "20",
+        "name": "cd4CountResult",
+        "title": "CD4 Count Result",
+        "settings": {
+          "valueType": "valueString",
+          "disabled": false,
+          "required": true
+        },
+        "FHIRMappings": [{
+          "resourceKey": "cd4CountObs",
+          "path": "valueQuantity",
+          "params": null,
+          "valueType": "formValue",
+          "value": "cd4CountResult"
+        }],
+        "skipLogic": {
+          "func": {},
+          "checks": []
+        },
+        "value": null
+      }]
+    }
+  ]
+}
