@@ -111,13 +111,13 @@
           "path": "contained[0].id",
           "params": null,
           "valueType": "staticValue",
-          "value": "#provider-1"
+          "value": "provider-1"
         }, {
           "resourceKey": "cd4CountObs",
           "path": "performer[0].reference",
           "params": null,
           "valueType": "staticValue",
-          "value": "provider-1"
+          "value": "#provider-1"
         }],
         "skipLogic": {
           "func": {},
@@ -158,10 +158,16 @@
         },
         "FHIRMappings": [{
           "resourceKey": "cd4CountObs",
-          "path": "valueQuantity",
+          "path": "valueCodeableConcept.text",
           "params": null,
           "valueType": "formValue",
           "value": "cd4CountResult"
+        }, {
+          "resourceKey": "cd4CountObs",
+          "path": "valueCodeableConcept.coding.code",
+          "params": null,
+          "valueType": "staticValue",
+          "value": "24467-3"
         }],
         "skipLogic": {
           "func": {},
