@@ -24,39 +24,45 @@ module.exports = function (loadResource, $q, state, FHIR, FormBuilderService) {
 
           const formFieldsValues = FormBuilderService.getFormFieldValues(form)
 
+          const cloneDeep = (obj) => {
+            return JSON.parse(JSON.stringify(obj))
+          }
+
           loadResource.fetch('app/scripts/services/FHIR/resources/Encounter.json').then(function (encounterTemplate) {
-            let resourceTemplateDict
-            switch (scope.cbsEvent.code) {
-              case 'linkage-to-care':
-                setProcedureEventType(encounterTemplate, scope.cbsEvent.code, 'Linkage to Care')
-                resourceTemplateDict = { main: encounterTemplate }
-                break
-              case 'hiv-confirmation':
-                setProcedureEventType(encounterTemplate, scope.cbsEvent.code, 'HIV Confirmation')
-                resourceTemplateDict = { main: encounterTemplate } // TODO
-                break
-              case 'cd4-count':
-                setProcedureEventType(encounterTemplate, scope.cbsEvent.code, 'CD4 Count')
-                resourceTemplateDict = { main: encounterTemplate } // TODO
-                break
-              case 'first-viral-load':
-                setProcedureEventType(encounterTemplate, scope.cbsEvent.code, 'First Viral Load')
-                resourceTemplateDict = { main: encounterTemplate } // TODO
-                break
-              default:
-                console.error(`Unknown event code ${scope.cbsEvent.code}`)
-            }
+            loadResource.fetch('app/scripts/services/FHIR/resources/Observation.json').then(function (observationTemplate) {
+              let resourceTemplateDict
+              switch (scope.cbsEvent.code) {
+                case 'linkage-to-care':
+                  setProcedureEventType(encounterTemplate, scope.cbsEvent.code, 'Linkage to Care')
+                  resourceTemplateDict = { main: encounterTemplate }
+                  break
+                case 'hiv-confirmation':
+                  setProcedureEventType(encounterTemplate, scope.cbsEvent.code, 'HIV Confirmation')
+                  resourceTemplateDict = { main: encounterTemplate, subjectHIVObs: cloneDeep(observationTemplate), partnerHIVObs: cloneDeep(observationTemplate) }
+                  break
+                case 'cd4-count':
+                  setProcedureEventType(encounterTemplate, scope.cbsEvent.code, 'CD4 Count')
+                  resourceTemplateDict = { main: encounterTemplate } // TODO
+                  break
+                case 'first-viral-load':
+                  setProcedureEventType(encounterTemplate, scope.cbsEvent.code, 'First Viral Load')
+                  resourceTemplateDict = { main: encounterTemplate } // TODO
+                  break
+                default:
+                  console.error(`Unknown event code ${scope.cbsEvent.code}`)
+              }
 
-            const resourceDict = FHIR.mapFHIRResources(resourceTemplateDict, scope.state[scope.cbsEvent.formName], formFieldsValues)
+              const resourceDict = FHIR.mapFHIRResources(resourceTemplateDict, scope.state[scope.cbsEvent.formName], formFieldsValues)
 
-            // add the Subject Reference - Patient/Reference
-            resourceDict.main.patient.reference = scope.patient.resourceType + '/' + scope.patient.id
+              // add the Subject Reference - Patient/Reference
+              resourceDict.main.patient.reference = scope.patient.resourceType + '/' + scope.patient.id
 
-            state.pushToEventsArray(resourceDict)
+              state.pushToEventsArray(resourceDict)
 
-            scope.resetForm(scope.state[scope.cbsEvent.formName], form)
+              scope.resetForm(scope.state[scope.cbsEvent.formName], form)
 
-            defer.resolve({ isValid: true, msg: 'Event has been successfully added for submission' })
+              defer.resolve({ isValid: true, msg: 'Event has been successfully added for submission' })
+            })
           })
 
           return defer.promise
