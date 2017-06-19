@@ -9,18 +9,20 @@ module.exports = function (loadResource, $q, state, FHIR, FormBuilderService) {
       cbsEvent: '='
     },
     link: function (scope) {
+      const setProcedureEventType = (encounterTemplate, encounterType, encounterDisplay) => {
+        // add encounter type.coding for event type
+        encounterTemplate.type[0].coding[0] = {
+          'system': 'http://hearth.org/cbs/event-types',
+          'code': encounterType,
+          'display': encounterDisplay
+        }
+      }
+
       scope.$watch('cbsEvent', () => {
         var submit = function (form) {
           var defer = $q.defer()
 
-          var formFieldsValues = {}
-          for (var k in form) {
-            if (form.hasOwnProperty(k)) {
-              if (typeof form[k] === 'object' && form[k].hasOwnProperty('$modelValue') && form[k].$dirty) {
-                formFieldsValues[k] = form[k].$modelValue
-              }
-            }
-          }
+          const formFieldsValues = FormBuilderService.getFormFieldValues(form)
 
           const cloneDeep = (obj) => {
             return JSON.parse(JSON.stringify(obj))
@@ -31,15 +33,19 @@ module.exports = function (loadResource, $q, state, FHIR, FormBuilderService) {
               let resourceTemplateDict
               switch (scope.cbsEvent.code) {
                 case 'linkage-to-care':
+                  setProcedureEventType(encounterTemplate, scope.cbsEvent.code, 'Linkage to Care')
                   resourceTemplateDict = { main: encounterTemplate }
                   break
                 case 'hiv-confirmation':
+                  setProcedureEventType(encounterTemplate, scope.cbsEvent.code, 'HIV Confirmation')
                   resourceTemplateDict = { main: encounterTemplate, subjectHIVObs: cloneDeep(observationTemplate), partnerHIVObs: cloneDeep(observationTemplate) }
                   break
                 case 'cd4-count':
+                  setProcedureEventType(encounterTemplate, scope.cbsEvent.code, 'CD4 Count')
                   resourceTemplateDict = { main: encounterTemplate } // TODO
                   break
                 case 'first-viral-load':
+                  setProcedureEventType(encounterTemplate, scope.cbsEvent.code, 'First Viral Load')
                   resourceTemplateDict = { main: encounterTemplate } // TODO
                   break
                 default:
