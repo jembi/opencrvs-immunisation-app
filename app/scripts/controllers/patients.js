@@ -31,7 +31,7 @@ module.exports = function ($scope, state, $location, $q, FHIR) {
 
       $scope.$watch(function () { return state.getPartialPatientDemographics() }, function (partialDemographics) {
         if (partialDemographics) {
-          $scope.state.header.right = [{ text: 'add patient', onClick: function () { $location.path('/add-patient') } }] // show the create patient button in top header
+          $scope.state.header.right = [{ text: 'Create patient', onClick: function () { $location.path('/add-patient') } }] // show the create patient button in top header
         }
       })
     }
