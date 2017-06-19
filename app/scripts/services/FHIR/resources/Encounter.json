@@ -6,7 +6,7 @@
     {
       "coding": [
         {
-          "system": "http://hearth.org/event-types",
+          "system": "http://hearth.org/cbs/event-types",
           "code": "",
           "display": ""
         }
@@ -14,7 +14,7 @@
     }, {
       "coding": [
         {
-          "system": "http://hearth.org/procedure-types",
+          "system": "http://hearth.org/cbs/procedure-types",
           "code": "",
           "display": ""
         }
