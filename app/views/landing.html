@@ -1,0 +1,36 @@
+<!doctype html>
+<div layout="column" flex="100" layout-fill layout-align="start center">
+  <div layout-padding>
+    <img src="app/images/Coat_of_arms_of_Rwanda.svg.png" width="350" height="350" />
+  </div>
+  <div layout="row" layout-align="center center" layout-padding>
+    <md-whiteframe flex="100" flex-gt-md="50" class="md-whiteframe-2dp dashboard-whiteframe center-text">
+      <h1>Rwanda Case-based Surveillance Demo</h1>
+      <p>
+        This is a mockup application that demonstrates a possible workflow for
+        case-based surveillance in Rwanda. It focusses on showing how duplication
+        of patient records can be minimized through the use of a national Master
+        Patient Index (MPI). It follows OpenHIE principles for patient management
+        as well as for saving clinical data (i.e. CBS events) to a Shared Health
+        Record.
+      </p>
+      <p>
+        The MPI uses fuzzy matching techniques to accurately search for patients
+        to minimise the creation of duplicate client records. The MPI in use is a
+        FHIR server developed by Jembi Health Systems. This FHIR server also acts
+        as a Shared Health Record which stores CBS events.
+      </p>
+      <p>
+        <b>Please note:</b> this demo is public and no real patient data should be
+        entered. A large number of test patients have been pre-loaded into the
+        MPI to allow you to see the fuzzy matching in action.
+      </p>
+      <p>
+        For more detailed information about the demo, see <a href="https://docs.google.com/document/d/1MSJM-wEDVm9rNGOewqb-Olyeibg_tKeV8QAWLXJStAM/edit">this document</a>.
+      </p>
+      <div layout="row" layout-align="end center">
+        <a class="md-button md-raised md-primary" href="#/patients">I understand</a>
+      </div>
+    </md-whiteframe>
+  </div>
+</div>

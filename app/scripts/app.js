@@ -17,6 +17,9 @@ const app = angular.module('rcbsApp', dependencies)
 
 app.config(function ($routeProvider) {
   $routeProvider
+  .when('/', {
+    templateUrl: 'app/views/landing.html'
+  })
   .when('/patients', {
     templateUrl: 'app/views/dashboard.html',
     controller: 'DashboardControl'
@@ -34,7 +37,7 @@ app.config(function ($routeProvider) {
     controller: 'ViewCbsEventsControl'
   })
   .otherwise({
-    redirectTo: '/patients'
+    redirectTo: '/'
   })
 })
 
