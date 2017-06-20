@@ -38,7 +38,7 @@ module.exports = function (Api, $scope, $routeParams, $location) {
     { code: 'linkage-to-care', display: 'Linkage to care', formName: 'FormBuilderAddCbsEventLinkageToCare' },
     { code: 'hiv-confirmation', display: 'HIV confirmation', formName: 'FormBuilderAddCbsEventHIVConfirmation' },
     { code: 'cd4-count', display: 'CD4 count', formName: 'FormBuilderAddCbsEventCD4Count' },
-    { code: 'first-viral-load', display: 'First viral load', formName: 'FormBuilderAddCbsEventFirstViralLoad' }
+    { code: 'viral-load', display: 'Viral load', formName: 'FormBuilderAddCbsEventViralLoad' }
   ]
 
   $scope.selectedEvent = $scope.cbsEvents[0]

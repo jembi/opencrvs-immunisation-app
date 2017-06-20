@@ -1,16 +1,16 @@
 {
   "key": "sec1",
   "name": "Section 1",
-  "displayName": "HIV Confirmation",
+  "displayName": "Viral Load",
   "flex": "100",
   "rows": [{
       "name": "Row 1",
       "layout": "row",
       "fields": [{
         "type": "date",
-        "flex": "30",
+        "flex": "20",
         "name": "encounterDate",
-        "title": "Date of First HIV Positive test",
+        "title": "Encounter Date",
         "settings": {
           "valueType": "valueString",
           "disabled": false,
@@ -29,13 +29,7 @@
           "valueType": "formValue",
           "value": "encounterDate"
         }, {
-          "resourceKey": "partnerHIVObs",
-          "path": "effectiveDateTime",
-          "params": null,
-          "valueType": "formValue",
-          "value": "encounterDate"
-        }, {
-          "resourceKey": "subjectHIVObs",
+          "resourceKey": "viralLoadObs",
           "path": "effectiveDateTime",
           "params": null,
           "valueType": "formValue",
@@ -49,9 +43,9 @@
       },
       {
         "type": "select",
-        "flex": "30",
+        "flex": "20",
         "name": "encounterLocation",
-        "title": "Location of First HIV Positive test",
+        "title": "Location",
         "settings": {
           "valueType": "valueString",
           "disabled": false,
@@ -90,98 +84,95 @@
           {"key": "Other", "value": "Other"}
         ],
         "value": null
-      }, 
-      {
-        "type": "select",
+      }, {
+        "type": "input",
         "flex": "20",
-        "name": "subjectHIVStatus",
-        "title": "HIV Status",
+        "name": "providerGivenName",
+        "title": "Provider Given Name",
         "settings": {
           "valueType": "valueString",
           "disabled": false,
           "required": true
         },
         "FHIRMappings": [{
-          "resourceKey": "subjectHIVObs",
+          "resourceKey": "viralLoadObs",
           "path": "encounter.reference",
           "params": null,
           "valueType": "staticValue",
           "value": "@main"
         }, {
-          "resourceKey": "subjectHIVObs",
-          "path": "valueCodeableConcept.coding.code",
+          "resourceKey": "viralLoadObs",
+          "path": "contained[0].name[0].given[0]",
+          "params": null,
+          "valueType": "formValue",
+          "value": "providerGivenName"
+        }, {
+          "resourceKey": "viralLoadObs",
+          "path": "contained[0].id",
           "params": null,
           "valueType": "staticValue",
-          "value": "55277-8"
+          "value": "provider-1"
         }, {
-          "resourceKey": "subjectHIVObs",
-          "path": "valueCodeableConcept.text",
+          "resourceKey": "viralLoadObs",
+          "path": "performer[0].reference",
           "params": null,
-          "valueType": "optionValue",
-          "value": "subjectHIVStatus"
+          "valueType": "staticValue",
+          "value": "#provider-1"
         }],
         "skipLogic": {
           "func": {},
           "checks": []
         },
-        "options": [{
-            "key": "positive",
-            "value": "Positive"
-          },
-          {
-            "key": "negative",
-            "value": "Negative"
-          }
-        ],
         "value": null
       }, {
-        "type": "select",
+        "type": "input",
         "flex": "20",
-        "name": "partnerHivStatus",
-        "title": "Partner HIV Status",
+        "name": "providerFamilyName",
+        "title": "Provider Family Name",
         "settings": {
           "valueType": "valueString",
           "disabled": false,
           "required": true
         },
         "FHIRMappings": [{
-          "resourceKey": "partnerHIVObs",
-          "path": "valueCodeableConcept.text",
+          "resourceKey": "viralLoadObs",
+          "path": "contained[0].name[0].family[0]",
           "params": null,
-          "valueType": "optionValue",
-          "value": "partnerHIVStatus"
-        }, {
-          "resourceKey": "partnerHIVObs",
-          "path": "encounter.reference",
-          "params": null,
-          "valueType": "staticValue",
-          "value": "@main"
-        }, {
-          "resourceKey": "partnerHIVObs",
-          "path": "valueCodeableConcept.coding.code",
-          "params": null,
-          "valueType": "staticValue",
-          "value": "partner-hiv-status"
-        }, {
-          "resourceKey": "partnerHIVObs",
-          "path": "valueCodeableConcept.coding.system",
-          "params": null,
-          "valueType": "staticValue",
-          "value": "http://hearth.org/cbs/observation-types"
+          "valueType": "formValue",
+          "value": "providerFamilyName"
         }],
         "skipLogic": {
           "func": {},
           "checks": []
         },
-        "options": [{
-            "key": "positive",
-            "value": "Positive"
-          },
-          {
-            "key": "negative",
-            "value": "Negative"
-          }
-        ],
+        "value": null
+      }, {
+        "type": "input",
+        "flex": "20",
+        "name": "viralLoadResult",
+        "title": "Viral Load Result",
+        "settings": {
+          "valueType": "valueString",
+          "disabled": false,
+          "required": true
+        },
+        "FHIRMappings": [{
+          "resourceKey": "viralLoadObs",
+          "path": "valueCodeableConcept.text",
+          "params": null,
+          "valueType": "formValue",
+          "value": "viralLoadResult"
+        }, {
+          "resourceKey": "viralLoadObs",
+          "path": "valueCodeableConcept.coding.code",
+          "params": null,
+          "valueType": "staticValue",
+          "value": "66725-3"
+        }],
+        "skipLogic": {
+          "func": {},
+          "checks": []
+        },
         "value": null
       }]
     }
