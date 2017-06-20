@@ -34,12 +34,12 @@ module.exports = function (Api, $q) {
 
     if (observations && observations.length > 0) {
       observations.forEach((obs) => {
-        switch (obs.code.coding[0].code) {
+        switch (obs.resource.code.coding[0].code) {
           case '33660-2': // HIV test
-            firstPositiveHivTestDate = obs.effectiveDateTime
+            firstPositiveHivTestDate = obs.resource.effectiveDateTime
             break
           case 'partner-hiv-status':
-            partnerStatus = obs.valueCodeableConcept.text
+            partnerStatus = obs.resource.valueCodeableConcept.text
             break
         }
       })
@@ -61,11 +61,11 @@ module.exports = function (Api, $q) {
     let providerName, viralLoadDate, viralLoadResults
 
     if (observations && observations.length > 0) {
-      viralLoadDate = observations[0].effectiveDateTime
-      viralLoadResults = observations[0].valueQuantity
+      viralLoadDate = observations[0].resource.effectiveDateTime
+      viralLoadResults = observations[0].resource.valueQuantity
 
-      observations[0].contained.forEach((containedResource) => {
-        if (containedResource.id === observations[0].performer[0].reference.substring(1)) {
+      observations[0].resource.contained.forEach((containedResource) => {
+        if (containedResource.id === observations[0].resource.performer[0].reference.substring(1)) {
           const providerGivenName = containedResource.name[0].given.join(' ')
           const providerFamilyName = containedResource.name[0].family.join(' ')
           providerName = providerGivenName + ' ' + providerFamilyName
@@ -110,11 +110,11 @@ module.exports = function (Api, $q) {
     let providerName, cd4CountDate, cd4CountResult
 
     if (observations && observations.length > 0) {
-      cd4CountDate = observations[0].effectiveDateTime
-      cd4CountResult = observations[0].valueQuantity
+      cd4CountDate = observations[0].resource.effectiveDateTime
+      cd4CountResult = observations[0].resource.valueQuantity
 
-      observations[0].contained.forEach((containedResource) => {
-        if (containedResource.id === observations[0].performer[0].reference.substring(1)) {
+      observations[0].resource.contained.forEach((containedResource) => {
+        if (containedResource.id === observations[0].resource.performer[0].reference.substring(1)) {
           const providerGivenName = containedResource.name[0].given.join(' ')
           const providerFamilyName = containedResource.name[0].family.join(' ')
           providerName = providerGivenName + ' ' + providerFamilyName
@@ -157,8 +157,11 @@ module.exports = function (Api, $q) {
 
       const promises = []
       encountersArray.forEach((encounter) => {
-        const resource = Api.Observations.get({'encounter': encounter.resource.id })
-        encounter._observations = resource.$resolved ? resource.entry : []
+        const resource = Api.Observations.get({'encounter': encounter.resource.id}, function (result) {
+          encounter._observations = result.entry
+        }, function (err) {
+          console.error(err)
+        })
         promises.push(resource.$promise)
       })
 
@@ -175,6 +178,7 @@ module.exports = function (Api, $q) {
     formatEvents: (events) => {
       const simpleEvents = []
       events.forEach((event) => {
+        console.log(event)
         if (isEventOfType(LINKAGE_TO_CARE, event.resource)) {
           event = constructSimpleLinkageToCareObject(event.resource, event._observations)
         } else if (isEventOfType(HIV_CONFIRMATION, event.resource)) {
