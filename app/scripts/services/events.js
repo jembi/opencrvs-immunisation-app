@@ -157,7 +157,7 @@ module.exports = function (Api, $q) {
 
       const promises = []
       encountersArray.forEach((encounter) => {
-        const resource = Api.Observations.get({'encounterId': encounter.resource.id })
+        const resource = Api.Observations.get({'encounter': encounter.resource.id })
         encounter._observations = resource.$resolved ? resource.entry : []
         promises.push(resource.$promise)
       })
