@@ -1,6 +1,10 @@
 <!doctype html>
 <table>
   <tr>
+    <td>Patient status:</td>
+    <td>{{event.data.subjectStatus}}</td>
+  </tr>
+  <tr>
     <td>Partner status:</td>
     <td>{{event.data.partnerStatus}}</td>
   </tr>
@@ -10,6 +14,6 @@
   </tr>
   <tr>
     <td>Test date:</td>
-    <td>{{event.data.firstPositiveHivTestDate}}</td>
+    <td>{{event.data.firstPositiveHivTestDate | date:'yyyy-MM-dd'}}</td>
   </tr>
 </table>
