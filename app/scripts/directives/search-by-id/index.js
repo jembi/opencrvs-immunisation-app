@@ -1,6 +1,6 @@
 'use strict'
 
-module.exports = function (Api, loadResource, $q, state) {
+module.exports = function (Api, loadResource, $q, state, FormBuilderService) {
   return {
     restrict: 'EA',
     templateUrl: 'app/scripts/directives/search-by-id/view.html',
@@ -8,6 +8,10 @@ module.exports = function (Api, loadResource, $q, state) {
     link: function (scope) {
       var submit = function (form) {
         var defer = $q.defer()
+
+        scope.$on('clear-search-form', () => {
+          FormBuilderService.resetForm(scope.state.FormBuilderSearchById, form)
+        })
 
         var formFieldsValues = {}
         for (var k in form) {

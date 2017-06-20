@@ -14,6 +14,7 @@ module.exports = function (state, $location) {
       scope.clearSearch = function () {
         state.setSearchResults(null)
         state.setPartialPatientDemographics(null)
+        scope.$emit('clear-search')
       }
 
       scope.createPatient = function () {

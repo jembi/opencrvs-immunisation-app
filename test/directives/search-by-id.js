@@ -33,7 +33,7 @@ tap.test('.link()', { autoend: true }, (t) => {
   tap.test('.submit()', { autoend: true }, (t) => {
     t.test('should resolve with a success message', (t) => {
       // given
-      const scope = {}
+      const scope = { $on: () => {} }
       const apiMock = {
         get: (params, success) => {
           success({ entry: [] })
@@ -62,7 +62,7 @@ tap.test('.link()', { autoend: true }, (t) => {
 
     t.test('should reject with an error message', (t) => {
       // given
-      const scope = {}
+      const scope = { $on: () => {} }
       const apiMock = {
         get: (params, success, error) => {
           const err = new Error()
@@ -93,7 +93,7 @@ tap.test('.link()', { autoend: true }, (t) => {
 
     t.test('should reject with a default error message when no statusText on error object', (t) => {
       // given
-      const scope = {}
+      const scope = { $on: () => {} }
       const apiMock = {
         get: (params, success, error) => {
           error(new Error())
@@ -121,7 +121,7 @@ tap.test('.link()', { autoend: true }, (t) => {
 
     t.test('should call the API with correct parameter', (t) => {
       // given
-      const scope = {}
+      const scope = { $on: () => {} }
       const apiMock = {
         get: (params, success, error) => {
           // then

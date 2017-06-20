@@ -40,4 +40,8 @@ module.exports = function ($scope, state, $location, $q, FHIR) {
   $scope.$on('$destroy', function () {
     state.setSearchResults(null)
   })
+
+  $scope.$on('clear-search', () => {
+    $scope.$broadcast('clear-search-form')
+  })
 }

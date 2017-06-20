@@ -2,7 +2,7 @@
 
 var moment = require('moment')
 
-module.exports = function (Api, loadResource, $q, state) {
+module.exports = function (Api, loadResource, $q, state, FormBuilderService) {
   var createParametersResource = function (formFields) {
     var resource = {
       resourceType: 'Patient',
@@ -42,6 +42,10 @@ module.exports = function (Api, loadResource, $q, state) {
     link: function (scope) {
       var submit = function (form) {
         var defer = $q.defer()
+
+        scope.$on('clear-search-form', () => {
+          FormBuilderService.resetForm(scope.state.FormBuilderDemographics, form)
+        })
 
         var formFieldsValues = {}
         for (var k in form) {
