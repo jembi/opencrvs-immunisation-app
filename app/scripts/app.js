@@ -50,7 +50,7 @@ app.config(function ($mdThemingProvider) {
   $mdThemingProvider.theme('default')
     .primaryPalette('light-blue')
     .accentPalette('orange')
-});
+})
 // TODO: Update styles based on design - Using default for now
 // app.config(function ($mdThemingProvider) {
 //   var customPrimary = {
