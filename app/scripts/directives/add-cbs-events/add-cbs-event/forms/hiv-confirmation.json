@@ -109,10 +109,28 @@
           "value": "@main"
         }, {
           "resourceKey": "subjectHIVObs",
+          "path": "code.coding[0].code",
+          "params": null,
+          "valueType": "staticValue",
+          "value": "33660-2"
+        }, {
+          "resourceKey": "subjectHIVObs",
+          "path": "code.coding[0].system",
+          "params": null,
+          "valueType": "staticValue",
+          "value": "http://loinc.org"
+        }, {
+          "resourceKey": "subjectHIVObs",
           "path": "valueCodeableConcept.coding.code",
           "params": null,
           "valueType": "staticValue",
-          "value": "55277-8"
+          "value": "LA6576-8"
+        }, {
+          "resourceKey": "subjectHIVObs",
+          "path": "valueCodeableConcept.coding.system",
+          "params": null,
+          "valueType": "staticValue",
+          "value": "http://loinc.org"
         }, {
           "resourceKey": "subjectHIVObs",
           "path": "valueCodeableConcept.text",
@@ -146,28 +164,40 @@
         },
         "FHIRMappings": [{
           "resourceKey": "partnerHIVObs",
-          "path": "valueCodeableConcept.text",
-          "params": null,
-          "valueType": "optionValue",
-          "value": "partnerHIVStatus"
-        }, {
-          "resourceKey": "partnerHIVObs",
           "path": "encounter.reference",
           "params": null,
           "valueType": "staticValue",
           "value": "@main"
         }, {
           "resourceKey": "partnerHIVObs",
-          "path": "valueCodeableConcept.coding.code",
+          "path": "code.coding[0].code",
           "params": null,
           "valueType": "staticValue",
           "value": "partner-hiv-status"
         }, {
           "resourceKey": "partnerHIVObs",
-          "path": "valueCodeableConcept.coding.system",
+          "path": "code.coding[0].system",
           "params": null,
           "valueType": "staticValue",
           "value": "http://hearth.org/cbs/observation-types"
+        }, {
+          "resourceKey": "partnerHIVObs",
+          "path": "valueCodeableConcept.coding.code",
+          "params": null,
+          "valueType": "staticValue",
+          "value": "LA6576-8"
+        }, {
+          "resourceKey": "partnerHIVObs",
+          "path": "valueCodeableConcept.coding.system",
+          "params": null,
+          "valueType": "staticValue",
+          "value": "http://loinc.org"
+        }, {
+          "resourceKey": "partnerHIVObs",
+          "path": "valueCodeableConcept.text",
+          "params": null,
+          "valueType": "optionValue",
+          "value": "partnerHivStatus"
         }],
         "skipLogic": {
           "func": {},

@@ -103,19 +103,23 @@ tap.test('Events service', { autoend: true }, (t) => {
     t.test('should construct a simple object for HIV confirmation', (t) => {
       // given
       const encounter = JSON.parse(JSON.stringify(encounterTemplate))
-      const observation = JSON.parse(JSON.stringify(observationTemplate))
-      const observationPartner = JSON.parse(JSON.stringify(observationTemplate))
+      const observation = {
+        resource: JSON.parse(JSON.stringify(observationTemplate))
+      }
+      const observationPartner = {
+        resource: JSON.parse(JSON.stringify(observationTemplate))
+      }
 
       encounter.period.start = '2017-06-01'
       encounter.type[0].coding[0].code = 'hiv-confirmation'
       encounter.type[0].coding[0].display = 'HIV Confirmation'
       encounter.location[0].location.display = 'Chuk'
 
-      observation.effectiveDateTime = '2010-06-30'
-      observation.code.coding[0].system = 'http://loinc.org'
-      observation.code.coding[0].code = '33660-2'
-      observation.code.coding[0].display = 'HIV 1 p24 Ag [Presence] in Serum by Neutralization test'
-      observation.valueCodeableConcept = {
+      observation.resource.effectiveDateTime = '2010-06-30'
+      observation.resource.code.coding[0].system = 'http://loinc.org'
+      observation.resource.code.coding[0].code = '33660-2'
+      observation.resource.code.coding[0].display = 'HIV 1 p24 Ag [Presence] in Serum by Neutralization test'
+      observation.resource.valueCodeableConcept = {
         coding: {
           system: 'http://loinc.org',
           code: 'LA6576-8'
@@ -123,11 +127,11 @@ tap.test('Events service', { autoend: true }, (t) => {
         text: 'Positive'
       }
 
-      observationPartner.effectiveDateTime = '2010-06-30'
-      observationPartner.code.coding[0].system = 'http://hearth.org/cbs'
-      observationPartner.code.coding[0].code = 'partner-hiv-status'
-      observationPartner.code.coding[0].display = 'Partners HIV status'
-      observationPartner.valueCodeableConcept = {
+      observationPartner.resource.effectiveDateTime = '2010-06-30'
+      observationPartner.resource.code.coding[0].system = 'http://hearth.org/cbs'
+      observationPartner.resource.code.coding[0].code = 'partner-hiv-status'
+      observationPartner.resource.code.coding[0].display = 'Partners HIV status'
+      observationPartner.resource.valueCodeableConcept = {
         coding: {
           system: 'http://loinc.org',
           code: 'LA6576-8'
@@ -154,7 +158,9 @@ tap.test('Events service', { autoend: true }, (t) => {
     t.test('should construct a simple object for Viral Load', (t) => {
       // given
       const encounter = JSON.parse(JSON.stringify(encounterTemplate))
-      const observation = JSON.parse(JSON.stringify(observationTemplate))
+      const observation = {
+        resource: JSON.parse(JSON.stringify(observationTemplate))
+      }
 
       encounter.period.start = '2017-04-04'
       encounter.type = [
@@ -162,19 +168,19 @@ tap.test('Events service', { autoend: true }, (t) => {
       ]
       encounter.location[0].location.display = 'Chuk'
 
-      observation.effectiveDateTime = '2017-04-04'
-      observation.code.coding[0].system = 'http://loinc.org'
-      observation.code.coding[0].code = '25836-8'
-      observation.code.coding[0].display = 'HIV 1 RNA [#/​volume] (viral load) in Unspecified specimen by Probe and target amplification method'
+      observation.resource.effectiveDateTime = '2017-04-04'
+      observation.resource.code.coding[0].system = 'http://loinc.org'
+      observation.resource.code.coding[0].code = '25836-8'
+      observation.resource.code.coding[0].display = 'HIV 1 RNA [#/​volume] (viral load) in Unspecified specimen by Probe and target amplification method'
 
-      observation.valueQuantity = {
+      observation.resource.valueQuantity = {
         value: 599,
         unit: 'copies/mL',
         system: 'http://unitsofmeasure.org',
         code: 'copies/mL'
       }
 
-      observation.contained = [
+      observation.resource.contained = [
         {
           resourceType: 'Practitioner',
           id: 'practioner-1',
@@ -185,7 +191,7 @@ tap.test('Events service', { autoend: true }, (t) => {
         }
       ]
 
-      observation.performer = [
+      observation.resource.performer = [
         {
           reference: '#practioner-1'
         }
@@ -199,10 +205,70 @@ tap.test('Events service', { autoend: true }, (t) => {
       t.equal(highViralLoadObj.eventType, 'viral-load', 'should have a eventType of "viral-load"')
       t.equal(highViralLoadObj.eventDate, '2017-04-04', 'should have a eventDate of "2017-04-04"')
       t.equal(highViralLoadObj.data.viralLoadDate, '2017-04-04', 'should have a data.viralLoadDate of "2017-04-04"')
-      t.deepEquals(highViralLoadObj.data.viralLoadResults, observation.valueQuantity, 'should have a data.viralLoadResults object with results')
+      t.deepEquals(highViralLoadObj.data.viralLoadResults, observation.resource.valueQuantity, 'should have a data.viralLoadResults object with results')
       t.equal(highViralLoadObj.data.viralLoadLocation, 'Chuk', 'should have a data.viralLoadLocation of "Chuk"')
       t.equal(highViralLoadObj.data.viralLoadProvider, 'Jane Smith', 'should have a data.viralLoadProvider of "Jane Smith"')
 
+      t.end()
+    })
+  })
+
+  t.test('.constructSimpleLinkageToCareObject', { autoend: true }, (t) => {
+    t.test('should construct simple linkage to care object', (t) => {
+      const events = Events()
+
+      const encounter = JSON.parse(JSON.stringify(encounterTemplate))
+      encounter.period.start = '2017-04-04'
+      encounter.type = [
+        { coding: [ { system: 'http://hearth.org/cbs/event-types', code: 'linkage-to-care', display: 'Linkage to Care' } ] },
+        { coding: [ { system: 'http://hearth.org/cbs/encounter-types', code: 'anc-visit', display: 'ANC Visit' } ] }
+      ]
+      encounter.location[0].location.display = 'Chuk'
+
+      const event = events.constructSimpleLinkageToCareObject(encounter)
+
+      t.equals(event.eventType, 'linkage-to-care')
+      t.equals(event.eventDate, '2017-04-04')
+      t.equals(event.data.encounterType, 'ANC Visit')
+      t.equals(event.data.encounterLocation, 'Chuk')
+      t.end()
+    })
+  })
+
+  t.test('.constructSimpleCD4CountObject', { autoend: true }, (t) => {
+    t.test('should construct simple cd4 count object', (t) => {
+      const events = Events()
+
+      const encounter = JSON.parse(JSON.stringify(encounterTemplate))
+      encounter.period.start = '2017-04-04'
+      encounter.type = [
+        { coding: [ { system: 'http://hearth.org/cbs/event-types', code: 'cd4-count', display: 'CD4 Count' } ] }
+      ]
+      encounter.location[0].location.display = 'Chuk'
+
+      const observation = {
+        resource: JSON.parse(JSON.stringify(observationTemplate))
+      }
+      observation.resource.effectiveDateTime = '2017-05-05'
+      observation.resource.valueQuantity = 'Test Result'
+      observation.resource.performer[0].reference = '#practioner-1'
+      observation.resource.contained = [{
+        resourceType: 'Practitioner',
+        id: 'practioner-1',
+        name: [{
+          family: ['Provider'],
+          given: ['Test']
+        }]
+      }]
+
+      const event = events.constructSimpleCD4CountObject(encounter, [observation])
+
+      t.equals(event.eventType, 'cd4-count')
+      t.equals(event.eventDate, '2017-04-04')
+      t.equals(event.data.cd4CountDate, '2017-05-05')
+      t.equals(event.data.cd4CountLocation, 'Chuk')
+      t.equals(event.data.cd4CountResult, 'Test Result')
+      t.equals(event.data.cd4CountProvider, 'Test Provider')
       t.end()
     })
   })
@@ -212,8 +278,12 @@ tap.test('Events service', { autoend: true }, (t) => {
       // given
       // HIV Confirmation
       const hivConfirmationEncounter = JSON.parse(JSON.stringify(encounterTemplate))
-      const hivConfirmationObservation = JSON.parse(JSON.stringify(observationTemplate))
-      const hivConfirmationObservationPartnerStatus = JSON.parse(JSON.stringify(observationTemplate))
+      const hivConfirmationObservation = {
+        resource: JSON.parse(JSON.stringify(observationTemplate))
+      }
+      const hivConfirmationObservationPartnerStatus = {
+        resource: JSON.parse(JSON.stringify(observationTemplate))
+      }
       hivConfirmationEncounter.period.start = '2017-06-01'
       hivConfirmationEncounter.type = [
         { coding: [ { system: 'http://hearth.org/cbs/event-types', code: 'hiv-confirmation', display: 'HIV Confirmation' } ] }
@@ -222,11 +292,11 @@ tap.test('Events service', { autoend: true }, (t) => {
       hivConfirmationEncounter.type[0].coding[0].display = 'HIV Confirmation'
       hivConfirmationEncounter.location[0].location.display = 'Chuk'
 
-      hivConfirmationObservation.effectiveDateTime = '2010-06-30'
-      hivConfirmationObservation.code.coding[0].system = 'http://loinc.org'
-      hivConfirmationObservation.code.coding[0].code = '33660-2'
-      hivConfirmationObservation.code.coding[0].display = 'HIV 1 p24 Ag [Presence] in Serum by Neutralization test'
-      hivConfirmationObservation.valueCodeableConcept = {
+      hivConfirmationObservation.resource.effectiveDateTime = '2010-06-30'
+      hivConfirmationObservation.resource.code.coding[0].system = 'http://loinc.org'
+      hivConfirmationObservation.resource.code.coding[0].code = '33660-2'
+      hivConfirmationObservation.resource.code.coding[0].display = 'HIV 1 p24 Ag [Presence] in Serum by Neutralization test'
+      hivConfirmationObservation.resource.valueCodeableConcept = {
         coding: {
           system: 'http://loinc.org',
           code: 'LA6576-8'
@@ -234,11 +304,11 @@ tap.test('Events service', { autoend: true }, (t) => {
         text: 'Positive'
       }
 
-      hivConfirmationObservationPartnerStatus.effectiveDateTime = '2010-06-30'
-      hivConfirmationObservationPartnerStatus.code.coding[0].system = 'http://hearth.org/cbs'
-      hivConfirmationObservationPartnerStatus.code.coding[0].code = 'partner-hiv-status'
-      hivConfirmationObservationPartnerStatus.code.coding[0].display = 'Partners HIV status'
-      hivConfirmationObservationPartnerStatus.valueCodeableConcept = {
+      hivConfirmationObservationPartnerStatus.resource.effectiveDateTime = '2010-06-30'
+      hivConfirmationObservationPartnerStatus.resource.code.coding[0].system = 'http://hearth.org/cbs'
+      hivConfirmationObservationPartnerStatus.resource.code.coding[0].code = 'partner-hiv-status'
+      hivConfirmationObservationPartnerStatus.resource.code.coding[0].display = 'Partners HIV status'
+      hivConfirmationObservationPartnerStatus.resource.valueCodeableConcept = {
         coding: {
           system: 'http://loinc.org',
           code: 'LA6576-8'
@@ -257,16 +327,18 @@ tap.test('Events service', { autoend: true }, (t) => {
 
       // CD4 Count
       const cd4CountEncounter = JSON.parse(JSON.stringify(encounterTemplate))
-      const cd4CountObservation = JSON.parse(JSON.stringify(observationTemplate))
+      const cd4CountObservation = {
+        resource: JSON.parse(JSON.stringify(observationTemplate))
+      }
       cd4CountEncounter.period.start = '2017-04-04'
       cd4CountEncounter.type = [
         { coding: [ { system: 'http://hearth.org/cbs/event-types', code: 'cd4-count', display: 'CD4 Count' } ] }
       ]
       cd4CountEncounter.location[0].location.display = 'Chuk'
-      cd4CountObservation.effectiveDateTime = '2017-05-05'
-      cd4CountObservation.valueQuantity = 'Test Result'
-      cd4CountObservation.performer[0].reference = '#practioner-1'
-      cd4CountObservation.contained = [{
+      cd4CountObservation.resource.effectiveDateTime = '2017-05-05'
+      cd4CountObservation.resource.valueQuantity = 'Test Result'
+      cd4CountObservation.resource.performer[0].reference = '#practioner-1'
+      cd4CountObservation.resource.contained = [{
         resourceType: 'Practitioner',
         id: 'practioner-1',
         name: [{
@@ -277,26 +349,28 @@ tap.test('Events service', { autoend: true }, (t) => {
 
       // Viral Load
       const viralLoadEncounter = JSON.parse(JSON.stringify(encounterTemplate))
-      const viralLoadObservation = JSON.parse(JSON.stringify(observationTemplate))
+      const viralLoadObservation = {
+        resource: JSON.parse(JSON.stringify(observationTemplate))
+      }
       viralLoadEncounter.period.start = '2017-04-04'
       viralLoadEncounter.type = [
         { coding: [ { system: 'http://hearth.org/cbs/event-types', code: 'viral-load', display: 'Viral Load' } ] }
       ]
       viralLoadEncounter.location[0].location.display = 'Chuk'
 
-      viralLoadObservation.effectiveDateTime = '2017-04-04'
-      viralLoadObservation.code.coding[0].system = 'http://loinc.org'
-      viralLoadObservation.code.coding[0].code = '25836-8'
-      viralLoadObservation.code.coding[0].display = 'HIV 1 RNA [#/​volume] (viral load) in Unspecified specimen by Probe and target amplification method'
+      viralLoadObservation.resource.effectiveDateTime = '2017-04-04'
+      viralLoadObservation.resource.code.coding[0].system = 'http://loinc.org'
+      viralLoadObservation.resource.code.coding[0].code = '25836-8'
+      viralLoadObservation.resource.code.coding[0].display = 'HIV 1 RNA [#/​volume] (viral load) in Unspecified specimen by Probe and target amplification method'
 
-      viralLoadObservation.valueQuantity = {
+      viralLoadObservation.resource.valueQuantity = {
         value: 599,
         unit: 'copies/mL',
         system: 'http://unitsofmeasure.org',
         code: 'copies/mL'
       }
 
-      viralLoadObservation.contained = [
+      viralLoadObservation.resource.contained = [
         {
           resourceType: 'Practitioner',
           id: 'practioner-1',
@@ -307,7 +381,7 @@ tap.test('Events service', { autoend: true }, (t) => {
         }
       ]
 
-      viralLoadObservation.performer = [
+      viralLoadObservation.resource.performer = [
         {
           reference: '#practioner-1'
         }
@@ -407,53 +481,59 @@ tap.test('Events service', { autoend: true }, (t) => {
   t.test('.addObservationsToEncounters', { autoend: true }, (t) => {
     t.test('attach observations to encounters and return array', (t) => {
       // Encounters for Patient/12345
-      const encounter1 = JSON.parse(JSON.stringify(encounterTemplate))
-      encounter1.id = '1'
-      encounter1.period.start = '2017-01-01'
-      encounter1.location[0].location.display = 'Test Hospital 1'
-      encounter1.patient.reference = 'Patient/12345'
-      encounter1.type[0].coding[0].code = 'linkage-to-care'
-      const encounter2 = JSON.parse(JSON.stringify(encounterTemplate))
-      encounter2.id = '2'
-      encounter2.period.start = '2017-02-02'
-      encounter2.location[0].location.display = 'Test Hospital 2'
-      encounter2.patient.reference = 'Patient/12345'
-      encounter2.type[0].coding[0].code = 'cd4-count'
+      const encounter1 = {
+        resource: JSON.parse(JSON.stringify(encounterTemplate))
+      }
+      encounter1.resource.id = '1'
+      encounter1.resource.period.start = '2017-01-01'
+      encounter1.resource.location[0].location.display = 'Test Hospital 1'
+      encounter1.resource.patient.reference = 'Patient/12345'
+      encounter1.resource.type[0].coding[0].code = 'linkage-to-care'
+      const encounter2 = {
+        resource: JSON.parse(JSON.stringify(encounterTemplate))
+      }
+      encounter2.resource.id = '2'
+      encounter2.resource.period.start = '2017-02-02'
+      encounter2.resource.location[0].location.display = 'Test Hospital 2'
+      encounter2.resource.patient.reference = 'Patient/12345'
+      encounter2.resource.type[0].coding[0].code = 'cd4-count'
 
       // Observations for Encounters 1 and 2
-      const observation1 = JSON.parse(JSON.stringify(observationTemplate))
-      observation1.encounter.reference = 'Encounter/1'
-      observation1.valueCodeableConcept.coding = { system: 'Test System 1', code: 'Test Code 1' }
-      observation1.valueCodeableConcept.text = 'Observation 1 outcome'
-      const observation2 = JSON.parse(JSON.stringify(observationTemplate))
-      observation2.encounter.reference = 'Encounter/1'
-      observation2.valueCodeableConcept.coding = { system: 'Test System 2', code: 'Test Code 2' }
-      observation2.valueCodeableConcept.text = 'Observation 2 outcome'
-      const observation3 = JSON.parse(JSON.stringify(observationTemplate))
-      observation3.encounter.reference = 'Encounter/2'
-      observation3.valueCodeableConcept.coding = { system: 'Test System 3', code: 'Test Code 3' }
-      observation3.valueCodeableConcept.text = 'Observation 3 outcome'
+      const observation1 = {
+        resource: JSON.parse(JSON.stringify(observationTemplate))
+      }
+      observation1.resource.encounter.reference = 'Encounter/1'
+      observation1.resource.valueCodeableConcept.coding = { system: 'Test System 1', code: 'Test Code 1' }
+      observation1.resource.valueCodeableConcept.text = 'Observation 1 outcome'
+      const observation2 = {
+        resource: JSON.parse(JSON.stringify(observationTemplate))
+      }
+      observation2.resource.encounter.reference = 'Encounter/1'
+      observation2.resource.valueCodeableConcept.coding = { system: 'Test System 2', code: 'Test Code 2' }
+      observation2.resource.valueCodeableConcept.text = 'Observation 2 outcome'
+      const observation3 = {
+        resource: JSON.parse(JSON.stringify(observationTemplate))
+      }
+      observation3.resource.encounter.reference = 'Encounter/2'
+      observation3.resource.valueCodeableConcept.coding = { system: 'Test System 3', code: 'Test Code 3' }
+      observation3.resource.valueCodeableConcept.text = 'Observation 3 outcome'
 
       const encounters = [encounter1, encounter2]
 
       const apiMock = {
         Observations: {
           get: (params) => {
-            let observations
-            switch (params['encounter.reference'].$eq) {
-              case 'Encounter/1':
-                observations = [observation1, observation2]
+            switch (params['encounter']) {
+              case '1':
+                encounter1._observations = [observation1, observation2]
                 break
-              case 'Encounter/2':
-                observations = [observation3]
+              case '2':
+                encounter2._observations = [observation3]
                 break
             }
-            const result = {
-              entry: observations,
-              $promise: Promise.resolve(),
-              $resolved: true
-            }
-            return result
+            return new Promise((resolve, reject) => {
+              resolve()
+            })
           }
         }
       }
@@ -461,9 +541,9 @@ tap.test('Events service', { autoend: true }, (t) => {
         defer: () => {
           return {
             resolve: (encountersArray) => {
-              t.equals(encountersArray[0]._observations[0].encounter.reference, 'Encounter/1')
-              t.equals(encountersArray[0]._observations[1].encounter.reference, 'Encounter/1')
-              t.equals(encountersArray[1]._observations[0].encounter.reference, 'Encounter/2')
+              t.equals(encountersArray[0]._observations[0].resource.encounter.reference, 'Encounter/1')
+              t.equals(encountersArray[0]._observations[1].resource.encounter.reference, 'Encounter/1')
+              t.equals(encountersArray[1]._observations[0].resource.encounter.reference, 'Encounter/2')
               t.end()
             }
           }
@@ -475,64 +555,6 @@ tap.test('Events service', { autoend: true }, (t) => {
 
       const events = Events(apiMock, qMock)
       events.addObservationsToEncounters(encounters)
-    })
-  })
-
-  t.test('.constructSimpleLinkageToCareObject', { autoend: true }, (t) => {
-    t.test('should construct simple linkage to care object', (t) => {
-      const events = Events()
-
-      const encounter = JSON.parse(JSON.stringify(encounterTemplate))
-      encounter.period.start = '2017-04-04'
-      encounter.type = [
-        { coding: [ { system: 'http://hearth.org/cbs/event-types', code: 'linkage-to-care', display: 'Linkage to Care' } ] },
-        { coding: [ { system: 'http://hearth.org/cbs/encounter-types', code: 'anc-visit', display: 'ANC Visit' } ] }
-      ]
-      encounter.location[0].location.display = 'Chuk'
-
-      const event = events.constructSimpleLinkageToCareObject(encounter)
-
-      t.equals(event.eventType, 'linkage-to-care')
-      t.equals(event.eventDate, '2017-04-04')
-      t.equals(event.data.encounterType, 'ANC Visit')
-      t.equals(event.data.encounterLocation, 'Chuk')
-      t.end()
-    })
-  })
-
-  t.test('.constructSimpleCD4CountObject', { autoend: true }, (t) => {
-    t.test('should construct simple cd4 count object', (t) => {
-      const events = Events()
-
-      const encounter = JSON.parse(JSON.stringify(encounterTemplate))
-      encounter.period.start = '2017-04-04'
-      encounter.type = [
-        { coding: [ { system: 'http://hearth.org/cbs/event-types', code: 'cd4-count', display: 'CD4 Count' } ] }
-      ]
-      encounter.location[0].location.display = 'Chuk'
-
-      const observation = JSON.parse(JSON.stringify(observationTemplate))
-      observation.effectiveDateTime = '2017-05-05'
-      observation.valueQuantity = 'Test Result'
-      observation.performer[0].reference = '#practioner-1'
-      observation.contained = [{
-        resourceType: 'Practitioner',
-        id: 'practioner-1',
-        name: [{
-          family: ['Provider'],
-          given: ['Test']
-        }]
-      }]
-
-      const event = events.constructSimpleCD4CountObject(encounter, [observation])
-
-      t.equals(event.eventType, 'cd4-count')
-      t.equals(event.eventDate, '2017-04-04')
-      t.equals(event.data.cd4CountDate, '2017-05-05')
-      t.equals(event.data.cd4CountLocation, 'Chuk')
-      t.equals(event.data.cd4CountResult, 'Test Result')
-      t.equals(event.data.cd4CountProvider, 'Test Provider')
-      t.end()
     })
   })
 })
