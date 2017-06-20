@@ -13,8 +13,8 @@ const FormBuilderCD4Count = require('../../app/scripts/directives/add-cbs-events
 const FormBuilderViralLoad = require('../../app/scripts/directives/add-cbs-events/add-cbs-event/forms/viral-load.json')
 
 const sandbox = sinon.sandbox.create()
-sandbox.stub(console, 'error').callsFake((msg) => {})
-sandbox.stub(console, 'log').callsFake((msg) => {})
+// sandbox.stub(console, 'error').callsFake((msg) => {})
+// sandbox.stub(console, 'log').callsFake((msg) => {})
 tap.tearDown(() => {
   sandbox.restore()
 })
@@ -203,7 +203,7 @@ tap.test('.submit()', { autoend: true }, (t) => {
         $modelValue: 'positive',
         $dirty: true
       },
-      partnerHIVStatus: {
+      partnerHivStatus: {
         $modelValue: 'negative',
         $dirty: true
       }
@@ -238,16 +238,20 @@ tap.test('.submit()', { autoend: true }, (t) => {
           // Patient HIV Observation
           t.equals(stateService.pushToEventsArray.getCall(0).args[0].subjectHIVObs.resourceType, 'Observation')
           t.equals(stateService.pushToEventsArray.getCall(0).args[0].subjectHIVObs.encounter.reference, '@main')
-          t.equals(stateService.pushToEventsArray.getCall(0).args[0].subjectHIVObs.valueCodeableConcept.coding.code, '55277-8')
+          t.equals(stateService.pushToEventsArray.getCall(0).args[0].subjectHIVObs.code.coding[0].code, '33660-2')
+          t.equals(stateService.pushToEventsArray.getCall(0).args[0].subjectHIVObs.code.coding[0].system, 'http://loinc.org')
           t.equals(stateService.pushToEventsArray.getCall(0).args[0].subjectHIVObs.valueCodeableConcept.coding.system, 'http://loinc.org')
+          t.equals(stateService.pushToEventsArray.getCall(0).args[0].subjectHIVObs.valueCodeableConcept.coding.code, 'LA6576-8')
           t.equals(stateService.pushToEventsArray.getCall(0).args[0].subjectHIVObs.valueCodeableConcept.text, 'Positive')
           t.equals(stateService.pushToEventsArray.getCall(0).args[0].subjectHIVObs.effectiveDateTime, '2017-01-01')
 
           // Partner HIV Observation
           t.equals(stateService.pushToEventsArray.getCall(0).args[0].partnerHIVObs.resourceType, 'Observation')
           t.equals(stateService.pushToEventsArray.getCall(0).args[0].partnerHIVObs.encounter.reference, '@main')
-          t.equals(stateService.pushToEventsArray.getCall(0).args[0].partnerHIVObs.valueCodeableConcept.coding.code, 'partner-hiv-status')
-          t.equals(stateService.pushToEventsArray.getCall(0).args[0].partnerHIVObs.valueCodeableConcept.coding.system, 'http://hearth.org/cbs/observation-types')
+          t.equals(stateService.pushToEventsArray.getCall(0).args[0].partnerHIVObs.code.coding[0].code, 'partner-hiv-status')
+          t.equals(stateService.pushToEventsArray.getCall(0).args[0].partnerHIVObs.code.coding[0].system, 'http://hearth.org/cbs/observation-types')
+          t.equals(stateService.pushToEventsArray.getCall(0).args[0].partnerHIVObs.valueCodeableConcept.coding.system, 'http://loinc.org')
+          t.equals(stateService.pushToEventsArray.getCall(0).args[0].partnerHIVObs.valueCodeableConcept.coding.code, 'LA6576-8')
           t.equals(stateService.pushToEventsArray.getCall(0).args[0].partnerHIVObs.valueCodeableConcept.text, 'Negative')
           t.equals(stateService.pushToEventsArray.getCall(0).args[0].partnerHIVObs.effectiveDateTime, '2017-01-01')
 
@@ -338,9 +342,8 @@ tap.test('.submit()', { autoend: true }, (t) => {
           t.equals(stateService.pushToEventsArray.getCall(0).args[0].cd4CountObs.contained[0].name[0].family[0], 'FamilyNamey')
           t.equals(stateService.pushToEventsArray.getCall(0).args[0].cd4CountObs.contained[0].id, 'provider-1')
           t.equals(stateService.pushToEventsArray.getCall(0).args[0].cd4CountObs.performer[0].reference, '#provider-1')
-          t.equals(stateService.pushToEventsArray.getCall(0).args[0].cd4CountObs.valueCodeableConcept.coding.code, '24467-3')
-          t.equals(stateService.pushToEventsArray.getCall(0).args[0].cd4CountObs.valueCodeableConcept.coding.system, 'http://loinc.org')
-          t.equals(stateService.pushToEventsArray.getCall(0).args[0].cd4CountObs.valueCodeableConcept.text, 'Example CD4 Count Result')
+          t.equals(stateService.pushToEventsArray.getCall(0).args[0].cd4CountObs.valueQuantity.unit, 'copies/mL')
+          t.equals(stateService.pushToEventsArray.getCall(0).args[0].cd4CountObs.valueQuantity.value, 'Example CD4 Count Result')
 
           testSandbox.restore()
           t.end()
@@ -429,9 +432,8 @@ tap.test('.submit()', { autoend: true }, (t) => {
           t.equals(stateService.pushToEventsArray.getCall(0).args[0].viralLoadObs.contained[0].name[0].family[0], 'FamilyNamey')
           t.equals(stateService.pushToEventsArray.getCall(0).args[0].viralLoadObs.contained[0].id, 'provider-1')
           t.equals(stateService.pushToEventsArray.getCall(0).args[0].viralLoadObs.performer[0].reference, '#provider-1')
-          t.equals(stateService.pushToEventsArray.getCall(0).args[0].viralLoadObs.valueCodeableConcept.coding.code, '66725-3')
-          t.equals(stateService.pushToEventsArray.getCall(0).args[0].viralLoadObs.valueCodeableConcept.coding.system, 'http://loinc.org')
-          t.equals(stateService.pushToEventsArray.getCall(0).args[0].viralLoadObs.valueCodeableConcept.text, 'Example Viral Load Result')
+          t.equals(stateService.pushToEventsArray.getCall(0).args[0].viralLoadObs.valueQuantity.unit, 'copies/mL')
+          t.equals(stateService.pushToEventsArray.getCall(0).args[0].viralLoadObs.valueQuantity.value, 'Example Viral Load Result')
 
           testSandbox.restore()
           t.end()
