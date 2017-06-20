@@ -34,6 +34,12 @@
       "reference": ""
     }
   ],
+  "valueQuantity": {
+    "value": "",
+    "unit": "",
+    "system": "",
+    "code": ""
+  },
   "valueCodeableConcept": {
     "coding": {
       "system": "http://loinc.org",
@@ -41,5 +47,14 @@
     },
     "text": ""
   },
-  "contained": []
+  "contained": [
+    {
+      "name": [
+        {
+          "given": [],
+          "family": []
+        }
+      ]
+    }
+  ]
 }

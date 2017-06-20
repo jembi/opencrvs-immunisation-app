@@ -7,14 +7,15 @@ module.exports = function (Api, loadResource, state) {
     restrict: 'EA',
     templateUrl: 'app/scripts/directives/add-cbs-events/cbs-event-selector/view.html',
     scope: {
-      eventTitles: '=',
+      cbsEvents: '=',
       setSelectedEvent: '&',
       patient: '='
     },
     link: function (scope) {
-      scope.selectEventClick = function (title) {
-        scope.selectedEvent = title
-        scope.setSelectedEvent({ selectedEvent: title })
+      scope.selectedEvent = scope.cbsEvents[0]
+      scope.selectEventClick = function (cbsEvent) {
+        scope.selectedEvent = cbsEvent
+        scope.setSelectedEvent({ selectedEvent: cbsEvent })
       }
 
       scope.submitControl = null

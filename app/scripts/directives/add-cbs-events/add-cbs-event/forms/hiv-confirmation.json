@@ -1,0 +1,219 @@
+{
+  "key": "sec1",
+  "name": "Section 1",
+  "displayName": "HIV Confirmation",
+  "flex": "100",
+  "rows": [{
+      "name": "Row 1",
+      "layout": "row",
+      "fields": [{
+        "type": "date",
+        "flex": "30",
+        "name": "encounterDate",
+        "title": "Date of First HIV Positive test",
+        "settings": {
+          "valueType": "valueString",
+          "disabled": false,
+          "required": true
+        },
+        "FHIRMappings": [{
+          "resourceKey": "main",
+          "path": "period.start",
+          "params": null,
+          "valueType": "formValue",
+          "value": "encounterDate"
+        }, {
+          "resourceKey": "main",
+          "path": "period.end",
+          "params": null,
+          "valueType": "formValue",
+          "value": "encounterDate"
+        }, {
+          "resourceKey": "partnerHIVObs",
+          "path": "effectiveDateTime",
+          "params": null,
+          "valueType": "formValue",
+          "value": "encounterDate"
+        }, {
+          "resourceKey": "subjectHIVObs",
+          "path": "effectiveDateTime",
+          "params": null,
+          "valueType": "formValue",
+          "value": "encounterDate"
+        }],
+        "skipLogic": {
+          "func": {},
+          "checks": []
+        },
+        "value": null
+      },
+      {
+        "type": "select",
+        "flex": "30",
+        "name": "encounterLocation",
+        "title": "Location of First HIV Positive test",
+        "settings": {
+          "valueType": "valueString",
+          "disabled": false,
+          "required": true,
+          "searchOptions": true
+        },
+        "FHIRMappings": [{
+          "resourceKey": "main",
+          "path": "location[0].location.display",
+          "params": null,
+          "valueType": "formValue",
+          "value": "encounterLocation"
+        }],
+        "skipLogic": {
+          "func": {},
+          "checks": []
+        },
+        "options": [
+          {"key": "Chuk", "value": "Chuk"}, 
+          {"key": "Kacyiru Police Hospital", "value": "Kacyiru Police Hospital"}, 
+          {"key": "Muhima Hospital", "value": "Muhima Hospital"}, 
+          {"key": "Kibagabaga Hospital", "value": "Kibagabaga Hospital"}, 
+          {"key": "Kanombe Military Hospital", "value": "Kanombe Military Hospital"}, 
+          {"key": "King Faisal Hospital", "value": "King Faisal Hospital"}, 
+          {"key": "Ndera Hospital", "value": "Ndera Hospital"}, 
+          {"key": "Masaka Hospital", "value": "Masaka Hospital"}, 
+          {"key": "Rwinkwavu Hospital", "value": "Rwinkwavu Hospital"}, 
+          {"key": "Kirehe Hospital", "value": "Kirehe Hospital"}, 
+          {"key": "Kibungo Hospital", "value": "Kibungo Hospital"}, 
+          {"key": "Nyagatare Hospital", "value": "Nyagatare Hospital"}, 
+          {"key": "Gahini Hospital", "value": "Gahini Hospital"}, 
+          {"key": "Nyamata Hospital", "value": "Nyamata Hospital"}, 
+          {"key": "Ngarama Hospital", "value": "Ngarama Hospital"}, 
+          {"key": "Kiziguro Hospital", "value": "Kiziguro Hospital"}, 
+          {"key": "Rwamagana Hospital", "value": "Rwamagana Hospital"}, 
+          {"key": "Other", "value": "Other"}
+        ],
+        "value": null
+      }, 
+      {
+        "type": "select",
+        "flex": "20",
+        "name": "subjectHIVStatus",
+        "title": "HIV Status",
+        "settings": {
+          "valueType": "valueString",
+          "disabled": false,
+          "required": true
+        },
+        "FHIRMappings": [{
+          "resourceKey": "subjectHIVObs",
+          "path": "encounter.reference",
+          "params": null,
+          "valueType": "staticValue",
+          "value": "@main"
+        }, {
+          "resourceKey": "subjectHIVObs",
+          "path": "code.coding[0].code",
+          "params": null,
+          "valueType": "staticValue",
+          "value": "33660-2"
+        }, {
+          "resourceKey": "subjectHIVObs",
+          "path": "code.coding[0].system",
+          "params": null,
+          "valueType": "staticValue",
+          "value": "http://loinc.org"
+        }, {
+          "resourceKey": "subjectHIVObs",
+          "path": "valueCodeableConcept.coding.code",
+          "params": null,
+          "valueType": "staticValue",
+          "value": "LA6576-8"
+        }, {
+          "resourceKey": "subjectHIVObs",
+          "path": "valueCodeableConcept.coding.system",
+          "params": null,
+          "valueType": "staticValue",
+          "value": "http://loinc.org"
+        }, {
+          "resourceKey": "subjectHIVObs",
+          "path": "valueCodeableConcept.text",
+          "params": null,
+          "valueType": "optionValue",
+          "value": "subjectHIVStatus"
+        }],
+        "skipLogic": {
+          "func": {},
+          "checks": []
+        },
+        "options": [{
+            "key": "positive",
+            "value": "Positive"
+          },
+          {
+            "key": "negative",
+            "value": "Negative"
+          }
+        ],
+        "value": null
+      }, {
+        "type": "select",
+        "flex": "20",
+        "name": "partnerHivStatus",
+        "title": "Partner HIV Status",
+        "settings": {
+          "valueType": "valueString",
+          "disabled": false,
+          "required": true
+        },
+        "FHIRMappings": [{
+          "resourceKey": "partnerHIVObs",
+          "path": "encounter.reference",
+          "params": null,
+          "valueType": "staticValue",
+          "value": "@main"
+        }, {
+          "resourceKey": "partnerHIVObs",
+          "path": "code.coding[0].code",
+          "params": null,
+          "valueType": "staticValue",
+          "value": "partner-hiv-status"
+        }, {
+          "resourceKey": "partnerHIVObs",
+          "path": "code.coding[0].system",
+          "params": null,
+          "valueType": "staticValue",
+          "value": "http://hearth.org/cbs/observation-types"
+        }, {
+          "resourceKey": "partnerHIVObs",
+          "path": "valueCodeableConcept.coding.code",
+          "params": null,
+          "valueType": "staticValue",
+          "value": "LA6576-8"
+        }, {
+          "resourceKey": "partnerHIVObs",
+          "path": "valueCodeableConcept.coding.system",
+          "params": null,
+          "valueType": "staticValue",
+          "value": "http://loinc.org"
+        }, {
+          "resourceKey": "partnerHIVObs",
+          "path": "valueCodeableConcept.text",
+          "params": null,
+          "valueType": "optionValue",
+          "value": "partnerHivStatus"
+        }],
+        "skipLogic": {
+          "func": {},
+          "checks": []
+        },
+        "options": [{
+            "key": "positive",
+            "value": "Positive"
+          },
+          {
+            "key": "negative",
+            "value": "Negative"
+          }
+        ],
+        "value": null
+      }]
+    }
+  ]
+}
