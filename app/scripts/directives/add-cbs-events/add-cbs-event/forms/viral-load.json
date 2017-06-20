@@ -158,16 +158,28 @@
         },
         "FHIRMappings": [{
           "resourceKey": "viralLoadObs",
-          "path": "valueCodeableConcept.text",
+          "path": "valueQuantity.value",
           "params": null,
           "valueType": "formValue",
           "value": "viralLoadResult"
         }, {
           "resourceKey": "viralLoadObs",
-          "path": "valueCodeableConcept.coding.code",
+          "path": "valueQuantity.unit",
           "params": null,
           "valueType": "staticValue",
-          "value": "66725-3"
+          "value": "copies/mL"
+        }, {
+          "resourceKey": "viralLoadObs",
+          "path": "valueQuantity.code",
+          "params": null,
+          "valueType": "staticValue",
+          "value": "copies/mL"
+        }, {
+          "resourceKey": "viralLoadObs",
+          "path": "valueQuantity.system",
+          "params": null,
+          "valueType": "staticValue",
+          "value": "http://unitsofmeasure.org"
         }],
         "skipLogic": {
           "func": {},

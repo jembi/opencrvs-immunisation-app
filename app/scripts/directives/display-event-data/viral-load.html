@@ -2,18 +2,18 @@
 <table>
   <tr>
     <td>Test date:</td>
-    <td>{{event.data.firstViralLoadDate}}</td>
-  </tr>
-  <tr>
-    <td>Result:</td>
-    <td>{{event.data.firstViralLoadResults}}</td>
+    <td>{{event.data.viralLoadDate}}</td>
   </tr>
   <tr>
     <td>Location:</td>
-    <td>{{event.data.firstViralLoadLocation}}</td>
+    <td>{{event.data.viralLoadLocation}}</td>
   </tr>
   <tr>
+    <td>Result:</td>
+    <td>{{event.data.viralLoadResults.value}} {{event.data.viralLoadResults.unit}}</td>
+  </tr>  
+  <tr>
     <td>Provider:</td>
-    <td>{{event.data.firstViralLoadProvider}}</td>
+    <td>{{event.data.viralLoadProvider}}</td>
   </tr>
 </table>

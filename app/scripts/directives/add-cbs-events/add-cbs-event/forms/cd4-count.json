@@ -158,16 +158,28 @@
         },
         "FHIRMappings": [{
           "resourceKey": "cd4CountObs",
-          "path": "valueCodeableConcept.text",
+          "path": "valueQuantity.value",
           "params": null,
           "valueType": "formValue",
           "value": "cd4CountResult"
         }, {
           "resourceKey": "cd4CountObs",
-          "path": "valueCodeableConcept.coding.code",
+          "path": "valueQuantity.unit",
           "params": null,
           "valueType": "staticValue",
-          "value": "24467-3"
+          "value": "copies/mL"
+        }, {
+          "resourceKey": "cd4CountObs",
+          "path": "valueQuantity.code",
+          "params": null,
+          "valueType": "staticValue",
+          "value": "copies/mL"
+        }, {
+          "resourceKey": "cd4CountObs",
+          "path": "valueQuantity.system",
+          "params": null,
+          "valueType": "staticValue",
+          "value": "http://unitsofmeasure.org"
         }],
         "skipLogic": {
           "func": {},

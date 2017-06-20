@@ -15,7 +15,7 @@ module.exports = function ($resource, config) {
 
     Encounters: $resource(server + '/fhir/Encounter'),
 
-    Observations: $resource(server + '/fhir/Observations'),
+    Observations: $resource(server + '/fhir/Observation'),
 
     Binary: $resource(server + '/fhir/Binary'),
 
