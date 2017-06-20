@@ -68,8 +68,9 @@
     <div class="title">Extensions</div>
     <div class="details" flex>
       <div class="detailsRow" ng-repeat="extension in patient.extension track by $index" layout="row">
-        <div ng-repeat="(key, value) in extension" ng-class="{'system': $first , 'value': $last } ">
-          {{value}}<span ng-if="$first">:</span>
+        <div ng-repeat="(key, value) in extension" ng-class="{'system': key === 'url', 'value': key.indexOf('value') === 0 } ">
+          <span ng-if="key === 'url'">{{value.split(':').pop()}}:</span>
+          <span ng-if="key.indexOf('value') === 0">{{value}}</span>
         </div>
       </div>
     </div>
