@@ -13,8 +13,8 @@ const FormBuilderCD4Count = require('../../app/scripts/directives/add-cbs-events
 const FormBuilderViralLoad = require('../../app/scripts/directives/add-cbs-events/add-cbs-event/forms/viral-load.json')
 
 const sandbox = sinon.sandbox.create()
-// sandbox.stub(console, 'error').callsFake((msg) => {})
-// sandbox.stub(console, 'log').callsFake((msg) => {})
+sandbox.stub(console, 'error').callsFake((msg) => {})
+sandbox.stub(console, 'log').callsFake((msg) => {})
 tap.tearDown(() => {
   sandbox.restore()
 })

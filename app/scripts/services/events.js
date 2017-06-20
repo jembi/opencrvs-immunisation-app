@@ -178,7 +178,6 @@ module.exports = function (Api, $q) {
     formatEvents: (events) => {
       const simpleEvents = []
       events.forEach((event) => {
-        console.log(event)
         if (isEventOfType(LINKAGE_TO_CARE, event.resource)) {
           event = constructSimpleLinkageToCareObject(event.resource, event._observations)
         } else if (isEventOfType(HIV_CONFIRMATION, event.resource)) {
