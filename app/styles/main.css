@@ -45,3 +45,17 @@ body {
   top: 14px !important;
 }
 /* FormBuilder DatePicker style override */
+
+.landing-paragraph {
+  margin: 20px;
+  padding: 10px;
+  text-align: left;
+}
+
+.notice {
+  background: #ffd78a;
+  border-bottom-style: solid;
+  border-bottom-width: medium;
+  border-bottom-color: #ff6b00;
+  border-radius: 2px;
+}
