@@ -6,7 +6,9 @@ module.exports = function (Api, loadResource, $q, state, FHIR, $location) {
   return {
     restrict: 'EA',
     templateUrl: 'app/scripts/directives/add-patient-form/view.html',
-    scope: {},
+    scope: {
+      patientId: '='
+    },
     link: function (scope) {
       if (!state.getPartialPatientDemographics()) {
         return $location.path('/patients')
@@ -29,8 +31,11 @@ module.exports = function (Api, loadResource, $q, state, FHIR, $location) {
           formFieldsValues.firstPostitiveHivTestDate = moment(formFieldsValues.firstPostitiveHivTestDate).format('YYYY-MM-DD')
           var fhirResourceDict = FHIR.mapFHIRResources({ main: fhirDoc }, scope.state.FormBuilderAddPatient, formFieldsValues)
 
-          Api.Patients.save(fhirResourceDict.main, function (bundle, headers) {
-            defer.resolve({ isValid: true, msg: 'Patient created successfully' })
+          fhirResourceDict.main.id = scope.patientId ? scope.patientId : undefined
+          const method = scope.patientId ? 'update' : 'save'
+
+          Api.Patients[method](fhirResourceDict.main, function (bundle, headers) {
+            defer.resolve({ isValid: true, msg: 'Patient saved successfully' })
             const patientId = headers('location').split('/')[3]
             $location.path('/events/' + patientId)
           }, function (err) {
@@ -53,7 +58,7 @@ module.exports = function (Api, loadResource, $q, state, FHIR, $location) {
         },
         sections: [],
         buttons: {
-          submit: 'add patient'
+          submit: scope.patientId ? 'edit patient' : 'add patient'
         },
         submit: {
           execute: submit,
@@ -68,17 +73,27 @@ module.exports = function (Api, loadResource, $q, state, FHIR, $location) {
       promises.push(loadResource.fetch('app/scripts/directives/add-patient-form/forms/address-info.json'))
       promises.push(loadResource.fetch('app/scripts/directives/add-patient-form/forms/emergency-contact-info.json'))
 
-      $q.all(promises).then(function (results) {
+      $q.all(promises).then((formSections) => {
         // set partial patient demographics in the form
-        var partialDemographics = state.getPartialPatientDemographics()
+        const partialFHIRDemographics = state.getPartialPatientDemographics()
         state.setPartialPatientDemographics(null)
 
-        results[0].rows[0].fields[2].value = partialDemographics.givenName
-        results[0].rows[0].fields[4].value = partialDemographics.familyName
-        results[0].rows[0].fields[7].value = partialDemographics.gender
-        results[0].rows[0].fields[8].value = partialDemographics.birthDate
+        const partialFormDemographics = {}
+        formSections.forEach((formSection) => {
+          Object.assign(partialFormDemographics, FHIR.mapFHIRObjectToFormFields(formSection, partialFHIRDemographics))
+        })
 
-        scope.state.FormBuilderAddPatient.sections = results
+        Object.keys(partialFormDemographics).forEach((formFieldName) => {
+          formSections.forEach((formSection) => {
+            formSection.rows[0].fields.forEach((field) => {
+              if (field.name === formFieldName) {
+                field.value = partialFormDemographics[formFieldName]
+              }
+            })
+          })
+        })
+
+        scope.state.FormBuilderAddPatient.sections = formSections
       })
     }
   }

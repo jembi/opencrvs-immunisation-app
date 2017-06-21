@@ -76,7 +76,7 @@
       "FHIRMappings": [{
         "resourceKey": "main",
         "path": "contact[0].relationship[1].coding[0].code",
-        "params": null,
+        "params": "contact[0].relationship[1].coding[0].system=http://hl7.org/fhir/vs/patient-contact-relationship",
         "valueType": "formValue",
         "value": "emergencyContactRelationship"
       }]
