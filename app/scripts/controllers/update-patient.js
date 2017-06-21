@@ -22,6 +22,7 @@ module.exports = function ($scope, $location, $routeParams, state, Api) {
   var success = function (patient) {
     if (!patient) {
       $scope.getPatientError = GET_PATIENT_ERROR
+      return
     }
 
     $scope.partialDemographics = patient

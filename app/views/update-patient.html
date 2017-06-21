@@ -4,3 +4,7 @@
 <div md-whiteframe="2" class="dashboard-whiteframe">
   <add-patient-form patient-id="patientId" ng-if="partialDemographics"></add-patient-form>
 </div>
+
+<div ng-if="getPatientError" md-whiteframe="2" class="dashboard-whiteframe">
+  <div>{{ getPatientError }}</div>
+</div>
