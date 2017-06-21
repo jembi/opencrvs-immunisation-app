@@ -45,3 +45,74 @@ body {
   top: 14px !important;
 }
 /* FormBuilder DatePicker style override */
+
+/* timeline styles - custom */
+.timelineCustom li {
+  margin-top: -50px;
+}
+
+timeline-heading h4 {
+  margin-bottom: 10px;
+  margin-top: 0px;
+  padding: 10px 0px;
+}
+
+.timelineAddEvent li {
+  padding: 10px;
+  text-align: center;
+}
+.timeline-badge-custom {
+  height: 80px;
+  width: 80px;
+}
+.timeline-badge-custom {
+  background: #ff9900;
+}
+
+.linkageToCare {
+  background: #f0ad4e;
+  color: #f0ad4e;
+}
+.linkageToCare h4 {
+  border-bottom: 2px dashed #f0ad4e;
+}
+.hivConfirmation {
+  background: #008cff;
+  color: #008cff;
+}
+.hivConfirmation h4 {
+  border-bottom: 2px dashed #008cff;
+}
+.cd4Count {
+  background: #2c9300;
+  color: #2c9300;
+}
+.cd4Count h4 {
+  border-bottom: 2px dashed #2c9300;
+}
+.viralLoad {
+  background: #d9534f;
+  color: #d9534f;
+}
+.viralLoad h4 {
+  border-bottom: 2px dashed #d9534f;
+}
+
+.timeline-panel table tr td:nth-child(2) {
+  font-weight: bold;
+}
+/* timeline styles - custom */
+
+.landing-paragraph {
+  margin: 20px;
+  padding: 10px;
+  text-align: left;
+}
+
+.notice {
+  background: #ffd78a;
+  border-bottom-style: solid;
+  border-bottom-width: medium;
+  border-bottom-color: #ff6b00;
+  border-radius: 2px;
+}

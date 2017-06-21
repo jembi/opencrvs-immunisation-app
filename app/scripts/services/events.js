@@ -30,13 +30,14 @@ module.exports = function (Api, $q) {
   }
 
   const constructSimpleHIVConfirmationObject = (encounter, observations) => {
-    let firstPositiveHivTestDate, partnerStatus
+    let firstPositiveHivTestDate, partnerStatus, subjectStatus
 
     if (observations && observations.length > 0) {
       observations.forEach((obs) => {
         switch (obs.resource.code.coding[0].code) {
           case '33660-2': // HIV test
             firstPositiveHivTestDate = obs.resource.effectiveDateTime
+            subjectStatus = obs.resource.valueCodeableConcept.text
             break
           case 'partner-hiv-status':
             partnerStatus = obs.resource.valueCodeableConcept.text
@@ -50,6 +51,7 @@ module.exports = function (Api, $q) {
       eventType: HIV_CONFIRMATION,
       eventDate: encounter.period.start,
       data: {
+        subjectStatus: subjectStatus,
         partnerStatus: partnerStatus,
         firstPositiveHivTestLocation: encounter.location[0].location.display,
         firstPositiveHivTestDate: firstPositiveHivTestDate
