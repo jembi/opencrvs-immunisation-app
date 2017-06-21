@@ -1,6 +1,10 @@
 <!doctype html>
 <table>
   <tr>
+    <td>Date:</td>
+    <td>{{event.eventDate | date:'yyyy-MM-dd'}}</td>
+  </tr>
+  <tr>
     <td>Encounter type:</td>
     <td>{{event.data.encounterType}}</td>
   </tr>

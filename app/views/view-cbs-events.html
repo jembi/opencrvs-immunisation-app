@@ -7,31 +7,24 @@
 
 <div flex="70" flex-offset="15">
   <timeline>
-    <timeline-event>
-      <timeline-badge class="warning">
-        <md-icon>add</md-icon>
-      </timeline-badge>
-      <timeline-panel flex>
-        <timeline-heading>
-        </timeline-heading>
-        <md-button class="md-primary md-raised" ng-click="addEvent()">Add event</md-button>
-      </timeline-panel>
+    <timeline-event class="timelineAddEvent">
+      <md-button class="md-primary md-raised" ng-click="addEvent()">Add new event</md-button>
     </timeline-event>
-    <timeline-event ng-repeat="eventItem in events">
-      <timeline-badge class="warning" ng-if="eventItem.eventType === 'linkage-to-care'">
+    <timeline-event ng-repeat="eventItem in events" ng-class="{timelineCustom: $index != 0}">
+      <timeline-badge class="linkageToCare" ng-if="eventItem.eventType === 'linkage-to-care'">
         <md-icon>link</md-icon>
       </timeline-badge>
-      <timeline-badge class="info" ng-if="eventItem.eventType === 'hiv-confirmation'">
+      <timeline-badge class="hivConfirmation" ng-if="eventItem.eventType === 'hiv-confirmation'">
         <md-icon>start_rate</md-icon>
       </timeline-badge>
-      <timeline-badge class="success" ng-if="eventItem.eventType === 'cd4-count'">
+      <timeline-badge class="cd4Count" ng-if="eventItem.eventType === 'cd4-count'">
         <md-icon>gradient</md-icon>
       </timeline-badge>
-      <timeline-badge class="danger" ng-if="eventItem.eventType === 'viral-load'">
+      <timeline-badge class="viralLoad" ng-if="eventItem.eventType === 'viral-load'">
         <md-icon>texture</md-icon>
       </timeline-badge>
       <timeline-panel flex class="info">
-        <timeline-heading>
+        <timeline-heading ng-class="{'linkageToCare': eventItem.eventType == 'linkage-to-care' , 'hivConfirmation': eventItem.eventType == 'hiv-confirmation', 'cd4Count': eventItem.eventType == 'cd4-count', 'viralLoad': eventItem.eventType == 'viral-load' } ">
           <h4>{{eventItem.eventTitle}} - {{fromNowDate(eventItem.eventDate)}}</h4>
         </timeline-heading>
         <display-event-data event="eventItem"></display-event-data>
