@@ -25,6 +25,7 @@ module.exports = function ($scope, state, $location, $q, FHIR) {
           onClick: function () {
             state.setSearchResults(null)
             state.setPartialPatientDemographics(null)
+            $scope.$broadcast('clear-search-form')
           }
         }
       ]
