@@ -7,7 +7,12 @@ module.exports = function ($scope, $routeParams, events, $location, Api) {
   const GET_PATIENT_ERROR = 'Error: Failed to find patient with id:' + patientId
 
   $scope.fromNowDate = (date) => {
-    return moment(date).fromNow()
+    date = moment(date)
+    if (date.isSame(new Date(), 'day')) {
+      return 'today'
+    } else {
+      return date.fromNow()
+    }
   }
 
   $scope.addEvent = () => {
