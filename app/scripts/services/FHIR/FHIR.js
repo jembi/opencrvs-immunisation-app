@@ -1,5 +1,7 @@
 'use strict'
 
+const walk = require('../../modules/path-walker')
+
 module.exports = function () {
   var setField = function (resource, key, value, params) {
     if (!resource) {
@@ -162,6 +164,42 @@ module.exports = function () {
       })
 
       return fhirResourceDict
+    },
+
+    mapFHIRObjectToFormFields: (formSchema, fhirObject) => {
+      const getIndexFromParams = (params) => {
+        const split = params.split('=')
+        const index = walk(split[0], fhirObject).indexOf(split[1])
+        return index > -1 ? index : 0
+      }
+
+      const getInitialIndex = (path) => {
+        const split = path.split('.')
+        const lastItem = split[split.length - 1]
+        if (lastItem.indexOf('[') === -1) {
+          return 0
+        }
+        return lastItem.split('[')[1][0]
+      }
+
+      const returnObj = {}
+      formSchema.rows[0].fields.forEach((field) => {
+        if (field.FHIRMappings) {
+          field.FHIRMappings.forEach((mapping) => {
+            let index = getInitialIndex(mapping.path)
+            if (mapping.params) {
+              index = getIndexFromParams(mapping.params)
+            }
+            switch (mapping.valueType) {
+              case 'formValue':
+              case 'optionValue':
+                returnObj[mapping.value] = walk(mapping.path, fhirObject)[index]
+            }
+          })
+        }
+      })
+
+      return returnObj
     }
   }
 }

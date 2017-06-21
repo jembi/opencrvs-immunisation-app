@@ -36,6 +36,10 @@ app.config(function ($routeProvider) {
     templateUrl: 'app/views/view-cbs-events.html',
     controller: 'ViewCbsEventsControl'
   })
+  .when('/update-patient/:patientId', {
+    templateUrl: 'app/views/update-patient.html',
+    controller: 'UpdatePatientControl'
+  })
   .otherwise({
     redirectTo: '/'
   })

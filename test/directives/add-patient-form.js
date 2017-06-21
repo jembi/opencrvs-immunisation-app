@@ -45,7 +45,7 @@ tap.test('.link()', { autoend: true }, (t) => {
       getPartialPatientDemographics: () => { return {} },
       setPartialPatientDemographics: () => {}
     }
-    const directive = addPatient({}, { fetch: fetchMock }, { all: allMock }, stateMock)
+    const directive = addPatient({}, { fetch: fetchMock }, { all: allMock }, stateMock, FHIR)
     // when
     directive.link(scope)
     // then
@@ -85,8 +85,12 @@ tap.test('.link()', { autoend: true }, (t) => {
     const stateMock = {
       getPartialPatientDemographics: () => {
         return {
-          givenName: 'given',
-          familyName: 'family',
+          name: [
+            {
+              given: ['given'],
+              family: ['family']
+            }
+          ],
           gender: 'female',
           birthDate: '1980-06-05'
         }
@@ -162,7 +166,7 @@ tap.test('.link()', { autoend: true }, (t) => {
           resolve: (result) => {
             // then
             t.equals(result.isValid, true)
-            t.equals(result.msg, 'Patient created successfully')
+            t.equals(result.msg, 'Patient saved successfully')
             t.end()
           }
         }

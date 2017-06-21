@@ -14,6 +14,10 @@ module.exports = function ($scope, $routeParams, events, $location, Api) {
     $location.path('/patients/' + patientId + '/add-events')
   }
 
+  $scope.editPatient = () => {
+    $location.path('/update-patient/' + patientId)
+  }
+
   $scope.state = {
     patients: null,
     singlePatient: true,
@@ -31,6 +35,9 @@ module.exports = function ($scope, $routeParams, events, $location, Api) {
         {
           text: 'Add Event',
           onClick: $scope.addEvent
+        }, {
+          text: 'Edit Patient',
+          onClick: $scope.editPatient
         }
       ]
     }
