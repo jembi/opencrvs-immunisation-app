@@ -33,7 +33,7 @@ tap.test('.link()', { autoend: true }, (t) => {
   tap.test('.submit()', { autoend: true }, (t) => {
     t.test('should resolve with a success message', (t) => {
       // given
-      const scope = {}
+      const scope = { $on: () => {} }
       const fetchMock = (file) => {
         return new Promise((resolve, reject) => {
           resolve()
@@ -65,7 +65,7 @@ tap.test('.link()', { autoend: true }, (t) => {
 
     t.test('should call Api.match with a FHIR parameter object', (t) => {
       // given
-      const scope = {}
+      const scope = { $on: () => {} }
       const fetchMock = (file) => {
         return new Promise((resolve, reject) => {
           resolve()
@@ -127,7 +127,7 @@ tap.test('.link()', { autoend: true }, (t) => {
 
     t.test('should set results on the state service', (t) => {
       // given
-      const scope = {}
+      const scope = { $on: () => {} }
       const fetchMock = (file) => {
         return new Promise((resolve, reject) => {
           resolve()
@@ -158,7 +158,7 @@ tap.test('.link()', { autoend: true }, (t) => {
 
     t.test('should reject submit promise if an error occurs with statusText Property', (t) => {
       // given
-      const scope = {}
+      const scope = { $on: () => {} }
       const fetchMock = (file) => {
         return new Promise((resolve, reject) => {
           resolve()
@@ -184,7 +184,7 @@ tap.test('.link()', { autoend: true }, (t) => {
 
     t.test('should reject submit promise if an unexpected error occurs', (t) => {
       // given
-      const scope = {}
+      const scope = { $on: () => {} }
       const fetchMock = (file) => {
         return new Promise((resolve, reject) => {
           resolve()
