@@ -13,7 +13,7 @@
   		"name": "TracNetID",
       "title": "TracNet ID",
       "settings": {
-      	"required": true
+      	"required": false
       },
       "FHIRMappings": [{
 				"resourceKey": "main",
