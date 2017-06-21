@@ -8,7 +8,7 @@
 <div flex="70" flex-offset="15">
   <timeline>
     <timeline-event class="timelineAddEvent">
-      <md-button class="md-primary md-raised" ng-click="addEvent()">Add new event</md-button>
+      <md-button class="md-primary md-raised" ng-click="addEvent()">Add event</md-button>
     </timeline-event>
     <timeline-event ng-repeat="eventItem in events" ng-class="{timelineCustom: $index != 0}">
       <timeline-badge class="linkageToCare" ng-if="eventItem.eventType === 'linkage-to-care'">

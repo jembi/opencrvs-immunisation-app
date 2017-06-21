@@ -54,7 +54,7 @@
       "type": "input",
   		"flex": "20",
   		"name": "firstname",
-      "title": "First Name",
+      "title": "Given Name",
       "settings": {
       	"required": true
       },
@@ -84,7 +84,7 @@
       "type": "input",
   		"flex": "30",
   		"name": "lastName",
-      "title": "Last Name",
+      "title": "Family Name",
       "settings": {
       	"required": true
       },

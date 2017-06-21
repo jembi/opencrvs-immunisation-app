@@ -11,7 +11,7 @@
       "type": "input",
       "flex": "20",
       "name": "emergencyContactFirstName",
-      "title": "First Name",
+      "title": "Given Name",
       "settings": {
         "required": true
       },
@@ -26,7 +26,7 @@
       "type": "input",
       "flex": "20",
       "name": "emergencyContactLastName",
-      "title": "Last Name",
+      "title": "Family Name",
       "settings": {
         "required": true
       },
