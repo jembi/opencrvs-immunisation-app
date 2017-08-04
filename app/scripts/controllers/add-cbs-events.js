@@ -7,7 +7,7 @@ module.exports = function (Api, $scope, $routeParams, $location) {
     patients: null,
     singlePatient: true,
     header: {
-      title: 'Add CBS Events',
+      title: 'Add Immunisation Events',
       left: [
         {
           text: 'back',

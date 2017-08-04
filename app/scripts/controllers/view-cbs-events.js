@@ -27,7 +27,7 @@ module.exports = function ($scope, $routeParams, events, $location, Api) {
     patients: null,
     singlePatient: true,
     header: {
-      title: 'View patient\'s CBS timeline',
+      title: 'View patient\'s Immunisation timeline',
       left: [
         {
           text: 'back',

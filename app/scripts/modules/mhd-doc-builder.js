@@ -113,8 +113,8 @@ exports.createDocumentBundle = (patientRef, eventDictionaries, currentTime) => {
 
       if (resourceKey === 'main') {
         composition.resource.section.entry.push({
-          title: 'CBS Event',
-          text: 'CBS Event',
+          title: 'Immunisation Event',
+          text: 'Immunisation Event',
           reference: resourceEntry.fullUrl
         })
       }
