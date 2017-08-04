@@ -1,5 +1,5 @@
-# rcbs-frontend
-Rwanda Case Based Surveillance frontend prototype
+# Mock Immunisation app for OpenCRVS
+A mock Immunisation app used to demonstrate submission of  birth notifications to OpenCRVS.
 
 ## Dev pro tips
 
