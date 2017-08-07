@@ -1,9 +1,9 @@
 'use strict'
 
-var app = require('angular').module('rcbsApp')
+var app = require('angular').module('opencrvsApp')
 
 app.controller('PatientsControl', require('./patients'))
 app.controller('AddPatientControl', require('./add-patient'))
-app.controller('AddCbsEventsControl', require('./add-events'))
-app.controller('ViewCbsEventsControl', require('./view-events'))
+app.controller('addEventsControl', require('./add-events'))
+app.controller('VieweventsControl', require('./view-events'))
 app.controller('UpdatePatientControl', require('./update-patient'))

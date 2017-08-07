@@ -1,6 +1,6 @@
 'use strict'
 
-var app = require('angular').module('rcbsApp')
+var app = require('angular').module('opencrvsApp')
 
 app.factory('Authinterceptor', require('./authinterceptor'))
 app.config(function ($httpProvider) {

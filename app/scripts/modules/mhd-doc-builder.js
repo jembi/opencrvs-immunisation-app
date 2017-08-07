@@ -195,7 +195,7 @@ exports.createDocumentManifest = (patientRef, docRefEntry, currentTime) => {
       reference: patientRef
     },
     created: currentTime,
-    source: 'urn:rcbs:mockupapp',
+    source: 'urn:opencrvs:mockupapp',
     content: [
       {
         pReference: {

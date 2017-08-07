@@ -6,7 +6,7 @@ const sinon = require('sinon')
 const FHIR = require('../../app/scripts/services/FHIR/FHIR.js')()
 const FormBuilderService = require('../../app/scripts/services/FormBuilder.js')()
 const stateService = require('../../app/scripts/services/state.js')()
-const addCbsEvent = require('../../app/scripts/directives/add-events/add-event')
+const addEvent = require('../../app/scripts/directives/add-events/add-event')
 const FormBuilderLinkageToCare = require('../../app/scripts/directives/add-events/add-event/forms/linkage-to-care.json')
 const FormBuilderHIVConfirmation = require('../../app/scripts/directives/add-events/add-event/forms/hiv-confirmation.json')
 const FormBuilderCD4Count = require('../../app/scripts/directives/add-events/add-event/forms/cd4-count.json')
@@ -20,11 +20,11 @@ tap.tearDown(() => {
 })
 
 tap.test('.link()', { autoend: true }, (t) => {
-  t.test('should set state.FormBuilderAddCbsEventLinkageToCare on scope and fetch correct form file', (t) => {
+  t.test('should set state.FormBuilderaddEventLinkageToCare on scope and fetch correct form file', (t) => {
     // given
     const scope = {
       $watch: (args, callback) => { callback() },
-      cbsEvent: { code: 'linkage-to-care', display: 'Linkage to care', formName: 'FormBuilderAddCbsEventLinkageToCare' }
+      event: { code: 'linkage-to-care', display: 'Linkage to care', formName: 'FormBuilderaddEventLinkageToCare' }
     }
     const fetchMock = (file) => {
       t.equals(file, 'app/scripts/directives/add-events/add-event/forms/linkage-to-care.json')
@@ -32,19 +32,19 @@ tap.test('.link()', { autoend: true }, (t) => {
         resolve()
       })
     }
-    const directive = addCbsEvent({ fetch: fetchMock })
+    const directive = addEvent({ fetch: fetchMock })
     // when
     directive.link(scope)
     // then
-    t.ok(scope.state.FormBuilderAddCbsEventLinkageToCare)
+    t.ok(scope.state.FormBuilderaddEventLinkageToCare)
     t.end()
   })
 
-  t.test('should set state.FormBuilderAddCbsEventHIVConfirmation on scope and fetch correct form file', (t) => {
+  t.test('should set state.FormBuilderaddEventHIVConfirmation on scope and fetch correct form file', (t) => {
     // given
     const scope = {
       $watch: (args, callback) => { callback() },
-      cbsEvent: { code: 'hiv-confirmation', display: 'HIV Confirmation', formName: 'FormBuilderAddCbsEventHIVConfirmation' }
+      event: { code: 'hiv-confirmation', display: 'HIV Confirmation', formName: 'FormBuilderaddEventHIVConfirmation' }
     }
     const fetchMock = (file) => {
       t.equals(file, 'app/scripts/directives/add-events/add-event/forms/hiv-confirmation.json')
@@ -52,19 +52,19 @@ tap.test('.link()', { autoend: true }, (t) => {
         resolve()
       })
     }
-    const directive = addCbsEvent({ fetch: fetchMock })
+    const directive = addEvent({ fetch: fetchMock })
     // when
     directive.link(scope)
     // then
-    t.ok(scope.state.FormBuilderAddCbsEventHIVConfirmation)
+    t.ok(scope.state.FormBuilderaddEventHIVConfirmation)
     t.end()
   })
 
-  t.test('should set state.FormBuilderAddCbsEventCD4Count on scope and fetch correct form file', (t) => {
+  t.test('should set state.FormBuilderaddEventCD4Count on scope and fetch correct form file', (t) => {
     // given
     const scope = {
       $watch: (args, callback) => { callback() },
-      cbsEvent: { code: 'cd4-count', display: 'CD4 Count', formName: 'FormBuilderAddCbsEventCD4Count' }
+      event: { code: 'cd4-count', display: 'CD4 Count', formName: 'FormBuilderaddEventCD4Count' }
     }
     const fetchMock = (file) => {
       t.equals(file, 'app/scripts/directives/add-events/add-event/forms/cd4-count.json')
@@ -72,19 +72,19 @@ tap.test('.link()', { autoend: true }, (t) => {
         resolve()
       })
     }
-    const directive = addCbsEvent({ fetch: fetchMock })
+    const directive = addEvent({ fetch: fetchMock })
     // when
     directive.link(scope)
     // then
-    t.ok(scope.state.FormBuilderAddCbsEventCD4Count)
+    t.ok(scope.state.FormBuilderaddEventCD4Count)
     t.end()
   })
 
-  t.test('should set state.FormBuilderAddCbsEventViralLoad on scope and fetch correct form file', (t) => {
+  t.test('should set state.FormBuilderaddEventViralLoad on scope and fetch correct form file', (t) => {
     // given
     const scope = {
       $watch: (args, callback) => { callback() },
-      cbsEvent: { code: 'viral-load', display: 'Viral Load', formName: 'FormBuilderAddCbsEventViralLoad' }
+      event: { code: 'viral-load', display: 'Viral Load', formName: 'FormBuilderaddEventViralLoad' }
     }
     const fetchMock = (file) => {
       t.equals(file, 'app/scripts/directives/add-events/add-event/forms/viral-load.json')
@@ -92,24 +92,24 @@ tap.test('.link()', { autoend: true }, (t) => {
         resolve()
       })
     }
-    const directive = addCbsEvent({ fetch: fetchMock })
+    const directive = addEvent({ fetch: fetchMock })
     // when
     directive.link(scope)
     // then
-    t.ok(scope.state.FormBuilderAddCbsEventViralLoad)
+    t.ok(scope.state.FormBuilderaddEventViralLoad)
     t.end()
   })
 })
 
 tap.test('.submit()', { autoend: true }, (t) => {
-  t.test('state.FormBuilderAddCbsEventLinkageToCare should resolve with a success message', (t) => {
+  t.test('state.FormBuilderaddEventLinkageToCare should resolve with a success message', (t) => {
     // given
     const testSandbox = sinon.sandbox.create()
     testSandbox.spy(stateService, 'pushToEventsArray')
 
     const scope = {
       $watch: (args, callback) => { callback() },
-      cbsEvent: { code: 'linkage-to-care', display: 'Linkage to care', formName: 'FormBuilderAddCbsEventLinkageToCare' },
+      event: { code: 'linkage-to-care', display: 'Linkage to care', formName: 'FormBuilderaddEventLinkageToCare' },
       patient: {
         resourceType: 'Patient',
         id: 'AAAAA-BBBB-CCCC-DDDDD-EEEEEE'
@@ -166,23 +166,23 @@ tap.test('.submit()', { autoend: true }, (t) => {
       }
     }
 
-    const directive = addCbsEvent({ fetch: fetchMock }, { defer: deferMock }, stateService, FHIR, FormBuilderService)
+    const directive = addEvent({ fetch: fetchMock }, { defer: deferMock }, stateService, FHIR, FormBuilderService)
     directive.link(scope)
     // when
-    scope.state.FormBuilderAddCbsEventLinkageToCare.sections = [FormBuilderLinkageToCare]
-    scope.state.FormBuilderAddCbsEventLinkageToCare.submit.execute(mockFormData)
+    scope.state.FormBuilderaddEventLinkageToCare.sections = [FormBuilderLinkageToCare]
+    scope.state.FormBuilderaddEventLinkageToCare.submit.execute(mockFormData)
     // then
-    t.ok(scope.state.FormBuilderAddCbsEventLinkageToCare)
+    t.ok(scope.state.FormBuilderaddEventLinkageToCare)
   })
 
-  t.test('state.FormBuilderAddCbsEventHIVConfirmation should resolve with a success message', (t) => {
+  t.test('state.FormBuilderaddEventHIVConfirmation should resolve with a success message', (t) => {
     // given
     const testSandbox = sinon.sandbox.create()
     testSandbox.spy(stateService, 'pushToEventsArray')
 
     const scope = {
       $watch: (args, callback) => { callback() },
-      cbsEvent: { code: 'hiv-confirmation', display: 'HIV Confirmation', formName: 'FormBuilderAddCbsEventHIVConfirmation' },
+      event: { code: 'hiv-confirmation', display: 'HIV Confirmation', formName: 'FormBuilderaddEventHIVConfirmation' },
       patient: {
         resourceType: 'Patient',
         id: 'AAAAA-BBBB-CCCC-DDDDD-GG'
@@ -261,23 +261,23 @@ tap.test('.submit()', { autoend: true }, (t) => {
       }
     }
 
-    const directive = addCbsEvent({ fetch: fetchMock }, { defer: deferMock }, stateService, FHIR, FormBuilderService)
+    const directive = addEvent({ fetch: fetchMock }, { defer: deferMock }, stateService, FHIR, FormBuilderService)
     directive.link(scope)
     // when
-    scope.state.FormBuilderAddCbsEventHIVConfirmation.sections = [FormBuilderHIVConfirmation]
-    scope.state.FormBuilderAddCbsEventHIVConfirmation.submit.execute(mockFormData)
+    scope.state.FormBuilderaddEventHIVConfirmation.sections = [FormBuilderHIVConfirmation]
+    scope.state.FormBuilderaddEventHIVConfirmation.submit.execute(mockFormData)
     // then
-    t.ok(scope.state.FormBuilderAddCbsEventHIVConfirmation)
+    t.ok(scope.state.FormBuilderaddEventHIVConfirmation)
   })
 
-  t.test('state.FormBuilderAddCbsEventCD4Count should resolve with a success message', (t) => {
+  t.test('state.FormBuilderaddEventCD4Count should resolve with a success message', (t) => {
     // given
     const testSandbox = sinon.sandbox.create()
     testSandbox.spy(stateService, 'pushToEventsArray')
 
     const scope = {
       $watch: (args, callback) => { callback() },
-      cbsEvent: { code: 'cd4-count', display: 'CD4 Count', formName: 'FormBuilderAddCbsEventCD4Count' },
+      event: { code: 'cd4-count', display: 'CD4 Count', formName: 'FormBuilderaddEventCD4Count' },
       patient: {
         resourceType: 'Patient',
         id: 'AAAAA-BBBB-CCCC-DDDDD-CC'
@@ -351,23 +351,23 @@ tap.test('.submit()', { autoend: true }, (t) => {
       }
     }
 
-    const directive = addCbsEvent({ fetch: fetchMock }, { defer: deferMock }, stateService, FHIR, FormBuilderService)
+    const directive = addEvent({ fetch: fetchMock }, { defer: deferMock }, stateService, FHIR, FormBuilderService)
     directive.link(scope)
     // when
-    scope.state.FormBuilderAddCbsEventCD4Count.sections = [FormBuilderCD4Count]
-    scope.state.FormBuilderAddCbsEventCD4Count.submit.execute(mockFormData)
+    scope.state.FormBuilderaddEventCD4Count.sections = [FormBuilderCD4Count]
+    scope.state.FormBuilderaddEventCD4Count.submit.execute(mockFormData)
     // then
-    t.ok(scope.state.FormBuilderAddCbsEventCD4Count)
+    t.ok(scope.state.FormBuilderaddEventCD4Count)
   })
 
-  t.test('state.FormBuilderAddCbsEventViralLoad should resolve with a success message', (t) => {
+  t.test('state.FormBuilderaddEventViralLoad should resolve with a success message', (t) => {
     // given
     const testSandbox = sinon.sandbox.create()
     testSandbox.spy(stateService, 'pushToEventsArray')
 
     const scope = {
       $watch: (args, callback) => { callback() },
-      cbsEvent: { code: 'viral-load', display: 'Viral Load', formName: 'FormBuilderAddCbsEventViralLoad' },
+      event: { code: 'viral-load', display: 'Viral Load', formName: 'FormBuilderaddEventViralLoad' },
       patient: {
         resourceType: 'Patient',
         id: 'AAAAA-BBBB-CCCC-DDDDD-AA'
@@ -441,12 +441,12 @@ tap.test('.submit()', { autoend: true }, (t) => {
       }
     }
 
-    const directive = addCbsEvent({ fetch: fetchMock }, { defer: deferMock }, stateService, FHIR, FormBuilderService)
+    const directive = addEvent({ fetch: fetchMock }, { defer: deferMock }, stateService, FHIR, FormBuilderService)
     directive.link(scope)
     // when
-    scope.state.FormBuilderAddCbsEventViralLoad.sections = [FormBuilderViralLoad]
-    scope.state.FormBuilderAddCbsEventViralLoad.submit.execute(mockFormData)
+    scope.state.FormBuilderaddEventViralLoad.sections = [FormBuilderViralLoad]
+    scope.state.FormBuilderaddEventViralLoad.submit.execute(mockFormData)
     // then
-    t.ok(scope.state.FormBuilderAddCbsEventViralLoad)
+    t.ok(scope.state.FormBuilderaddEventViralLoad)
   })
 })
