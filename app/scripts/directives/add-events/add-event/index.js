@@ -3,7 +3,7 @@
 module.exports = function (loadResource, $q, state, FHIR, FormBuilderService) {
   return {
     restrict: 'EA',
-    templateUrl: 'app/scripts/directives/add-cbs-events/add-cbs-event/view.html',
+    templateUrl: 'app/scripts/directives/add-events/add-event/view.html',
     scope: {
       patient: '=',
       cbsEvent: '='
@@ -94,7 +94,7 @@ module.exports = function (loadResource, $q, state, FHIR, FormBuilderService) {
           [scope.cbsEvent.formName]: {}
         }
 
-        loadResource.fetch(`app/scripts/directives/add-cbs-events/add-cbs-event/forms/${scope.cbsEvent.code}.json`).then(function (formSection) {
+        loadResource.fetch(`app/scripts/directives/add-events/add-event/forms/${scope.cbsEvent.code}.json`).then(function (formSection) {
           scope.state[scope.cbsEvent.formName].sections.push(formSection)
         })
       })

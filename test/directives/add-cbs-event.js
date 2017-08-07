@@ -6,11 +6,11 @@ const sinon = require('sinon')
 const FHIR = require('../../app/scripts/services/FHIR/FHIR.js')()
 const FormBuilderService = require('../../app/scripts/services/FormBuilder.js')()
 const stateService = require('../../app/scripts/services/state.js')()
-const addCbsEvent = require('../../app/scripts/directives/add-cbs-events/add-cbs-event')
-const FormBuilderLinkageToCare = require('../../app/scripts/directives/add-cbs-events/add-cbs-event/forms/linkage-to-care.json')
-const FormBuilderHIVConfirmation = require('../../app/scripts/directives/add-cbs-events/add-cbs-event/forms/hiv-confirmation.json')
-const FormBuilderCD4Count = require('../../app/scripts/directives/add-cbs-events/add-cbs-event/forms/cd4-count.json')
-const FormBuilderViralLoad = require('../../app/scripts/directives/add-cbs-events/add-cbs-event/forms/viral-load.json')
+const addCbsEvent = require('../../app/scripts/directives/add-events/add-event')
+const FormBuilderLinkageToCare = require('../../app/scripts/directives/add-events/add-event/forms/linkage-to-care.json')
+const FormBuilderHIVConfirmation = require('../../app/scripts/directives/add-events/add-event/forms/hiv-confirmation.json')
+const FormBuilderCD4Count = require('../../app/scripts/directives/add-events/add-event/forms/cd4-count.json')
+const FormBuilderViralLoad = require('../../app/scripts/directives/add-events/add-event/forms/viral-load.json')
 
 const sandbox = sinon.sandbox.create()
 sandbox.stub(console, 'error').callsFake((msg) => {})
@@ -27,7 +27,7 @@ tap.test('.link()', { autoend: true }, (t) => {
       cbsEvent: { code: 'linkage-to-care', display: 'Linkage to care', formName: 'FormBuilderAddCbsEventLinkageToCare' }
     }
     const fetchMock = (file) => {
-      t.equals(file, 'app/scripts/directives/add-cbs-events/add-cbs-event/forms/linkage-to-care.json')
+      t.equals(file, 'app/scripts/directives/add-events/add-event/forms/linkage-to-care.json')
       return new Promise((resolve, reject) => {
         resolve()
       })
@@ -47,7 +47,7 @@ tap.test('.link()', { autoend: true }, (t) => {
       cbsEvent: { code: 'hiv-confirmation', display: 'HIV Confirmation', formName: 'FormBuilderAddCbsEventHIVConfirmation' }
     }
     const fetchMock = (file) => {
-      t.equals(file, 'app/scripts/directives/add-cbs-events/add-cbs-event/forms/hiv-confirmation.json')
+      t.equals(file, 'app/scripts/directives/add-events/add-event/forms/hiv-confirmation.json')
       return new Promise((resolve, reject) => {
         resolve()
       })
@@ -67,7 +67,7 @@ tap.test('.link()', { autoend: true }, (t) => {
       cbsEvent: { code: 'cd4-count', display: 'CD4 Count', formName: 'FormBuilderAddCbsEventCD4Count' }
     }
     const fetchMock = (file) => {
-      t.equals(file, 'app/scripts/directives/add-cbs-events/add-cbs-event/forms/cd4-count.json')
+      t.equals(file, 'app/scripts/directives/add-events/add-event/forms/cd4-count.json')
       return new Promise((resolve, reject) => {
         resolve()
       })
@@ -87,7 +87,7 @@ tap.test('.link()', { autoend: true }, (t) => {
       cbsEvent: { code: 'viral-load', display: 'Viral Load', formName: 'FormBuilderAddCbsEventViralLoad' }
     }
     const fetchMock = (file) => {
-      t.equals(file, 'app/scripts/directives/add-cbs-events/add-cbs-event/forms/viral-load.json')
+      t.equals(file, 'app/scripts/directives/add-events/add-event/forms/viral-load.json')
       return new Promise((resolve, reject) => {
         resolve()
       })
@@ -133,8 +133,8 @@ tap.test('.submit()', { autoend: true }, (t) => {
     }
     const fetchMock = (file) => {
       return new Promise((resolve, reject) => {
-        if (file === 'app/scripts/directives/add-cbs-events/add-cbs-event/forms/linkage-to-care.json') {
-          const FormBuilderLinkageToCare = require('../../app/scripts/directives/add-cbs-events/add-cbs-event/forms/linkage-to-care.json')
+        if (file === 'app/scripts/directives/add-events/add-event/forms/linkage-to-care.json') {
+          const FormBuilderLinkageToCare = require('../../app/scripts/directives/add-events/add-event/forms/linkage-to-care.json')
           resolve(FormBuilderLinkageToCare)
         } else if (file === 'app/scripts/services/FHIR/resources/Encounter.json') {
           const FHIREncounterResource = require('../../app/scripts/services/FHIR/resources/Encounter.json')
@@ -210,8 +210,8 @@ tap.test('.submit()', { autoend: true }, (t) => {
     }
     const fetchMock = (file) => {
       return new Promise((resolve, reject) => {
-        if (file === 'app/scripts/directives/add-cbs-events/add-cbs-event/forms/hiv-confirmation.json') {
-          const FormBuilderHIVConfirmation = require('../../app/scripts/directives/add-cbs-events/add-cbs-event/forms/hiv-confirmation.json')
+        if (file === 'app/scripts/directives/add-events/add-event/forms/hiv-confirmation.json') {
+          const FormBuilderHIVConfirmation = require('../../app/scripts/directives/add-events/add-event/forms/hiv-confirmation.json')
           resolve(FormBuilderHIVConfirmation)
         } else if (file === 'app/scripts/services/FHIR/resources/Encounter.json') {
           const FHIREncounterResource = require('../../app/scripts/services/FHIR/resources/Encounter.json')
@@ -309,8 +309,8 @@ tap.test('.submit()', { autoend: true }, (t) => {
     }
     const fetchMock = (file) => {
       return new Promise((resolve, reject) => {
-        if (file === 'app/scripts/directives/add-cbs-events/add-cbs-event/forms/cd4-count.json') {
-          const FormBuilderCD4Count = require('../../app/scripts/directives/add-cbs-events/add-cbs-event/forms/cd4-count.json')
+        if (file === 'app/scripts/directives/add-events/add-event/forms/cd4-count.json') {
+          const FormBuilderCD4Count = require('../../app/scripts/directives/add-events/add-event/forms/cd4-count.json')
           resolve(FormBuilderCD4Count)
         } else if (file === 'app/scripts/services/FHIR/resources/Encounter.json') {
           const FHIREncounterResource = require('../../app/scripts/services/FHIR/resources/Encounter.json')
@@ -399,8 +399,8 @@ tap.test('.submit()', { autoend: true }, (t) => {
     }
     const fetchMock = (file) => {
       return new Promise((resolve, reject) => {
-        if (file === 'app/scripts/directives/add-cbs-events/add-cbs-event/forms/viral-load.json') {
-          const FormBuilderViralLoad = require('../../app/scripts/directives/add-cbs-events/add-cbs-event/forms/viral-load.json')
+        if (file === 'app/scripts/directives/add-events/add-event/forms/viral-load.json') {
+          const FormBuilderViralLoad = require('../../app/scripts/directives/add-events/add-event/forms/viral-load.json')
           resolve(FormBuilderViralLoad)
         } else if (file === 'app/scripts/services/FHIR/resources/Encounter.json') {
           const FHIREncounterResource = require('../../app/scripts/services/FHIR/resources/Encounter.json')

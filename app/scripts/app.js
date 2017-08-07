@@ -29,11 +29,11 @@ app.config(function ($routeProvider) {
     controller: 'AddPatientControl'
   })
   .when('/patients/:patientId/add-events', {
-    templateUrl: 'app/views/add-cbs-events.html',
+    templateUrl: 'app/views/add-events.html',
     controller: 'AddCbsEventsControl'
   })
   .when('/events/:patientId', {
-    templateUrl: 'app/views/view-cbs-events.html',
+    templateUrl: 'app/views/view-events.html',
     controller: 'ViewCbsEventsControl'
   })
   .when('/update-patient/:patientId', {

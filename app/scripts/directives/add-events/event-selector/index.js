@@ -5,7 +5,7 @@ const mhdBuilder = require('../../../modules/mhd-doc-builder')
 module.exports = function (Api, loadResource, state) {
   return {
     restrict: 'EA',
-    templateUrl: 'app/scripts/directives/add-cbs-events/cbs-event-selector/view.html',
+    templateUrl: 'app/scripts/directives/add-events/event-selector/view.html',
     scope: {
       cbsEvents: '=',
       setSelectedEvent: '&',

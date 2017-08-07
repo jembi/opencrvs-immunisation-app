@@ -15,7 +15,7 @@ tap.tearDown(() => {
 tap.test('.mapFHIRResources()', { autoend: true }, (t) => {
   t.test('should map FormBuilder field values to a FHIR document', (t) => {
     // given
-    const FormBuilderLinkageToCare = require('../../app/scripts/directives/add-cbs-events/add-cbs-event/forms/linkage-to-care.json')
+    const FormBuilderLinkageToCare = require('../../app/scripts/directives/add-events/add-event/forms/linkage-to-care.json')
     const FormBuilderInstance = {
       sections: [FormBuilderLinkageToCare]
     }

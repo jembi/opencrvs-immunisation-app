@@ -1,7 +1,7 @@
 {
   "name": "rcbs-frontend",
   "version": "0.0.1",
-  "description": "Rwanda Case Based Surveillance",
+  "description": "OpenCRVS Immunisation App",
   "scripts": {
     "build": "browserify --entry app/scripts/app.js -t [ babelify --presets [ es2015 ] ] | uglifyjs --output dist/bundle.js",
     "start": "npm run build && light-server -s . -p 7777 -w \"app/**, index.html # npm run build # reload\"",
