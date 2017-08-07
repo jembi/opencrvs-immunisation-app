@@ -1,6 +1,6 @@
 'use strict'
 
-var app = require('angular').module('opencrvsApp')
+var app = require('angular').module('ocrvsApp')
 
 app.controller('PatientsControl', require('./patients'))
 app.controller('AddPatientControl', require('./add-patient'))

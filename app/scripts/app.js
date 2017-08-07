@@ -13,7 +13,7 @@ const formBuilder = require('md-form-builder')
 require('angular-timeline')
 
 const dependencies = [ ngRoute, formBuilder, ngMaterial, ngCookies, ngResource, ngMessages, mdDataTable, 'angular-timeline' ]
-const app = angular.module('opencrvsApp', dependencies)
+const app = angular.module('ocrvsApp', dependencies)
 
 app.config(function ($routeProvider) {
   $routeProvider
@@ -80,7 +80,7 @@ function bootstrapApplication () {
   require('./controllers')
 
   angular.element(document).ready(function () {
-    angular.bootstrap(document, ['opencrvsApp'])
+    angular.bootstrap(document, ['ocrvsApp'])
   })
 }
 

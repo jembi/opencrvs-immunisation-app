@@ -1,7 +1,7 @@
 'use strict'
 
 module.exports = function (state, $location) {
-  const TRACNET_SYSTEM_IDENTIFIER = 'opencrvs:tracnet:id'
+  const TRACNET_SYSTEM_IDENTIFIER = 'ocrvs:tracnet:id'
   return {
     restrict: 'EA',
     replace: true,

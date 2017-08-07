@@ -100,7 +100,7 @@
   ],
   "extension": [
     {
-      "url": "opencrvs:profession",
+      "url": "ocrvs:profession",
       "valueString": ""
     }
   ]

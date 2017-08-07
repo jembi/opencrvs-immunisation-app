@@ -20,7 +20,7 @@
         "path": "identifier[0].system",
         "params": null,
         "valueType": "staticValue",
-        "value": "opencrvs:tracnet:id"
+        "value": "ocrvs:tracnet:id"
       }, {
 				"resourceKey": "main",
         "path": "identifier[0].assigner.display",
@@ -211,7 +211,7 @@
       "FHIRMappings": [{
 				"resourceKey": "main",
         "path": "extension.valueString",
-        "params": "extension.url=opencrvs:profession",
+        "params": "extension.url=ocrvs:profession",
         "valueType": "formValue",
         "value": "profession"
       }]

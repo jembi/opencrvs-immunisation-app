@@ -1,6 +1,6 @@
 'use strict'
 
-var app = require('angular').module('opencrvsApp')
+var app = require('angular').module('ocrvsApp')
 
 app.directive('header', require('./header'))
 app.directive('patientsList', require('./patients-list'))
