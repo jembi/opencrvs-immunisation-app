@@ -13,7 +13,7 @@ const formBuilder = require('md-form-builder')
 require('angular-timeline')
 
 const dependencies = [ ngRoute, formBuilder, ngMaterial, ngCookies, ngResource, ngMessages, mdDataTable, 'angular-timeline' ]
-const app = angular.module('rcbsApp', dependencies)
+const app = angular.module('ocrvsApp', dependencies)
 
 app.config(function ($routeProvider) {
   $routeProvider
@@ -29,12 +29,12 @@ app.config(function ($routeProvider) {
     controller: 'AddPatientControl'
   })
   .when('/patients/:patientId/add-events', {
-    templateUrl: 'app/views/add-cbs-events.html',
-    controller: 'AddCbsEventsControl'
+    templateUrl: 'app/views/add-events.html',
+    controller: 'addEventsControl'
   })
   .when('/events/:patientId', {
-    templateUrl: 'app/views/view-cbs-events.html',
-    controller: 'ViewCbsEventsControl'
+    templateUrl: 'app/views/view-events.html',
+    controller: 'VieweventsControl'
   })
   .when('/update-patient/:patientId', {
     templateUrl: 'app/views/update-patient.html',
@@ -132,7 +132,7 @@ function bootstrapApplication () {
   require('./controllers')
 
   angular.element(document).ready(function () {
-    angular.bootstrap(document, ['rcbsApp'])
+    angular.bootstrap(document, ['ocrvsApp'])
   })
 }
 

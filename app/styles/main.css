@@ -68,32 +68,32 @@ timeline-heading h4 {
   background: #ff9900;
 }
 
-.linkageToCare {
+.event1 {
   background: #f0ad4e;
   color: #f0ad4e;
 }
-.linkageToCare h4 {
+.event1 h4 {
   border-bottom: 2px dashed #f0ad4e;
 }
-.hivConfirmation {
+.event2 {
   background: #008cff;
   color: #008cff;
 }
-.hivConfirmation h4 {
+.event2 h4 {
   border-bottom: 2px dashed #008cff;
 }
-.cd4Count {
+.event3 {
   background: #2c9300;
   color: #2c9300;
 }
-.cd4Count h4 {
+.event3 h4 {
   border-bottom: 2px dashed #2c9300;
 }
-.viralLoad {
+.event4 {
   background: #d9534f;
   color: #d9534f;
 }
-.viralLoad h4 {
+.event4 h4 {
   border-bottom: 2px dashed #d9534f;
 }
 

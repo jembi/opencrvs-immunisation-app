@@ -100,7 +100,7 @@
   ],
   "extension": [
     {
-      "url": "rcbs:profession",
+      "url": "ocrvs:profession",
       "valueString": ""
     }
   ]

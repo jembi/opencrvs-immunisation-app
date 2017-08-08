@@ -11,20 +11,11 @@
       <md-button class="md-primary md-raised" ng-click="addEvent()">Add event</md-button>
     </timeline-event>
     <timeline-event ng-repeat="eventItem in events" ng-class="{timelineCustom: $index != 0}">
-      <timeline-badge class="linkageToCare" ng-if="eventItem.eventType === 'linkage-to-care'">
+      <timeline-badge class="event1" ng-if="eventItem.eventType === 'sample-event'">
         <md-icon>link</md-icon>
       </timeline-badge>
-      <timeline-badge class="hivConfirmation" ng-if="eventItem.eventType === 'hiv-confirmation'">
-        <md-icon>start_rate</md-icon>
-      </timeline-badge>
-      <timeline-badge class="cd4Count" ng-if="eventItem.eventType === 'cd4-count'">
-        <md-icon>gradient</md-icon>
-      </timeline-badge>
-      <timeline-badge class="viralLoad" ng-if="eventItem.eventType === 'viral-load'">
-        <md-icon>texture</md-icon>
-      </timeline-badge>
       <timeline-panel flex class="info">
-        <timeline-heading ng-class="{'linkageToCare': eventItem.eventType == 'linkage-to-care' , 'hivConfirmation': eventItem.eventType == 'hiv-confirmation', 'cd4Count': eventItem.eventType == 'cd4-count', 'viralLoad': eventItem.eventType == 'viral-load' } ">
+        <timeline-heading ng-class="{'event1': eventItem.eventType == 'sampleEvent' } ">
           <h4>{{eventItem.eventTitle}} -
             <span>
               {{fromNowDate(eventItem.eventDate)}}

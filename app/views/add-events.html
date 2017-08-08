@@ -11,12 +11,10 @@
 
     <div layout="row">
       <div flex="20" md-whiteframe="2" class="dashboard-whiteframe">
-        <cbs-event-selector cbs-events="cbsEvents" set-selected-event="setSelectedEvent(selectedEvent)" patient="state.patients[0].resource"></cbs-event-selector>
+        <event-selector events="events" set-selected-event="setSelectedEvent(selectedEvent)" patient="state.patients[0].resource"></event-selector>
       </div>
-      <div flex="80" layout="column">
-        <div md-whiteframe="2" class="dashboard-whiteframe">
-          <add-cbs-event cbs-event="selectedEvent" patient="state.patients[0].resource"></add-cbs-event>
-        </div>
+      <div flex="80" md-whiteframe="2" class="dashboard-whiteframe">
+        <add-event event="selectedEvent" patient="state.patients[0].resource"></add-event>
       </div>
     </div>
   </div>
