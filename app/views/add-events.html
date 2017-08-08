@@ -9,12 +9,12 @@
       <patients-list ng-if="state.patients" results="state.patients" single-patient="state.singlePatient"></patients-list>
     </div>
 
-    <div layout="row" flex="100">
+    <div layout="row">
       <div flex="20" md-whiteframe="2" class="dashboard-whiteframe">
-        <cbs-event-selector cbs-events="cbsEvents" set-selected-event="setSelectedEvent(selectedEvent)" patient="state.patients[0].resource"></cbs-event-selector>
+        <event-selector events="events" set-selected-event="setSelectedEvent(selectedEvent)" patient="state.patients[0].resource"></event-selector>
       </div>
       <div flex="80" md-whiteframe="2" class="dashboard-whiteframe">
-        <add-cbs-event cbs-event="selectedEvent" patient="state.patients[0].resource"></add-cbs-event>
+        <add-event event="selectedEvent" patient="state.patients[0].resource"></add-event>
       </div>
     </div>
   </div>

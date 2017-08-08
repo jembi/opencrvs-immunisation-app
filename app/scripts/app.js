@@ -13,7 +13,7 @@ const formBuilder = require('md-form-builder')
 require('angular-timeline')
 
 const dependencies = [ ngRoute, formBuilder, ngMaterial, ngCookies, ngResource, ngMessages, mdDataTable, 'angular-timeline' ]
-const app = angular.module('rcbsApp', dependencies)
+const app = angular.module('ocrvsApp', dependencies)
 
 app.config(function ($routeProvider) {
   $routeProvider
@@ -29,12 +29,12 @@ app.config(function ($routeProvider) {
     controller: 'AddPatientControl'
   })
   .when('/patients/:patientId/add-events', {
-    templateUrl: 'app/views/add-cbs-events.html',
-    controller: 'AddCbsEventsControl'
+    templateUrl: 'app/views/add-events.html',
+    controller: 'addEventsControl'
   })
   .when('/events/:patientId', {
-    templateUrl: 'app/views/view-cbs-events.html',
-    controller: 'ViewCbsEventsControl'
+    templateUrl: 'app/views/view-events.html',
+    controller: 'VieweventsControl'
   })
   .when('/update-patient/:patientId', {
     templateUrl: 'app/views/update-patient.html',
@@ -51,9 +51,61 @@ app.config(function ($locationProvider) {
 
 /* ------------- CUSTOM THEMING ---------------- */
 app.config(function ($mdThemingProvider) {
+  // green
+  $mdThemingProvider.definePalette('customPrimary', {
+    '50': 'e0f3f2',
+    '100': 'b3e1de',
+    '200': '80cdc8',
+    '300': '4db8b1',
+    '400': '26a9a1',
+    '500': '009a90',
+    '600': '009288',
+    '700': '00887d',
+    '800': '007e73',
+    '900': '006c61',
+    'A100': '9cfff2',
+    'A200': '69ffec',
+    'A400': '36ffe5',
+    'A700': '1cffe2',
+    'contrastDefaultColor': 'light',
+    'contrastDarkColors': [ ],
+    'contrastLightColors': [ '900' ]
+  })
+
+  // orange
+  $mdThemingProvider.definePalette('customAccent', {
+    '50': 'fef0e8',
+    '100': 'fdd9c5',
+    '200': 'fcc09e',
+    '300': 'fba777',
+    '400': 'fa9459',
+    '500': 'f9813c',
+    '600': 'f87936',
+    '700': 'f76e2e',
+    '800': 'f66427',
+    '900': 'f5511a',
+    'A100': 'ffffff',
+    'A200': 'fff6f4',
+    'A400': 'ffcfc1',
+    'A700': 'ffbba7',
+    'contrastDefaultColor': 'light',
+    'contrastDarkColors': [ ],
+    'contrastLightColors': [ '900' ]
+  })
+
   $mdThemingProvider.theme('default')
-    .primaryPalette('light-blue')
-    .accentPalette('orange')
+    .primaryPalette('customPrimary', {
+      'default': '400',
+      'hue-1': '100',
+      'hue-2': '600',
+      'hue-3': 'A100'
+    })
+    .accentPalette('customAccent', {
+      'default': '800',
+      'hue-1': '100',
+      'hue-2': '600',
+      'hue-3': 'A100'
+    })
 })
 
 app.config(function ($mdDateLocaleProvider) {
@@ -80,7 +132,7 @@ function bootstrapApplication () {
   require('./controllers')
 
   angular.element(document).ready(function () {
-    angular.bootstrap(document, ['rcbsApp'])
+    angular.bootstrap(document, ['ocrvsApp'])
   })
 }
 

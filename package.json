@@ -1,7 +1,7 @@
 {
-  "name": "rcbs-frontend",
+  "name": "opencrvs-immunisation-app",
   "version": "0.0.1",
-  "description": "Rwanda Case Based Surveillance",
+  "description": "OpenCRVS Immunisation App",
   "scripts": {
     "build": "browserify --entry app/scripts/app.js -t [ babelify --presets [ es2015 ] ] | uglifyjs --output dist/bundle.js",
     "start": "npm run build && light-server -s . -p 7777 -w \"app/**, index.html # npm run build # reload\"",
@@ -13,7 +13,7 @@
     "cov": "npm run test:code -- --coverage-report=lcov"
   },
   "main": "app/scripts/app.js",
-  "repository": "git@github.com:jembi/rcbs-frontend.git",
+  "repository": "git@github.com:jembi/opencrvs-immunisation-app.git",
   "author": "Jembi Health Systems NPC",
   "license": "MIT",
   "devDependencies": {

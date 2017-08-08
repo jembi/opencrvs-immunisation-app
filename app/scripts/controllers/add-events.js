@@ -7,7 +7,7 @@ module.exports = function (Api, $scope, $routeParams, $location) {
     patients: null,
     singlePatient: true,
     header: {
-      title: 'Add CBS Events',
+      title: 'Add Immunisation Events',
       left: [
         {
           text: 'back',
@@ -34,14 +34,11 @@ module.exports = function (Api, $scope, $routeParams, $location) {
 
   Api.Patients.get({ id: $routeParams.patientId }, success, error)
 
-  $scope.cbsEvents = [
-    { code: 'linkage-to-care', display: 'Linkage to care', formName: 'FormBuilderAddCbsEventLinkageToCare' },
-    { code: 'hiv-confirmation', display: 'HIV confirmation', formName: 'FormBuilderAddCbsEventHIVConfirmation' },
-    { code: 'cd4-count', display: 'CD4 count', formName: 'FormBuilderAddCbsEventCD4Count' },
-    { code: 'viral-load', display: 'Viral load', formName: 'FormBuilderAddCbsEventViralLoad' }
+  $scope.events = [
+    { code: 'sample-event', display: 'Sample Event', formName: 'FormBuilderaddEventSampleEvent' }
   ]
 
-  $scope.selectedEvent = $scope.cbsEvents[0]
+  $scope.selectedEvent = $scope.events[0]
   $scope.setSelectedEvent = function (selectedEvent) {
     $scope.selectedEvent = selectedEvent
   }

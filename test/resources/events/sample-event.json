@@ -1,14 +1,14 @@
 {
   "resourceType": "Encounter",
   "status": "finished",
-  "class": "HIVAIDS",
+  "class": "Immunisation",
   "type": [
     {
       "coding": [
         {
-          "system": "http://hearth.org/cbs/event-types",
-          "code": "hiv-confirmation",
-          "display": "HIV confirmation CBS event"
+          "system": "http://hearth.org/crvs/event-types",
+          "code": "sample-event",
+          "display": "Sample Event"
         }
       ]
     }

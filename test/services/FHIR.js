@@ -15,9 +15,9 @@ tap.tearDown(() => {
 tap.test('.mapFHIRResources()', { autoend: true }, (t) => {
   t.test('should map FormBuilder field values to a FHIR document', (t) => {
     // given
-    const FormBuilderLinkageToCare = require('../../app/scripts/directives/add-cbs-events/add-cbs-event/forms/linkage-to-care.json')
+    const FormBuilderSampleEvent = require('../../app/scripts/directives/add-events/add-event/forms/sample-event.json')
     const FormBuilderInstance = {
-      sections: [FormBuilderLinkageToCare]
+      sections: [FormBuilderSampleEvent]
     }
 
     const FHIREncounterResource = require('../../app/scripts/services/FHIR/resources/Encounter.json')
@@ -38,7 +38,7 @@ tap.test('.mapFHIRResources()', { autoend: true }, (t) => {
     t.equal(encounter.type[1].coding[0].code, 'pmtct-visit', 'should have a type.coding.code of "pmtct-visit"')
     t.equal(encounter.type[1].coding[0].display, 'PMTCT visit', 'should have a end period of "PMTCT visit"')
 
-    t.equal(encounter.class, 'HIVAIDS', 'should have a class of "HIVAIDS"')
+    t.equal(encounter.class, 'Immunisation', 'should have a class of "HIVAIDS"')
 
     t.equal(encounter.location[0].location.display, 'Kacyiru Police Hospital', 'should have a location.display of "Kacyiru Police Hospital"')
     t.end()
