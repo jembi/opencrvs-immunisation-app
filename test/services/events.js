@@ -88,7 +88,7 @@ tap.test('Events service', { autoend: true }, (t) => {
   t.test('.formatEvents', { autoend: true }, (t) => {
     t.test('should delegate event formatting depending on event type', (t) => {
       // given
-      // Linkage to Care
+      // Sample Encounter
       const sampleEncounter = JSON.parse(JSON.stringify(encounterTemplate))
       sampleEncounter.period.start = '2017-04-04'
       sampleEncounter.type = [
