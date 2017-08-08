@@ -50,11 +50,72 @@ tap.test('Events service', { autoend: true }, (t) => {
   })
 
   t.test('.isEventOfType', { autoend: true }, (t) => {
-    t.end()
+    t.test('should return true when event is a Sample event', (t) => {
+      const result = Events().isEventOfType('sample-event', require('../resources/events/sample-event.json'))
+      t.true(result)
+      t.end()
+    })
+
+    t.test('should return false when event isn\'t a Sample event', (t) => {
+      const result = Events().isEventOfType('sample-event', {})
+      t.false(result)
+      t.end()
+    })
+  })
+
+  t.test('.constructSimpleSampleEventObject', { autoend: true }, (t) => {
+    t.test('should construct simple sample event object', (t) => {
+      const events = Events()
+
+      const encounter = JSON.parse(JSON.stringify(encounterTemplate))
+      encounter.period.start = '2017-04-04'
+      encounter.type = [
+       { coding: [ { system: 'http://hearth.org/crvs/event-types', code: 'sample-event', display: 'Sample Event' } ] },
+       { coding: [ { system: 'http://hearth.org/crvs/encounter-types', code: 'anc-visit', display: 'ANC Visit' } ] }
+      ]
+      encounter.location[0].location.display = 'Chuk'
+
+      const event = events.constructSimpleSampleEventObject(encounter)
+
+      t.equals(event.eventType, 'sample-event')
+      t.equals(event.eventDate, '2017-04-04')
+      t.equals(event.data.encounterType, 'ANC Visit')
+      t.equals(event.data.encounterLocation, 'Chuk')
+      t.end()
+    })
   })
 
   t.test('.formatEvents', { autoend: true }, (t) => {
-    t.end()
+    t.test('should delegate event formatting depending on event type', (t) => {
+      // given
+      // Linkage to Care
+      const sampleEncounter = JSON.parse(JSON.stringify(encounterTemplate))
+      sampleEncounter.period.start = '2017-04-04'
+      sampleEncounter.type = [
+        { coding: [ { system: 'http://hearth.org/crvs/event-types', code: 'sample-event', display: 'Sample Event' } ] },
+        { coding: [ { system: 'http://hearth.org/crvs/encounter-types', code: 'anc-visit', display: 'ANC Visit' } ] }
+      ]
+      sampleEncounter.location[0].location.display = 'Chuk'
+
+      const encounters = [
+        {
+          'resource': sampleEncounter,
+          '_observations': []
+        }
+      ]
+
+      // when
+      const formattedEvents = Events().formatEvents(encounters)
+
+      t.ok(formattedEvents)
+
+      t.equal(formattedEvents[0].eventType, 'sample-event', 'should have a eventType of "sample=event"')
+      t.equal(formattedEvents[0].eventDate, '2017-04-04', 'should have a eventDate of "2017-04-04"')
+      t.equal(formattedEvents[0].data.encounterType, 'ANC Visit', 'should have a "encounterType" of "ANC Visit"')
+      t.equal(formattedEvents[0].data.encounterLocation, 'Chuk', 'should have a encounterLocation of "Chuk"')
+
+      t.end()
+    })
   })
 
   t.test('.getAllEncountersForPatient', { autoend: true }, (t) => {

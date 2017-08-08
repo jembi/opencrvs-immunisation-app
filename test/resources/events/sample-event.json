@@ -1,0 +1,30 @@
+{
+  "resourceType": "Encounter",
+  "status": "finished",
+  "class": "Immunisation",
+  "type": [
+    {
+      "coding": [
+        {
+          "system": "http://hearth.org/crvs/event-types",
+          "code": "sample-event",
+          "display": "Sample Event"
+        }
+      ]
+    }
+  ],
+  "period": {
+    "start": "",
+    "end": ""
+  },
+  "location": [
+    {
+      "location": {
+        "display": ""
+      }
+    }
+  ],
+  "subject": {
+    "reference": ""
+  }
+}

@@ -1,6 +1,8 @@
 'use strict'
 
 module.exports = function (Api, $q) {
+  const SAMPLE_EVENT = 'sample-event'
+
   const isImmunisationEncounter = (event) => {
     return event.resourceType &&
       event.resourceType === 'Encounter' &&
@@ -22,6 +24,26 @@ module.exports = function (Api, $q) {
               codingElem.code === eventTypeCode
           })
       })
+  }
+
+  const constructSimpleSampleEventObject = (encounter) => {
+    let encounterType
+
+    encounter.type.forEach((type) => {
+      if (type.coding[0].system === 'http://hearth.org/crvs/encounter-types') {
+        encounterType = type.coding[0].display
+      }
+    })
+
+    return {
+      eventTitle: 'Sample Event',
+      eventType: SAMPLE_EVENT,
+      eventDate: encounter.period.start,
+      data: {
+        encounterType: encounterType,
+        encounterLocation: encounter.location[0].location.display
+      }
+    }
   }
 
   return {
@@ -67,10 +89,17 @@ module.exports = function (Api, $q) {
     formatEvents: (events) => {
       const simpleEvents = []
       events.forEach((event) => {
+        if (isEventOfType(SAMPLE_EVENT, event.resource)) {
+          event = constructSimpleSampleEventObject(event.resource, event._observations)
+        } else {
+          console.error('Unknown event type found', event)
+        }
         simpleEvents.push(event)
       })
       return simpleEvents
     },
+
+    constructSimpleSampleEventObject: constructSimpleSampleEventObject,
 
     isEventOfType: isEventOfType
   }

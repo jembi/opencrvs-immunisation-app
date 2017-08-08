@@ -14,6 +14,33 @@ tap.tearDown(() => {
 
 tap.test('.mapFHIRResources()', { autoend: true }, (t) => {
   t.test('should map FormBuilder field values to a FHIR document', (t) => {
+    // given
+    const FormBuilderSampleEvent = require('../../app/scripts/directives/add-events/add-event/forms/sample-event.json')
+    const FormBuilderInstance = {
+      sections: [FormBuilderSampleEvent]
+    }
+
+    const FHIREncounterResource = require('../../app/scripts/services/FHIR/resources/Encounter.json')
+    const mockFormData = {
+      encounterDate: '2017-02-23',
+      encounterLocation: 'Kacyiru Police Hospital',
+      encounterType: 'pmtct-visit'
+    }
+    // when
+    const fhirResourceDict = FHIR.mapFHIRResources({ main: FHIREncounterResource }, FormBuilderInstance, mockFormData)
+    const encounter = fhirResourceDict.main
+    // then
+    t.ok(encounter)
+
+    t.equal(encounter.period.start, '2017-02-23', 'should have a start period of "2017-02-23"')
+    t.equal(encounter.period.end, '2017-02-23', 'should have a end period of "2017-02-23"')
+
+    t.equal(encounter.type[1].coding[0].code, 'pmtct-visit', 'should have a type.coding.code of "pmtct-visit"')
+    t.equal(encounter.type[1].coding[0].display, 'PMTCT visit', 'should have a end period of "PMTCT visit"')
+
+    t.equal(encounter.class, 'Immunisation', 'should have a class of "HIVAIDS"')
+
+    t.equal(encounter.location[0].location.display, 'Kacyiru Police Hospital', 'should have a location.display of "Kacyiru Police Hospital"')
     t.end()
   })
 })
