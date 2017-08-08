@@ -169,7 +169,7 @@ exports.createDocumentReference = (patientRef, binaryResourceEntry, currentTime)
       attachment: {
         contentType: 'application/fhir+json',
         url: binaryResourceEntry.fullUrl,
-        title: 'CBS event report',
+        title: 'CRVS event report',
         creation: currentTime
       }
     }
@@ -189,7 +189,7 @@ exports.createDocumentManifest = (patientRef, docRefEntry, currentTime) => {
         system: 'http://hl7.org/fhir/ValueSet/c80-doc-typecodes',
         code: '74264-3'
       },
-      text: 'HIV summary registry report Document'
+      text: 'Immunisation summary registry report Document'
     },
     subject: {
       reference: patientRef

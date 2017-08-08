@@ -35,10 +35,7 @@ module.exports = function (Api, $scope, $routeParams, $location) {
   Api.Patients.get({ id: $routeParams.patientId }, success, error)
 
   $scope.events = [
-    { code: 'linkage-to-care', display: 'Linkage to care', formName: 'FormBuilderaddEventLinkageToCare' },
-    { code: 'hiv-confirmation', display: 'HIV confirmation', formName: 'FormBuilderaddEventHIVConfirmation' },
-    { code: 'cd4-count', display: 'CD4 count', formName: 'FormBuilderaddEventCD4Count' },
-    { code: 'viral-load', display: 'Viral load', formName: 'FormBuilderaddEventViralLoad' }
+    { code: 'sample-event', display: 'Sample Event', formName: 'FormBuilderaddEventSampleEvent' }
   ]
 
   $scope.selectedEvent = $scope.events[0]

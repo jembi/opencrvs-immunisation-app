@@ -12,7 +12,7 @@ module.exports = function (loadResource, $q, state, FHIR, FormBuilderService) {
       const setProcedureEventType = (encounterTemplate, encounterType, encounterDisplay) => {
         // add encounter type.coding for event type
         encounterTemplate.type[0].coding[0] = {
-          'system': 'http://hearth.org/cbs/event-types',
+          'system': 'http://hearth.org/crvs/event-types',
           'code': encounterType,
           'display': encounterDisplay
         }
@@ -24,29 +24,13 @@ module.exports = function (loadResource, $q, state, FHIR, FormBuilderService) {
 
           const formFieldsValues = FormBuilderService.getFormFieldValues(form)
 
-          const cloneDeep = (obj) => {
-            return JSON.parse(JSON.stringify(obj))
-          }
-
           loadResource.fetch('app/scripts/services/FHIR/resources/Encounter.json').then(function (encounterTemplate) {
             loadResource.fetch('app/scripts/services/FHIR/resources/Observation.json').then(function (observationTemplate) {
               let resourceTemplateDict
               switch (scope.event.code) {
-                case 'linkage-to-care':
-                  setProcedureEventType(encounterTemplate, scope.event.code, 'Linkage to Care')
+                case 'sample-event':
+                  setProcedureEventType(encounterTemplate, scope.event.code, 'Sample Event')
                   resourceTemplateDict = { main: encounterTemplate }
-                  break
-                case 'hiv-confirmation':
-                  setProcedureEventType(encounterTemplate, scope.event.code, 'HIV Confirmation')
-                  resourceTemplateDict = { main: encounterTemplate, subjectHIVObs: cloneDeep(observationTemplate), partnerHIVObs: cloneDeep(observationTemplate) }
-                  break
-                case 'cd4-count':
-                  setProcedureEventType(encounterTemplate, scope.event.code, 'CD4 Count')
-                  resourceTemplateDict = { main: encounterTemplate, cd4CountObs: cloneDeep(observationTemplate) }
-                  break
-                case 'viral-load':
-                  setProcedureEventType(encounterTemplate, scope.event.code, 'Viral Load')
-                  resourceTemplateDict = { main: encounterTemplate, viralLoadObs: cloneDeep(observationTemplate) }
                   break
                 default:
                   console.error(`Unknown event code ${scope.event.code}`)
