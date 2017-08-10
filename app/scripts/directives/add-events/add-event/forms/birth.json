@@ -1,0 +1,147 @@
+{
+  "key": "sec1",
+  "name": "Section 1",
+  "displayName": "Birth",
+  "flex": "100",
+  "rows": [{
+      "name": "Row 1",
+      "layout": "row",
+      "fields": [{
+        "type": "input",
+        "flex": "20",
+        "name": "babyGivenName",
+        "title": "Baby Given Name",
+        "settings": {
+          "valueType": "valueString",
+          "disabled": false,
+          "required": true
+        },
+        "skipLogic": {
+          "func": {},
+          "checks": []
+        },
+        "value": null
+      }, {
+        "type": "input",
+        "flex": "20",
+        "name": "babyMiddleNames",
+        "title": "Baby Middle Names",
+        "settings": {
+          "valueType": "valueString",
+          "disabled": false,
+          "required": true
+        },
+        "skipLogic": {
+          "func": {},
+          "checks": []
+        },
+        "value": null
+      }, {
+        "type": "input",
+        "flex": "20",
+        "name": "babyFamilyName",
+        "title": "Baby Family Name",
+        "settings": {
+          "valueType": "valueString",
+          "disabled": false,
+          "required": true
+        },
+        "skipLogic": {
+          "func": {},
+          "checks": []
+        },
+        "value": null
+      }, {
+        "type": "input",
+        "flex": "20",
+        "name": "birthPlace",
+        "title": "Place of Birth",
+        "settings": {
+          "valueType": "valueString",
+          "disabled": false,
+          "required": true
+        },
+        "skipLogic": {
+          "func": {},
+          "checks": []
+        },
+        "value": null
+      }, {
+        "type": "date",
+        "flex": "20",
+        "name": "birthDate",
+        "title": "Date of Birth",
+        "settings": {
+          "valueType": "valueString",
+          "disabled": false,
+          "required": true
+        },
+        "skipLogic": {
+          "func": {},
+          "checks": []
+        },
+        "value": null
+      },{
+        "type": "input",
+        "flex": "20",
+        "name": "mothersGivenName",
+        "title": "Mothers Given Name",
+        "settings": {
+          "valueType": "valueString",
+          "disabled": false,
+          "required": true
+        },
+        "skipLogic": {
+          "func": {},
+          "checks": []
+        },
+        "value": null
+      }, {
+        "type": "input",
+        "flex": "20",
+        "name": "mothersMiddleNames",
+        "title": "Mothers Middle Names",
+        "settings": {
+          "valueType": "valueString",
+          "disabled": false,
+          "required": true
+        },
+        "skipLogic": {
+          "func": {},
+          "checks": []
+        },
+        "value": null
+      }, {
+        "type": "input",
+        "flex": "20",
+        "name": "mothersFamilyName",
+        "title": "Mothers Family Name",
+        "settings": {
+          "valueType": "valueString",
+          "disabled": false,
+          "required": true
+        },
+        "skipLogic": {
+          "func": {},
+          "checks": []
+        },
+        "value": null
+      }, {
+        "type": "input",
+        "flex": "20",
+        "name": "mothersContactNumber",
+        "title": "Mothers Contact Number",
+        "settings": {
+          "valueType": "valueString",
+          "disabled": false,
+          "required": true
+        },
+        "skipLogic": {
+          "func": {},
+          "checks": []
+        },
+        "value": null
+      }]
+    }
+  ]
+}
