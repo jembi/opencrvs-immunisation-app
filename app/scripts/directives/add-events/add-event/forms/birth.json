@@ -1,14 +1,14 @@
 {
   "key": "sec1",
   "name": "Section 1",
-  "displayName": "Birth",
+  "displayName": "Birth Registration",
   "flex": "100",
   "rows": [{
       "name": "Row 1",
       "layout": "row",
       "fields": [{
         "type": "input",
-        "flex": "20",
+        "flex": "33",
         "name": "babyGivenName",
         "title": "Baby Given Name",
         "settings": {
@@ -23,13 +23,12 @@
         "value": null
       }, {
         "type": "input",
-        "flex": "20",
+        "flex": "33",
         "name": "babyMiddleNames",
         "title": "Baby Middle Names",
         "settings": {
           "valueType": "valueString",
-          "disabled": false,
-          "required": true
+          "disabled": false
         },
         "skipLogic": {
           "func": {},
@@ -38,7 +37,7 @@
         "value": null
       }, {
         "type": "input",
-        "flex": "20",
+        "flex": "33",
         "name": "babyFamilyName",
         "title": "Baby Family Name",
         "settings": {
@@ -51,9 +50,13 @@
           "checks": []
         },
         "value": null
-      }, {
+      }]
+    }, {
+      "name": "Row 2",
+      "layout": "row",
+      "fields": [{
         "type": "input",
-        "flex": "20",
+        "flex": "33",
         "name": "birthPlace",
         "title": "Place of Birth",
         "settings": {
@@ -68,7 +71,7 @@
         "value": null
       }, {
         "type": "date",
-        "flex": "20",
+        "flex": "33",
         "name": "birthDate",
         "title": "Date of Birth",
         "settings": {
@@ -81,9 +84,13 @@
           "checks": []
         },
         "value": null
-      },{
+      }]
+    }, {
+      "name": "Row 3",
+      "layout": "row",
+      "fields": [{
         "type": "input",
-        "flex": "20",
+        "flex": "33",
         "name": "mothersGivenName",
         "title": "Mothers Given Name",
         "settings": {
@@ -98,22 +105,7 @@
         "value": null
       }, {
         "type": "input",
-        "flex": "20",
-        "name": "mothersMiddleNames",
-        "title": "Mothers Middle Names",
-        "settings": {
-          "valueType": "valueString",
-          "disabled": false,
-          "required": true
-        },
-        "skipLogic": {
-          "func": {},
-          "checks": []
-        },
-        "value": null
-      }, {
-        "type": "input",
-        "flex": "20",
+        "flex": "33",
         "name": "mothersFamilyName",
         "title": "Mothers Family Name",
         "settings": {
@@ -128,7 +120,7 @@
         "value": null
       }, {
         "type": "input",
-        "flex": "20",
+        "flex": "33",
         "name": "mothersContactNumber",
         "title": "Mothers Contact Number",
         "settings": {
