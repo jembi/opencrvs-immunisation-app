@@ -15,9 +15,9 @@ tap.tearDown(() => {
 tap.test('.mapFHIRResources()', { autoend: true }, (t) => {
   t.test('should map FormBuilder field values to a FHIR document', (t) => {
     // given
-    const FormBuilderSampleEvent = require('../../app/scripts/directives/add-events/add-event/forms/sample-event.json')
+    const FormBuilderAddEventBirthNotification = require('../../app/scripts/directives/add-events/add-event/forms/birth-notification.json')
     const FormBuilderInstance = {
-      sections: [FormBuilderSampleEvent]
+      sections: [FormBuilderAddEventBirthNotification]
     }
 
     const FHIREncounterResource = require('../../app/scripts/services/FHIR/resources/Encounter.json')
