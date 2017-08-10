@@ -28,8 +28,8 @@ module.exports = function (loadResource, $q, state, FHIR, FormBuilderService) {
             loadResource.fetch('app/scripts/services/FHIR/resources/Observation.json').then(function (observationTemplate) {
               let resourceTemplateDict
               switch (scope.event.code) {
-                case 'birth':
-                  setProcedureEventType(encounterTemplate, scope.event.code, 'Birth')
+                case 'birth-notification':
+                  setProcedureEventType(encounterTemplate, scope.event.code, 'Birth Notification')
                   resourceTemplateDict = { main: encounterTemplate }
                   break
                 default:

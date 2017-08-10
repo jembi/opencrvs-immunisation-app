@@ -1,7 +1,7 @@
 {
   "key": "sec1",
   "name": "Section 1",
-  "displayName": "Birth Registration",
+  "displayName": "Birth Notification",
   "flex": "100",
   "rows": [{
       "name": "Row 1",
@@ -119,12 +119,12 @@
         },
         "value": null
       }, {
-        "type": "input",
+        "type": "inputPhoneNumber",
         "flex": "33",
         "name": "mothersContactNumber",
         "title": "Mothers Contact Number",
         "settings": {
-          "valueType": "valueString",
+          "checkPhoneNumber": true,
           "disabled": false,
           "required": true
         },

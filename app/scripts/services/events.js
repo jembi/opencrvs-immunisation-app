@@ -1,7 +1,7 @@
 'use strict'
 
 module.exports = function (Api, $q) {
-  const BIRTH = 'birth'
+  const BIRTH = 'birth-notification'
 
   const isImmunisationEncounter = (event) => {
     return event.resourceType &&
@@ -26,7 +26,7 @@ module.exports = function (Api, $q) {
       })
   }
 
-  const constructSimpleBirthObject = (encounter) => {
+  const constructSimpleBirthNotificationObject = (encounter) => {
     let encounterType
 
     encounter.type.forEach((type) => {
@@ -36,7 +36,7 @@ module.exports = function (Api, $q) {
     })
 
     return {
-      eventTitle: 'Birth',
+      eventTitle: 'Birth Notification',
       eventType: BIRTH,
       eventDate: encounter.period.start,
       data: {
@@ -90,7 +90,7 @@ module.exports = function (Api, $q) {
       const simpleEvents = []
       events.forEach((event) => {
         if (isEventOfType(BIRTH, event.resource)) {
-          event = constructSimpleBirthObject(event.resource, event._observations)
+          event = constructSimpleBirthNotificationObject(event.resource, event._observations)
         } else {
           console.error('Unknown event type found', event)
         }
@@ -99,7 +99,7 @@ module.exports = function (Api, $q) {
       return simpleEvents
     },
 
-    constructSimpleBirthObject: constructSimpleBirthObject,
+    constructSimpleBirthNotificationObject: constructSimpleBirthNotificationObject,
 
     isEventOfType: isEventOfType
   }
