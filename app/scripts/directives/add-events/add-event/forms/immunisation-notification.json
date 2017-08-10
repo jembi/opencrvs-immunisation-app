@@ -1,0 +1,57 @@
+{
+  "key": "sec1",
+  "name": "Section 1",
+  "displayName": "Immunisation Notification",
+  "flex": "100",
+  "rows": [{
+      "name": "Row 1",
+      "layout": "row",
+      "fields": [{
+        "type": "date",
+        "flex": "33",
+        "name": "immunisationDate",
+        "title": "Date",
+        "settings": {
+          "valueType": "valueString",
+          "disabled": false,
+          "required": true
+        },
+        "skipLogic": {
+          "func": {},
+          "checks": []
+        },
+        "value": null
+      }, {
+        "type": "input",
+        "flex": "33",
+        "name": "place",
+        "title": "Place",
+        "settings": {
+          "valueType": "valueString",
+          "disabled": false,
+          "required": true
+        },
+        "skipLogic": {
+          "func": {},
+          "checks": []
+        },
+        "value": null
+      }, {
+        "type": "input",
+        "flex": "33",
+        "name": "immunisationAdministered",
+        "title": "Immunisation administered",
+        "settings": {
+          "valueType": "valueString",
+          "disabled": false,
+          "required": true
+        },
+        "skipLogic": {
+          "func": {},
+          "checks": []
+        },
+        "value": null
+      }]
+    }
+  ]
+}

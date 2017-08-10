@@ -32,6 +32,10 @@ module.exports = function (loadResource, $q, state, FHIR, FormBuilderService) {
                   setProcedureEventType(encounterTemplate, scope.event.code, 'Sample Event')
                   resourceTemplateDict = { main: encounterTemplate }
                   break
+                case 'immunisation-notification':
+                  setProcedureEventType(encounterTemplate, scope.event.code, 'Immunisation Notification')
+                  resourceTemplateDict = { main: encounterTemplate }
+                  break
                 default:
                   console.error(`Unknown event code ${scope.event.code}`)
               }
