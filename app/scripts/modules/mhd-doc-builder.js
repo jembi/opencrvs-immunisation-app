@@ -76,23 +76,23 @@ exports.createDocumentBundle = (patientRef, eventDictionaries, currentTime) => {
       status: 'final',
       type: {
         coding: {
-          system: 'http://hl7.org/fhir/ValueSet/c80-doc-typecodes',
-          code: '74264-3'
+          system: 'http://opencrvs.org/doc-types',
+          code: 'birth-notification'
         },
-        text: 'HIV summary registry report Document'
+        text: 'Birth Notification'
       },
       class: {
         coding: {
-          system: 'http://hl7.org/fhir/ValueSet/c80-doc-typecodes',
-          code: '47045-0'
+          system: 'http://opencrvs.org/doc-classes',
+          code: 'crvs-document'
         },
-        text: 'Study report Document'
+        text: 'CRVS Document'
       },
       subject: {
         reference: patientRef
       },
       date: currentTime,
-      title: 'HIV case-based surveillance event report',
+      title: 'Birth Notification',
       section: {
         entry: []
       }
@@ -111,10 +111,26 @@ exports.createDocumentBundle = (patientRef, eventDictionaries, currentTime) => {
       const resourceEntry = eventDict[resourceKey]
       resourceEntries.push(resourceEntry)
 
-      if (resourceKey === 'main') {
+      if (resourceKey === 'motherDetails') {
         composition.resource.section.entry.push({
-          title: 'Immunisation Event',
-          text: 'Immunisation Event',
+          title: 'Mother\'s Details',
+          text: 'Mother\'s Details',
+          reference: resourceEntry.fullUrl
+        })
+      }
+
+      if (resourceKey === 'fatherDetails') {
+        composition.resource.section.entry.push({
+          title: 'Father\'s Details',
+          text: 'Father\'s Details',
+          reference: resourceEntry.fullUrl
+        })
+      }
+
+      if (resourceKey === 'location') {
+        composition.resource.section.entry.push({
+          title: 'Location',
+          text: 'Location',
           reference: resourceEntry.fullUrl
         })
       }
@@ -148,17 +164,17 @@ exports.createDocumentReference = (patientRef, binaryResourceEntry, currentTime)
     docStatus: 'final',
     type: {
       coding: {
-        system: 'http://hl7.org/fhir/ValueSet/c80-doc-typecodes',
-        code: '74264-3'
+        system: 'http://opencrvs.org/doc-types',
+        code: 'birth-notification'
       },
-      text: 'HIV summary registry report Document'
+      text: 'Birth Notification'
     },
     class: {
       coding: {
-        system: 'http://hl7.org/fhir/ValueSet/c80-doc-typecodes',
-        code: '47045-0'
+        system: 'http://opencrvs.org/doc-classes',
+        code: 'crvs-document'
       },
-      text: 'Study report Document'
+      text: 'CRVS Document'
     },
     subject: {
       reference: patientRef
@@ -186,10 +202,10 @@ exports.createDocumentManifest = (patientRef, docRefEntry, currentTime) => {
     status: 'current',
     type: {
       coding: {
-        system: 'http://hl7.org/fhir/ValueSet/c80-doc-typecodes',
-        code: '74264-3'
+        system: 'http://opencrvs.org/doc-types',
+        code: 'birth-notification'
       },
-      text: 'Immunisation summary registry report Document'
+      text: 'Birth Notification'
     },
     subject: {
       reference: patientRef
