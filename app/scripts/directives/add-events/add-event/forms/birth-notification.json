@@ -9,75 +9,6 @@
       "fields": [{
         "type": "input",
         "flex": "33",
-        "name": "babyGivenName",
-        "title": "Baby Given Name",
-        "settings": {
-          "valueType": "valueString",
-          "disabled": false,
-          "required": true
-        },
-        "FHIRMappings": [{
-          "resourceKey": "childDetails",
-          "path": "name[0].given[0]",
-          "params": null,
-          "valueType": "formValue",
-          "value": "babyGivenName"
-        }],
-        "skipLogic": {
-          "func": {},
-          "checks": []
-        },
-        "value": null
-      }, {
-        "type": "input",
-        "flex": "33",
-        "name": "babyMiddleNames",
-        "title": "Baby Middle Names",
-        "settings": {
-          "valueType": "valueString",
-          "disabled": false
-        },
-        "FHIRMappings": [{
-          "resourceKey": "childDetails",
-          "path": "name[0].given[1]",
-          "params": null,
-          "valueType": "formValue",
-          "value": "babyMiddleNames"
-        }],
-        "skipLogic": {
-          "func": {},
-          "checks": []
-        },
-        "value": null
-      }, {
-        "type": "input",
-        "flex": "33",
-        "name": "babyFamilyName",
-        "title": "Baby Family Name",
-        "settings": {
-          "valueType": "valueString",
-          "disabled": false,
-          "required": true
-        },
-        "FHIRMappings": [{
-          "resourceKey": "childDetails",
-          "path": "name[0].family[0]",
-          "params": null,
-          "valueType": "formValue",
-          "value": "babyFamilyName"
-        }],
-        "skipLogic": {
-          "func": {},
-          "checks": []
-        },
-        "value": null
-      }]
-    }, {
-      "name": "Row 2",
-      "layout": "row",
-      "fields": [{
-        "type": "input",
-        "flex": "33",
         "name": "birthPlace",
         "title": "Place of Birth",
         "settings": {
@@ -121,7 +52,7 @@
         "value": null
       }]
     }, {
-      "name": "Row 3",
+      "name": "Row 2",
       "layout": "row",
       "fields": [{
         "type": "input",
