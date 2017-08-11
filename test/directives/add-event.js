@@ -53,7 +53,9 @@ tap.test('.submit()', { autoend: true }, (t) => {
             resourceType: 'Patient',
             id: 'AAAAA-BBBB-CCCC-DDDDD-EEEEEE'
           }
-        }
+        },
+        resourceType: 'Patient',
+        id: 'AAAAA-BBBB-CCCC-DDDDD-EEEEEE'
       }
     }
     const mockFormData = {
@@ -85,8 +87,8 @@ tap.test('.submit()', { autoend: true }, (t) => {
         if (file === 'app/scripts/directives/add-events/add-event/forms/birth-notification.json') {
           const FormBuilderAddEventBirthNotification = require('../../app/scripts/directives/add-events/add-event/forms/birth-notification.json')
           resolve(FormBuilderAddEventBirthNotification)
-        } else if (file === 'app/scripts/services/FHIR/resources/Patient-motherDetails.json') {
-          const FHIREncounterResource = require('../../app/scripts/services/FHIR/resources/Patient-motherDetails.json')
+        } else if (file === 'app/scripts/services/FHIR/resources/RelatedPerson-motherDetails.json') {
+          const FHIREncounterResource = require('../../app/scripts/services/FHIR/resources/RelatedPerson-motherDetails.json')
           resolve(FHIREncounterResource)
         } else if (file === 'app/scripts/services/FHIR/resources/Location.json') {
           const FHIRObservationResource = require('../../app/scripts/services/FHIR/resources/Location.json')
@@ -107,7 +109,7 @@ tap.test('.submit()', { autoend: true }, (t) => {
           const eventDict = stateService.pushToEventsArray.getCall(0).args[0]
 
           t.equals(eventDict.childDetails.resourceType, 'Patient')
-          t.equals(eventDict.motherDetails.resourceType, 'Patient')
+          t.equals(eventDict.motherDetails.resourceType, 'RelatedPerson')
           t.equals(eventDict.location.resourceType, 'Location')
 
           t.equals(eventDict.childDetails.birthDate, '2017-02-23')
@@ -115,6 +117,8 @@ tap.test('.submit()', { autoend: true }, (t) => {
           t.equals(eventDict.motherDetails.name[0].given[0], 'Mary')
           t.equals(eventDict.motherDetails.name[0].family[0], 'Smith')
           t.equals(eventDict.motherDetails.telecom[0].value, '+27725556784')
+          t.equals(eventDict.motherDetails.patient.reference, 'Patient/AAAAA-BBBB-CCCC-DDDDD-EEEEEE')
+          t.equals(eventDict.motherDetails.relationship.coding[0].code, 'MTH')
 
           t.equals(eventDict.location.name, 'GoodHealth Clinic, Durban')
 

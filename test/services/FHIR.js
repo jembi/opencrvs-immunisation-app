@@ -30,7 +30,7 @@ tap.test('.mapFHIRResources()', { autoend: true }, (t) => {
     // when
     const fhirResourceDict = FHIR.mapFHIRResources({
       childDetails: require('../../app/scripts/services/FHIR/resources/Patient.json'),
-      motherDetails: require('../../app/scripts/services/FHIR/resources/Patient-motherDetails.json'),
+      motherDetails: require('../../app/scripts/services/FHIR/resources/RelatedPerson-motherDetails.json'),
       location: require('../../app/scripts/services/FHIR/resources/Location.json')
     }, FormBuilderInstance, mockFormData)
 

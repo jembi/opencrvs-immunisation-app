@@ -1,0 +1,32 @@
+{
+  "resourceType": "RelatedPerson",
+  "active": true,
+  "patient": {
+    "reference": ""
+  },
+  "name": [
+    {
+      "use": "official",
+      "prefix": [],
+      "family": [],
+      "given": []
+    }
+  ],
+  "gender": "female",
+  "telecom": [
+    {
+      "system": "phone",
+      "value": "",
+      "use": ""
+    }
+  ],
+  "relationship": {
+    "coding": [
+      {
+        "system": "http://hl7.org/fhir/v3/RoleCode",
+        "code": "MTH"
+      }
+    ],
+    "text": "mother"
+  }
+}

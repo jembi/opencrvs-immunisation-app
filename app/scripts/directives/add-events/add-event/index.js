@@ -26,12 +26,13 @@ module.exports = function (loadResource, $q, state, FHIR, FormBuilderService) {
           const formFieldsValues = FormBuilderService.getFormFieldValues(form)
 
           loadResource.fetch('app/scripts/services/FHIR/resources/Encounter.json').then(function (encounterTemplate) {
-            loadResource.fetch('app/scripts/services/FHIR/resources/Patient-motherDetails.json').then(function (motherTemplate) {
+            loadResource.fetch('app/scripts/services/FHIR/resources/RelatedPerson-motherDetails.json').then(function (motherTemplate) {
               loadResource.fetch('app/scripts/services/FHIR/resources/Location.json').then(function (locationTemplate) {
                 let resourceTemplateDict
                 switch (scope.event.code) {
                   case 'birth-notification':
                     setProcedureEventType(encounterTemplate, scope.event.code, 'Birth Notification')
+                    motherTemplate.patient.reference = scope.patient.resourceType + '/' + scope.patient.id
                     resourceTemplateDict = {
                       main: encounterTemplate,
                       childDetails: scope.patient.toJSON(),
