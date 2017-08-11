@@ -1,0 +1,20 @@
+{
+  "resourceType": "Patient",
+  "active": true,
+  "name": [
+    {
+      "use": "official",
+      "prefix": [],
+      "family": [],
+      "given": []
+    }
+  ],
+  "gender": "F",
+  "telecom": [
+    {
+      "system": "phone",
+      "value": "",
+      "use": ""
+    }
+  ]
+}

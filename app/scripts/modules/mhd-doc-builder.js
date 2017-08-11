@@ -28,22 +28,22 @@ exports.returnResourceAsEntry = (resource, isTransaction) => {
  * @param  {String} eventDict the dictionary of events to lookup fullUrls from
  */
 const resolveReferences = (resource, eventDict) => {
-  for (let prop in resource) {
-    if (prop === 'reference' && resource[prop].charAt(0) === '@') {
-      const resourceKey = resource[prop].substring(1)
-      if (!eventDict[resourceKey]) {
-        throw new Error('Unknown reference to event dictionary encountered')
-      }
-      resource[prop] = eventDict[resourceKey].fullUrl
-    } else if (typeof resource[prop] === 'object') {
-      if (Array.isArray(resource[prop])) {
-        resource[prop].forEach((element) => {
-          resolveReferences(element, eventDict)
-        })
-      } else {
+  if (Array.isArray(resource)) {
+    resource.forEach((element) => {
+      resolveReferences(element, eventDict)
+    })
+  } else {
+    Object.getOwnPropertyNames(resource).forEach((prop) => {
+      if (prop === 'reference' && resource[prop].charAt(0) === '@') {
+        const resourceKey = resource[prop].substring(1)
+        if (!eventDict[resourceKey]) {
+          throw new Error('Unknown reference to event dictionary encountered')
+        }
+        resource[prop] = eventDict[resourceKey].fullUrl
+      } else if (typeof resource[prop] === 'object') {
         resolveReferences(resource[prop], eventDict)
       }
-    }
+    })
   }
 }
 
@@ -73,7 +73,7 @@ exports.createDocumentBundle = (patientRef, eventDictionaries, currentTime) => {
         value: uuid.v4()
       },
       resourceType: 'Composition',
-      status: 'final',
+      status: 'preliminary',
       type: {
         coding: {
           system: 'http://opencrvs.org/doc-types',
@@ -119,18 +119,18 @@ exports.createDocumentBundle = (patientRef, eventDictionaries, currentTime) => {
         })
       }
 
-      if (resourceKey === 'fatherDetails') {
+      if (resourceKey === 'childDetails') {
         composition.resource.section.entry.push({
-          title: 'Father\'s Details',
-          text: 'Father\'s Details',
+          title: 'Child Details',
+          text: 'Child Details',
           reference: resourceEntry.fullUrl
         })
       }
 
       if (resourceKey === 'location') {
         composition.resource.section.entry.push({
-          title: 'Location',
-          text: 'Location',
+          title: 'Birth Location',
+          text: 'Birth Location',
           reference: resourceEntry.fullUrl
         })
       }

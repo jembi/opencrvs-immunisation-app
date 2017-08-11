@@ -9,6 +9,7 @@ module.exports = function (loadResource, $q, state, FHIR, FormBuilderService) {
       event: '='
     },
     link: function (scope) {
+      // eslint-disable-next-line
       const setProcedureEventType = (encounterTemplate, encounterType, encounterDisplay) => {
         // add encounter type.coding for event type
         encounterTemplate.type[0].coding[0] = {
@@ -24,13 +25,23 @@ module.exports = function (loadResource, $q, state, FHIR, FormBuilderService) {
 
           const formFieldsValues = FormBuilderService.getFormFieldValues(form)
 
-          loadResource.fetch('app/scripts/services/FHIR/resources/Encounter.json').then(function (encounterTemplate) {
-            loadResource.fetch('app/scripts/services/FHIR/resources/Observation.json').then(function (observationTemplate) {
+          loadResource.fetch('app/scripts/services/FHIR/resources/Patient-motherDetails.json').then(function (motherTemplate) {
+            loadResource.fetch('app/scripts/services/FHIR/resources/Location.json').then(function (locationTemplate) {
               let resourceTemplateDict
               switch (scope.event.code) {
                 case 'birth-notification':
-                  setProcedureEventType(encounterTemplate, scope.event.code, 'Birth Notification')
-                  resourceTemplateDict = { main: encounterTemplate }
+                  resourceTemplateDict = {
+                    childDetails: scope.patient.toJSON(),
+                    motherDetails: motherTemplate,
+                    location: locationTemplate
+                  }
+                  break
+                case 'immunization':
+                  // TODO
+                  // add the Subject Reference - Patient/Reference
+                  // resourceDict.main.patient.reference = scope.patient.resourceType + '/' + scope.patient.id
+
+                  // setProcedureEventType(encounterTemplate, scope.event.code, 'Immunization')
                   break
                 default:
                   console.error(`Unknown event code ${scope.event.code}`)
@@ -38,11 +49,7 @@ module.exports = function (loadResource, $q, state, FHIR, FormBuilderService) {
 
               const resourceDict = FHIR.mapFHIRResources(resourceTemplateDict, scope.state[scope.event.formName], formFieldsValues)
 
-              // add the Subject Reference - Patient/Reference
-              resourceDict.main.patient.reference = scope.patient.resourceType + '/' + scope.patient.id
-
               state.pushToEventsArray(resourceDict)
-
               scope.resetForm(scope.state[scope.event.formName], form)
 
               defer.resolve({ isValid: true, msg: 'Event has been successfully added for submission' })

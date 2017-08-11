@@ -16,6 +16,13 @@
           "disabled": false,
           "required": true
         },
+        "FHIRMappings": [{
+          "resourceKey": "childDetails",
+          "path": "name[0].given[0]",
+          "params": null,
+          "valueType": "formValue",
+          "value": "babyGivenName"
+        }],
         "skipLogic": {
           "func": {},
           "checks": []
@@ -30,6 +37,13 @@
           "valueType": "valueString",
           "disabled": false
         },
+        "FHIRMappings": [{
+          "resourceKey": "childDetails",
+          "path": "name[0].given[1]",
+          "params": null,
+          "valueType": "formValue",
+          "value": "babyMiddleNames"
+        }],
         "skipLogic": {
           "func": {},
           "checks": []
@@ -45,6 +59,13 @@
           "disabled": false,
           "required": true
         },
+        "FHIRMappings": [{
+          "resourceKey": "childDetails",
+          "path": "name[0].family[0]",
+          "params": null,
+          "valueType": "formValue",
+          "value": "babyFamilyName"
+        }],
         "skipLogic": {
           "func": {},
           "checks": []
@@ -64,6 +85,13 @@
           "disabled": false,
           "required": true
         },
+        "FHIRMappings": [{
+          "resourceKey": "location",
+          "path": "name",
+          "params": null,
+          "valueType": "formValue",
+          "value": "birthPlace"
+        }],
         "skipLogic": {
           "func": {},
           "checks": []
@@ -79,6 +107,13 @@
           "disabled": false,
           "required": true
         },
+        "FHIRMappings": [{
+          "resourceKey": "childDetails",
+          "path": "birthDate",
+          "params": null,
+          "valueType": "formValue",
+          "value": "birthDate"
+        }],
         "skipLogic": {
           "func": {},
           "checks": []
@@ -98,6 +133,13 @@
           "disabled": false,
           "required": true
         },
+        "FHIRMappings": [{
+          "resourceKey": "motherDetails",
+          "path": "name[0].given[0]",
+          "params": null,
+          "valueType": "formValue",
+          "value": "mothersGivenName"
+        }],
         "skipLogic": {
           "func": {},
           "checks": []
@@ -113,6 +155,13 @@
           "disabled": false,
           "required": true
         },
+        "FHIRMappings": [{
+          "resourceKey": "motherDetails",
+          "path": "name[0].family[0]",
+          "params": null,
+          "valueType": "formValue",
+          "value": "mothersFamilyName"
+        }],
         "skipLogic": {
           "func": {},
           "checks": []
@@ -128,6 +177,13 @@
           "disabled": false,
           "required": true
         },
+        "FHIRMappings": [{
+          "resourceKey": "motherDetails",
+          "path": "telecom[0].value",
+          "params": null,
+          "valueType": "formValue",
+          "value": "mothersContactNumber"
+        }],
         "skipLogic": {
           "func": {},
           "checks": []
