@@ -82,7 +82,7 @@ module.exports = function (loadResource, $q, state, FHIR, FormBuilderService) {
           scope.state[scope.event.formName].sections.push(formSection)
         })
 
-        // disbale form when event has been added tp array - only one event at a time
+        // disable form when event has been added to array - only one event at a time
         scope.$watch(function () { return state.getEventsArray() }, function (events) {
           if (events) {
             if (events.length > 0) {
