@@ -9,7 +9,6 @@ module.exports = function (loadResource, $q, state, FHIR, FormBuilderService) {
       event: '='
     },
     link: function (scope) {
-      // eslint-disable-next-line
       const setProcedureEventType = (encounterTemplate, encounterType, encounterDisplay) => {
         // add encounter type.coding for event type
         encounterTemplate.type[0].coding[0] = {
