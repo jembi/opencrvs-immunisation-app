@@ -11,11 +11,11 @@
       <md-button class="md-primary md-raised" ng-click="addEvent()">Add event</md-button>
     </timeline-event>
     <timeline-event ng-repeat="eventItem in events" ng-class="{timelineCustom: $index != 0}">
-      <timeline-badge class="event1" ng-if="eventItem.eventType === 'sample-event'">
+      <timeline-badge class="event1" ng-if="eventItem.eventType === 'birth-event'">
         <md-icon>link</md-icon>
       </timeline-badge>
       <timeline-panel flex class="info">
-        <timeline-heading ng-class="{'event1': eventItem.eventType == 'sampleEvent' } ">
+        <timeline-heading ng-class="{'event1': eventItem.eventType == 'birthEvent' } ">
           <h4>{{eventItem.eventTitle}} -
             <span>
               {{fromNowDate(eventItem.eventDate)}}
