@@ -56,7 +56,7 @@ const resolveAllReferences = (eventDict) => {
   })
 }
 
-exports.createDocumentBundle = (patientRef, eventDictionaries, currentTime) => {
+exports.createDocumentBundle = (patientRef, eventDictionaries, currentTime, compositionType) => {
   const doc = {
     resourceType: 'Bundle',
     type: 'document',
@@ -77,9 +77,9 @@ exports.createDocumentBundle = (patientRef, eventDictionaries, currentTime) => {
       type: {
         coding: {
           system: 'http://opencrvs.org/doc-types',
-          code: 'birth-notification'
+          code: compositionType
         },
-        text: 'Birth Notification'
+        text: compositionType
       },
       class: {
         coding: {
@@ -235,7 +235,12 @@ exports.createDocumentManifest = (patientRef, docRefEntry, currentTime) => {
 exports.buildMHDTransaction = (patientRef, eventDictionaries) => {
   const currentTime = new Date()
 
-  const docBundle = exports.createDocumentBundle(patientRef, eventDictionaries, currentTime)
+  // only consider first event added
+  eventDictionaries = [ eventDictionaries[0] ]
+
+  const compositionType = eventDictionaries[0].main.type[0].coding[0].code
+
+  const docBundle = exports.createDocumentBundle(patientRef, eventDictionaries, currentTime, compositionType)
 
   const binaryResource = exports.createBinaryResource(docBundle)
   const binaryResourceEntry = exports.returnResourceAsEntry(binaryResource, true)

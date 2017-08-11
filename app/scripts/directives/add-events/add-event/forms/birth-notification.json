@@ -22,6 +22,12 @@
           "params": null,
           "valueType": "formValue",
           "value": "birthPlace"
+        }, {
+          "resourceKey": "main",
+          "path": "location[0].location.reference",
+          "params": null,
+          "valueType": "staticValue",
+          "value": "@location"
         }],
         "skipLogic": {
           "func": {},
@@ -41,6 +47,18 @@
         "FHIRMappings": [{
           "resourceKey": "childDetails",
           "path": "birthDate",
+          "params": null,
+          "valueType": "formValue",
+          "value": "birthDate"
+        }, {
+          "resourceKey": "main",
+          "path": "period.start",
+          "params": null,
+          "valueType": "formValue",
+          "value": "birthDate"
+        }, {
+          "resourceKey": "main",
+          "path": "period.end",
           "params": null,
           "valueType": "formValue",
           "value": "birthDate"

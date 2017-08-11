@@ -91,6 +91,9 @@ tap.test('.submit()', { autoend: true }, (t) => {
         } else if (file === 'app/scripts/services/FHIR/resources/Location.json') {
           const FHIRObservationResource = require('../../app/scripts/services/FHIR/resources/Location.json')
           resolve(FHIRObservationResource)
+        } else if (file === 'app/scripts/services/FHIR/resources/Encounter.json') {
+          const FHIRObservationResource = require('../../app/scripts/services/FHIR/resources/Encounter.json')
+          resolve(FHIRObservationResource)
         }
       })
     }
