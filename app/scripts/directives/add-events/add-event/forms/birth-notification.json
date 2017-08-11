@@ -8,38 +8,9 @@
       "layout": "row",
       "fields": [{
         "type": "input",
-        "flex": "33",
-        "name": "babyGivenName",
-        "title": "Baby Given Name",
-        "settings": {
-          "valueType": "valueString",
-          "disabled": false,
-          "required": true
-        },
-        "skipLogic": {
-          "func": {},
-          "checks": []
-        },
-        "value": null
-      }, {
-        "type": "input",
-        "flex": "33",
-        "name": "babyMiddleNames",
-        "title": "Baby Middle Names",
-        "settings": {
-          "valueType": "valueString",
-          "disabled": false
-        },
-        "skipLogic": {
-          "func": {},
-          "checks": []
-        },
-        "value": null
-      }, {
-        "type": "input",
-        "flex": "33",
-        "name": "babyFamilyName",
-        "title": "Baby Family Name",
+        "flex": "66",
+        "name": "birthPlace",
+        "title": "Place of Birth",
         "settings": {
           "valueType": "valueString",
           "disabled": false,
@@ -53,40 +24,6 @@
       }]
     }, {
       "name": "Row 2",
-      "layout": "row",
-      "fields": [{
-        "type": "input",
-        "flex": "33",
-        "name": "birthPlace",
-        "title": "Place of Birth",
-        "settings": {
-          "valueType": "valueString",
-          "disabled": false,
-          "required": true
-        },
-        "skipLogic": {
-          "func": {},
-          "checks": []
-        },
-        "value": null
-      }, {
-        "type": "date",
-        "flex": "33",
-        "name": "birthDate",
-        "title": "Date of Birth",
-        "settings": {
-          "valueType": "valueString",
-          "disabled": false,
-          "required": true
-        },
-        "skipLogic": {
-          "func": {},
-          "checks": []
-        },
-        "value": null
-      }]
-    }, {
-      "name": "Row 3",
       "layout": "row",
       "fields": [{
         "type": "input",
