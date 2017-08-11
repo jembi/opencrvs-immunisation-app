@@ -22,34 +22,76 @@
         },
         "value": null
       }, {
-        "type": "input",
+        "type": "select",
         "flex": "33",
         "name": "place",
         "title": "Place",
         "settings": {
           "valueType": "valueString",
           "disabled": false,
-          "required": true
+          "required": true,
+          "searchOptions": true
         },
         "skipLogic": {
           "func": {},
           "checks": []
         },
+        "options": [
+          {"key": "Chuk", "value": "Chuk"},
+          {"key": "Kacyiru Police Hospital", "value": "Kacyiru Police Hospital"},
+          {"key": "Muhima Hospital", "value": "Muhima Hospital"},
+          {"key": "Kibagabaga Hospital", "value": "Kibagabaga Hospital"},
+          {"key": "Kanombe Military Hospital", "value": "Kanombe Military Hospital"},
+          {"key": "King Faisal Hospital", "value": "King Faisal Hospital"},
+          {"key": "Ndera Hospital", "value": "Ndera Hospital"},
+          {"key": "Masaka Hospital", "value": "Masaka Hospital"},
+          {"key": "Rwinkwavu Hospital", "value": "Rwinkwavu Hospital"},
+          {"key": "Kirehe Hospital", "value": "Kirehe Hospital"},
+          {"key": "Kibungo Hospital", "value": "Kibungo Hospital"},
+          {"key": "Nyagatare Hospital", "value": "Nyagatare Hospital"},
+          {"key": "Gahini Hospital", "value": "Gahini Hospital"},
+          {"key": "Nyamata Hospital", "value": "Nyamata Hospital"},
+          {"key": "Ngarama Hospital", "value": "Ngarama Hospital"},
+          {"key": "Kiziguro Hospital", "value": "Kiziguro Hospital"},
+          {"key": "Rwamagana Hospital", "value": "Rwamagana Hospital"},
+          {"key": "Other", "value": "Other"}
+        ],
         "value": null
       }, {
-        "type": "input",
+        "type": "select",
         "flex": "33",
         "name": "immunisationAdministered",
         "title": "Immunisation administered",
         "settings": {
           "valueType": "valueString",
           "disabled": false,
-          "required": true
+          "required": true,
+          "searchOptions": true
         },
         "skipLogic": {
           "func": {},
           "checks": []
         },
+        "options": [
+          {"key": "90281", "value": "Immune globulin (IG), human, for intramuscular use"},
+          {"key": "90283", "value": "Immune globulin (IGIV), human, for intravenous use"},
+          {"key": "90287", "value": "Botulinum antitoxin, equine, any route"},
+          {"key": "90291", "value": "Cytomegalovirus immune globulin (CMV-IGIV), human, for intravenous use"},
+          {"key": "90296", "value": "Diphtheria antitoxin, equine, any route"},
+          {"key": "90371", "value": "Hepatitis B immune globulin (HBIG), human, for intramuscular use"},
+          {"key": "90375", "value": "Rabies immune globulin (RIG), human, for intramuscular and/or subcutaneous use"},
+          {"key": "90376", "value": "Rabies immune globulin, heat-treated (RIG-HT), human, for intramuscular and/or subcutaneous use"},
+          {"key": "90378", "value": "Respiratory syncytial virus immune globulin (RSV-IgIM), for intramuscular use, 50 mg, each"},
+          {"key": "90379", "value": "Respiratory syncytial virus immune globulin (RSV-IGIV), human, for intravenous use"},
+          {"key": "90389", "value": "Tetanus immune globulin (TIG), human, for intramuscular use"},
+          {"key": "90393", "value": "Vaccinia immune globulin, human, for intramuscular use"},
+          {"key": "90396", "value": "Varicella-zoster immune globulin, human, for intramuscular use"},
+          {"key": "90470", "value": "H1N1 immunization administration (intramuscular, intranasal), including counseling when performed"},
+          {"key": "90476", "value": "Adenovirus vaccine, type 4, live, for oral use"},
+          {"key": "90477", "value": "Adenovirus vaccine, type 7, live, for oral use"},
+          {"key": "90581", "value": "Anthrax vaccine, for subcutaneous use"},
+          {"key": "90585", "value": "Bacillus Calmette-Guerin vaccine (BCG) for tuberculosis, live, for percutaneous use"}
+        ],
         "value": null
       }]
     }
