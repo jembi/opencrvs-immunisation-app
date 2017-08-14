@@ -2,7 +2,6 @@
 
 const tap = require('tap')
 const sinon = require('sinon')
-const moment = require('moment')
 
 const addPatient = require('../../app/scripts/directives/add-patient-form')
 const FHIR = require('../../app/scripts/services/FHIR/FHIR.js')()
@@ -27,9 +26,6 @@ tap.test('.link()', { autoend: true }, (t) => {
           case 'app/scripts/directives/add-patient-form/forms/address-info.json':
             resolve(require('../../app/scripts/directives/add-patient-form/forms/address-info.json'))
             break
-          case 'app/scripts/directives/add-patient-form/forms/emergency-contact-info.json':
-            resolve(require('../../app/scripts/directives/add-patient-form/forms/emergency-contact-info.json'))
-            break
           case 'app/scripts/services/FHIR/resources/Patient.json':
             resolve(require('../../app/scripts/services/FHIR/resources/Patient.json'))
             break
@@ -51,7 +47,7 @@ tap.test('.link()', { autoend: true }, (t) => {
     // then
     t.ok(scope.state.FormBuilderAddPatient)
     setTimeout(() => {
-      t.equals(scope.state.FormBuilderAddPatient.sections.length, 3)
+      t.equals(scope.state.FormBuilderAddPatient.sections.length, 2)
       t.end()
     }, 500)
   })
@@ -67,9 +63,6 @@ tap.test('.link()', { autoend: true }, (t) => {
             break
           case 'app/scripts/directives/add-patient-form/forms/address-info.json':
             resolve(require('../../app/scripts/directives/add-patient-form/forms/address-info.json'))
-            break
-          case 'app/scripts/directives/add-patient-form/forms/emergency-contact-info.json':
-            resolve(require('../../app/scripts/directives/add-patient-form/forms/emergency-contact-info.json'))
             break
           case 'app/scripts/services/FHIR/resources/Patient.json':
             resolve(require('../../app/scripts/services/FHIR/resources/Patient.json'))
@@ -91,8 +84,7 @@ tap.test('.link()', { autoend: true }, (t) => {
               family: ['family']
             }
           ],
-          gender: 'female',
-          birthDate: '1980-06-05'
+          gender: 'female'
         }
       },
       setPartialPatientDemographics: () => {}
@@ -103,14 +95,12 @@ tap.test('.link()', { autoend: true }, (t) => {
     // wait 50ms to ensure sections have been added to FormBuilder
     setTimeout(function () {
       // then
-      const givenNameActual = scope.state.FormBuilderAddPatient.sections[0].rows[0].fields[2].value
+      const givenNameActual = scope.state.FormBuilderAddPatient.sections[0].rows[0].fields[1].value
       t.equals(givenNameActual, 'given')
-      const familyNameActual = scope.state.FormBuilderAddPatient.sections[0].rows[0].fields[4].value
+      const familyNameActual = scope.state.FormBuilderAddPatient.sections[0].rows[0].fields[3].value
       t.equals(familyNameActual, 'family')
-      const genderNameActual = scope.state.FormBuilderAddPatient.sections[0].rows[0].fields[7].value
+      const genderNameActual = scope.state.FormBuilderAddPatient.sections[0].rows[0].fields[4].value
       t.equals(genderNameActual, 'female')
-      const birthDateNameActual = scope.state.FormBuilderAddPatient.sections[0].rows[0].fields[8].value
-      t.equals(birthDateNameActual, '1980-06-05')
       t.end()
     }, 100)
   })
@@ -149,9 +139,6 @@ tap.test('.link()', { autoend: true }, (t) => {
             case 'app/scripts/directives/add-patient-form/forms/address-info.json':
               resolve(require('../../app/scripts/directives/add-patient-form/forms/address-info.json'))
               break
-            case 'app/scripts/directives/add-patient-form/forms/emergency-contact-info.json':
-              resolve(require('../../app/scripts/directives/add-patient-form/forms/emergency-contact-info.json'))
-              break
             case 'app/scripts/services/FHIR/resources/Patient.json':
               resolve(require('../../app/scripts/services/FHIR/resources/Patient.json'))
               break
@@ -188,7 +175,7 @@ tap.test('.link()', { autoend: true }, (t) => {
       directive.link(scope)
       // when
       setTimeout(() => {
-        t.equals(scope.state.FormBuilderAddPatient.sections.length, 3)
+        t.equals(scope.state.FormBuilderAddPatient.sections.length, 2)
         scope.state.FormBuilderAddPatient.submit.execute(mockFormData)
       }, 200)
     })
@@ -207,9 +194,6 @@ tap.test('.link()', { autoend: true }, (t) => {
               break
             case 'app/scripts/directives/add-patient-form/forms/address-info.json':
               resolve(require('../../app/scripts/directives/add-patient-form/forms/address-info.json'))
-              break
-            case 'app/scripts/directives/add-patient-form/forms/emergency-contact-info.json':
-              resolve(require('../../app/scripts/directives/add-patient-form/forms/emergency-contact-info.json'))
               break
             case 'app/scripts/directives/add-patient-form/forms/hiv-info.json':
               resolve(require('../../app/scripts/directives/add-patient-form/forms/hiv-info.json'))
@@ -247,7 +231,7 @@ tap.test('.link()', { autoend: true }, (t) => {
       directive.link(scope)
       // when
       setTimeout(() => {
-        t.equals(scope.state.FormBuilderAddPatient.sections.length, 3)
+        t.equals(scope.state.FormBuilderAddPatient.sections.length, 2)
         scope.state.FormBuilderAddPatient.submit.execute(mockFormData)
       }, 200)
     })
@@ -255,22 +239,13 @@ tap.test('.link()', { autoend: true }, (t) => {
     t.test('should send the correct fhir patient to the Api', (t) => {
       // given
       const scope = {}
-      const date = new Date()
-      const formattedDate = moment(date).format('YYYY-MM-DD')
       const mockFormData = {
         // Basic Info
         TracNetID: { $modelValue: '1111111111', $dirty: true },
-        title: { $modelValue: 'Mr', $dirty: true },
         firstname: { $modelValue: 'Namey', $dirty: true },
         middleNames: { $modelValue: 'middleNamey', $dirty: true },
         lastName: { $modelValue: 'Surnamey', $dirty: true },
-        contactNumberType: { $modelValue: 'Mobile', $dirty: true },
-        contactNumber: { $modelValue: '+27721111111', $dirty: true },
         gender: { $modelValue: 'male', $dirty: true },
-        dob: { $modelValue: date, $dirty: true },
-        emailAddress: { $modelValue: 'email@exchange.com', $dirty: true },
-        emaildAddressConfirm: { $modelValue: 'email@exchange.com', $dirty: true },
-        profession: { $modelValue: 'Dentist', $dirty: true },
         preferredLanguage: { $modelValue: 'xhosa', $dirty: true },
 
         // Address Info
@@ -278,14 +253,8 @@ tap.test('.link()', { autoend: true }, (t) => {
         district: { $modelValue: 'Disty', $dirty: true },
         sector: { $modelValue: 'Secty', $dirty: true },
         cell: { $modelValue: 'Celly', $dirty: true },
-        umudugudu: { $modelValue: 'Ummy', $dirty: true },
+        umudugudu: { $modelValue: 'Ummy', $dirty: true }
 
-        // Emergency Contact Info
-        emergencyContactFirstName: { $modelValue: 'Emergy', $dirty: true },
-        emergencyContactLastName: { $modelValue: 'Emerly', $dirty: true },
-        emergencyContactRelationship: { $modelValue: 'Family', $dirty: true },
-        emergencyContactMobile: { $modelValue: '+27721112222', $dirty: true },
-        emergencyContactEmail: { $modelValue: 'email@exchange.org', $dirty: true }
       }
       const fetchMock = (file) => {
         return new Promise((resolve, reject) => {
@@ -295,9 +264,6 @@ tap.test('.link()', { autoend: true }, (t) => {
               break
             case 'app/scripts/directives/add-patient-form/forms/address-info.json':
               resolve(require('../../app/scripts/directives/add-patient-form/forms/address-info.json'))
-              break
-            case 'app/scripts/directives/add-patient-form/forms/emergency-contact-info.json':
-              resolve(require('../../app/scripts/directives/add-patient-form/forms/emergency-contact-info.json'))
               break
             case 'app/scripts/services/FHIR/resources/Patient.json':
               resolve(require('../../app/scripts/services/FHIR/resources/Patient.json'))
@@ -321,16 +287,10 @@ tap.test('.link()', { autoend: true }, (t) => {
       const savePatientMock = (patient) => {
         // Basic Info
         t.equals(patient.identifier[0].value, '1111111111')
-        t.equals(patient.name[0].prefix[0], 'Mr')
         t.equals(patient.name[0].given[0], 'Namey')
         t.equals(patient.name[0].given[1], 'middleNamey')
         t.equals(patient.name[0].family[0], 'Surnamey')
-        t.equals(patient.telecom[1].use, 'Mobile')
-        t.equals(patient.telecom[1].value, '+27721111111')
         t.equals(patient.gender, 'male')
-        t.equals(patient.birthDate, formattedDate)
-        t.equals(patient.telecom[0].value, 'email@exchange.com')
-        t.equals(patient.extension[0].valueString, 'Dentist')
         t.equals(patient.communication[0].language.text, 'xhosa')
 
         // Address Info
@@ -340,13 +300,6 @@ tap.test('.link()', { autoend: true }, (t) => {
         t.equals(patient.address[0].line[1], 'Celly')
         t.equals(patient.address[0].line[2], 'Ummy')
 
-        // Emergency Contact Info
-        t.equals(patient.contact[0].name[0].given[0], 'Emergy')
-        t.equals(patient.contact[0].name[0].family[0], 'Emerly')
-        t.equals(patient.contact[0].relationship[1].coding[0].code, 'Family')
-        t.equals(patient.contact[0].telecom[0].value, '+27721112222')
-        t.equals(patient.contact[0].telecom[0].use, 'Mobile')
-        t.equals(patient.contact[0].telecom[1].value, 'email@exchange.org')
         t.end()
       }
 
@@ -359,7 +312,7 @@ tap.test('.link()', { autoend: true }, (t) => {
       directive.link(scope)
       // when
       setTimeout(() => {
-        t.equals(scope.state.FormBuilderAddPatient.sections.length, 3)
+        t.equals(scope.state.FormBuilderAddPatient.sections.length, 2)
         scope.state.FormBuilderAddPatient.submit.execute(mockFormData)
       }, 100)
     })
@@ -379,9 +332,6 @@ tap.test('.link()', { autoend: true }, (t) => {
               break
             case 'app/scripts/directives/add-patient-form/forms/address-info.json':
               resolve(require('../../app/scripts/directives/add-patient-form/forms/address-info.json'))
-              break
-            case 'app/scripts/directives/add-patient-form/forms/emergency-contact-info.json':
-              resolve(require('../../app/scripts/directives/add-patient-form/forms/emergency-contact-info.json'))
               break
             case 'app/scripts/services/FHIR/resources/Patient.json':
               resolve(require('../../app/scripts/services/FHIR/resources/Patient.json'))
@@ -416,7 +366,7 @@ tap.test('.link()', { autoend: true }, (t) => {
       directive.link(scope)
       // when
       setTimeout(() => {
-        t.equals(scope.state.FormBuilderAddPatient.sections.length, 3)
+        t.equals(scope.state.FormBuilderAddPatient.sections.length, 2)
         scope.state.FormBuilderAddPatient.submit.execute(mockFormData)
       }, 100)
     })

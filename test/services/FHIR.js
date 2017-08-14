@@ -67,10 +67,6 @@ tap.test('.mapFHIRObjectToFormFields', { autoend: true }, (t) => {
     const formFieldValues = FHIR.mapFHIRObjectToFormFields(formSchema, fhirObject)
 
     t.equal(formFieldValues.gender, 'male')
-    t.equal(formFieldValues.title, 'Mr')
-    t.equal(formFieldValues.emailAddress, 'aa@aa')
-    t.equal(formFieldValues.contactNumber, '1234')
-    t.equal(formFieldValues.contactNumberType, 'Mobile')
     t.end()
   })
 })

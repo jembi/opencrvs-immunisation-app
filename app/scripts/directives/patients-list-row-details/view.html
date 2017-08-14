@@ -2,16 +2,6 @@
 <md-content layout="row" style="background: transparent;">
   <link rel="stylesheet" href="app/scripts/directives/patients-list-row-details/style.css" />
 
-  <div class="patientDetailsWhiteframe" md-whiteframe="2" flex-sm="50" flex-gt-sm="50" flex-gt-md="25"  layout="column" layout-align="start center">
-    <div class="title">Telecom</div>
-    <div class="details" flex>
-      <div class="detailsRow" ng-repeat="telecom in patient.telecom track by $index" layout="row">
-        <div class="system">{{telecom.system}}:</div>
-        <div class="value">{{telecom.value}}</div>
-      </div>
-    </div>
-  </div>
-
   <div class="patientDetailsWhiteframe" md-whiteframe="2" flex-sm="50" flex-gt-sm="50" flex-gt-md="25" layout="column" layout-align="start center">
     <div class="title">Address</div>
     <div class="details" flex>
@@ -35,42 +25,6 @@
         <div class="detailsRow" layout="row">
           <div class="system">Umudugudu:</div>
           <div class="value">{{address.line[2]}}</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="patientDetailsWhiteframe" md-whiteframe="2" flex-sm="45" flex-gt-sm="35" flex-gt-md="25" layout="column" layout-align="start center">
-    <div class="title">Contact</div>
-    <div class="details" flex>
-      <div ng-repeat="contact in patient.contact track by $index" layout="column">
-        <div class="detailsRow" layout="row">
-          <div class="system">Relationship:</div>
-          <div class="value">{{contact.relationship}}</div>
-        </div>
-        <div class="detailsRow" layout="row">
-          <div class="system">Name:</div>
-          <div class="value">
-            <div ng-repeat="nameInstance in contact.name track by $index">
-              <span ng-repeat="name in nameInstance track by $index">{{name}}</span>
-            </div>
-          </div>
-        </div>
-        <div class="detailsRow" ng-repeat="telecom in contact.telecom track by $index" layout="row">
-          <div class="system">{{telecom.system}}:</div>
-          <div class="value">{{telecom.value}}</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="patientDetailsWhiteframe" md-whiteframe="2" flex-sm="45" flex-gt-sm="35" flex-gt-md="25" layout="column" layout-align="start center">
-    <div class="title">Extensions</div>
-    <div class="details" flex>
-      <div class="detailsRow" ng-repeat="extension in patient.extension track by $index" layout="row">
-        <div ng-repeat="(key, value) in extension" ng-class="{'system': key === 'url', 'value': key.indexOf('value') === 0 } ">
-          <span ng-if="key === 'url'">{{value.split(':').pop()}}:</span>
-          <span ng-if="key.indexOf('value') === 0">{{value}}</span>
         </div>
       </div>
     </div>
