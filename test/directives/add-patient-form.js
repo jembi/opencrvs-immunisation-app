@@ -99,7 +99,7 @@ tap.test('.link()', { autoend: true }, (t) => {
       t.equals(givenNameActual, 'given')
       const familyNameActual = scope.state.FormBuilderAddPatient.sections[0].rows[0].fields[3].value
       t.equals(familyNameActual, 'family')
-      const genderNameActual = scope.state.FormBuilderAddPatient.sections[0].rows[0].fields[5].value
+      const genderNameActual = scope.state.FormBuilderAddPatient.sections[0].rows[0].fields[4].value
       t.equals(genderNameActual, 'female')
       t.end()
     }, 100)

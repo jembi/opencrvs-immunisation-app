@@ -82,22 +82,6 @@
     }, {
       "type": "select",
   		"flex": "20",
-  		"name": "contactNumberType",
-      "title": "Contact Number Type",
-      "settings": {
-      	"required": true
-      },
-      "options": [{"key": "Mobile",  "value": "Mobile"}, {"key": "Home",  "value": "Home"}, {"key": "Other",  "value": "Other"}],
-      "FHIRMappings": [{
-				"resourceKey": "main",
-        "path": "telecom.use",
-        "params": "telecom.system=phone",
-        "valueType": "formValue",
-        "value": "contactNumberType"
-      }]
-    }, {
-      "type": "select",
-  		"flex": "20",
   		"name": "gender",
       "title": "Gender",
       "settings": {
