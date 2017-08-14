@@ -2,7 +2,6 @@
 
 const tap = require('tap')
 const sinon = require('sinon')
-const moment = require('moment')
 
 const addPatient = require('../../app/scripts/directives/add-patient-form')
 const FHIR = require('../../app/scripts/services/FHIR/FHIR.js')()
@@ -48,7 +47,7 @@ tap.test('.link()', { autoend: true }, (t) => {
     // then
     t.ok(scope.state.FormBuilderAddPatient)
     setTimeout(() => {
-      t.equals(scope.state.FormBuilderAddPatient.sections.length, 3)
+      t.equals(scope.state.FormBuilderAddPatient.sections.length, 2)
       t.end()
     }, 500)
   })
@@ -96,11 +95,11 @@ tap.test('.link()', { autoend: true }, (t) => {
     // wait 50ms to ensure sections have been added to FormBuilder
     setTimeout(function () {
       // then
-      const givenNameActual = scope.state.FormBuilderAddPatient.sections[0].rows[0].fields[2].value
+      const givenNameActual = scope.state.FormBuilderAddPatient.sections[0].rows[0].fields[1].value
       t.equals(givenNameActual, 'given')
-      const familyNameActual = scope.state.FormBuilderAddPatient.sections[0].rows[0].fields[4].value
+      const familyNameActual = scope.state.FormBuilderAddPatient.sections[0].rows[0].fields[3].value
       t.equals(familyNameActual, 'family')
-      const genderNameActual = scope.state.FormBuilderAddPatient.sections[0].rows[0].fields[7].value
+      const genderNameActual = scope.state.FormBuilderAddPatient.sections[0].rows[0].fields[5].value
       t.equals(genderNameActual, 'female')
       t.end()
     }, 100)
@@ -176,7 +175,7 @@ tap.test('.link()', { autoend: true }, (t) => {
       directive.link(scope)
       // when
       setTimeout(() => {
-        t.equals(scope.state.FormBuilderAddPatient.sections.length, 3)
+        t.equals(scope.state.FormBuilderAddPatient.sections.length, 2)
         scope.state.FormBuilderAddPatient.submit.execute(mockFormData)
       }, 200)
     })
@@ -232,7 +231,7 @@ tap.test('.link()', { autoend: true }, (t) => {
       directive.link(scope)
       // when
       setTimeout(() => {
-        t.equals(scope.state.FormBuilderAddPatient.sections.length, 3)
+        t.equals(scope.state.FormBuilderAddPatient.sections.length, 2)
         scope.state.FormBuilderAddPatient.submit.execute(mockFormData)
       }, 200)
     })
@@ -240,8 +239,6 @@ tap.test('.link()', { autoend: true }, (t) => {
     t.test('should send the correct fhir patient to the Api', (t) => {
       // given
       const scope = {}
-      const date = new Date()
-      const formattedDate = moment(date).format('YYYY-MM-DD')
       const mockFormData = {
         // Basic Info
         TracNetID: { $modelValue: '1111111111', $dirty: true },
@@ -256,7 +253,7 @@ tap.test('.link()', { autoend: true }, (t) => {
         district: { $modelValue: 'Disty', $dirty: true },
         sector: { $modelValue: 'Secty', $dirty: true },
         cell: { $modelValue: 'Celly', $dirty: true },
-        umudugudu: { $modelValue: 'Ummy', $dirty: true },
+        umudugudu: { $modelValue: 'Ummy', $dirty: true }
 
       }
       const fetchMock = (file) => {
@@ -315,7 +312,7 @@ tap.test('.link()', { autoend: true }, (t) => {
       directive.link(scope)
       // when
       setTimeout(() => {
-        t.equals(scope.state.FormBuilderAddPatient.sections.length, 3)
+        t.equals(scope.state.FormBuilderAddPatient.sections.length, 2)
         scope.state.FormBuilderAddPatient.submit.execute(mockFormData)
       }, 100)
     })
@@ -369,7 +366,7 @@ tap.test('.link()', { autoend: true }, (t) => {
       directive.link(scope)
       // when
       setTimeout(() => {
-        t.equals(scope.state.FormBuilderAddPatient.sections.length, 3)
+        t.equals(scope.state.FormBuilderAddPatient.sections.length, 2)
         scope.state.FormBuilderAddPatient.submit.execute(mockFormData)
       }, 100)
     })
