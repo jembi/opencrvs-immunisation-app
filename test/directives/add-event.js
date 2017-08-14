@@ -114,8 +114,8 @@ tap.test('.submit()', { autoend: true }, (t) => {
 
           t.equals(eventDict.childDetails.birthDate, '2017-02-23')
 
-          t.equals(eventDict.motherDetails.name[0].given[0], 'Mary')
-          t.equals(eventDict.motherDetails.name[0].family[0], 'Smith')
+          t.equals(eventDict.motherDetails.name.given[0], 'Mary')
+          t.equals(eventDict.motherDetails.name.family[0], 'Smith')
           t.equals(eventDict.motherDetails.telecom[0].value, '+27725556784')
           t.equals(eventDict.motherDetails.patient.reference, 'Patient/AAAAA-BBBB-CCCC-DDDDD-EEEEEE')
           t.equals(eventDict.motherDetails.relationship.coding[0].code, 'MTH')

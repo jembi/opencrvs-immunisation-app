@@ -84,7 +84,7 @@
         },
         "FHIRMappings": [{
           "resourceKey": "motherDetails",
-          "path": "name[0].given[0]",
+          "path": "name.given[0]",
           "params": null,
           "valueType": "formValue",
           "value": "mothersGivenName"
@@ -106,7 +106,7 @@
         },
         "FHIRMappings": [{
           "resourceKey": "motherDetails",
-          "path": "name[0].family[0]",
+          "path": "name.family[0]",
           "params": null,
           "valueType": "formValue",
           "value": "mothersFamilyName"

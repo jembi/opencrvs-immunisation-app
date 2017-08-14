@@ -45,8 +45,8 @@ tap.test('.mapFHIRResources()', { autoend: true }, (t) => {
 
     t.equals(childDetails.birthDate, '2017-02-23')
 
-    t.equals(motherDetails.name[0].given[0], 'Mary')
-    t.equals(motherDetails.name[0].family[0], 'Smith')
+    t.equals(motherDetails.name.given[0], 'Mary')
+    t.equals(motherDetails.name.family[0], 'Smith')
     t.equals(motherDetails.telecom[0].value, '+27725556784')
 
     t.equals(location.name, 'GoodHealth Clinic, Durban')

@@ -1,17 +1,14 @@
 {
   "resourceType": "RelatedPerson",
-  "active": true,
   "patient": {
     "reference": ""
   },
-  "name": [
-    {
+  "name": {
       "use": "official",
       "prefix": [],
       "family": [],
       "given": []
-    }
-  ],
+    },
   "gender": "female",
   "telecom": [
     {
