@@ -2,6 +2,7 @@
 
 module.exports = function (Api, $q) {
   const SAMPLE_EVENT = 'sample-event'
+  const IMMUNISATION_EVENT = 'immunisation'
 
   const isImmunisationEncounter = (event) => {
     return event.resourceType &&
@@ -41,6 +42,18 @@ module.exports = function (Api, $q) {
       eventDate: encounter.period.start,
       data: {
         encounterType: encounterType,
+        encounterLocation: encounter.location[0].location.display
+      }
+    }
+  }
+
+  const constructSimpleImmunisationEventObject = (encounter) => {
+    return {
+      eventTitle: 'Immunisation',
+      eventType: IMMUNISATION_EVENT,
+      eventDate: encounter.period.start,
+      data: {
+        immunisationAdministerd: encounter._immunisation.vaccineCode.text,
         encounterLocation: encounter.location[0].location.display
       }
     }
@@ -100,6 +113,7 @@ module.exports = function (Api, $q) {
     },
 
     constructSimpleSampleEventObject: constructSimpleSampleEventObject,
+    constructSimpleImmunisationEventObject: constructSimpleImmunisationEventObject,
 
     isEventOfType: isEventOfType
   }
