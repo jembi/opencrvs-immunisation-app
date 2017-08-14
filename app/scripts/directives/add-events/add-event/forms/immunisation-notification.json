@@ -20,6 +20,19 @@
           "func": {},
           "checks": []
         },
+        "FHIRMappings": [{
+          "resourceKey": "immunisation",
+          "path": "date",
+          "params": null,
+          "valueType": "formValue",
+          "value": "immunisationDate"
+        }, {
+          "resourceKey": "immunisation",
+          "path": "encounter.reference",
+          "params": null,
+          "valueType": "staticValue",
+          "value": "@main"
+        }],
         "value": null
       }, {
         "type": "select",
@@ -56,6 +69,19 @@
           {"key": "Rwamagana Hospital", "value": "Rwamagana Hospital"},
           {"key": "Other", "value": "Other"}
         ],
+        "FHIRMappings": [{
+          "resourceKey": "location",
+          "path": "name",
+          "params": null,
+          "valueType": "formValue",
+          "value": "place"
+        }, {
+          "resourceKey": "immunisation",
+          "path": "location.reference",
+          "params": null,
+          "valueType": "staticValue",
+          "value": "@location"
+        }],
         "value": null
       }, {
         "type": "select",
@@ -92,6 +118,19 @@
           {"key": "90581", "value": "Anthrax vaccine, for subcutaneous use"},
           {"key": "90585", "value": "Bacillus Calmette-Guerin vaccine (BCG) for tuberculosis, live, for percutaneous use"}
         ],
+        "FHIRMappings": [{
+          "resourceKey": "immunisation",
+          "path": "vaccineCode.coding[0].code",
+          "params": null,
+          "valueType": "optionValue",
+          "value": "immunisationAdministered"
+        }, {
+          "resourceKey": "immunisation",
+          "path": "vaccineCode.text",
+          "params": null,
+          "valueType": "formValue",
+          "value": "immunisationAdministered"
+        }],
         "value": null
       }]
     }

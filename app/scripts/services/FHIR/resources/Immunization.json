@@ -1,0 +1,25 @@
+{
+  "resourceType": "Immunization",
+  "status": "completed",
+  "date": "2013-01-10",
+  "vaccineCode": {
+    "coding": [
+      {
+        "system": "urn:oid:1.2.36.1.2001.1005.17",
+        "code": ""
+      }
+    ],
+    "text": ""
+  },
+  "patient": {
+    "reference": ""
+  },
+  "wasNotGiven": false,
+  "reported": false,
+  "encounter": {
+    "reference": ""
+  },
+  "location": {
+    "reference": ""
+  }
+}
