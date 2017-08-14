@@ -9,54 +9,6 @@
       "fields": [{
         "type": "input",
         "flex": "33",
-        "name": "babyGivenName",
-        "title": "Baby Given Name",
-        "settings": {
-          "valueType": "valueString",
-          "disabled": false,
-          "required": true
-        },
-        "skipLogic": {
-          "func": {},
-          "checks": []
-        },
-        "value": null
-      }, {
-        "type": "input",
-        "flex": "33",
-        "name": "babyMiddleNames",
-        "title": "Baby Middle Names",
-        "settings": {
-          "valueType": "valueString",
-          "disabled": false
-        },
-        "skipLogic": {
-          "func": {},
-          "checks": []
-        },
-        "value": null
-      }, {
-        "type": "input",
-        "flex": "33",
-        "name": "babyFamilyName",
-        "title": "Baby Family Name",
-        "settings": {
-          "valueType": "valueString",
-          "disabled": false,
-          "required": true
-        },
-        "skipLogic": {
-          "func": {},
-          "checks": []
-        },
-        "value": null
-      }]
-    }, {
-      "name": "Row 2",
-      "layout": "row",
-      "fields": [{
-        "type": "input",
-        "flex": "33",
         "name": "birthPlace",
         "title": "Place of Birth",
         "settings": {
@@ -64,6 +16,19 @@
           "disabled": false,
           "required": true
         },
+        "FHIRMappings": [{
+          "resourceKey": "location",
+          "path": "name",
+          "params": null,
+          "valueType": "formValue",
+          "value": "birthPlace"
+        }, {
+          "resourceKey": "main",
+          "path": "location[0].location.reference",
+          "params": null,
+          "valueType": "staticValue",
+          "value": "@location"
+        }],
         "skipLogic": {
           "func": {},
           "checks": []
@@ -79,6 +44,25 @@
           "disabled": false,
           "required": true
         },
+        "FHIRMappings": [{
+          "resourceKey": "childDetails",
+          "path": "birthDate",
+          "params": null,
+          "valueType": "formValue",
+          "value": "birthDate"
+        }, {
+          "resourceKey": "main",
+          "path": "period.start",
+          "params": null,
+          "valueType": "formValue",
+          "value": "birthDate"
+        }, {
+          "resourceKey": "main",
+          "path": "period.end",
+          "params": null,
+          "valueType": "formValue",
+          "value": "birthDate"
+        }],
         "skipLogic": {
           "func": {},
           "checks": []
@@ -86,7 +70,7 @@
         "value": null
       }]
     }, {
-      "name": "Row 3",
+      "name": "Row 2",
       "layout": "row",
       "fields": [{
         "type": "input",
@@ -98,6 +82,13 @@
           "disabled": false,
           "required": true
         },
+        "FHIRMappings": [{
+          "resourceKey": "motherDetails",
+          "path": "name.given[0]",
+          "params": null,
+          "valueType": "formValue",
+          "value": "mothersGivenName"
+        }],
         "skipLogic": {
           "func": {},
           "checks": []
@@ -113,6 +104,13 @@
           "disabled": false,
           "required": true
         },
+        "FHIRMappings": [{
+          "resourceKey": "motherDetails",
+          "path": "name.family[0]",
+          "params": null,
+          "valueType": "formValue",
+          "value": "mothersFamilyName"
+        }],
         "skipLogic": {
           "func": {},
           "checks": []
@@ -128,6 +126,13 @@
           "disabled": false,
           "required": true
         },
+        "FHIRMappings": [{
+          "resourceKey": "motherDetails",
+          "path": "telecom[0].value",
+          "params": null,
+          "valueType": "formValue",
+          "value": "mothersContactNumber"
+        }],
         "skipLogic": {
           "func": {},
           "checks": []

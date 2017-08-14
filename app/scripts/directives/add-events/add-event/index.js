@@ -25,27 +25,37 @@ module.exports = function (loadResource, $q, state, FHIR, FormBuilderService) {
           const formFieldsValues = FormBuilderService.getFormFieldValues(form)
 
           loadResource.fetch('app/scripts/services/FHIR/resources/Encounter.json').then(function (encounterTemplate) {
-            loadResource.fetch('app/scripts/services/FHIR/resources/Observation.json').then(function (observationTemplate) {
-              let resourceTemplateDict
-              switch (scope.event.code) {
-                case 'birth-notification':
-                  setProcedureEventType(encounterTemplate, scope.event.code, 'Birth Notification')
-                  resourceTemplateDict = { main: encounterTemplate }
-                  break
-                default:
-                  console.error(`Unknown event code ${scope.event.code}`)
-              }
+            loadResource.fetch('app/scripts/services/FHIR/resources/RelatedPerson-motherDetails.json').then(function (motherTemplate) {
+              loadResource.fetch('app/scripts/services/FHIR/resources/Location.json').then(function (locationTemplate) {
+                let resourceTemplateDict
+                switch (scope.event.code) {
+                  case 'birth-notification':
+                    setProcedureEventType(encounterTemplate, scope.event.code, 'Birth Notification')
+                    motherTemplate.patient.reference = scope.patient.resourceType + '/' + scope.patient.id
+                    resourceTemplateDict = {
+                      main: encounterTemplate,
+                      childDetails: scope.patient.toJSON(),
+                      motherDetails: motherTemplate,
+                      location: locationTemplate
+                    }
+                    break
+                  case 'immunization':
+                    setProcedureEventType(encounterTemplate, scope.event.code, 'Immunization')
+                    // TODO
+                    break
+                  default:
+                    console.error(`Unknown event code ${scope.event.code}`)
+                }
+                const resourceDict = FHIR.mapFHIRResources(resourceTemplateDict, scope.state[scope.event.formName], formFieldsValues)
 
-              const resourceDict = FHIR.mapFHIRResources(resourceTemplateDict, scope.state[scope.event.formName], formFieldsValues)
+                // add the Subject Reference - Patient/Reference
+                resourceDict.main.patient.reference = scope.patient.resourceType + '/' + scope.patient.id
 
-              // add the Subject Reference - Patient/Reference
-              resourceDict.main.patient.reference = scope.patient.resourceType + '/' + scope.patient.id
+                state.pushToEventsArray(resourceDict)
+                scope.resetForm(scope.state[scope.event.formName], form)
 
-              state.pushToEventsArray(resourceDict)
-
-              scope.resetForm(scope.state[scope.event.formName], form)
-
-              defer.resolve({ isValid: true, msg: 'Event has been successfully added for submission' })
+                defer.resolve({ isValid: true, msg: 'Event has been successfully added for submission' })
+              })
             })
           })
 

@@ -20,27 +20,37 @@ tap.test('.mapFHIRResources()', { autoend: true }, (t) => {
       sections: [FormBuilderAddEventBirthNotification]
     }
 
-    const FHIREncounterResource = require('../../app/scripts/services/FHIR/resources/Encounter.json')
     const mockFormData = {
-      encounterDate: '2017-02-23',
-      encounterLocation: 'Kacyiru Police Hospital',
-      encounterType: 'pmtct-visit'
+      birthPlace: 'GoodHealth Clinic, Durban',
+      birthDate: '2017-02-23',
+      mothersGivenName: 'Mary',
+      mothersFamilyName: 'Smith',
+      mothersContactNumber: '+27725556784'
     }
     // when
-    const fhirResourceDict = FHIR.mapFHIRResources({ main: FHIREncounterResource }, FormBuilderInstance, mockFormData)
-    const encounter = fhirResourceDict.main
+    const fhirResourceDict = FHIR.mapFHIRResources({
+      childDetails: require('../../app/scripts/services/FHIR/resources/Patient.json'),
+      motherDetails: require('../../app/scripts/services/FHIR/resources/RelatedPerson-motherDetails.json'),
+      location: require('../../app/scripts/services/FHIR/resources/Location.json')
+    }, FormBuilderInstance, mockFormData)
+
+    const childDetails = fhirResourceDict.childDetails
+    const motherDetails = fhirResourceDict.motherDetails
+    const location = fhirResourceDict.location
+
     // then
-    t.ok(encounter)
+    t.ok(childDetails)
+    t.ok(motherDetails)
+    t.ok(location)
 
-    t.equal(encounter.period.start, '2017-02-23', 'should have a start period of "2017-02-23"')
-    t.equal(encounter.period.end, '2017-02-23', 'should have a end period of "2017-02-23"')
+    t.equals(childDetails.birthDate, '2017-02-23')
 
-    t.equal(encounter.type[1].coding[0].code, 'pmtct-visit', 'should have a type.coding.code of "pmtct-visit"')
-    t.equal(encounter.type[1].coding[0].display, 'PMTCT visit', 'should have a end period of "PMTCT visit"')
+    t.equals(motherDetails.name.given[0], 'Mary')
+    t.equals(motherDetails.name.family[0], 'Smith')
+    t.equals(motherDetails.telecom[0].value, '+27725556784')
 
-    t.equal(encounter.class, 'Immunisation', 'should have a class of "HIVAIDS"')
+    t.equals(location.name, 'GoodHealth Clinic, Durban')
 
-    t.equal(encounter.location[0].location.display, 'Kacyiru Police Hospital', 'should have a location.display of "Kacyiru Police Hospital"')
     t.end()
   })
 })
