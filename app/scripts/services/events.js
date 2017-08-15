@@ -85,6 +85,13 @@ module.exports = function (Api, $q) {
           })
           promises.push(location.$promise)
         }
+
+        const immunisation = Api.Reference.get({ resource: 'Immunization', encounter: encounter.resource.id }, function (result) {
+          encounter._immunisation = result.entry
+        }, function (err) {
+          console.error(err)
+        })
+        promises.push(immunisation.$promise)
       })
 
       $q.all(promises).then(() => {
@@ -101,7 +108,7 @@ module.exports = function (Api, $q) {
       const simpleEvents = []
       events.forEach((event) => {
         if (isEventOfType(BIRTH, event.resource)) {
-          event = constructSimpleBirthNotificationObject(event.resource, event._location)
+          event = constructSimpleBirthNotificationObject(event.resource, event._location || {}, event._immunisation || {})
         } else {
           console.error('Unknown event type found', event)
         }

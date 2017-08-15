@@ -32,6 +32,12 @@
           "params": null,
           "valueType": "staticValue",
           "value": "@main"
+        }, {
+          "resourceKey": "main",
+          "path": "period.start",
+          "params": null,
+          "valueType": "formValu",
+          "value": "immunisationDate"
         }],
         "value": null
       }, {
@@ -78,6 +84,12 @@
         }, {
           "resourceKey": "immunisation",
           "path": "location.reference",
+          "params": null,
+          "valueType": "staticValue",
+          "value": "@location"
+        }, {
+          "resourceKey": "main",
+          "path": "location[0].location.reference",
           "params": null,
           "valueType": "staticValue",
           "value": "@location"
