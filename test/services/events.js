@@ -6,6 +6,7 @@ const tap = require('tap')
 const Events = require('../../app/scripts/services/events')
 const encounterTemplate = require('../../app/scripts/services/FHIR/resources/Encounter')
 const observationTemplate = require('../../app/scripts/services/FHIR/resources/Observation')
+const locationTemplate = require('../../app/scripts/services/FHIR/resources/Location')
 
 const sandbox = sinon.sandbox.create()
 sandbox.stub(console, 'error').callsFake((msg) => {})
@@ -50,37 +51,40 @@ tap.test('Events service', { autoend: true }, (t) => {
   })
 
   t.test('.isEventOfType', { autoend: true }, (t) => {
-    t.test('should return true when event is a Sample event', (t) => {
-      const result = Events().isEventOfType('sample-event', require('../resources/events/sample-event.json'))
+    t.test('should return true when event is a birth notification event', (t) => {
+      const result = Events().isEventOfType('birth-notification', require('../resources/events/birth-notification.json'))
       t.true(result)
       t.end()
     })
 
-    t.test('should return false when event isn\'t a Sample event', (t) => {
-      const result = Events().isEventOfType('sample-event', {})
+    t.test('should return false when event isn\'t a Birth notification event', (t) => {
+      const result = Events().isEventOfType('birth-notification', {})
       t.false(result)
       t.end()
     })
   })
 
-  t.test('.constructSimpleSampleEventObject', { autoend: true }, (t) => {
-    t.test('should construct simple sample event object', (t) => {
+  t.test('.constructSimpleBirthNotificationObject', { autoend: true }, (t) => {
+    t.test('should construct simple birth notification object', (t) => {
       const events = Events()
 
       const encounter = JSON.parse(JSON.stringify(encounterTemplate))
       encounter.period.start = '2017-04-04'
       encounter.type = [
-       { coding: [ { system: 'http://hearth.org/crvs/event-types', code: 'sample-event', display: 'Sample Event' } ] },
-       { coding: [ { system: 'http://hearth.org/crvs/encounter-types', code: 'anc-visit', display: 'ANC Visit' } ] }
+       { coding: [ { system: 'http://hearth.org/crvs/event-types', code: 'birth-notification', display: 'Birth Notification' } ] }
       ]
-      encounter.location[0].location.display = 'Chuk'
 
-      const event = events.constructSimpleSampleEventObject(encounter)
+      const location = JSON.parse(JSON.stringify(locationTemplate))
+      location.name = 'Test Location'
 
-      t.equals(event.eventType, 'sample-event')
+      const event = events.constructSimpleBirthNotificationObject(encounter, location)
+
+      t.equals(event.eventTitle, 'Birth Notification')
+      t.equals(event.eventType, 'birth-notification')
       t.equals(event.eventDate, '2017-04-04')
-      t.equals(event.data.encounterType, 'ANC Visit')
-      t.equals(event.data.encounterLocation, 'Chuk')
+      t.equals(event.data.encounterType, 'Birth Notification')
+      t.equals(event.data.birthPlace, 'Test Location')
+      t.equals(event.data.birthDate, '2017-04-04')
       t.end()
     })
   })
@@ -92,15 +96,17 @@ tap.test('Events service', { autoend: true }, (t) => {
       const sampleEncounter = JSON.parse(JSON.stringify(encounterTemplate))
       sampleEncounter.period.start = '2017-04-04'
       sampleEncounter.type = [
-        { coding: [ { system: 'http://hearth.org/crvs/event-types', code: 'sample-event', display: 'Sample Event' } ] },
-        { coding: [ { system: 'http://hearth.org/crvs/encounter-types', code: 'anc-visit', display: 'ANC Visit' } ] }
+        { coding: [ { system: 'http://hearth.org/crvs/event-types', code: 'birth-notification', display: 'Birth Notification' } ] }
       ]
-      sampleEncounter.location[0].location.display = 'Chuk'
+
+      const location = JSON.parse(JSON.stringify(locationTemplate))
+      location.name = 'Test Location'
 
       const encounters = [
         {
           'resource': sampleEncounter,
-          '_observations': []
+          '_observations': [],
+          _location: location
         }
       ]
 
@@ -109,11 +115,12 @@ tap.test('Events service', { autoend: true }, (t) => {
 
       t.ok(formattedEvents)
 
-      t.equal(formattedEvents[0].eventType, 'sample-event', 'should have a eventType of "sample=event"')
-      t.equal(formattedEvents[0].eventDate, '2017-04-04', 'should have a eventDate of "2017-04-04"')
-      t.equal(formattedEvents[0].data.encounterType, 'ANC Visit', 'should have a "encounterType" of "ANC Visit"')
-      t.equal(formattedEvents[0].data.encounterLocation, 'Chuk', 'should have a encounterLocation of "Chuk"')
-
+      t.equals(formattedEvents[0].eventTitle, 'Birth Notification')
+      t.equals(formattedEvents[0].eventType, 'birth-notification')
+      t.equals(formattedEvents[0].eventDate, '2017-04-04')
+      t.equals(formattedEvents[0].data.encounterType, 'Birth Notification')
+      t.equals(formattedEvents[0].data.birthPlace, 'Test Location')
+      t.equals(formattedEvents[0].data.birthDate, '2017-04-04')
       t.end()
     })
   })
@@ -158,7 +165,7 @@ tap.test('Events service', { autoend: true }, (t) => {
     })
   })
 
-  t.test('.addObservationsToEncounters', { autoend: true }, (t) => {
+  t.test('.resolveReferences', { autoend: true }, (t) => {
     t.test('attach observations to encounters and return array', (t) => {
       // Encounters for Patient/12345
       const encounter1 = {
@@ -234,7 +241,7 @@ tap.test('Events service', { autoend: true }, (t) => {
       }
 
       const events = Events(apiMock, qMock)
-      events.addObservationsToEncounters(encounters)
+      events.resolveReferences(encounters)
     })
   })
 })

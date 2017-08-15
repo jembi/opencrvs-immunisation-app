@@ -14,7 +14,7 @@ module.exports = function ($scope, state, $location, $q, FHIR) {
   $scope.$watch(function () { return state.getSearchResults() }, function (newResults) {
     $scope.state.patients = newResults
     if (!newResults) {
-      $scope.state.header.title = 'Search Patient'
+      $scope.state.header.title = 'Search for child'
       $scope.state.header.left = [] // hide the return to search button in top header
       $scope.state.header.right = [] // hide the create patient button in top header
     } else {

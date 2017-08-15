@@ -1,7 +1,7 @@
 'use strict'
 
 module.exports = function (state, $location) {
-  const TRACNET_SYSTEM_IDENTIFIER = 'ocrvs:tracnet:id'
+  const IMMUNISATION_SYSTEM_IDENTIFIER = 'ocrvs:immunisation:id'
   return {
     restrict: 'EA',
     replace: true,
@@ -43,19 +43,19 @@ module.exports = function (state, $location) {
         return officialName
       }
 
-      var getTracnetID = function (identifiers) {
-        var tracnetID = null
+      var getImmunisationID = function (identifiers) {
+        var immunisationID = null
 
         for (var i = 0; i < identifiers.length; i++) {
           var identifierInstance = identifiers[i]
           if (identifierInstance.use === 'official') {
-            if (identifierInstance.system === TRACNET_SYSTEM_IDENTIFIER) {
-              tracnetID = identifierInstance.value
+            if (identifierInstance.system === IMMUNISATION_SYSTEM_IDENTIFIER) {
+              immunisationID = identifierInstance.value
             }
           }
         }
 
-        return tracnetID
+        return immunisationID
       }
 
       var getGender = function (gender) {
@@ -111,7 +111,7 @@ module.exports = function (state, $location) {
               id: patient.id,
               name: getOfficialName(patient.name),
               gender: getGender(patient.gender),
-              tracnetID: getTracnetID(patient.identifier),
+              immunisationID: getImmunisationID(patient.identifier),
               birthDate: patient.birthDate,
               telecom: patient.telecom,
               address: patient.address,
