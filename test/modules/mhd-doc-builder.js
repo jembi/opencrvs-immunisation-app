@@ -128,7 +128,7 @@ tap.test('MHD document builder', { autoend: true }, (t) => {
 
   t.test('.buildMHDPayload', { autoend: true }, (t) => {
     t.test('should return a transaction bundle with 3 entries', (t) => {
-      const mhdTransaction = mhdBuilder.buildMHDTransaction('Patient/test', [ { test: 'event' } ])
+      const mhdTransaction = mhdBuilder.buildMHDTransaction('Patient/test', [ { main: { type: [ { coding: [ { code: 'test' } ] } ] } } ])
       t.ok(mhdTransaction)
       t.equals(mhdTransaction.resourceType, 'Bundle')
       t.equals(mhdTransaction.type, 'transaction')

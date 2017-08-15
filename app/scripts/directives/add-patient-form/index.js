@@ -27,7 +27,6 @@ module.exports = function (Api, loadResource, $q, state, FHIR, $location) {
         }
 
         loadResource.fetch('app/scripts/services/FHIR/resources/Patient.json').then(function (fhirDoc) {
-          formFieldsValues.dob = moment(formFieldsValues.dob).format('YYYY-MM-DD')
           formFieldsValues.firstPostitiveHivTestDate = moment(formFieldsValues.firstPostitiveHivTestDate).format('YYYY-MM-DD')
           var fhirResourceDict = FHIR.mapFHIRResources({ main: fhirDoc }, scope.state.FormBuilderAddPatient, formFieldsValues)
 
@@ -71,7 +70,6 @@ module.exports = function (Api, loadResource, $q, state, FHIR, $location) {
       var promises = []
       promises.push(loadResource.fetch('app/scripts/directives/add-patient-form/forms/basic-info.json'))
       promises.push(loadResource.fetch('app/scripts/directives/add-patient-form/forms/address-info.json'))
-      promises.push(loadResource.fetch('app/scripts/directives/add-patient-form/forms/emergency-contact-info.json'))
 
       $q.all(promises).then((formSections) => {
         // set partial patient demographics in the form

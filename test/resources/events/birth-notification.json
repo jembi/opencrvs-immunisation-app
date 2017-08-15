@@ -7,16 +7,8 @@
       "coding": [
         {
           "system": "http://hearth.org/crvs/event-types",
-          "code": "",
-          "display": ""
-        }
-      ]
-    }, {
-      "coding": [
-        {
-          "system": "http://hearth.org/crvs/encounter-types",
-          "code": "",
-          "display": ""
+          "code": "birth-notification",
+          "display": "Birth Notification"
         }
       ]
     }
@@ -28,12 +20,11 @@
   "location": [
     {
       "location": {
-        "display": "",
-        "reference": ""
+        "display": ""
       }
     }
   ],
-  "patient": {
+  "subject": {
     "reference": ""
   }
 }

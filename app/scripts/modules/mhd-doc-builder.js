@@ -28,22 +28,22 @@ exports.returnResourceAsEntry = (resource, isTransaction) => {
  * @param  {String} eventDict the dictionary of events to lookup fullUrls from
  */
 const resolveReferences = (resource, eventDict) => {
-  for (let prop in resource) {
-    if (prop === 'reference' && resource[prop].charAt(0) === '@') {
-      const resourceKey = resource[prop].substring(1)
-      if (!eventDict[resourceKey]) {
-        throw new Error('Unknown reference to event dictionary encountered')
-      }
-      resource[prop] = eventDict[resourceKey].fullUrl
-    } else if (typeof resource[prop] === 'object') {
-      if (Array.isArray(resource[prop])) {
-        resource[prop].forEach((element) => {
-          resolveReferences(element, eventDict)
-        })
-      } else {
+  if (Array.isArray(resource)) {
+    resource.forEach((element) => {
+      resolveReferences(element, eventDict)
+    })
+  } else {
+    Object.getOwnPropertyNames(resource).forEach((prop) => {
+      if (prop === 'reference' && resource[prop].charAt(0) === '@') {
+        const resourceKey = resource[prop].substring(1)
+        if (!eventDict[resourceKey]) {
+          throw new Error('Unknown reference to event dictionary encountered')
+        }
+        resource[prop] = eventDict[resourceKey].fullUrl
+      } else if (typeof resource[prop] === 'object') {
         resolveReferences(resource[prop], eventDict)
       }
-    }
+    })
   }
 }
 
@@ -56,7 +56,7 @@ const resolveAllReferences = (eventDict) => {
   })
 }
 
-exports.createDocumentBundle = (patientRef, eventDictionaries, currentTime) => {
+exports.createDocumentBundle = (patientRef, eventDictionaries, currentTime, compositionType) => {
   const doc = {
     resourceType: 'Bundle',
     type: 'document',
@@ -73,26 +73,26 @@ exports.createDocumentBundle = (patientRef, eventDictionaries, currentTime) => {
         value: uuid.v4()
       },
       resourceType: 'Composition',
-      status: 'final',
+      status: 'preliminary',
       type: {
         coding: {
-          system: 'http://hl7.org/fhir/ValueSet/c80-doc-typecodes',
-          code: '74264-3'
+          system: 'http://opencrvs.org/doc-types',
+          code: compositionType
         },
-        text: 'HIV summary registry report Document'
+        text: compositionType
       },
       class: {
         coding: {
-          system: 'http://hl7.org/fhir/ValueSet/c80-doc-typecodes',
-          code: '47045-0'
+          system: 'http://opencrvs.org/doc-classes',
+          code: 'crvs-document'
         },
-        text: 'Study report Document'
+        text: 'CRVS Document'
       },
       subject: {
         reference: patientRef
       },
       date: currentTime,
-      title: 'HIV case-based surveillance event report',
+      title: 'Birth Notification',
       section: {
         entry: []
       }
@@ -111,10 +111,26 @@ exports.createDocumentBundle = (patientRef, eventDictionaries, currentTime) => {
       const resourceEntry = eventDict[resourceKey]
       resourceEntries.push(resourceEntry)
 
-      if (resourceKey === 'main') {
+      if (resourceKey === 'motherDetails') {
         composition.resource.section.entry.push({
-          title: 'Immunisation Event',
-          text: 'Immunisation Event',
+          title: 'Mother\'s Details',
+          text: 'Mother\'s Details',
+          reference: resourceEntry.fullUrl
+        })
+      }
+
+      if (resourceKey === 'childDetails') {
+        composition.resource.section.entry.push({
+          title: 'Child Details',
+          text: 'Child Details',
+          reference: resourceEntry.fullUrl
+        })
+      }
+
+      if (resourceKey === 'location') {
+        composition.resource.section.entry.push({
+          title: 'Birth Location',
+          text: 'Birth Location',
           reference: resourceEntry.fullUrl
         })
       }
@@ -148,17 +164,17 @@ exports.createDocumentReference = (patientRef, binaryResourceEntry, currentTime)
     docStatus: 'final',
     type: {
       coding: {
-        system: 'http://hl7.org/fhir/ValueSet/c80-doc-typecodes',
-        code: '74264-3'
+        system: 'http://opencrvs.org/doc-types',
+        code: 'birth-notification'
       },
-      text: 'HIV summary registry report Document'
+      text: 'Birth Notification'
     },
     class: {
       coding: {
-        system: 'http://hl7.org/fhir/ValueSet/c80-doc-typecodes',
-        code: '47045-0'
+        system: 'http://opencrvs.org/doc-classes',
+        code: 'crvs-document'
       },
-      text: 'Study report Document'
+      text: 'CRVS Document'
     },
     subject: {
       reference: patientRef
@@ -186,10 +202,10 @@ exports.createDocumentManifest = (patientRef, docRefEntry, currentTime) => {
     status: 'current',
     type: {
       coding: {
-        system: 'http://hl7.org/fhir/ValueSet/c80-doc-typecodes',
-        code: '74264-3'
+        system: 'http://opencrvs.org/doc-types',
+        code: 'birth-notification'
       },
-      text: 'Immunisation summary registry report Document'
+      text: 'Birth Notification'
     },
     subject: {
       reference: patientRef
@@ -219,7 +235,12 @@ exports.createDocumentManifest = (patientRef, docRefEntry, currentTime) => {
 exports.buildMHDTransaction = (patientRef, eventDictionaries) => {
   const currentTime = new Date()
 
-  const docBundle = exports.createDocumentBundle(patientRef, eventDictionaries, currentTime)
+  // only consider first event added
+  eventDictionaries = [ eventDictionaries[0] ]
+
+  const compositionType = eventDictionaries[0].main.type[0].coding[0].code
+
+  const docBundle = exports.createDocumentBundle(patientRef, eventDictionaries, currentTime, compositionType)
 
   const binaryResource = exports.createBinaryResource(docBundle)
   const binaryResourceEntry = exports.returnResourceAsEntry(binaryResource, true)

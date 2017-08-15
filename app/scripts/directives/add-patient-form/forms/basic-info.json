@@ -10,8 +10,8 @@
 		"fields": [{
   		"type": "input",
   		"flex": "20",
-  		"name": "TracNetID",
-      "title": "TracNet ID",
+  		"name": "ImmunisationID",
+      "title": "Immunisation ID",
       "settings": {
       	"required": false
       },
@@ -20,35 +20,19 @@
         "path": "identifier[0].system",
         "params": null,
         "valueType": "staticValue",
-        "value": "ocrvs:tracnet:id"
+        "value": "ocrvs:immunisation:id"
       }, {
 				"resourceKey": "main",
         "path": "identifier[0].assigner.display",
         "params": null,
         "valueType": "staticValue",
-        "value": "TracNet ID"
+        "value": "Immunisation ID"
       }, {
 				"resourceKey": "main",
       	"path": "identifier[0].value",
         "params": null,
       	"valueType": "formValue",
-      	"value": "TracNetID"
-      }]
-    }, {
-      "type": "select",
-  		"flex": "10",
-  		"name": "title",
-      "title": "Title",
-      "settings": {
-      	"required": true
-      },
-      "options": [{"key": "Mr",  "value": "Mr"}, {"key": "Mrs",  "value": "Mrs"}, {"key": "Ms",  "value": "Ms"}, {"key": "Dr",  "value": "Dr"}],
-      "FHIRMappings": [{
-				"resourceKey": "main",
-        "path": "name[0].prefix[0]",
-        "params": null,
-        "valueType": "formValue",
-        "value": "title"
+      	"value": "ImmunisationID"
       }]
     }, {
       "type": "input",
@@ -67,7 +51,7 @@
       }]
     }, {
       "type": "input",
-  		"flex": "20",
+  		"flex": "30",
   		"name": "middleNames",
       "title": "Middles Names",
       "settings": {
@@ -94,37 +78,6 @@
         "params": "",
         "valueType": "formValue",
         "value": "lastName"
-      }]
-    }, {
-      "type": "select",
-  		"flex": "20",
-  		"name": "contactNumberType",
-      "title": "Contact Number Type",
-      "settings": {
-      	"required": true
-      },
-      "options": [{"key": "Mobile",  "value": "Mobile"}, {"key": "Home",  "value": "Home"}, {"key": "Other",  "value": "Other"}],
-      "FHIRMappings": [{
-				"resourceKey": "main",
-        "path": "telecom.use",
-        "params": "telecom.system=phone",
-        "valueType": "formValue",
-        "value": "contactNumberType"
-      }]
-    }, {
-      "type": "input",
-  		"flex": "30",
-  		"name": "contactNumber",
-      "title": "Contact Number",
-      "settings": {
-      	"required": true
-      },
-      "FHIRMappings": [{
-				"resourceKey": "main",
-        "path": "telecom.value",
-        "params": "telecom.system=phone",
-        "valueType": "formValue",
-        "value": "contactNumber"
       }]
     }, {
       "type": "select",
@@ -158,62 +111,6 @@
         "params": null,
       	"valueType": "formValue",
       	"value": "gender"
-      }]
-    }, {
-      "type": "date",
-  		"flex": "30",
-  		"name": "dob",
-      "title": "Date of Birth",
-      "settings": {
-				"valueType": "valueString",
-        "disabled": false,
-      	"required": true
-      },
-      "FHIRMappings": [{
-				"resourceKey": "main",
-        "path": "birthDate",
-        "params": null,
-      	"valueType": "formValue",
-      	"value": "dob"
-      }],
-			"value": null
-    }, {
-      "type": "email",
-  		"flex": "50",
-  		"name": "emailAddress",
-      "title": "Email Address",
-      "settings": {
-      	"required": true
-      },
-      "FHIRMappings": [{
-				"resourceKey": "main",
-        "path": "telecom.value",
-        "params": "telecom.system=email",
-        "valueType": "formValue",
-        "value": "emailAddress"
-      }]
-    }, {
-      "type": "email",
-  		"flex": "50",
-  		"name": "emaildAddressConfirm",
-      "title": "Email Address Confirm",
-      "settings": {
-      	"required": true
-      }
-    }, {
-      "type": "input",
-      "flex": "30",
-      "name": "profession",
-      "title": "Profession",
-      "settings": {
-        "required": true
-      },
-      "FHIRMappings": [{
-				"resourceKey": "main",
-        "path": "extension.valueString",
-        "params": "extension.url=ocrvs:profession",
-        "valueType": "formValue",
-        "value": "profession"
       }]
     }, {
       "type": "select",
