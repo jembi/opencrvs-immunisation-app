@@ -110,7 +110,9 @@ module.exports = function (Api, $q) {
         }
 
         const immunisation = Api.Reference.get({ resource: 'Immunization', encounter: encounter.resource.id }, function (result) {
-          encounter._immunisation = result.entry
+          if (result && result.entry && result.entry[0] && result.entry[0].resource) {
+            encounter._immunisation = result.entry[0].resource
+          }
         }, function (err) {
           console.error(err)
         })
