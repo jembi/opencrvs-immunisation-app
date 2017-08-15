@@ -10,8 +10,8 @@
 		"fields": [{
   		"type": "input",
   		"flex": "20",
-  		"name": "TracNetID",
-      "title": "TracNet ID",
+  		"name": "ImmunisationID",
+      "title": "Immunisation ID",
       "settings": {
       	"required": false
       },
@@ -20,19 +20,19 @@
         "path": "identifier[0].system",
         "params": null,
         "valueType": "staticValue",
-        "value": "ocrvs:tracnet:id"
+        "value": "ocrvs:immunisation:id"
       }, {
 				"resourceKey": "main",
         "path": "identifier[0].assigner.display",
         "params": null,
         "valueType": "staticValue",
-        "value": "TracNet ID"
+        "value": "Immunisation ID"
       }, {
 				"resourceKey": "main",
       	"path": "identifier[0].value",
         "params": null,
       	"valueType": "formValue",
-      	"value": "TracNetID"
+      	"value": "ImmunisationID"
       }]
     }, {
       "type": "input",

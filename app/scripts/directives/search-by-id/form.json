@@ -10,7 +10,7 @@
     "fields": [{
       "type": "input",
       "flex": "100",
-      "name": "tracNetID",
+      "name": "immunisationID",
       "title": "Identifier",
       "settings": {
         "required": true
