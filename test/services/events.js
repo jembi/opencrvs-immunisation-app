@@ -57,13 +57,13 @@ tap.test('Events service', { autoend: true }, (t) => {
       t.true(result)
       t.end()
     })
-  
+
     t.test('should return false when event isn\'t a Birth notification event', (t) => {
       const result = Events().isEventOfType('birth-notification', {})
       t.false(result)
       t.end()
     })
-  
+
     t.test('should return true when event is a immunisation event', (t) => {
       const result = Events().isEventOfType('immunisation', require('../resources/events/immunisation.json'))
       t.true(result)
