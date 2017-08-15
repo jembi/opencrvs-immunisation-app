@@ -18,8 +18,8 @@
         <timeline-heading ng-class="{'event1': eventItem.eventType === 'birth-notification' } ">
           <h4>{{eventItem.eventTitle}} -
             <span>
-              {{fromNowDate(eventItem.birthDate)}}
-              <md-tooltip md-delay="200">{{eventItem.birthDate | date:'yyyy-MM-dd'}}</md-tooltip>
+              {{fromNowDate(eventItem.eventDate)}}
+              <md-tooltip md-delay="200">{{eventItem.eventDate | date:'yyyy-MM-dd'}}</md-tooltip>
             </span>
           </h4>
         </timeline-heading>

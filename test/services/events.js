@@ -222,6 +222,13 @@ tap.test('Events service', { autoend: true }, (t) => {
               resolve()
             })
           }
+        },
+        Reference: {
+          get: (params) => {
+            return new Promise((resolve, reject) => {
+              resolve()
+            })
+          }
         }
       }
       const qMock = {

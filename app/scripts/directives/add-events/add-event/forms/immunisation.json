@@ -1,7 +1,7 @@
 {
   "key": "sec1",
   "name": "Section 1",
-  "displayName": "Immunisation Notification",
+  "displayName": "Immunisation",
   "flex": "100",
   "rows": [{
       "name": "Row 1",
@@ -20,6 +20,25 @@
           "func": {},
           "checks": []
         },
+        "FHIRMappings": [{
+          "resourceKey": "immunisation",
+          "path": "date",
+          "params": null,
+          "valueType": "formValue",
+          "value": "immunisationDate"
+        }, {
+          "resourceKey": "immunisation",
+          "path": "encounter.reference",
+          "params": null,
+          "valueType": "staticValue",
+          "value": "@main"
+        }, {
+          "resourceKey": "main",
+          "path": "period.start",
+          "params": null,
+          "valueType": "formValu",
+          "value": "immunisationDate"
+        }],
         "value": null
       }, {
         "type": "select",
@@ -56,6 +75,25 @@
           {"key": "17", "value": "Rwamagana Hospital"},
           {"key": "other", "value": "Other"}
         ],
+        "FHIRMappings": [{
+          "resourceKey": "location",
+          "path": "name",
+          "params": null,
+          "valueType": "formValue",
+          "value": "place"
+        }, {
+          "resourceKey": "immunisation",
+          "path": "location.reference",
+          "params": null,
+          "valueType": "staticValue",
+          "value": "@location"
+        }, {
+          "resourceKey": "main",
+          "path": "location[0].location.reference",
+          "params": null,
+          "valueType": "staticValue",
+          "value": "@location"
+        }],
         "value": null
       }, {
         "type": "select",
@@ -92,6 +130,19 @@
           {"key": "90581", "value": "Anthrax vaccine, for subcutaneous use"},
           {"key": "90585", "value": "Bacillus Calmette-Guerin vaccine (BCG) for tuberculosis, live, for percutaneous use"}
         ],
+        "FHIRMappings": [{
+          "resourceKey": "immunisation",
+          "path": "vaccineCode.coding[0].code",
+          "params": null,
+          "valueType": "optionValue",
+          "value": "immunisationAdministered"
+        }, {
+          "resourceKey": "immunisation",
+          "path": "vaccineCode.text",
+          "params": null,
+          "valueType": "formValue",
+          "value": "immunisationAdministered"
+        }],
         "value": null
       }]
     }
