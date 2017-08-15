@@ -96,12 +96,12 @@ module.exports = function (loadResource, $q, state, FHIR, FormBuilderService) {
           [scope.event.formName]: {}
         }
 
-        loadResource.fetch(`app/scripts/directives/add-events/add-event/forms/${scope.event.code}.json`).then((formSection) => {
+        loadResource.fetch(`app/scripts/directives/add-events/add-event/forms/${scope.event.code}.json`).then(function (formSection) {
           scope.state[scope.event.formName].sections.push(formSection)
         })
 
         // disable form when event has been added to array - only one event at a time
-        scope.$watch(() => { return state.getEventsArray() }, (events) => {
+        scope.$watch(function () { return state.getEventsArray() }, function (events) {
           if (events) {
             if (events.length > 0) {
               scope.state[scope.event.formName].globals.viewModeOnly = true
