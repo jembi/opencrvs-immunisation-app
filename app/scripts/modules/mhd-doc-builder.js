@@ -75,10 +75,10 @@ exports.createDocumentBundle = (patientRef, eventDictionaries, currentTime, comp
       resourceType: 'Composition',
       status: 'preliminary',
       type: {
-        coding: {
+        coding: [{
           system: 'http://opencrvs.org/doc-types',
           code: compositionType
-        },
+        }],
         text: compositionType
       },
       class: {
