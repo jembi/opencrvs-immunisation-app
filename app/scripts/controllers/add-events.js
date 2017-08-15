@@ -36,7 +36,7 @@ module.exports = function (Api, $scope, $routeParams, $location) {
 
   $scope.events = [
     { code: 'birth-notification', display: 'Birth Notification', formName: 'FormBuilderAddEventBirthNotification' },
-    { code: 'immunisation-notification', display: 'Immunisation Notification', formName: 'FormBuilderAddEventImmunisationNotification' }
+    { code: 'immunisation', display: 'Immunisation', formName: 'FormBuilderAddEventImmunisation' }
   ]
 
   $scope.selectedEvent = $scope.events[0]

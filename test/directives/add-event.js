@@ -8,7 +8,7 @@ const FormBuilderService = require('../../app/scripts/services/FormBuilder.js')(
 const stateService = require('../../app/scripts/services/state.js')()
 const addEvent = require('../../app/scripts/directives/add-events/add-event')
 const FormBuilderAddEventBirthNotification = require('../../app/scripts/directives/add-events/add-event/forms/birth-notification.json')
-const FormBuilderAddEventImmunisationNotification = require('../../app/scripts/directives/add-events/add-event/forms/immunisation-notification.json')
+const FormBuilderAddEventImmunisation = require('../../app/scripts/directives/add-events/add-event/forms/immunisation.json')
 
 const sandbox = sinon.sandbox.create()
 sandbox.stub(console, 'error').callsFake((msg) => {})
@@ -38,14 +38,14 @@ tap.test('.link()', { autoend: true }, (t) => {
     t.end()
   })
 
-  t.test('should set state.FormBuilderAddEventImmunisationNotification on scope and fetch correct form file', (t) => {
+  t.test('should set state.FormBuilderAddEventImmunisation on scope and fetch correct form file', (t) => {
     // given
     const scope = {
       $watch: (args, callback) => { callback() },
-      event: { code: 'immunisation-notification', display: 'Immunisation Notification', formName: 'FormBuilderAddEventImmunisationNotification' }
+      event: { code: 'immunisation', display: 'Immunisation', formName: 'FormBuilderAddEventImmunisation' }
     }
     const fetchMock = (file) => {
-      t.equals(file, 'app/scripts/directives/add-events/add-event/forms/immunisation-notification.json')
+      t.equals(file, 'app/scripts/directives/add-events/add-event/forms/immunisation.json')
       return new Promise((resolve, reject) => {
         resolve()
       })
@@ -54,7 +54,7 @@ tap.test('.link()', { autoend: true }, (t) => {
     // when
     directive.link(scope)
     // then
-    t.ok(scope.state.FormBuilderAddEventImmunisationNotification)
+    t.ok(scope.state.FormBuilderAddEventImmunisation)
     t.end()
   })
 })
@@ -161,14 +161,14 @@ tap.test('.submit()', { autoend: true }, (t) => {
     t.ok(scope.state.FormBuilderAddEventBirthNotification)
   })
 
-  t.test('state.FormBuilderAddEventImmunisationNotification should resolve with a success message', (t) => {
+  t.test('state.FormBuilderAddEventImmunisation should resolve with a success message', (t) => {
     // given
     const testSandbox = sinon.sandbox.create()
     testSandbox.spy(stateService, 'pushToEventsArray')
 
     const scope = {
       $watch: (args, callback) => { callback() },
-      event: { code: 'immunisation-notification', display: 'Immunisation Notification', formName: 'FormBuilderAddEventImmunisationNotification' },
+      event: { code: 'immunisation', display: 'Immunisation', formName: 'FormBuilderAddEventImmunisation' },
       patient: {
         toJSON: () => {
           return {
@@ -248,9 +248,9 @@ tap.test('.submit()', { autoend: true }, (t) => {
     const directive = addEvent({ fetch: fetchMock }, { defer: deferMock }, stateService, FHIR, FormBuilderService)
     directive.link(scope)
     // when
-    scope.state.FormBuilderAddEventImmunisationNotification.sections = [FormBuilderAddEventImmunisationNotification]
-    scope.state.FormBuilderAddEventImmunisationNotification.submit.execute(mockFormData)
+    scope.state.FormBuilderAddEventImmunisation.sections = [FormBuilderAddEventImmunisation]
+    scope.state.FormBuilderAddEventImmunisation.submit.execute(mockFormData)
     // then
-    t.ok(scope.state.FormBuilderAddEventImmunisationNotification)
+    t.ok(scope.state.FormBuilderAddEventImmunisation)
   })
 })

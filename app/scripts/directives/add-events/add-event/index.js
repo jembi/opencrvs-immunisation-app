@@ -40,7 +40,7 @@ module.exports = function (loadResource, $q, state, FHIR, FormBuilderService) {
                         location: locationTemplate
                       }
                       break
-                    case 'immunisation-notification':
+                    case 'immunisation':
                       setProcedureEventType(encounterTemplate, scope.event.code, scope.event.display)
                       resourceTemplateDict = {
                         main: encounterTemplate,
