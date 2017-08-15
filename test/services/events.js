@@ -7,6 +7,7 @@ const Events = require('../../app/scripts/services/events')
 const encounterTemplate = require('../../app/scripts/services/FHIR/resources/Encounter')
 const observationTemplate = require('../../app/scripts/services/FHIR/resources/Observation')
 const locationTemplate = require('../../app/scripts/services/FHIR/resources/Location')
+const immunisationTemplate = require('../../app/scripts/services/FHIR/resources/Immunization')
 
 const sandbox = sinon.sandbox.create()
 sandbox.stub(console, 'error').callsFake((msg) => {})
@@ -62,6 +63,12 @@ tap.test('Events service', { autoend: true }, (t) => {
       t.false(result)
       t.end()
     })
+
+    t.test('should return true when event is a immunisation event', (t) => {
+      const result = Events().isEventOfType('immunisation', require('../resources/events/immunisation.json'))
+      t.true(result)
+      t.end()
+    })
   })
 
   t.test('.constructSimpleBirthNotificationObject', { autoend: true }, (t) => {
@@ -87,26 +94,69 @@ tap.test('Events service', { autoend: true }, (t) => {
       t.equals(event.data.birthDate, '2017-04-04')
       t.end()
     })
+
+    t.test('should construct simple immunisation object', (t) => {
+      const events = Events()
+
+      const encounter = JSON.parse(JSON.stringify(encounterTemplate))
+      encounter.period.start = '2017-04-04'
+      encounter.type = [
+       { coding: [ { system: 'http://hearth.org/crvs/event-types', code: 'immunisation', display: 'Immunisation' } ] }
+      ]
+
+      const location = JSON.parse(JSON.stringify(locationTemplate))
+      location.name = 'Test Location'
+
+      const immunisation = JSON.parse(JSON.stringify(immunisationTemplate))
+      immunisation.vaccineCode.text = 'Test Vaccine'
+
+      const event = events.constructSimpleImmunisationObject(encounter, location, immunisation)
+
+      t.equals(event.eventTitle, 'Immunisation')
+      t.equals(event.eventType, 'immunisation')
+      t.equals(event.eventDate, '2017-04-04')
+      t.equals(event.data.encounterType, 'Immunisation')
+      t.equals(event.data.encounterLocation, 'Test Location')
+      t.equals(event.data.encounterDate, '2017-04-04')
+      t.equals(event.data.immunisationAdministered, 'Test Vaccine')
+      t.end()
+    })
   })
 
   t.test('.formatEvents', { autoend: true }, (t) => {
     t.test('should delegate event formatting depending on event type', (t) => {
       // given
       // Sample Encounter
-      const sampleEncounter = JSON.parse(JSON.stringify(encounterTemplate))
-      sampleEncounter.period.start = '2017-04-04'
-      sampleEncounter.type = [
+      const birthEncounter = JSON.parse(JSON.stringify(encounterTemplate))
+      birthEncounter.period.start = '2017-04-04'
+      birthEncounter.type = [
         { coding: [ { system: 'http://hearth.org/crvs/event-types', code: 'birth-notification', display: 'Birth Notification' } ] }
+      ]
+
+      const immunisationEncounter = JSON.parse(JSON.stringify(encounterTemplate))
+      immunisationEncounter.period.start = '2017-04-04'
+      immunisationEncounter.type = [
+        { coding: [ { system: 'http://hearth.org/crvs/event-types', code: 'immunisation', display: 'Immunisation' } ] }
       ]
 
       const location = JSON.parse(JSON.stringify(locationTemplate))
       location.name = 'Test Location'
 
+      const immunisation = JSON.parse(JSON.stringify(immunisationTemplate))
+      immunisation.vaccineCode.text = 'Test Vaccine'
+
       const encounters = [
         {
-          'resource': sampleEncounter,
+          'resource': birthEncounter,
           '_observations': [],
-          _location: location
+          _location: location,
+          _immunisation: immunisation
+        },
+        {
+          'resource': immunisationEncounter,
+          '_observations': [],
+          _location: location,
+          _immunisation: immunisation
         }
       ]
 
@@ -121,6 +171,14 @@ tap.test('Events service', { autoend: true }, (t) => {
       t.equals(formattedEvents[0].data.encounterType, 'Birth Notification')
       t.equals(formattedEvents[0].data.birthPlace, 'Test Location')
       t.equals(formattedEvents[0].data.birthDate, '2017-04-04')
+
+      t.equals(formattedEvents[1].eventTitle, 'Immunisation')
+      t.equals(formattedEvents[1].eventType, 'immunisation')
+      t.equals(formattedEvents[1].eventDate, '2017-04-04')
+      t.equals(formattedEvents[1].data.encounterType, 'Immunisation')
+      t.equals(formattedEvents[1].data.encounterLocation, 'Test Location')
+      t.equals(formattedEvents[1].data.encounterDate, '2017-04-04')
+      t.equals(formattedEvents[1].data.immunisationAdministered, 'Test Vaccine')
       t.end()
     })
   })
