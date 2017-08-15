@@ -39,25 +39,24 @@ module.exports = function (loadResource, $q, state, FHIR, FormBuilderService) {
                       location: locationTemplate
                     }
                     break
-                 case 'immunisation-notification':
-                  setProcedureEventType(encounterTemplate, scope.event.code, scope.event.display)
-                  resourceTemplateDict = { main: encounterTemplate }
-                  break
+                  case 'immunisation-notification':
+                    setProcedureEventType(encounterTemplate, scope.event.code, scope.event.display)
+                    resourceTemplateDict = { main: encounterTemplate }
+                    break
                   default:
                     console.error(`Unknown event code ${scope.event.code}`)
                 }
                 const resourceDict = FHIR.mapFHIRResources(resourceTemplateDict, scope.state[scope.event.formName], formFieldsValues)
 
-              const resourceDict = FHIR.mapFHIRResources(resourceTemplateDict, scope.state[scope.event.formName], formFieldsValues)
+                // add the Subject Reference - Patient/Reference
+                resourceDict.main.patient.reference = scope.patient.resourceType + '/' + scope.patient.id
 
-              // add the Subject Reference - Patient/Reference
-              resourceDict.main.patient.reference = scope.patient.resourceType + '/' + scope.patient.id
+                state.pushToEventsArray(resourceDict)
 
-              state.pushToEventsArray(resourceDict)
+                scope.resetForm(scope.state[scope.event.formName], form)
 
-              scope.resetForm(scope.state[scope.event.formName], form)
-
-              defer.resolve({ isValid: true, msg: 'Event has been successfully added for submission' })
+                defer.resolve({ isValid: true, msg: 'Event has been successfully added for submission' })
+              })
             })
           })
 
