@@ -69,7 +69,7 @@ module.exports = function ($scope, $routeParams, events, $location, Api) {
       // TODO: some UI message informing the user of the error
     }
 
-    let promise = events.addObservationsToEncounters(result)
+    let promise = events.resolveReferences(result)
     promise.then(results => {
       const formattedEvents = events.formatEvents(results)
       $scope.events = events.sortEventsDesc(formattedEvents)

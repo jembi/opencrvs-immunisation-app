@@ -23,10 +23,9 @@ module.exports = function (Api, loadResource, state) {
       // add watcher to check when events are added to state service
       scope.$watch(function () { return state.getEventsArray() }, function (events) {
         if (events.length > 0) {
-          const eventsString = (events.length > 1) ? 'events' : 'event'
           scope.submitControl = {
             status: 'info',
-            displayText: 'You have ' + events.length + ' ' + eventsString + ' ready to be submitted'
+            displayText: 'Event ready to be submitted'
           }
         }
       }, true)
@@ -38,14 +37,14 @@ module.exports = function (Api, loadResource, state) {
 
       scope.submitEventsBundle = function () {
         scope.submitControl.status = 'processing'
-        scope.submitControl.displayText = 'Busy processing submitted events'
+        scope.submitControl.displayText = 'Busy processing submitted event'
 
         const mhdTransaction = mhdBuilder.buildMHDTransaction(scope.patient.resourceType + '/' + scope.patient.id, state.getEventsArray())
         Api.FhirRoot.save(mhdTransaction, function (result) {
           state.setEventsArray([])
 
           scope.submitControl.status = 'success'
-          scope.submitControl.displayText = 'Events submitted successfully!'
+          scope.submitControl.displayText = 'Event submitted successfully!'
         }, function (err) {
           scope.submitControl.status = 'error'
           scope.submitControl.displayText = err.statusText || 'Internal Server Error: Please contact your administrator to resolve the issue'

@@ -11,15 +11,15 @@
       <md-button class="md-primary md-raised" ng-click="addEvent()">Add event</md-button>
     </timeline-event>
     <timeline-event ng-repeat="eventItem in events" ng-class="{timelineCustom: $index != 0}">
-      <timeline-badge class="event1" ng-if="eventItem.eventType === 'sample-event'">
+      <timeline-badge class="event1" ng-if="eventItem.eventType === 'birth-notification'">
         <md-icon>link</md-icon>
       </timeline-badge>
       <timeline-panel flex class="info">
-        <timeline-heading ng-class="{'event1': eventItem.eventType == 'sampleEvent' } ">
+        <timeline-heading ng-class="{'event1': eventItem.eventType === 'birth-notification' } ">
           <h4>{{eventItem.eventTitle}} -
             <span>
-              {{fromNowDate(eventItem.eventDate)}}
-              <md-tooltip md-delay="200">{{eventItem.eventDate | date:'yyyy-MM-dd'}}</md-tooltip>
+              {{fromNowDate(eventItem.birthDate)}}
+              <md-tooltip md-delay="200">{{eventItem.birthDate | date:'yyyy-MM-dd'}}</md-tooltip>
             </span>
           </h4>
         </timeline-heading>

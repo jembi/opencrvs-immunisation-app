@@ -22,10 +22,10 @@ module.exports = function (Api, loadResource, $q, state, FormBuilderService) {
           }
         }
 
-        var patientId = formFieldsValues.tracNetID
+        var patientId = formFieldsValues.immunisationID
         Api.Patients.get({ identifier: patientId }, function (result) {
           state.setSearchResults(result.entry)
-          state.setSearchType('tracNetId')
+          state.setSearchType('immunisationId')
           defer.resolve({ isValid: true, msg: 'Search Successful' })
         }, function (err) {
           console.error(err)

@@ -1,7 +1,7 @@
 {
   "key": "search-by-id",
   "name": "Search By Id",
-  "displayName": "1. Search by TracNet ID:",
+  "displayName": "1. Search by ID:",
   "flex": "100",
   "rows": [{
     "name": "Row 1",
@@ -10,8 +10,8 @@
     "fields": [{
       "type": "input",
       "flex": "100",
-      "name": "tracNetID",
-      "title": "TracNet ID",
+      "name": "immunisationID",
+      "title": "Identifier",
       "settings": {
         "required": true
       }

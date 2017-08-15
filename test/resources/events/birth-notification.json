@@ -7,8 +7,8 @@
       "coding": [
         {
           "system": "http://hearth.org/crvs/event-types",
-          "code": "sample-event",
-          "display": "Sample Event"
+          "code": "birth-notification",
+          "display": "Birth Notification"
         }
       ]
     }
