@@ -65,7 +65,7 @@ module.exports = function (Api, $q) {
         encounterType: encounterType,
         encounterLocation: location.name,
         encounterDate: encounter.period.start,
-        immunisationAdministered: immunisation.vaccineCode.text
+        immunisationAdministered: immunisation.vaccineCode.coding[0].code
       }
     }
   }
