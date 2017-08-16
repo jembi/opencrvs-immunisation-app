@@ -1,0 +1,150 @@
+{
+  "key": "sec1",
+  "name": "Section 1",
+  "displayName": "Immunisation",
+  "flex": "100",
+  "rows": [{
+      "name": "Row 1",
+      "layout": "row",
+      "fields": [{
+        "type": "date",
+        "flex": "33",
+        "name": "immunisationDate",
+        "title": "Date",
+        "settings": {
+          "valueType": "valueString",
+          "disabled": false,
+          "required": true
+        },
+        "skipLogic": {
+          "func": {},
+          "checks": []
+        },
+        "FHIRMappings": [{
+          "resourceKey": "immunisation",
+          "path": "date",
+          "params": null,
+          "valueType": "formValue",
+          "value": "immunisationDate"
+        }, {
+          "resourceKey": "immunisation",
+          "path": "encounter.reference",
+          "params": null,
+          "valueType": "staticValue",
+          "value": "@main"
+        }, {
+          "resourceKey": "main",
+          "path": "period.start",
+          "params": null,
+          "valueType": "formValue",
+          "value": "immunisationDate"
+        }],
+        "value": null
+      }, {
+        "type": "select",
+        "flex": "33",
+        "name": "place",
+        "title": "Place",
+        "settings": {
+          "valueType": "valueString",
+          "disabled": false,
+          "required": true,
+          "searchOptions": true
+        },
+        "skipLogic": {
+          "func": {},
+          "checks": []
+        },
+        "options": [
+          {"key": "1", "value": "Chuk"},
+          {"key": "2", "value": "Kacyiru Police Hospital"},
+          {"key": "3", "value": "Muhima Hospital"},
+          {"key": "4", "value": "Kibagabaga Hospital"},
+          {"key": "5", "value": "Kanombe Military Hospital"},
+          {"key": "6", "value": "King Faisal Hospital"},
+          {"key": "7", "value": "Ndera Hospital"},
+          {"key": "8", "value": "Masaka Hospital"},
+          {"key": "9", "value": "Rwinkwavu Hospital"},
+          {"key": "10", "value": "Kirehe Hospital"},
+          {"key": "11", "value": "Kibungo Hospital"},
+          {"key": "12", "value": "Nyagatare Hospital"},
+          {"key": "13", "value": "Gahini Hospital"},
+          {"key": "14", "value": "Nyamata Hospital"},
+          {"key": "15", "value": "Ngarama Hospital"},
+          {"key": "16", "value": "Kiziguro Hospital"},
+          {"key": "17", "value": "Rwamagana Hospital"},
+          {"key": "other", "value": "Other"}
+        ],
+        "FHIRMappings": [{
+          "resourceKey": "location",
+          "path": "name",
+          "params": null,
+          "valueType": "optionValue",
+          "value": "place"
+        }, {
+          "resourceKey": "immunisation",
+          "path": "location.reference",
+          "params": null,
+          "valueType": "staticValue",
+          "value": "@location"
+        }, {
+          "resourceKey": "main",
+          "path": "location[0].location.reference",
+          "params": null,
+          "valueType": "staticValue",
+          "value": "@location"
+        }],
+        "value": null
+      }, {
+        "type": "select",
+        "flex": "33",
+        "name": "immunisationAdministered",
+        "title": "Immunisation administered",
+        "settings": {
+          "valueType": "valueString",
+          "disabled": false,
+          "required": true,
+          "searchOptions": true
+        },
+        "skipLogic": {
+          "func": {},
+          "checks": []
+        },
+        "options": [
+          {"key": "90281", "value": "Immune globulin (IG), human, for intramuscular use"},
+          {"key": "90283", "value": "Immune globulin (IGIV), human, for intravenous use"},
+          {"key": "90287", "value": "Botulinum antitoxin, equine, any route"},
+          {"key": "90291", "value": "Cytomegalovirus immune globulin (CMV-IGIV), human, for intravenous use"},
+          {"key": "90296", "value": "Diphtheria antitoxin, equine, any route"},
+          {"key": "90371", "value": "Hepatitis B immune globulin (HBIG), human, for intramuscular use"},
+          {"key": "90375", "value": "Rabies immune globulin (RIG), human, for intramuscular and/or subcutaneous use"},
+          {"key": "90376", "value": "Rabies immune globulin, heat-treated (RIG-HT), human, for intramuscular and/or subcutaneous use"},
+          {"key": "90378", "value": "Respiratory syncytial virus immune globulin (RSV-IgIM), for intramuscular use, 50 mg, each"},
+          {"key": "90379", "value": "Respiratory syncytial virus immune globulin (RSV-IGIV), human, for intravenous use"},
+          {"key": "90389", "value": "Tetanus immune globulin (TIG), human, for intramuscular use"},
+          {"key": "90393", "value": "Vaccinia immune globulin, human, for intramuscular use"},
+          {"key": "90396", "value": "Varicella-zoster immune globulin, human, for intramuscular use"},
+          {"key": "90470", "value": "H1N1 immunization administration (intramuscular, intranasal), including counseling when performed"},
+          {"key": "90476", "value": "Adenovirus vaccine, type 4, live, for oral use"},
+          {"key": "90477", "value": "Adenovirus vaccine, type 7, live, for oral use"},
+          {"key": "90581", "value": "Anthrax vaccine, for subcutaneous use"},
+          {"key": "90585", "value": "Bacillus Calmette-Guerin vaccine (BCG) for tuberculosis, live, for percutaneous use"}
+        ],
+        "FHIRMappings": [{
+          "resourceKey": "immunisation",
+          "path": "vaccineCode.coding[0].code",
+          "params": null,
+          "valueType": "formValue",
+          "value": "immunisationAdministered"
+        }, {
+          "resourceKey": "immunisation",
+          "path": "vaccineCode.text",
+          "params": null,
+          "valueType": "optionValue",
+          "value": "immunisationAdministered"
+        }],
+        "value": null
+      }]
+    }
+  ]
+}

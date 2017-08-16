@@ -14,12 +14,15 @@
       <timeline-badge class="event1" ng-if="eventItem.eventType === 'birth-notification'">
         <md-icon>link</md-icon>
       </timeline-badge>
+      <timeline-badge class="event2" ng-if="eventItem.eventType === 'immunisation'">
+        <md-icon>start_rate</md-icon>
+      </timeline-badge>
       <timeline-panel flex class="info">
-        <timeline-heading ng-class="{'event1': eventItem.eventType === 'birth-notification' } ">
+        <timeline-heading ng-class="{'event1': eventItem.eventType === 'birth-notification', 'event2': eventItem.eventType === 'immunisation'} ">
           <h4>{{eventItem.eventTitle}} -
             <span>
-              {{fromNowDate(eventItem.birthDate)}}
-              <md-tooltip md-delay="200">{{eventItem.birthDate | date:'yyyy-MM-dd'}}</md-tooltip>
+              {{fromNowDate(eventItem.eventDate)}}
+              <md-tooltip md-delay="200">{{eventItem.eventDate | date:'yyyy-MM-dd'}}</md-tooltip>
             </span>
           </h4>
         </timeline-heading>
