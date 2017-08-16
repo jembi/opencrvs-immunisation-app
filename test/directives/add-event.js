@@ -192,7 +192,7 @@ tap.test('.submit()', { autoend: true }, (t) => {
         $dirty: true
       },
       immunisationAdministered: {
-        $modelValue: 'Anthrax vaccine, for subcutaneous use',
+        $modelValue: '111111',
         $dirty: true
       }
     }
@@ -237,7 +237,7 @@ tap.test('.submit()', { autoend: true }, (t) => {
           t.equals(eventDict.immunisation.encounter.reference, '@main')
           t.equals(eventDict.immunisation.location.reference, '@location')
           t.equals(eventDict.immunisation.date, '2017-02-23')
-          t.equals(eventDict.immunisation.vaccineCode.text, 'Anthrax vaccine, for subcutaneous use')
+          t.equals(eventDict.immunisation.vaccineCode.coding[0].code, '111111')
 
           testSandbox.restore()
           t.end()
