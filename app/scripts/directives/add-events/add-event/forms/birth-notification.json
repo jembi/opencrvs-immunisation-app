@@ -116,7 +116,6 @@
         "name": "mothersContactNumber",
         "title": "Mothers Contact Number",
         "settings": {
-          "checkPhoneNumber": true,
           "disabled": false,
           "required": true
         },
