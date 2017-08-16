@@ -43,7 +43,7 @@
       }, {
         "type": "select",
         "flex": "33",
-        "name": "place",
+        "name": "encounterLocation",
         "title": "Place",
         "settings": {
           "valueType": "valueString",
@@ -60,13 +60,13 @@
           "path": "location.reference",
           "params": null,
           "valueType": "formValue",
-          "value": "place"
+          "value": "encounterLocation"
         }, {
           "resourceKey": "main",
           "path": "location[0].location.reference",
           "params": null,
           "valueType": "formValue",
-          "value": "place"
+          "value": "encounterLocation"
         }],
         "value": null
       }, {

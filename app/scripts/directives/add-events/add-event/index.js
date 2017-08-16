@@ -101,7 +101,7 @@ module.exports = function (loadResource, $q, state, FHIR, FormBuilderService, Ap
           formSection.rows.forEach((row) => {
             row.fields.forEach((field) => {
               // set options load functions
-              if (field.name === 'birthPlace') {
+              if (field.name === 'encounterLocation') {
                 field.loadOptionsFunc = () => {
                   return new Promise((resolve, reject) => {
                     Api.Locations.get((locationsBundle) => {

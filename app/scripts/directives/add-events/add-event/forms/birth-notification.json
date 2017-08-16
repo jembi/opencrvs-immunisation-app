@@ -9,7 +9,7 @@
       "fields": [{
         "type": "select",
         "flex": "33",
-        "name": "birthPlace",
+        "name": "encounterLocation",
         "title": "Place of Birth",
         "settings": {
           "valueType": "valueString",
@@ -21,7 +21,7 @@
           "path": "location[0].location.reference",
           "params": null,
           "valueType": "formValue",
-          "value": "birthPlace"
+          "value": "encounterLocation"
         }],
         "skipLogic": {
           "func": {},

@@ -82,7 +82,7 @@ tap.test('.submit()', { autoend: true }, (t) => {
     const mockFormData = {
       $setPristine: function () {},
       $setUntouched: function () {},
-      birthPlace: {
+      encounterLocation: {
         $modelValue: 'Location/123',
         $dirty: true
       },
@@ -183,7 +183,7 @@ tap.test('.submit()', { autoend: true }, (t) => {
     const mockFormData = {
       $setPristine: function () {},
       $setUntouched: function () {},
-      place: {
+      encounterLocation: {
         $modelValue: 'Location/123',
         $dirty: true
       },
