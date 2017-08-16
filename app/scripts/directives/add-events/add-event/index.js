@@ -44,7 +44,6 @@ module.exports = function (loadResource, $q, state, FHIR, FormBuilderService, Ap
                       immunisationTemplate.patient.reference = scope.patient.resourceType + '/' + scope.patient.id
                       resourceTemplateDict = {
                         main: encounterTemplate,
-                        location: locationTemplate,
                         immunisation: immunisationTemplate
                       }
                       break

@@ -55,44 +55,18 @@
           "func": {},
           "checks": []
         },
-        "options": [
-          {"key": "1", "value": "Chuk"},
-          {"key": "2", "value": "Kacyiru Police Hospital"},
-          {"key": "3", "value": "Muhima Hospital"},
-          {"key": "4", "value": "Kibagabaga Hospital"},
-          {"key": "5", "value": "Kanombe Military Hospital"},
-          {"key": "6", "value": "King Faisal Hospital"},
-          {"key": "7", "value": "Ndera Hospital"},
-          {"key": "8", "value": "Masaka Hospital"},
-          {"key": "9", "value": "Rwinkwavu Hospital"},
-          {"key": "10", "value": "Kirehe Hospital"},
-          {"key": "11", "value": "Kibungo Hospital"},
-          {"key": "12", "value": "Nyagatare Hospital"},
-          {"key": "13", "value": "Gahini Hospital"},
-          {"key": "14", "value": "Nyamata Hospital"},
-          {"key": "15", "value": "Ngarama Hospital"},
-          {"key": "16", "value": "Kiziguro Hospital"},
-          {"key": "17", "value": "Rwamagana Hospital"},
-          {"key": "other", "value": "Other"}
-        ],
         "FHIRMappings": [{
-          "resourceKey": "location",
-          "path": "name",
-          "params": null,
-          "valueType": "optionValue",
-          "value": "place"
-        }, {
           "resourceKey": "immunisation",
           "path": "location.reference",
           "params": null,
-          "valueType": "staticValue",
-          "value": "@location"
+          "valueType": "formValue",
+          "value": "place"
         }, {
           "resourceKey": "main",
           "path": "location[0].location.reference",
           "params": null,
-          "valueType": "staticValue",
-          "value": "@location"
+          "valueType": "formValue",
+          "value": "place"
         }],
         "value": null
       }, {
