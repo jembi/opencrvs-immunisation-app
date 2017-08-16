@@ -134,13 +134,13 @@
           "resourceKey": "immunisation",
           "path": "vaccineCode.coding[0].code",
           "params": null,
-          "valueType": "optionValue",
+          "valueType": "formValue",
           "value": "immunisationAdministered"
         }, {
           "resourceKey": "immunisation",
           "path": "vaccineCode.text",
           "params": null,
-          "valueType": "formValue",
+          "valueType": "optionValue",
           "value": "immunisationAdministered"
         }],
         "value": null
