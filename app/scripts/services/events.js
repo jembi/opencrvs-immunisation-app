@@ -65,19 +65,7 @@ module.exports = function (Api, $q) {
         encounterType: encounterType,
         encounterLocation: location.name,
         encounterDate: encounter.period.start,
-        immunisationAdministered: immunisation.vaccineCode.coding[0].code
-      }
-    }
-  }
-
-  const constructSimpleImmunisationEventObject = (encounter) => {
-    return {
-      eventTitle: 'Immunisation',
-      eventType: IMMUNISATION_EVENT,
-      eventDate: encounter.period.start,
-      data: {
-        immunisationAdministerd: encounter._immunisation.vaccineCode.text,
-        encounterLocation: encounter.location[0].location.display
+        immunisationAdministered: immunisation.vaccineCode.text
       }
     }
   }

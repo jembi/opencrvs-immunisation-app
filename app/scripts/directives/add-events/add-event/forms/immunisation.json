@@ -36,7 +36,7 @@
           "resourceKey": "main",
           "path": "period.start",
           "params": null,
-          "valueType": "formValu",
+          "valueType": "formValue",
           "value": "immunisationDate"
         }],
         "value": null
@@ -79,7 +79,7 @@
           "resourceKey": "location",
           "path": "name",
           "params": null,
-          "valueType": "formValue",
+          "valueType": "optionValue",
           "value": "place"
         }, {
           "resourceKey": "immunisation",
