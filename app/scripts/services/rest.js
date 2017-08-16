@@ -26,6 +26,8 @@ module.exports = function ($resource, config) {
 
     DocumentReference: $resource(server + '/fhir/DocumentReference'),
 
-    Reference: $resource(server + '/fhir/:resource/:id', { resource: '@resource', id: '@id' })
+    Reference: $resource(server + '/fhir/:resource/:id', { resource: '@resource', id: '@id' }),
+
+    Locations: $resource(server + '/fhir/Location')
   }
 }
