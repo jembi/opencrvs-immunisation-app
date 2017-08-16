@@ -1,6 +1,6 @@
 'use strict'
 
-module.exports = function (loadResource, $q, state, FHIR, FormBuilderService) {
+module.exports = function (loadResource, $q, state, FHIR, FormBuilderService, Api) {
   return {
     restrict: 'EA',
     templateUrl: 'app/scripts/directives/add-events/add-event/view.html',
@@ -26,36 +26,33 @@ module.exports = function (loadResource, $q, state, FHIR, FormBuilderService) {
 
           loadResource.fetch('app/scripts/services/FHIR/resources/Encounter.json').then(function (encounterTemplate) {
             loadResource.fetch('app/scripts/services/FHIR/resources/RelatedPerson-motherDetails.json').then(function (motherTemplate) {
-              loadResource.fetch('app/scripts/services/FHIR/resources/Location.json').then(function (locationTemplate) {
-                let resourceTemplateDict
-                switch (scope.event.code) {
-                  case 'birth-notification':
-                    setProcedureEventType(encounterTemplate, scope.event.code, 'Birth Notification')
-                    motherTemplate.patient.reference = scope.patient.resourceType + '/' + scope.patient.id
-                    resourceTemplateDict = {
-                      main: encounterTemplate,
-                      childDetails: scope.patient.toJSON(),
-                      motherDetails: motherTemplate,
-                      location: locationTemplate
-                    }
-                    break
-                  case 'immunization':
-                    setProcedureEventType(encounterTemplate, scope.event.code, 'Immunization')
-                    // TODO
-                    break
-                  default:
-                    console.error(`Unknown event code ${scope.event.code}`)
-                }
-                const resourceDict = FHIR.mapFHIRResources(resourceTemplateDict, scope.state[scope.event.formName], formFieldsValues)
+              let resourceTemplateDict
+              switch (scope.event.code) {
+                case 'birth-notification':
+                  setProcedureEventType(encounterTemplate, scope.event.code, 'Birth Notification')
+                  motherTemplate.patient.reference = scope.patient.resourceType + '/' + scope.patient.id
+                  resourceTemplateDict = {
+                    main: encounterTemplate,
+                    childDetails: scope.patient.toJSON(),
+                    motherDetails: motherTemplate
+                  }
+                  break
+                case 'immunization':
+                  setProcedureEventType(encounterTemplate, scope.event.code, 'Immunization')
+                  // TODO
+                  break
+                default:
+                  console.error(`Unknown event code ${scope.event.code}`)
+              }
+              const resourceDict = FHIR.mapFHIRResources(resourceTemplateDict, scope.state[scope.event.formName], formFieldsValues)
 
-                // add the Subject Reference - Patient/Reference
-                resourceDict.main.patient.reference = scope.patient.resourceType + '/' + scope.patient.id
+              // add the Subject Reference - Patient/Reference
+              resourceDict.main.patient.reference = scope.patient.resourceType + '/' + scope.patient.id
 
-                state.pushToEventsArray(resourceDict)
-                scope.resetForm(scope.state[scope.event.formName], form)
+              state.pushToEventsArray(resourceDict)
+              scope.resetForm(scope.state[scope.event.formName], form)
 
-                defer.resolve({ isValid: true, msg: 'Event has been successfully added for submission' })
-              })
+              defer.resolve({ isValid: true, msg: 'Event has been successfully added for submission' })
             })
           })
 
@@ -88,8 +85,30 @@ module.exports = function (loadResource, $q, state, FHIR, FormBuilderService) {
           [scope.event.formName]: {}
         }
 
-        loadResource.fetch(`app/scripts/directives/add-events/add-event/forms/${scope.event.code}.json`).then(function (formSection) {
+        loadResource.fetch(`app/scripts/directives/add-events/add-event/forms/${scope.event.code}.json`).then((formSection) => {
           scope.state[scope.event.formName].sections.push(formSection)
+
+          formSection.rows.forEach((row) => {
+            row.fields.forEach((field) => {
+              // set options load functions
+              if (field.name === 'birthPlace') {
+                field.loadOptionsFunc = () => {
+                  return new Promise((resolve, reject) => {
+                    Api.Locations.get((locationsBundle) => {
+                      var options = []
+                      locationsBundle.entry.forEach((locationEntry) => {
+                        options.push({ key: 'Location/' + locationEntry.resource.id, value: locationEntry.resource.name })
+                      })
+                      resolve(options)
+                    }, (err) => {
+                      console.log(err)
+                      reject(err)
+                    })
+                  })
+                }
+              }
+            })
+          })
         })
 
         // disable form when event has been added to array - only one event at a time

@@ -7,7 +7,7 @@
       "name": "Row 1",
       "layout": "row",
       "fields": [{
-        "type": "input",
+        "type": "select",
         "flex": "33",
         "name": "birthPlace",
         "title": "Place of Birth",
@@ -17,17 +17,11 @@
           "required": true
         },
         "FHIRMappings": [{
-          "resourceKey": "location",
-          "path": "name",
-          "params": null,
-          "valueType": "formValue",
-          "value": "birthPlace"
-        }, {
           "resourceKey": "main",
           "path": "location[0].location.reference",
           "params": null,
-          "valueType": "staticValue",
-          "value": "@location"
+          "valueType": "formValue",
+          "value": "birthPlace"
         }],
         "skipLogic": {
           "func": {},
