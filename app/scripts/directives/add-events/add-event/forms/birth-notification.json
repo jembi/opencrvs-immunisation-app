@@ -7,9 +7,9 @@
       "name": "Row 1",
       "layout": "row",
       "fields": [{
-        "type": "input",
+        "type": "select",
         "flex": "33",
-        "name": "birthPlace",
+        "name": "encounterLocation",
         "title": "Place of Birth",
         "settings": {
           "valueType": "valueString",
@@ -17,17 +17,11 @@
           "required": true
         },
         "FHIRMappings": [{
-          "resourceKey": "location",
-          "path": "name",
-          "params": null,
-          "valueType": "formValue",
-          "value": "birthPlace"
-        }, {
           "resourceKey": "main",
           "path": "location[0].location.reference",
           "params": null,
-          "valueType": "staticValue",
-          "value": "@location"
+          "valueType": "formValue",
+          "value": "encounterLocation"
         }],
         "skipLogic": {
           "func": {},
@@ -122,7 +116,6 @@
         "name": "mothersContactNumber",
         "title": "Mothers Contact Number",
         "settings": {
-          "checkPhoneNumber": true,
           "disabled": false,
           "required": true
         },

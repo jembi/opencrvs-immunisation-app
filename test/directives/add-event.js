@@ -27,7 +27,7 @@ tap.test('.link()', { autoend: true }, (t) => {
     const fetchMock = (file) => {
       t.equals(file, 'app/scripts/directives/add-events/add-event/forms/birth-notification.json')
       return new Promise((resolve, reject) => {
-        resolve()
+        resolve(require('../../app/scripts/directives/add-events/add-event/forms/birth-notification.json'))
       })
     }
     const directive = addEvent({ fetch: fetchMock })
@@ -47,7 +47,7 @@ tap.test('.link()', { autoend: true }, (t) => {
     const fetchMock = (file) => {
       t.equals(file, 'app/scripts/directives/add-events/add-event/forms/immunisation.json')
       return new Promise((resolve, reject) => {
-        resolve()
+        resolve(require('../../app/scripts/directives/add-events/add-event/forms/immunisation.json'))
       })
     }
     const directive = addEvent({ fetch: fetchMock })
@@ -82,8 +82,8 @@ tap.test('.submit()', { autoend: true }, (t) => {
     const mockFormData = {
       $setPristine: function () {},
       $setUntouched: function () {},
-      birthPlace: {
-        $modelValue: 'GoodHealth Clinic, Durban',
+      encounterLocation: {
+        $modelValue: 'Location/123',
         $dirty: true
       },
       birthDate: {
@@ -112,8 +112,8 @@ tap.test('.submit()', { autoend: true }, (t) => {
           const FHIREncounterResource = require('../../app/scripts/services/FHIR/resources/RelatedPerson-motherDetails.json')
           resolve(FHIREncounterResource)
         } else if (file === 'app/scripts/services/FHIR/resources/Location.json') {
-          const FHIRObservationResource = require('../../app/scripts/services/FHIR/resources/Location.json')
-          resolve(FHIRObservationResource)
+          const FHIRLocationResource = require('../../app/scripts/services/FHIR/resources/Location.json')
+          resolve(FHIRLocationResource)
         } else if (file === 'app/scripts/services/FHIR/resources/Encounter.json') {
           const FHIRObservationResource = require('../../app/scripts/services/FHIR/resources/Encounter.json')
           resolve(FHIRObservationResource)
@@ -134,7 +134,7 @@ tap.test('.submit()', { autoend: true }, (t) => {
 
           t.equals(eventDict.childDetails.resourceType, 'Patient')
           t.equals(eventDict.motherDetails.resourceType, 'RelatedPerson')
-          t.equals(eventDict.location.resourceType, 'Location')
+          t.equals(eventDict.main.resourceType, 'Encounter')
 
           t.equals(eventDict.childDetails.birthDate, '2017-02-23')
 
@@ -144,7 +144,7 @@ tap.test('.submit()', { autoend: true }, (t) => {
           t.equals(eventDict.motherDetails.patient.reference, 'Patient/AAAAA-BBBB-CCCC-DDDDD-EEEEEE')
           t.equals(eventDict.motherDetails.relationship.coding[0].code, 'MTH')
 
-          t.equals(eventDict.location.name, 'GoodHealth Clinic, Durban')
+          t.equals(eventDict.main.location[0].location.reference, 'Location/123')
 
           testSandbox.restore()
           t.end()
@@ -183,8 +183,8 @@ tap.test('.submit()', { autoend: true }, (t) => {
     const mockFormData = {
       $setPristine: function () {},
       $setUntouched: function () {},
-      place: {
-        $modelValue: 'GoodHealth Clinic, Durban',
+      encounterLocation: {
+        $modelValue: 'Location/123',
         $dirty: true
       },
       immunisationDate: {
@@ -198,15 +198,15 @@ tap.test('.submit()', { autoend: true }, (t) => {
     }
     const fetchMock = (file) => {
       return new Promise((resolve, reject) => {
-        if (file === 'app/scripts/directives/add-events/add-event/forms/birth-notification.json') {
-          const FormBuilderAddEventBirthNotification = require('../../app/scripts/directives/add-events/add-event/forms/birth-notification.json')
-          resolve(FormBuilderAddEventBirthNotification)
+        if (file === 'app/scripts/directives/add-events/add-event/forms/immunisation.json') {
+          const FormBuilderAddEventImmunisation = require('../../app/scripts/directives/add-events/add-event/forms/immunisation.json')
+          resolve(FormBuilderAddEventImmunisation)
         } else if (file === 'app/scripts/services/FHIR/resources/RelatedPerson-motherDetails.json') {
           const FHIREncounterResource = require('../../app/scripts/services/FHIR/resources/RelatedPerson-motherDetails.json')
           resolve(FHIREncounterResource)
         } else if (file === 'app/scripts/services/FHIR/resources/Location.json') {
-          const FHIRObservationResource = require('../../app/scripts/services/FHIR/resources/Location.json')
-          resolve(FHIRObservationResource)
+          const FHIRLocationResource = require('../../app/scripts/services/FHIR/resources/Location.json')
+          resolve(FHIRLocationResource)
         } else if (file === 'app/scripts/services/FHIR/resources/Encounter.json') {
           const FHIRObservationResource = require('../../app/scripts/services/FHIR/resources/Encounter.json')
           resolve(FHIRObservationResource)
@@ -226,16 +226,13 @@ tap.test('.submit()', { autoend: true }, (t) => {
           const eventDict = stateService.pushToEventsArray.getCall(0).args[0]
 
           t.equals(eventDict.main.resourceType, 'Encounter')
-          t.equals(eventDict.location.resourceType, 'Location')
           t.equals(eventDict.immunisation.resourceType, 'Immunization')
 
           t.equals(eventDict.main.period.start, '2017-02-23')
-          t.equals(eventDict.main.location[0].location.reference, '@location')
-
-          t.equals(eventDict.location.name, 'GoodHealth Clinic, Durban')
+          t.equals(eventDict.main.location[0].location.reference, 'Location/123')
 
           t.equals(eventDict.immunisation.encounter.reference, '@main')
-          t.equals(eventDict.immunisation.location.reference, '@location')
+          t.equals(eventDict.immunisation.location.reference, 'Location/123')
           t.equals(eventDict.immunisation.date, '2017-02-23')
           t.equals(eventDict.immunisation.vaccineCode.coding[0].code, '111111')
 

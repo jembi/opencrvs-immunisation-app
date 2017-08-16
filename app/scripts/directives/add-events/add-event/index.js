@@ -1,6 +1,6 @@
 'use strict'
 
-module.exports = function (loadResource, $q, state, FHIR, FormBuilderService) {
+module.exports = function (loadResource, $q, state, FHIR, FormBuilderService, Api) {
   return {
     restrict: 'EA',
     templateUrl: 'app/scripts/directives/add-events/add-event/view.html',
@@ -36,8 +36,7 @@ module.exports = function (loadResource, $q, state, FHIR, FormBuilderService) {
                       resourceTemplateDict = {
                         main: encounterTemplate,
                         childDetails: scope.patient.toJSON(),
-                        motherDetails: motherTemplate,
-                        location: locationTemplate
+                        motherDetails: motherTemplate
                       }
                       break
                     case 'immunisation':
@@ -45,7 +44,6 @@ module.exports = function (loadResource, $q, state, FHIR, FormBuilderService) {
                       immunisationTemplate.patient.reference = scope.patient.resourceType + '/' + scope.patient.id
                       resourceTemplateDict = {
                         main: encounterTemplate,
-                        location: locationTemplate,
                         immunisation: immunisationTemplate
                       }
                       break
@@ -97,8 +95,30 @@ module.exports = function (loadResource, $q, state, FHIR, FormBuilderService) {
           [scope.event.formName]: {}
         }
 
-        loadResource.fetch(`app/scripts/directives/add-events/add-event/forms/${scope.event.code}.json`).then(function (formSection) {
+        loadResource.fetch(`app/scripts/directives/add-events/add-event/forms/${scope.event.code}.json`).then((formSection) => {
           scope.state[scope.event.formName].sections.push(formSection)
+
+          formSection.rows.forEach((row) => {
+            row.fields.forEach((field) => {
+              // set options load functions
+              if (field.name === 'encounterLocation') {
+                field.loadOptionsFunc = () => {
+                  return new Promise((resolve, reject) => {
+                    Api.Locations.get((locationsBundle) => {
+                      var options = []
+                      locationsBundle.entry.forEach((locationEntry) => {
+                        options.push({ key: 'Location/' + locationEntry.resource.id, value: locationEntry.resource.name })
+                      })
+                      resolve(options)
+                    }, (err) => {
+                      console.log(err)
+                      reject(err)
+                    })
+                  })
+                }
+              }
+            })
+          })
         })
 
         // disable form when event has been added to array - only one event at a time

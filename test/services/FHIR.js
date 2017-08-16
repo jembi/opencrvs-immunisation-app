@@ -21,7 +21,7 @@ tap.test('.mapFHIRResources()', { autoend: true }, (t) => {
     }
 
     const mockFormData = {
-      birthPlace: 'GoodHealth Clinic, Durban',
+      encounterLocation: 'Location/123',
       birthDate: '2017-02-23',
       mothersGivenName: 'Mary',
       mothersFamilyName: 'Smith',
@@ -29,19 +29,19 @@ tap.test('.mapFHIRResources()', { autoend: true }, (t) => {
     }
     // when
     const fhirResourceDict = FHIR.mapFHIRResources({
+      main: require('../../app/scripts/services/FHIR/resources/Encounter.json'),
       childDetails: require('../../app/scripts/services/FHIR/resources/Patient.json'),
-      motherDetails: require('../../app/scripts/services/FHIR/resources/RelatedPerson-motherDetails.json'),
-      location: require('../../app/scripts/services/FHIR/resources/Location.json')
+      motherDetails: require('../../app/scripts/services/FHIR/resources/RelatedPerson-motherDetails.json')
     }, FormBuilderInstance, mockFormData)
 
     const childDetails = fhirResourceDict.childDetails
     const motherDetails = fhirResourceDict.motherDetails
-    const location = fhirResourceDict.location
+    const encounter = fhirResourceDict.main
 
     // then
     t.ok(childDetails)
     t.ok(motherDetails)
-    t.ok(location)
+    t.ok(encounter)
 
     t.equals(childDetails.birthDate, '2017-02-23')
 
@@ -49,7 +49,7 @@ tap.test('.mapFHIRResources()', { autoend: true }, (t) => {
     t.equals(motherDetails.name.family[0], 'Smith')
     t.equals(motherDetails.telecom[0].value, '+27725556784')
 
-    t.equals(location.name, 'GoodHealth Clinic, Durban')
+    t.equals(encounter.location[0].location.reference, 'Location/123')
 
     t.end()
   })
