@@ -21,7 +21,7 @@ tap.test('.mapFHIRResources()', { autoend: true }, (t) => {
     }
 
     const mockFormData = {
-      birthPlace: 'Location/123',
+      encounterLocation: 'Location/123',
       birthDate: '2017-02-23',
       mothersGivenName: 'Mary',
       mothersFamilyName: 'Smith',

@@ -82,7 +82,7 @@ tap.test('.submit()', { autoend: true }, (t) => {
     const mockFormData = {
       $setPristine: function () {},
       $setUntouched: function () {},
-      birthPlace: {
+      encounterLocation: {
         $modelValue: 'Location/123',
         $dirty: true
       },
@@ -183,8 +183,8 @@ tap.test('.submit()', { autoend: true }, (t) => {
     const mockFormData = {
       $setPristine: function () {},
       $setUntouched: function () {},
-      place: {
-        $modelValue: 'GoodHealth Clinic, Durban',
+      encounterLocation: {
+        $modelValue: 'Location/123',
         $dirty: true
       },
       immunisationDate: {
@@ -226,14 +226,13 @@ tap.test('.submit()', { autoend: true }, (t) => {
           const eventDict = stateService.pushToEventsArray.getCall(0).args[0]
 
           t.equals(eventDict.main.resourceType, 'Encounter')
-          t.equals(eventDict.location.resourceType, 'Location')
           t.equals(eventDict.immunisation.resourceType, 'Immunization')
 
           t.equals(eventDict.main.period.start, '2017-02-23')
-          t.equals(eventDict.main.location[0].location.reference, '@location')
+          t.equals(eventDict.main.location[0].location.reference, 'Location/123')
 
           t.equals(eventDict.immunisation.encounter.reference, '@main')
-          t.equals(eventDict.immunisation.location.reference, '@location')
+          t.equals(eventDict.immunisation.location.reference, 'Location/123')
           t.equals(eventDict.immunisation.date, '2017-02-23')
           t.equals(eventDict.immunisation.vaccineCode.coding[0].code, '111111')
 
