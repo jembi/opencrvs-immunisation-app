@@ -127,11 +127,24 @@ exports.createDocumentBundle = (patientRef, eventDictionaries, currentTime, comp
         })
       }
 
-      if (resourceKey === 'location') {
+      if (resourceKey === 'immunisation') {
+        composition.resource.section.entry.push({
+          title: 'Immunisation',
+          text: 'Immunisation',
+          reference: resourceEntry.fullUrl
+        })
+      }
+
+      if (resourceKey === 'main') {
+        composition.resource.section.entry.push({
+          title: 'Birth Encounter',
+          text: 'Birth Encounter',
+          reference: resourceEntry.fullUrl
+        })
         composition.resource.section.entry.push({
           title: 'Birth Location',
           text: 'Birth Location',
-          reference: resourceEntry.fullUrl
+          reference: resourceEntry.resource.location[0].location.reference
         })
       }
     })
