@@ -249,9 +249,9 @@ tap.test('.link()', { autoend: true }, (t) => {
         preferredLanguage: { $modelValue: 'xhosa', $dirty: true },
 
         // Address Info
-        province: { $modelValue: 'Provey', $dirty: true },
+        region: { $modelValue: 'Regy', $dirty: true },
         district: { $modelValue: 'Disty', $dirty: true },
-        sector: { $modelValue: 'Secty', $dirty: true },
+        village: { $modelValue: 'Villy', $dirty: true },
         cell: { $modelValue: 'Celly', $dirty: true }
 
       }
@@ -293,11 +293,10 @@ tap.test('.link()', { autoend: true }, (t) => {
         t.equals(patient.communication[0].language.text, 'xhosa')
 
         // Address Info
-        t.equals(patient.address[0].state, 'Provey')
+        t.equals(patient.address[0].state, 'Regy')
         t.equals(patient.address[0].district, 'Disty')
-        t.equals(patient.address[0].line[0], 'Secty')
+        t.equals(patient.address[0].line[0], 'Villy')
         t.equals(patient.address[0].line[1], 'Celly')
-        t.equals(patient.address[0].line[2], 'Ummy')
 
         t.end()
       }
