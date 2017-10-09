@@ -252,8 +252,7 @@ tap.test('.link()', { autoend: true }, (t) => {
         province: { $modelValue: 'Provey', $dirty: true },
         district: { $modelValue: 'Disty', $dirty: true },
         sector: { $modelValue: 'Secty', $dirty: true },
-        cell: { $modelValue: 'Celly', $dirty: true },
-        umudugudu: { $modelValue: 'Ummy', $dirty: true }
+        cell: { $modelValue: 'Celly', $dirty: true }
 
       }
       const fetchMock = (file) => {

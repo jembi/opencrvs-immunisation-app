@@ -31,7 +31,7 @@ module.exports = function (loadResource, $q, state, FHIR, FormBuilderService, Ap
                   let resourceTemplateDict
                   switch (scope.event.code) {
                     case 'birth-notification':
-                      setProcedureEventType(encounterTemplate, scope.event.code, 'Birth Notification')
+                      setProcedureEventType(encounterTemplate, scope.event.code, 'Birth Details')
                       motherTemplate.patient.reference = scope.patient.resourceType + '/' + scope.patient.id
                       resourceTemplateDict = {
                         main: encounterTemplate,

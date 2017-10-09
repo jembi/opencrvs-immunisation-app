@@ -7,7 +7,7 @@
     <div class="details" flex>
       <div ng-repeat="address in patient.address track by $index" layout="column">
         <div class="detailsRow" layout="row">
-          <div class="system">Province:</div>
+          <div class="system">Region:</div>
           <div class="value">{{address.state}}</div>
         </div>
         <div class="detailsRow" layout="row">
@@ -15,16 +15,12 @@
           <div class="value">{{address.district}}</div>
         </div>
         <div class="detailsRow" layout="row">
-          <div class="system">Sector:</div>
+          <div class="system">Village:</div>
           <div class="value">{{address.line[0]}}</div>
         </div>
         <div class="detailsRow" layout="row">
           <div class="system">Cell:</div>
           <div class="value">{{address.line[1]}}</div>
-        </div>
-        <div class="detailsRow" layout="row">
-          <div class="system">Umudugudu:</div>
-          <div class="value">{{address.line[2]}}</div>
         </div>
       </div>
     </div>

@@ -46,7 +46,7 @@
             <td md-cell>{{patient.name.family}}</td>
             <td md-cell>{{patient.gender}}</td>
             <td md-cell>{{patient.immunisationID}}</td>
-            <td md-cell>{{patient.birthDate}}</td>
+            <td md-cell>{{patient.birthDate | date}}</td>
             <td md-cell ng-if="!singlePatient && searchType == 'demographics'">
               <span class="matchlabel" ng-class="{'certain': patient.search.extension.valueCode == 'certain' , 'possible': patient.search.extension.valueCode == 'possible', 'probable': patient.search.extension.valueCode == 'probable' } ">
                 {{patient.search.extension.valueCode}} ({{patient.search.score * 100 | number : 2}}%)

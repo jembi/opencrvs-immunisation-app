@@ -9,9 +9,9 @@
     "layout": "row",
     "fields": [{
       "type": "input",
-      "flex": "20",
-      "name": "province",
-      "title": "Province",
+      "flex": "25",
+      "name": "region",
+      "title": "Region",
       "settings": {
         "required": true
       },
@@ -20,11 +20,11 @@
         "path": "address[0].state",
         "params": null,
         "valueType": "formValue",
-        "value": "province"
+        "value": "region"
       }]
     }, {
       "type": "input",
-      "flex": "20",
+      "flex": "25",
       "name": "district",
       "title": "District",
       "settings": {
@@ -39,9 +39,9 @@
       }]
     }, {
       "type": "input",
-      "flex": "20",
-      "name": "sector",
-      "title": "Sector",
+      "flex": "25",
+      "name": "village",
+      "title": "Village",
       "settings": {
         "required": true
       },
@@ -50,11 +50,11 @@
         "path": "address[0].line[0]",
         "params": null,
         "valueType": "formValue",
-        "value": "sector"
+        "value": "village"
       }]
     }, {
       "type": "input",
-      "flex": "20",
+      "flex": "25",
       "name": "cell",
       "title": "Cell",
       "settings": {
@@ -66,21 +66,6 @@
         "params": null,
         "valueType": "formValue",
         "value": "cell"
-      }]
-    }, {
-      "type": "input",
-      "flex": "20",
-      "name": "umudugudu",
-      "title": "Umudugudu",
-      "settings": {
-        "required": true
-      },
-      "FHIRMappings": [{
-        "resourceKey": "main",
-        "path": "address[0].line[2]",
-        "params": null,
-        "valueType": "formValue",
-        "value": "umudugudu"
       }]
     }]
   }]

@@ -1,7 +1,7 @@
 {
   "key": "sec1",
   "name": "Section 1",
-  "displayName": "Birth Notification",
+  "displayName": "Birth Details",
   "flex": "100",
   "rows": [{
       "name": "Row 1",

@@ -37,7 +37,7 @@ module.exports = function (Api, $q) {
     })
 
     return {
-      eventTitle: 'Birth Notification',
+      eventTitle: 'Birth Details',
       eventType: BIRTHNOTIFICATION,
       eventDate: encounter.period.start,
       data: {

@@ -92,7 +92,7 @@ exports.createDocumentBundle = (patientRef, eventDictionaries, currentTime, comp
         reference: patientRef
       },
       date: currentTime,
-      title: 'Birth Notification',
+      title: 'Birth Details',
       section: {
         entry: []
       }
@@ -180,7 +180,7 @@ exports.createDocumentReference = (patientRef, binaryResourceEntry, currentTime)
         system: 'http://opencrvs.org/doc-types',
         code: 'birth-notification'
       },
-      text: 'Birth Notification'
+      text: 'Birth Details'
     },
     class: {
       coding: {
@@ -218,7 +218,7 @@ exports.createDocumentManifest = (patientRef, docRefEntry, currentTime) => {
         system: 'http://opencrvs.org/doc-types',
         code: 'birth-notification'
       },
-      text: 'Birth Notification'
+      text: 'Birth Details'
     },
     subject: {
       reference: patientRef

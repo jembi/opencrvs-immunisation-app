@@ -78,7 +78,7 @@ tap.test('Events service', { autoend: true }, (t) => {
       const encounter = JSON.parse(JSON.stringify(encounterTemplate))
       encounter.period.start = '2017-04-04'
       encounter.type = [
-       { coding: [ { system: 'http://hearth.org/crvs/event-types', code: 'birth-notification', display: 'Birth Notification' } ] }
+       { coding: [ { system: 'http://hearth.org/crvs/event-types', code: 'birth-notification', display: 'Birth Details' } ] }
       ]
 
       const location = JSON.parse(JSON.stringify(locationTemplate))
@@ -86,10 +86,10 @@ tap.test('Events service', { autoend: true }, (t) => {
 
       const event = events.constructSimpleBirthNotificationObject(encounter, location)
 
-      t.equals(event.eventTitle, 'Birth Notification')
+      t.equals(event.eventTitle, 'Birth Details')
       t.equals(event.eventType, 'birth-notification')
       t.equals(event.eventDate, '2017-04-04')
-      t.equals(event.data.encounterType, 'Birth Notification')
+      t.equals(event.data.encounterType, 'Birth Details')
       t.equals(event.data.birthPlace, 'Test Location')
       t.equals(event.data.birthDate, '2017-04-04')
       t.end()
@@ -130,7 +130,7 @@ tap.test('Events service', { autoend: true }, (t) => {
       const birthEncounter = JSON.parse(JSON.stringify(encounterTemplate))
       birthEncounter.period.start = '2017-04-04'
       birthEncounter.type = [
-        { coding: [ { system: 'http://hearth.org/crvs/event-types', code: 'birth-notification', display: 'Birth Notification' } ] }
+        { coding: [ { system: 'http://hearth.org/crvs/event-types', code: 'birth-notification', display: 'Birth Details' } ] }
       ]
 
       const immunisationEncounter = JSON.parse(JSON.stringify(encounterTemplate))
@@ -165,10 +165,10 @@ tap.test('Events service', { autoend: true }, (t) => {
 
       t.ok(formattedEvents)
 
-      t.equals(formattedEvents[0].eventTitle, 'Birth Notification')
+      t.equals(formattedEvents[0].eventTitle, 'Birth Details')
       t.equals(formattedEvents[0].eventType, 'birth-notification')
       t.equals(formattedEvents[0].eventDate, '2017-04-04')
-      t.equals(formattedEvents[0].data.encounterType, 'Birth Notification')
+      t.equals(formattedEvents[0].data.encounterType, 'Birth Details')
       t.equals(formattedEvents[0].data.birthPlace, 'Test Location')
       t.equals(formattedEvents[0].data.birthDate, '2017-04-04')
 

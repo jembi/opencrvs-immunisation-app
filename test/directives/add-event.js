@@ -22,7 +22,7 @@ tap.test('.link()', { autoend: true }, (t) => {
     // given
     const scope = {
       $watch: (args, callback) => { callback() },
-      event: { code: 'birth-notification', display: 'Birth Notification', formName: 'FormBuilderAddEventBirthNotification' }
+      event: { code: 'birth-notification', display: 'Birth Details', formName: 'FormBuilderAddEventBirthNotification' }
     }
     const fetchMock = (file) => {
       t.equals(file, 'app/scripts/directives/add-events/add-event/forms/birth-notification.json')
@@ -67,7 +67,7 @@ tap.test('.submit()', { autoend: true }, (t) => {
 
     const scope = {
       $watch: (args, callback) => { callback() },
-      event: { code: 'birth-notification', display: 'Birth Notification', formName: 'FormBuilderAddEventBirthNotification' },
+      event: { code: 'birth-notification', display: 'Birth Details', formName: 'FormBuilderAddEventBirthNotification' },
       patient: {
         toJSON: () => {
           return {

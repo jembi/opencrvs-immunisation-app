@@ -121,11 +121,10 @@
       	"required": true
       },
       "options": [
-				{"key": "Kinyarwanda",  "value": "Kinyarwanda"},
 				{"key": "English",  "value": "English"},
-				{"key": "French",  "value": "French"},
-				{"key": "Swahili",  "value": "Swahili"},
-				{"key": "Other",  "value": "Other"}
+				{"key": "Twi",  "value": "Twi"},
+				{"key": "Ewe",  "value": "Ewe"},
+				{"key": "Dagbani",  "value": "Dagbani"}
 			],
       "FHIRMappings": [{
 				"resourceKey": "main",

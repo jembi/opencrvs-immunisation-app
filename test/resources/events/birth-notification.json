@@ -8,7 +8,7 @@
         {
           "system": "http://hearth.org/crvs/event-types",
           "code": "birth-notification",
-          "display": "Birth Notification"
+          "display": "Birth Details"
         }
       ]
     }

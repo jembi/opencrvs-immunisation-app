@@ -7,7 +7,7 @@ module.exports = function (Api, $scope, $routeParams, $location) {
     patients: null,
     singlePatient: true,
     header: {
-      title: 'Add Immunisation Events',
+      title: 'Add Events',
       left: [
         {
           text: 'back',
@@ -35,7 +35,7 @@ module.exports = function (Api, $scope, $routeParams, $location) {
   Api.Patients.get({ id: $routeParams.patientId }, success, error)
 
   $scope.events = [
-    { code: 'birth-notification', display: 'Birth Notification', formName: 'FormBuilderAddEventBirthNotification' },
+    { code: 'birth-notification', display: 'Birth Details', formName: 'FormBuilderAddEventBirthNotification' },
     { code: 'immunisation', display: 'Immunisation', formName: 'FormBuilderAddEventImmunisation' }
   ]
 
